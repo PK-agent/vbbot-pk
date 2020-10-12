@@ -159,9 +159,9 @@ app.post('/addorder', async (req,res) => {
     
     orderUser.name = req.body.name;
     orderUser.phone = req.body.phone;
-    orderUserr.address = req.body.address;
-    orderUserr.quantity = req.body.quantity;
-    orderUserr.received_date = req.body.received_date;
+    orderUser.address = req.body.address;
+    orderUser.quantity = req.body.quantity;
+    orderUser.received_date = req.body.received_date;
     
     let data = {
         orderid: orderUser.id,
@@ -172,7 +172,7 @@ app.post('/addorder', async (req,res) => {
         received_date: orderUser.received_date
     }
        
-    db.collection('orderslist').doc(orderUser.name).add(data)
+    db.collection('orderslist').doc(orderUser.id).add(data)
     
     .then(res => res.json())
     .then(json => console.log('JSON', json))
