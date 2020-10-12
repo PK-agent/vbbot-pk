@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Stocks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ </head>
+
+  <body>
+  <h1>Stocks</h1>
+
+  <p>
+
+    Merchant Name: <%= merchant.merchant_name %>
+  <p>
+  
+  <table cellspacing="1" cellpadding="5" border="1">
+    <tr>
+    
+    <th>id</th>
+    <th>Batch</th>
+    <th>Type</th>   
+    <th>Qty</th>
+    <th>Price</th>
+    <th>Received Date</th>
+    <th>Comment</th>
+    <th>Action</th>
+  </tr>
+
+  <% data.forEach(function(batch){ %>
+     <tr>
+      
+       <td><%= batch.id %></td>
+       <td><%= batch.batch %></td>
+       <td><%= batch.type %></td>
+       <td><%= batch.qty %></td>
+       <td><%= batch.price %></td>
+       <td><%= batch.received_date %></td>
+       <td><%= batch.comment %></td>
+
+       <td>
+        <form id="form" action="../../admin/stocklist" method="post">
+           sale: <input type="number" name="qty" min="1" max="<%= batch.qty %>"/>
+           date: <input type="date" name="date"/>
+           <input type="hidden" name="batch_id" value="<%= batch.id %>"/>
+           <input type="hidden" name="type" value="<%= batch.type %>"/>
+           <input type="hidden" name="batch" value="<%= batch.batch %>"/>
+           <input type="hidden" name="price" value="<%= batch.price %>"/>
+           <input type="hidden" name="instock" value="<%= batch.qty %>"/>
+           <input type="hidden" name="merchant_id" value="<%= merchant.merchant_id %>"/>
+           <input type="submit" name="submit"/>
+        </form>
+       </td>
+       
+     
+      
+     </tr>
+  <% }); %>
+
+
+  
+
+	</table>
+
+ 
+ 
+
+  </body>
+
+</html>

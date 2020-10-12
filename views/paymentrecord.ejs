@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Payment Record</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ </head>
+
+  <body>
+  <h1>Payment Record</h1>
+
+  <p>Merchant Name: <%= merchant.merchant_name %> <p>
+  <p>Total Sale: <%= merchant.total_sale %> <p>
+  <p>Total Paid: <%= merchant.total_paid %> <p>
+  <p>Total Balance: <%= merchant.total_balance %> <p>
+
+
+  <form id="form" action="../../admin/savepayment" method="post">
+     amount: <input type="number" name="amount"/> <br>
+     date: <input type="date" name="date"/> <br>
+     
+     <input type="hidden" name="total_sale" value="<%= merchant.total_sale %>"/>
+     <input type="hidden" name="merchant_id" value="<%= merchant.merchant_id %>"/>
+     <input type="submit" name="submit"/>
+  </form>
+
+  <h3>History</h3>
+  <table cellspacing="1" cellpadding="5" border="1">
+    <tr>    
+      <th>Date</th>
+      <th>Amount</th>    
+    </tr>
+
+    <% merchant.payment_logs.forEach(function(payment){ %>
+       <tr>        
+         <td><%= payment.date %></td>
+         <td><%= payment.amount %></td>         
+       </tr>
+    <% }); %>
+
+  
+
+ 
+
+  </body>
+
+</html>
