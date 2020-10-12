@@ -174,7 +174,7 @@ app.post('/addorder', async (req,res) => {
        
     db.collection('users').doc(currentUser.id).set(data)
     
-
+});
 
 /*
 app.get('/admin/addstock/:merchant_id', async (req,res) => {  
@@ -894,5 +894,5 @@ generatePushID = (function() {
       return id;
     };
   })();
-});
+
 
