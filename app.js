@@ -49,7 +49,8 @@ app.get('/test',function(req,res){
      res.render('test.ejs');
 });
 
-app.get('/addorder',function(req,res){    
+app.get('/addorder',function(req,res){  
+    console.log("Hello kids");  
     res.render('addorder.ejs');
 });
 
