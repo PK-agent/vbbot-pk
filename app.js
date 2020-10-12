@@ -220,6 +220,7 @@ app.post('/admin/addorder', async (req,res) => {
 
 app.post('/addorder', async (req,res) => {  
    
+    console.log("hello ksds");
     let today = new Date();
     let orderlist_id = req.body.orderlist_id;
 
