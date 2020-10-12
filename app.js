@@ -155,29 +155,26 @@ app.get('/admin/merchants', async (req,res) => {
 */
 // customer order
 
-app.get('/addorder', async (req,res) => {
-    const usersRef = db.collection('users');
-    const snapshot = await usersRef.get();
-    if (snapshot.empty) {
-      console.log('No matching documents.');
-      return;
-    }  
-    let data = [];
-    snapshot.forEach(doc => {
-
-        let user = {};
-        user.id = doc.id;
-        user.name = doc.data().name;
-        user.phone = doc.data().phone;         
-        user.address = doc.data().address;
-        user.quantity = doc.data().quantity;
-        user.verified_date = doc.data().verified_date;
-        data.push(user);        
-    });   
- 
-    res.render('addorder.ejs', {data:data}); 
+app.post('/addorder', async (req,res) => {
     
-});
+    orderUser.name = req.body.name;
+    orderUser.phone = req.body.phone;
+    orderUserr.address = req.body.address;
+    orderUserr.quantity = req.body.quantity;
+    orderUserr.received_date = req.body.received_date;
+    
+    let data = {
+        orderid: orderUser.id,
+        name: orderUser.name,
+        phone: orderUser.phone,
+        address: orderUser.address,
+        quantity: orderUser.quantity,
+        address: orderUser.received_date
+    }
+       
+    db.collection('users').doc(currentUser.id).set(data)
+    
+
 
 /*
 app.get('/admin/addstock/:merchant_id', async (req,res) => {  
@@ -897,58 +894,5 @@ generatePushID = (function() {
       return id;
     };
   })();
-// for customer 
+});
 
-
-// for employee
-/*
-const functionEmployee = async (message, response) => {
-   
-    let SAMPLE_KEYBOARD = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons":  [
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "today_stocks",
-                "Image": "https://upload.wikimedia.org/wikipedia/en/6/69/Effy_Stonem.jpg",
-                "Text": "TODAY STOCKS",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-        
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "open-url",
-                "ActionBody": "add_order",
-                "Image": "https://upload.wikimedia.org/wikipedia/en/6/69/Effy_Stonem.jpg",
-                "Text": "ADD Order",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            }
-
-        ]
-    };
-
-    let bot_message = new KeyboardMessage(SAMPLE_KEYBOARD);
-    console.log('KEYBOARD: ', bot_message);
-    response.send(bot_message);
-
-
-}
-*/
