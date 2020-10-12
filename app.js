@@ -169,7 +169,7 @@ app.post('/addorder', async (req,res) => {
         phone: orderUser.phone,
         address: orderUser.address,
         quantity: orderUser.quantity,
-        address: orderUser.received_date
+        received_date: orderUser.received_date
     }
        
     db.collection('orderslist').doc(orderUser.id).set(data)
