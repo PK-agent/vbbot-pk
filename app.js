@@ -49,10 +49,34 @@ app.get('/test',function(req,res){
      res.render('test.ejs');
 });
 
-app.get('/addorder',function(req,res){   
+app.get('/addorder',function(req,res){    
     res.render('addorder.ejs');
 });
 
+app.post('/addorder', async (req,res) => {  
+   
+    let today = new Date();
+    
+    let data = {
+        batch: req.body.item_batch,
+        type:req.body.item_type,
+        qty:parseInt(req.body.item_qty),
+        price:parseInt(req.body.item_price),
+        received_date:req.body.item_received_date,
+        comment:req.body.comment,    
+        created_on:today   
+    }
+   
+
+    db.collection('users').doc(merchant_id).collection('stocks').add(data)
+    .then(()=>{
+          res.json({success:'success'});  
+
+    }).catch((error)=>{
+        console.log('ERROR:', error);
+    }); 
+    
+});
 
 app.get('/register',function(req,res){   
       let data = {
@@ -130,8 +154,8 @@ app.get('/admin/merchants', async (req,res) => {
 });
 */
 // customer order
-/*
-app.get('/admin/orderlist', async (req,res) => {
+
+app.get('/addorder', async (req,res) => {
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
@@ -151,10 +175,10 @@ app.get('/admin/orderlist', async (req,res) => {
         data.push(user);        
     });   
  
-    res.render('orderlist.ejs', {data:data}); 
+    res.render('addorder.ejs', {data:data}); 
     
 });
-*/
+
 /*
 app.get('/admin/addstock/:merchant_id', async (req,res) => {  
     let data = { };        
@@ -218,32 +242,7 @@ app.post('/admin/addorder', async (req,res) => {
 */
 //admin addorder
 
-app.post('/addorder', async (req,res) => {  
-   
-    console.log("hello ksds");
-    let today = new Date();
-    let orderlist_id = req.body.orderlist_id;
 
-    let data = {
-        batch: req.body.item_batch,
-        type:req.body.item_type,
-        qty:parseInt(req.body.item_qty),
-        price:parseInt(req.body.item_price),
-        received_date:req.body.item_received_date,
-        comment:req.body.comment,    
-        created_on:today   
-    }
-   
-
-    db.collection('users').doc(merchant_id).collection('stocks').add(data)
-    .then(()=>{
-          res.json({success:'success'});  
-
-    }).catch((error)=>{
-        console.log('ERROR:', error);
-    }); 
-    
-});
 
 /*
 app.get('/admin/stocklist/:merchant_id', async (req,res) => { 
