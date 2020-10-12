@@ -172,7 +172,7 @@ app.post('/addorder', async (req,res) => {
         address: orderUser.received_date
     }
        
-    db.collection('users').doc(currentUser.id).set(data)
+    db.collection('orderslist').doc(orderUser.id).set(data)
     
 });
 
