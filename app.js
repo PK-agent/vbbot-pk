@@ -194,17 +194,7 @@ app.get('/customerOrder',function(req,res){
     if (snapshot.empty) {
       console.log('No matching documents.');
       return;
-    }  
-    let data = [];
-    snapshot.forEach(doc => {
-
-        let user = {};
-        user.id = doc.id;
-        user.name = doc.data().name;
-        user.phone = doc.data().phone;         
-        user.address = doc.data().address;
-        data.push(user);        
-    }); 
+    } 
 
    res.render('addorder.ejs');
 });
