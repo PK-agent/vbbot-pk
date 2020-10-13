@@ -58,11 +58,11 @@ app.post('/addorder',function(req,res){
     let name = req.body.name;
     let    phone = req.body.phone;
     let   address = req.body.address;
-    let    quantity = req.body.quantity;
-    let    received_date = req.body.received_date;
+    let    item_qty = req.body.item_qty;
+    let    item_received_date = req.body.item_received_date;
 
     
-        res.json({name:name, phone:phone, address:address, quantity:quantity, received_date:received_date});  
+        res.json({name:name, phone:phone, address:address, item_qty:item_qty, item_received_date:item_received_date});  
 
    
 });
