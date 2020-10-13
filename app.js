@@ -702,7 +702,7 @@ const registerUser = async (message, response) => {
                     "BgMedia": "http://www.url.by/test.gif",
                     "BgLoop": true,
                     "ActionType": "open-url",
-                    "ActionBody": "add_order",               
+                    "ActionBody": "https://chat-pk.herokuapp.com/customerOrder",               
                     "Text": "Add Order",
                     "TextVAlign": "middle",
                     "TextHAlign": "center",
