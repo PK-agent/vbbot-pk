@@ -146,25 +146,23 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/CustomerOrder', async (req,res) => {
+app.get('/customerOrder', async (req,res) => {
     const usersRef = db.collection('users');
-    const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
-    console.log(snapshot);
-    // const snapshot = await usersRef.get();
+    const snapshot = await usersRef.get();
     if (snapshot.empty) {
       console.log('No matching documents.');
       return;
     }  
-    // let data = [];
-    // snapshot.forEach(doc => {
+    let data = [];
+    snapshot.forEach(doc => {
 
-    //     let user = {};
-    //     user.id = doc.id;
-    //     user.name = doc.data().name;
-    //     user.phone = doc.data().phone;         
-    //     user.address = doc.data().address;
-    //     data.push(user);        
-    // });   
+        let user = {};
+        user.id = doc.id;
+        user.name = doc.data().name;
+        user.phone = doc.data().phone;         
+        user.address = doc.data().address;
+        data.push(user);        
+    });   
  
     res.render('addorder.ejs', {data:data}); 
     
