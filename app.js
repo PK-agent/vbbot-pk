@@ -188,11 +188,26 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/customerOrder',function(req,res){  
+app.get('/customerOrder', async (req,res) => {
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
+    let data = [];
+    snapshot.forEach(doc => {
 
-   res.render('addorder.ejs');
+        let user = {};
+        user.id = doc.id;
+        user.name = doc.data().name;
+        user.phone = doc.data().phone;         
+        user.address = doc.data().address;
+        data.push(user);        
+    });   
+ 
+    res.render('merchants.ejs', {data:data}); 
+    
 });
 
 app.post('/customerOrder', async (req,res) => {  
