@@ -71,12 +71,12 @@ app.post('/addorder',function(req,res){
     }
 
     db.collection('orderslist').doc(orderUser.id).set(data)
-
-            .then(res => res.json())
-            .then(json => console.log('JSON', json))
+    .then(()=>{
+        res.json({success:'success'});  
 
     }).catch((error)=>{
     console.log('ERROR:', error);
+    });
 });
 
 app.post('/admin/merchants', async (req,res) => {  
