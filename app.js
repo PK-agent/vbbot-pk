@@ -149,7 +149,7 @@ app.post('/register',function(req,res){
 
 app.get('/customerOrder', async(req,res) => {  
     const usersRef = db.collection('users');
-    const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
+    const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
     console.log(snapshot);
     // const snapshot = await usersRef.get();
     if (snapshot.empty) {
