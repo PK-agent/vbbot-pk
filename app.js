@@ -120,7 +120,7 @@ app.post('/register',function(req,res){
        
 });
 
-app.post('/addorder',function(req,res){   
+app.post('admin/addorder',function(req,res){   
     
     console.log('Data from form:', req.body);
 
