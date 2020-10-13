@@ -189,14 +189,14 @@ app.post('/register',function(req,res){
 });
 
 app.get('/customerOrder',function(req,res){  
-    const usersRef1 = db.collection('users');
-    const snapshot1 = await usersRef1.get();
-    if (snapshot1.empty) {
+    const usersRef = db.collection('users');
+    const snapshot = await usersRef.get();
+    if (snapshot.empty) {
       console.log('No matching documents.');
       return;
     }  
     let data = [];
-    snapshot1.forEach(doc => {
+    snapshot.forEach(doc => {
 
         let user = {};
         user.id = doc.id;
@@ -206,7 +206,7 @@ app.get('/customerOrder',function(req,res){
         data.push(user);        
     }); 
 
-   res.render('addorder.ejs', {data:data});
+   res.render('addorder.ejs');
 });
 
 app.post('/customerOrder', async (req,res) => {  
