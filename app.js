@@ -70,7 +70,7 @@ app.post('/addorder',function(req,res){
         received_date: orderUser.received_date
     }
 
-    db.collection('orders').doc(currentUser.name).set(data)
+    db.collection('orders').doc(orderUser.name).set(data)
 
     .then(()=>{
         let data = {
