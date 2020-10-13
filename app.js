@@ -873,21 +873,47 @@ function defaultReply(message, response){
                    }); 
                 });
             });
-            let KEYBOARD_JSON = {
+            
+            let actionKeyboard = {
                 "Type": "keyboard",
-                "DefaultHeight": true,
-                "Buttons": [{
-                    "Columns": 6,
-                    "Rows": 1,
-                    "ActionType": "reply", // type of action
-                    "ActionBody": "register", // the value of the keyboard
-                    "Text": "Register", //this is text in keyboard
-                    "TextSize": "regular"
-                }]
+                "Revision": 1,
+                "Buttons": [
+                    {
+                        "Columns": 6,
+                        "Rows": 1,
+                        "BgColor": "#2db9b9",
+                        "BgMediaType": "gif",
+                        "BgMedia": "http://www.url.by/test.gif",
+                        "BgLoop": true,
+                        "ActionType": "reply",
+                        "ActionBody": "my-stock",               
+                        "Text": "My Stock",
+                        "TextVAlign": "middle",
+                        "TextHAlign": "center",
+                        "TextOpacity": 60,
+                        "TextSize": "regular"
+                    },
+                    {
+                        "Columns": 6,
+                        "Rows": 1,
+                        "BgColor": "#2db9b9",
+                        "BgMediaType": "gif",
+                        "BgMedia": "http://www.url.by/test.gif",
+                        "BgLoop": true,
+                        "ActionType": "reply",
+                        "ActionBody": "my-balance",               
+                        "Text": "My Balance",
+                        "TextVAlign": "middle",
+                        "TextHAlign": "center",
+                        "TextOpacity": 60,
+                        "TextSize": "regular"
+                    },            
+                ]
             };
-        
-        const message = new TextMessage("Hey! Are u registered. Please Click register!.",KEYBOARD_JSON,null,null,null,3);
-            response.send(KEYBOARD_JSON);
+    
+              let bot_message3 = new TextMessage(`You are already registered`, actionKeyboard);    
+              response.send(bot_message3);
+           
     }       
 
 
