@@ -50,9 +50,11 @@ app.get('/test',function(req,res){
 });
 
 app.get('/addorder',function(req,res){    
+    let data = {order_name: orderUser.name
+    }
     res.render('addorder.ejs');
 });
-
+/*
 app.post('/addorder', async (req,res) => {  
    
     let today = new Date();
@@ -77,7 +79,7 @@ app.post('/addorder', async (req,res) => {
     }); 
     
 });
-
+*/
 app.get('/register',function(req,res){   
       let data = {
         user_name: currentUser.name,
@@ -163,8 +165,8 @@ app.post('/addorder', async (req,res) => {
     orderUser.quantity = req.body.quantity;
     orderUser.received_date = req.body.received_date;
     
-    let data = {
-        orderid: orderUser.id,
+    let data = {       
+        orderlist_id: orderUser.id,
         name: orderUser.name,
         phone: orderUser.phone,
         address: orderUser.address,
@@ -172,15 +174,13 @@ app.post('/addorder', async (req,res) => {
         received_date: orderUser.received_date
     }
        
-    db.collection('orderslist').doc(orderUser.id).add(data)
-    
-    .then(res => res.json())
-    .then(json => console.log('JSON', json))
+    db.collection('orderslist').doc(orderUser.id).set(data)
+    .then(()=>{
+          res.json({success:'success'});  
 
-.catch((error)=>{
-console.log('ERROR:', error);
-
-});
+    }).catch((error)=>{
+        console.log('ERROR:', error);
+    }); 
 })
 /*
 app.get('/admin/addstock/:merchant_id', async (req,res) => {  
