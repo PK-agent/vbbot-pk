@@ -539,6 +539,12 @@ bot.onTextMessage(/./, (message, response) => {
             customerOrder(message, response);
             break;
         case "tdy_stock":
+            customerTdyStock(message, response);
+            break;
+        case "my-stock":
+            checkStock(message, response);
+            break;
+        case "my-balance":
             checkBalance(message, response);
             break;
         case "menu":
@@ -588,6 +594,12 @@ const textReply = (message, response) => {
 const urlReply = (message, response) => {    
 
     let bot_message = new UrlMessage(process.env.APP_URL + '/test/');   
+    response.send(bot_message);
+}
+
+const customerOrder = (message, response) => {    
+
+    let bot_message = new UrlMessage(APP_URL + '/CustomerOrder/');   
     response.send(bot_message);
 }
 
