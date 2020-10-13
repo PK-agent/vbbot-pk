@@ -50,7 +50,10 @@ app.get('/test',function(req,res){
 });
 
 app.get('/addorder',function(req,res){    
-    res.render('addorder.ejs');
+    let data = {
+        user_name: currentUser.name,
+      } 
+      res.render('addorder.ejs', {data:data});
 });
 
 app.post('/addorder',function(req,res){   
@@ -71,7 +74,7 @@ app.post('/addorder',function(req,res){
     };
 
 
-    db.collection('orderslist').doc(name).set(data)
+    db.collection('orderslist').doc(currentUser.id).set(data)
         res.json({name:name, phone:phone, address:address, item_qty:item_qty, item_received_date:item_received_date});  
 
    
