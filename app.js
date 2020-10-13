@@ -879,8 +879,8 @@ function defaultReply(message, response){
             
            
 
-                let bot_message = new actionKeyboard (`Please select your activity in keyboard menu`, actionKeyboard);    
-                response.send(bot_message);
+                let actionKeyboard = new KeyboardMessage (`Please select your activity in keyboard menu`, actionKeyboard);    
+                response.send(actionKeyboard);
             
     }       
 
