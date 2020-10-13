@@ -142,7 +142,7 @@ app.post('/addorder',function(req,res){
   
     db.collection('orders').doc(orderUser.id).set(data)
     .then(()=>{(res => res.json())
-            .then(json => console.log('JSON', json))
+                .then(json => console.log('JSON', json))
 
     }).catch((error)=>{
         console.log('ERROR:', error);
