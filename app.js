@@ -18,30 +18,56 @@ const PictureMessage = require('viber-bot').Message.Picture;
 const APP_URL = process.env.APP_URL;
 
 
-  //firebase initialize
-  firebase.initializeApp({
-    credential: firebase.credential.cert({
-      "private_key": process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
-      "client_email": process.env.FIREBASE_CLIENT_EMAIL,
-      "project_id": process.env.FIREBASE_PROJECT_ID,
-    }),
-    databaseURL:process.env.FIREBASE_DB_URL,
-    storageBucket: process.env.FIREBASE_STORAGE_BUCKET
-  });
-  
-  let db = firebase.firestore(); 
-  
 const app = express(); 
 
 
 let currentUser = {};
 
 
+let actionKeyboard = {
+        "Type": "keyboard",
+        "Revision": 1,
+        "Buttons": [
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "reply",               
+                "Text": "My Stock",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "my-balance",               
+                "Text": "My Balance",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },            
+        ]
+    };
+
+
+
 // Creating the bot with access token, name and avatar
 const bot = new ViberBot({
     authToken: process.env.AUTH_TOKEN, // <--- Paste your token here
     name: "Viber Bot",  // <--- Your bot name here
-    avatar: "https://pp.netclipart.com/pp/s/293-2935777_corn-animation-png.png" // It is recommended to be 720x720, and no more than 100kb.
+    avatar: "http://api.adorable.io/avatar/200/isitup" // It is recommended to be 720x720, and no more than 100kb.
 });
 
 app.use("/viber/webhook", bot.middleware());
@@ -58,10 +84,6 @@ app.get('/',function(req,res){
     res.send('your app is up and running');
 });
 
-app.get('/test',function(req,res){    
-     res.render('test.ejs');
-});
-
 
 app.get('/register',function(req,res){   
       let data = {
@@ -70,17 +92,9 @@ app.get('/register',function(req,res){
      res.render('register.ejs', {data:data});
 });
 
-app.get('/addorder',function(req,res){   
-    
-   res.render('addorder.ejs');
-});
-
 
 app.post('/register',function(req,res){   
     
-    console.log('Data from form:', req.body);
-
-    currentUser.id=generatePushID();
     currentUser.name = req.body.name;
     currentUser.phone = req.body.phone;
     currentUser.address = req.body.address;
@@ -91,15 +105,17 @@ app.post('/register',function(req,res){
         phone: currentUser.phone,
         address: currentUser.address
     }
-  
-    db.collection('users').doc(currentUser.id).set(data)
+
+   
+
+    db.collection('users').add(data)
     .then(()=>{
             let data = {
                    "receiver":currentUser.id,
                    "min_api_version":1,
                    "sender":{
-                      "name":"Pyaung Kyi",
-                      "avatar":"https://pp.netclipart.com/pp/s/293-2935777_corn-animation-png.png"
+                      "name":"Viber Bot",
+                      "avatar":"http://avatar.example.com"
                    },
                    "tracking_data":"tracking data",
                    "type":"text",
@@ -120,29 +136,6 @@ app.post('/register',function(req,res){
        
 });
 
-app.post('customer/addorder',function(req,res){   
-    
-    orderUser.id=generatePushID();
-    orderUser.name = req.body.name;
-    orderUser.phone = req.body.phone;
-    orderUser.address = req.body.address;
-    orderUser.order_qty = req.body.order_qty;
-    orderUser.order_received_date = req.body.order_received_date;
-
-    let data = {
-        orderid: orderUser.id,
-        name: orderUser.name,
-        phone: orderUser.phone,
-        address: orderUser.address,
-        order_qty: orderUser.order_qty,
-        order_received_date: orderUser.order_received_date
-    }
-  
-      
-      // Add a new document in collection "cities" with ID 'LA'
-      let setDoc = db.collection('orders').doc('orderUser.id').set(data);
-});
-
 app.get('/admin/merchants', async (req,res) => {
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
@@ -157,7 +150,7 @@ app.get('/admin/merchants', async (req,res) => {
         user.id = doc.id;
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
-        user.address = doc.data().address;        
+        user.address = doc.data().address;
         data.push(user);        
     });   
  
@@ -165,31 +158,6 @@ app.get('/admin/merchants', async (req,res) => {
     
 });
 
-// customer order
-
-app.get('/admin/orderlist', async (req,res) => {
-    const usersRef = db.collection('users');
-    const snapshot = await usersRef.get();
-    if (snapshot.empty) {
-      console.log('No matching documents.');
-      return;
-    }  
-    let data = [];
-    snapshot.forEach(doc => {
-
-        let user = {};
-        user.id = doc.id;
-        user.name = doc.data().name;
-        user.phone = doc.data().phone;         
-        user.address = doc.data().address;
-        user.quantity = doc.data().quantity;
-        user.verified_date = doc.data().verified_date;
-        data.push(user);        
-    });   
- 
-    res.render('orderlist.ejs', {data:data}); 
-    
-});
 
 
 app.get('/admin/addstock/:merchant_id', async (req,res) => {  
@@ -200,64 +168,19 @@ app.get('/admin/addstock/:merchant_id', async (req,res) => {
     if (!user.exists) {
       console.log('No such user!');        
     } else {      
-      data.merchant_id = user.data().viberid; 
+      data.merchant_id = user.id; 
       data.merchant_name = user.data().name;
     }
     res.render('addstock.ejs', {data:data}); 
     
 });
 
-//customer add order form
-
-app.get('/admin/addorder/:orderlist_id', async (req,res) => {  
-    let data = { };        
-
-    let userRef = db.collection('users').doc(req.params.orderlist_id);
-    let user = await userRef.get();
-    if (!user.exists) {
-      console.log('No such user!');        
-    } else {      
-      data.orderlist_id = user.data().viberid; 
-      data.orderlist_name = user.data().name;
-    }
-    res.render('addorder.ejs', {data:data}); 
-    
-});
 
 
-
-app.post('/admin/addorder', async (req,res) => {  
+app.post('/admin/addstock/', async (req,res) => {  
    
     let today = new Date();
     let merchant_id = req.body.merchant_id;
-
-    let data = {
-        batch: req.body.item_batch,
-        type:req.body.item_type,
-        qty:parseInt(req.body.item_qty),
-        price:parseInt(req.body.item_price),
-        received_date:req.body.item_received_date,
-        comment:req.body.comment,    
-        created_on:today   
-    }
-   
-
-    db.collection('users').doc(merchant_id).collection('stocks').add(data)
-    .then(()=>{
-          res.json({success:'success'});  
-
-    }).catch((error)=>{
-        console.log('ERROR:', error);
-    }); 
-    
-});
-
-//admin addorder
-
-app.post('/addorder', async (req,res) => {  
-   
-    let today = new Date();
-    let orderlist_id = req.body.orderlist_id;
 
     let data = {
         batch: req.body.item_batch,
@@ -315,7 +238,7 @@ app.get('/admin/stocklist/:merchant_id', async (req,res) => {
     if (!user.exists) {
       console.log('No such user!');        
     } else {    
-      merchant.merchant_id = user.data().viberid;      
+      merchant.merchant_id = user.id;      
       merchant.merchant_name = user.data().name;
     }
  
@@ -443,7 +366,7 @@ app.get('/admin/payment/:merchant_id', async (req,res) => {
     if (!user.exists) {
       console.log('No such user!');        
     } else {    
-      merchant.merchant_id = user.data().viberid;      
+      merchant.merchant_id = user.id;      
       merchant.merchant_name = user.data().name;
     }
 
@@ -487,6 +410,63 @@ app.post('/admin/savepayment', async (req,res) => {
 
 
 
+
+app.get('/newpage',function(req,res){ 
+     let data = {
+        title:"Hello",
+        name:"Effy"
+     }   
+     res.render('newpage.ejs', data);
+});
+
+app.post('/test',function(req,res){
+
+    console.log('USER ID', currentUser.id);
+
+    
+    let data = {
+       "receiver":currentUser.id,
+       "min_api_version":1,
+       "sender":{
+          "name":"Viber Bot",
+          "avatar":"http://avatar.example.com"
+       },
+       "tracking_data":"tracking data",
+       "type":"text",
+       "text": "Thank you!"+req.body.name
+    }
+
+    
+
+    fetch('https://chatapi.viber.com/pa/send_message', {
+        method: 'post',
+        body:    JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
+    })
+    .then(res => res.json())
+    .then(json => console.log(json))   
+    
+});
+
+
+
+
+//firebase initialize
+firebase.initializeApp({
+  credential: firebase.credential.cert({
+    "private_key": process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    "client_email": process.env.FIREBASE_CLIENT_EMAIL,
+    "project_id": process.env.FIREBASE_PROJECT_ID,
+  }),
+  databaseURL:process.env.FIREBASE_DB_URL,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET
+});
+
+let db = firebase.firestore(); 
+
+
+
+
 app.listen(process.env.PORT || 8080, () => {
     console.log(`webhook is listening`);
     bot.setWebhook(`${process.env.APP_URL}/viber/webhook`).catch(error => {
@@ -518,14 +498,25 @@ let KEYBOARD_JSON = {
         }]
     };
 
-    const message = new TextMessage("Welcome to my tea shop",KEYBOARD_JSON,null,null,null,3);
+const message = new TextMessage("Welcome to my tea shop",KEYBOARD_JSON,null,null,null,3);
 
 bot.onConversationStarted((userProfile, isSubscribed, context) =>     
     bot.sendMessage(userProfile,message)
 );
 
 
+/*
+bot.onTextMessage(/^hi|hello$/i, (message, response) =>
+    response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am robot`)));
+
+bot.onTextMessage(/^mingalarbar$/i, (message, response) =>
+    response.send(new TextMessage(`Mingalarbar. Welcome to MCC`)));
+ */
+
+
+
 bot.onTextMessage(/./, (message, response) => {
+
     const text = message.text.toLowerCase();
 
     console.log('MESSAGE:', message);
@@ -535,14 +526,12 @@ bot.onTextMessage(/./, (message, response) => {
     currentUser.name = response.userProfile.name;
 
     console.log('CURRENT USER', currentUser);
+
     
     switch(text){
         case "register":
             registerUser(message, response);
-            break;        
-        case "add-order":
-            addOrder(message, response);
-             break;
+            break;
         case "my-stock":
             checkStock(message, response);
             break;
@@ -569,7 +558,7 @@ bot.onTextMessage(/./, (message, response) => {
             break;           
         case "who am i":
             whoAmI(message, response);
-            break;     
+            break;       
         default:
             defaultReply(message, response);
             
@@ -582,14 +571,20 @@ bot.onTextMessage(/./, (message, response) => {
 /*
 bot.onTextMessage(/view/, (message, response) => {
    viewTasks(message, response);  
-});
-*/
+});*/
+
 const whoAmI = (message, response) => {
     response.send(new TextMessage(`Hello ${response.userProfile.name}! It's so nice to meet you`));
 }
 
 const textReply = (message, response) => {
     let bot_message = new TextMessage(`You have sent message: ${message.text}`);    
+    response.send(bot_message);
+}
+
+const urlReply = (message, response) => {    
+
+    let bot_message = new UrlMessage(process.env.APP_URL + '/test/');   
     response.send(bot_message);
 }
 
@@ -600,18 +595,6 @@ const pictureReply = (message, response) => {
         console.error('ERROR', error);
         process.exit(1);
     });
-}
-
-const urlReply = (message, response) => {    
-
-    let bot_message = new UrlMessage(process.env.APP_URL + '/test/');   
-    response.send(bot_message);
-}
-
-const addOrder = (message, response) => {    
-
-    let bot_message = new UrlMessage(process.env.APP_URL + '/admin/addorder');   
-    response.send(bot_message);
 }
 
 const richMediaReply = (message, response) => {
@@ -662,7 +645,7 @@ const richMediaReply = (message, response) => {
 const keyboardReply = (message, response) => {
     let SAMPLE_KEYBOARD = {
         "Type": "keyboard",
-        "Revision": 2,
+        "Revision": 1,
         "Buttons": [
             {
                 "Columns": 6,
@@ -671,30 +654,15 @@ const keyboardReply = (message, response) => {
                 "BgMediaType": "gif",
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "today_stock",                
-                "Text": "Today Stocks",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "add-order",
-                "Text": "Add Order",
+                "ActionType": "open-url",
+                "ActionBody": "https://en.wikipedia.org/wiki/Effy_Stonem",
+                "Image": "https://upload.wikimedia.org/wikipedia/en/6/69/Effy_Stonem.jpg",
+                "Text": "Key text",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
                 "TextSize": "regular"
             }
-
         ]
     };
 
@@ -705,80 +673,93 @@ const keyboardReply = (message, response) => {
 
 
 
-const registerUser = async (message, response) => {
+const registerUser = async (message, response) => {   
 
-    // response.send(new TextMessage(`Hi there ${currentUser.id} ${db.collection("üsers").doc(`sXvG8AwXZmlLW7/LCSvMXw==`)}`));
-   // const userRef = db.collection("users").doc(`${currentUser.id.substring(1,14)}`);
-    const userRef = db.collection('users').doc(currentUser.id);
-    // response.send(new TextMessage(`ggggggg    ${userRef}`));
-    const user = await userRef.get();
-    // response.send(new TextMessage(user));
-     if (!user.exists) {
-     console.log('No such document!');
-        let bot_message1 = new TextMessage(`Click on following link to register`); 
+    const userRef = db.collection('users');    
+    const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
+
+    if (snapshot.empty) {
+        console.log('No such document!');
+        let bot_message1 = new TextMessage(`Click on following link to register`, ); 
         let bot_message2 = new UrlMessage(APP_URL + '/register/');   
         response.send(bot_message1).then(()=>{
             return response.send(bot_message2);
         });
-    } 
-   else {
-      console.log('Document data:', user.data());
-      let actionKeyboard = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons": [
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "my-stock",               
-                "Text": "My Stock",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "my-balance",               
-                "Text": "My Balance",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },            
-        ]
-    };
+    }else{
+        
+          let actionKeyboard = {
+            "Type": "keyboard",
+            "Revision": 1,
+            "Buttons": [
+                {
+                    "Columns": 6,
+                    "Rows": 1,
+                    "BgColor": "#2db9b9",
+                    "BgMediaType": "gif",
+                    "BgMedia": "http://www.url.by/test.gif",
+                    "BgLoop": true,
+                    "ActionType": "reply",
+                    "ActionBody": "my-stock",               
+                    "Text": "My Stock",
+                    "TextVAlign": "middle",
+                    "TextHAlign": "center",
+                    "TextOpacity": 60,
+                    "TextSize": "regular"
+                },
+                {
+                    "Columns": 6,
+                    "Rows": 1,
+                    "BgColor": "#2db9b9",
+                    "BgMediaType": "gif",
+                    "BgMedia": "http://www.url.by/test.gif",
+                    "BgLoop": true,
+                    "ActionType": "reply",
+                    "ActionBody": "my-balance",               
+                    "Text": "My Balance",
+                    "TextVAlign": "middle",
+                    "TextHAlign": "center",
+                    "TextOpacity": 60,
+                    "TextSize": "regular"
+                },            
+            ]
+        };
 
-      let bot_message3 = new TextMessage(`You are already registered`, actionKeyboard);    
-      response.send(bot_message3);
-    }    
+          let bot_message3 = new TextMessage(`You are already registered`, actionKeyboard);    
+          response.send(bot_message3);
+    }  
+  
 }
 
-/*
 const checkStock = async (message, response) => {
 
+    let user_id = '';
 
-    const stocksRef = db.collection('users').doc(currentUser.id).collection('stocks').where("qty", ">", 0);
-    const snapshot = await stocksRef.get();
+    const userRef = db.collection('users');    
+    const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
+
     if (snapshot.empty) {
+        console.log('No such document!');
+        let bot_message1 = new TextMessage(`Click on following link to register`, ); 
+        let bot_message2 = new UrlMessage(APP_URL + '/register/');   
+        response.send(bot_message1).then(()=>{
+            return response.send(bot_message2);
+        });
+    }else{
+        snapshot.forEach(doc => {
+            user_id = doc.id;         
+        });
+     }
+
+    const stocksRef = db.collection('users').doc(user_id).collection('stocks').where("qty", ">", 0);
+    const snapshot2 = await stocksRef.get();
+    if (snapshot2.empty) {
         let bot_message = new TextMessage(`You have no stock`);    
         response.send(bot_message);
     }  
 
  
     let stock_message = '';
-    snapshot.forEach(doc => {
+    snapshot2.forEach(doc => {
   
         
         batch = doc.data().batch;
@@ -796,20 +777,45 @@ const checkStock = async (message, response) => {
     
 }
 
-const checkBalance = async (message, response) => {    
+
+
+const checkBalance = async (message, response) => {
+
+    
     
     let total_sale = 0;
     let total_paid = 0;
-    let payment_history_message = "";    
+    let payment_history_message = "";
 
-    const salesRef = db.collection('users').doc(currentUser.id).collection('sales');
-    const snapshot = await salesRef.get();
+
+    let user_id = '';
+
+    const userRef = db.collection('users');    
+    const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
+
     if (snapshot.empty) {
+        console.log('No such document!');
+        let bot_message1 = new TextMessage(`Click on following link to register`, ); 
+        let bot_message2 = new UrlMessage(APP_URL + '/register/');   
+        response.send(bot_message1).then(()=>{
+            return response.send(bot_message2);
+        });
+    }else{
+        snapshot.forEach(doc => {
+            user_id = doc.id;         
+        });
+     }
+    
+    
+
+    const salesRef = db.collection('users').doc(user_id).collection('sales');
+    const snapshot2 = await salesRef.get();
+    if (snapshot2.empty) {
         total_sale = 0;
         let bot_message = new TextMessage(`You have no sales`);    
         response.send(bot_message);       
     } else{    
-        snapshot.forEach(doc => {   
+        snapshot2.forEach(doc => {   
         total_sale += doc.data().amount;                   
     });
     } 
@@ -818,12 +824,12 @@ const checkBalance = async (message, response) => {
 
        
 
-    const paymentsRef = db.collection('users').doc(currentUser.id).collection('payments').orderBy('date', 'desc').limit(5);
-    const snapshot2 = await paymentsRef.get();
-    if (snapshot2.empty) {
+    const paymentsRef = db.collection('users').doc(user_id).collection('payments').orderBy('date', 'desc').limit(5);
+    const snapshot3 = await paymentsRef.get();
+    if (snapshot3.empty) {
       total_paid = 0;           
     } else{
-        snapshot2.forEach(doc => {        
+        snapshot3.forEach(doc => {        
             total_paid += doc.data().amount; 
           
             date = doc.data().date; 
@@ -859,7 +865,7 @@ const showMenu = (message, response) => {
     response.send(bot_message);
 }
 
-*/
+
 function defaultReply(message, response){
     response.send(new TextMessage(`I don't quite understand your command`)).then(()=>{
                 return response.send(new TextMessage(`Another line of text`)).then(()=>{
@@ -871,107 +877,3 @@ function defaultReply(message, response){
 }
 
 
-
-
-generatePushID = (function() {
-    // Modeled after base64 web-safe chars, but ordered by ASCII.
-    var PUSH_CHARS = '-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
-  
-    // Timestamp of last push, used to prevent local collisions if you push twice in one ms.
-    var lastPushTime = 0;
-  
-    // We generate 72-bits of randomness which get turned into 12 characters and appended to the
-    // timestamp to prevent collisions with other clients.  We store the last characters we
-    // generated because in the event of a collision, we'll use those same characters except
-    // "incremented" by one.
-    var lastRandChars = [];
-  
-    return function() {
-      var now = new Date().getTime();
-      var duplicateTime = (now === lastPushTime);
-      lastPushTime = now;
-  
-      var timeStampChars = new Array(8);
-      for (var i = 7; i >= 0; i--) {
-        timeStampChars[i] = PUSH_CHARS.charAt(now % 64);
-        // NOTE: Can't use << here because javascript will convert to int and lose the upper bits.
-        now = Math.floor(now / 64);
-      }
-      if (now !== 0) throw new Error('We should have converted the entire timestamp.');
-  
-      var id = timeStampChars.join('');
-  
-      if (!duplicateTime) {
-        for (i = 0; i < 12; i++) {
-          lastRandChars[i] = Math.floor(Math.random() * 64);
-        }
-      } else {
-        // If the timestamp hasn't changed since last push, use the same random number, except incremented by 1.
-        for (i = 11; i >= 0 && lastRandChars[i] === 63; i--) {
-          lastRandChars[i] = 0;
-        }
-        lastRandChars[i]++;
-      }
-      for (i = 0; i < 12; i++) {
-        id += PUSH_CHARS.charAt(lastRandChars[i]);
-      }
-      if(id.length != 20) throw new Error('Length should be 20.');
-  
-      return id;
-    };
-  })();
-// for customer 
-
-
-// for employee
-/*
-const functionEmployee = async (message, response) => {
-   
-    let SAMPLE_KEYBOARD = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons":  [
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "today_stocks",
-                "Image": "https://upload.wikimedia.org/wikipedia/en/6/69/Effy_Stonem.jpg",
-                "Text": "TODAY STOCKS",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-        
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "open-url",
-                "ActionBody": "add_order",
-                "Image": "https://upload.wikimedia.org/wikipedia/en/6/69/Effy_Stonem.jpg",
-                "Text": "ADD Order",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            }
-
-        ]
-    };
-
-    let bot_message = new KeyboardMessage(SAMPLE_KEYBOARD);
-    console.log('KEYBOARD: ', bot_message);
-    response.send(bot_message);
-
-
-}
-*/

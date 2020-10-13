@@ -16,7 +16,7 @@
     
     <th>Name</th>
     <th>Phone</th>
-    <th>Address</th>         
+    <th>Address</th>   
     <th>Manage Stock</th>
     <th>Payment</th>
   </tr>
@@ -26,15 +26,20 @@
       
        <td><%= user.name %></td>
        <td><%= user.phone %></td>
-       <td><%= user.address %></td>      
+       <td><%= user.address %></td>
      
        <td><a href="../admin/addstock/<%= user.id %>">Add Stock</a> | <a href="../admin/stocklist/<%= user.id %>">Stock List</a></td>
        <td><a href="../admin/payment/<%= user.id %>">Payment History</a></td>
      </tr>
   <% }); %>
- 
 
-	</table> 
+
+  
+
+	</table>
+
+ 
+ 
 
   </body>
 
