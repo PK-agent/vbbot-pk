@@ -189,6 +189,7 @@ app.post('/register',function(req,res){
 });
 
 app.get('/customerOrder',function(req,res){  
+    const usersRef = db.collection('users');
 
    res.render('addorder.ejs');
 });
