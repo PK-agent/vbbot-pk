@@ -86,7 +86,7 @@ app.post('/addorder',function(req,res){
         item_received_date: currentUser.item_received_date
     };
     
-
+    console.log( '${res.name}')
     db.collection('orderslist').doc(currentUser.id).set(data)
     .then(()=>{
           res.json({success:'success'});  
