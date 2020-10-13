@@ -50,12 +50,55 @@ app.get('/test',function(req,res){
 });
 
 app.get('/addorder',function(req,res){    
-    let data = {order_name: orderUser.name
-    }
     res.render('addorder.ejs');
 });
-/*
-app.post('/addorder', async (req,res) => {  
+
+app.post('/addorder',function(req,res){   
+    
+    orderUser.name = req.body.name;
+    orderUser.phone = req.body.phone;
+    orderUser.address = req.body.address;
+    orderUser.quantity = req.body.quantity;
+    orderUser.received_date = req.body.received_date;
+
+    let data = {
+        
+        name: orderUser.name,
+        phone: orderUser.phone,
+        address: orderUser.address,
+        quantity: orderUser.quantity,
+        received_date: orderUser.received_date
+    }
+
+    db.collection('orders').doc(currentUser.name).set(data)
+
+    .then(()=>{
+        let data = {
+               "receiver":orderUser.name,
+               "min_api_version":1,
+               "sender":{
+                  "name":"Viber Bot",
+                  "avatar":"http://avatar.example.com"
+               },
+               "tracking_data":"tracking data",
+               "type":"text",
+               "text": "Thank you!"+req.body.name
+            }                
+
+            fetch('https://chatapi.viber.com/pa/send_message', {
+                method: 'post',
+                body:    JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
+            })
+            .then(res => res.json())
+            .then(json => console.log('JSON', json))
+
+}).catch((error)=>{
+    console.log('ERROR:', error);
+});
+});
+
+app.post('/admin/merchants', async (req,res) => {  
    
     let today = new Date();
     
@@ -79,7 +122,7 @@ app.post('/addorder', async (req,res) => {
     }); 
     
 });
-*/
+
 app.get('/register',function(req,res){   
       let data = {
         user_name: currentUser.name,
@@ -132,324 +175,6 @@ app.post('/register',function(req,res){
        
 });
 
-/*
-app.get('/admin/merchants', async (req,res) => {
-    const usersRef = db.collection('users');
-    const snapshot = await usersRef.get();
-    if (snapshot.empty) {
-      console.log('No matching documents.');
-      return;
-    }  
-    let data = [];
-    snapshot.forEach(doc => {
-
-        let user = {};
-        user.id = doc.id;
-        user.name = doc.data().name;
-        user.phone = doc.data().phone;         
-        user.address = doc.data().address;        
-        data.push(user);        
-    });   
- 
-    res.render('merchants.ejs', {data:data}); 
-    
-});
-*/
-// customer order
-
-app.post('/addorder', async (req,res) => {
-    
-    orderUser.name = req.body.name;
-    orderUser.phone = req.body.phone;
-    orderUser.address = req.body.address;
-    orderUser.quantity = req.body.quantity;
-    orderUser.received_date = req.body.received_date;
-    
-    let data = {       
-        orderlist_id: orderUser.id,
-        name: orderUser.name,
-        phone: orderUser.phone,
-        address: orderUser.address,
-        quantity: orderUser.quantity,
-        received_date: orderUser.received_date
-    }
-       
-    db.collection('orderslist').doc(orderUser.id).set(data)
-    .then(()=>{
-          res.json({success:'success'});  
-
-    }).catch((error)=>{
-        console.log('ERROR:', error);
-    }); 
-})
-/*
-app.get('/admin/addstock/:merchant_id', async (req,res) => {  
-    let data = { };        
-
-    let userRef = db.collection('users').doc(req.params.merchant_id);
-    let user = await userRef.get();
-    if (!user.exists) {
-      console.log('No such user!');        
-    } else {      
-      data.merchant_id = user.data().viberid; 
-      data.merchant_name = user.data().name;
-    }
-    res.render('addstock.ejs', {data:data}); 
-    
-});
-*/
-//customer add order form
-/*
-app.get('/admin/addorder/:orderlist_id', async (req,res) => {  
-    let data = { };        
-
-    let userRef = db.collection('users').doc(req.params.orderlist_id);
-    let user = await userRef.get();
-    if (!user.exists) {
-      console.log('No such user!');        
-    } else {      
-      data.orderlist_id = user.data().viberid; 
-      data.orderlist_name = user.data().name;
-    }
-    res.render('addorder.ejs', {data:data}); 
-    
-});
-
-*/
-/*
-app.post('/admin/addorder', async (req,res) => {  
-   
-    let today = new Date();
-    let merchant_id = req.body.merchant_id;
-
-    let data = {
-        batch: req.body.item_batch,
-        type:req.body.item_type,
-        qty:parseInt(req.body.item_qty),
-        price:parseInt(req.body.item_price),
-        received_date:req.body.item_received_date,
-        comment:req.body.comment,    
-        created_on:today   
-    }
-   
-
-    db.collection('users').doc(merchant_id).collection('stocks').add(data)
-    .then(()=>{
-          res.json({success:'success'});  
-
-    }).catch((error)=>{
-        console.log('ERROR:', error);
-    }); 
-    
-});
-*/
-//admin addorder
-
-
-
-/*
-app.get('/admin/stocklist/:merchant_id', async (req,res) => { 
-    
-
-    const stocksRef = db.collection('users').doc(req.params.merchant_id).collection('stocks').where("qty", ">", 0);
-    const snapshot = await stocksRef.get();
-    if (snapshot.empty) {
-      console.log('No stocks.');
-      res.send('No stocks');
-    }  
-
-    let data = [];
-
-    snapshot.forEach(doc => {
-        let batch = {};
-
-        batch.id = doc.id;
-        batch.batch = doc.data().batch;
-        batch.type = doc.data().type;
-        batch.qty = doc.data().qty;
-        batch.price = doc.data().price;
-        batch.received_date = doc.data().received_date;
-        batch.comment = doc.data().comment;      
-        
-        data.push(batch);        
-    });   
-
-
-    let merchant = { };        
-
-    let userRef = db.collection('users').doc(req.params.merchant_id);
-    let user = await userRef.get();
-    if (!user.exists) {
-      console.log('No such user!');        
-    } else {    
-      merchant.merchant_id = user.data().viberid;      
-      merchant.merchant_name = user.data().name;
-    }
- 
-    res.render('stocklist.ejs', {data:data, merchant:merchant});    
-    
-});
-
-
-
-app.post('/admin/stocklist', async (req,res) => {     
-    
-    let today = new Date();
-    let merchant_id = req.body.merchant_id; 
-
-    let data = {
-        date: req.body.date,
-        batch_id: req.body.batch_id,
-        type: req.body.type,
-        qty: parseInt(req.body.qty),
-        amount:parseInt(req.body.qty)*parseInt(req.body.price),
-        created_on:today   
-    }   
-
-    let instock = parseInt(req.body.instock) -  parseInt(req.body.qty);
-   
-    
-    db.collection('users').doc(merchant_id).collection('sales').add(data)
-    .then(()=>{
-          
-          db.collection('users').doc(merchant_id).collection('stocks')
-          .doc(req.body.batch_id).update({qty:instock})
-              .then(()=>{
-                  res.redirect('/admin/stocklist/'+merchant_id);
-              }).catch((err)=>console.log('ERROR:', err));   
-
-    }).catch((error)=>{
-        console.log('ERROR:', error);
-    }); 
-    
-});
-
-
-app.get('/admin/salesrecord/:merchant_id', async (req,res) => { 
-    
-
-    const salesRef = db.collection('users').doc(req.params.merchant_id).collection('sales').orderBy('date', 'desc');
-    const snapshot = await salesRef.get();
-    if (snapshot.empty) {
-      res.send('No sales record');
-    }  
-
-    let data = [];
-
-    snapshot.forEach(doc => {
-        let sale = {};
-
-        sale.id = doc.id;
-        sale.date = doc.data().date;
-        sale.batch_id = doc.data().batch_id;
-        sale.type = doc.data().type;
-        sale.qty = doc.data().qty;
-        sale.amount = doc.data().amount;
-        
-        data.push(sale);        
-    });   
-
-
-    let merchant = { };        
-
-    let userRef = db.collection('users').doc(req.params.merchant_id);
-    let user = await userRef.get();
-    if (!user.exists) {
-      console.log('No such user!');        
-    } else {    
-      merchant.merchant_id = user.data().viberid;      
-      merchant.merchant_name = user.data().name;
-    }
- 
-    res.render('salesrecord.ejs', {data:data, merchant:merchant});    
-    
-});
-
-
-app.get('/admin/payment/:merchant_id', async (req,res) => {  
-
-    let total_sale = 0;
-    let total_paid = 0;
-    let payment_logs = [];
-
-    const salesRef = db.collection('users').doc(req.params.merchant_id).collection('sales');
-    const snapshot = await salesRef.get();
-    if (snapshot.empty) {
-      total_sale = 0;
-      res.send('No sales.');      
-    } else{    
-        snapshot.forEach(doc => {   
-        total_sale += doc.data().amount;                   
-    });
-    } 
-
-       
-
-    const paymentsRef = db.collection('users').doc(req.params.merchant_id).collection('payments').orderBy('date', 'desc');
-    const snapshot2 = await paymentsRef.get();
-    if (snapshot2.empty) {
-      total_paid = 0;
-      console.log('No payments.');      
-    } else{
-        snapshot2.forEach(doc => {        
-            total_paid += doc.data().amount;  
-
-            let payment = {};
-            payment.date = doc.data().date; 
-            payment.amount = doc.data().amount; 
-            payment_logs.push(payment);             
-        }); 
-    }
-
-    
-
-    let merchant = { };        
-
-    let userRef = db.collection('users').doc(req.params.merchant_id);
-    let user = await userRef.get();
-    if (!user.exists) {
-      console.log('No such user!');        
-    } else {    
-      merchant.merchant_id = user.data().viberid;      
-      merchant.merchant_name = user.data().name;
-    }
-
-    merchant.total_sale = total_sale;
-    merchant.total_paid = total_paid;
-    merchant.payment_logs = payment_logs;
-    merchant.total_balance = total_sale - total_paid;
- 
- 
-
-    res.render('paymentrecord.ejs', {merchant:merchant}); 
-    
-});
-
-
-app.post('/admin/savepayment', async (req,res) => {     
-    
-    let today = new Date();
-    let merchant_id = req.body.merchant_id; 
-
-    let data = {
-        amount: parseInt(req.body.amount),
-        date: req.body.date,        
-       
-        created_on:today   
-    }       
-   
-    
-    db.collection('users').doc(merchant_id).collection('payments').add(data)
-    .then(()=>{  
-        res.redirect('/admin/payment/'+merchant_id);   
-
-    }).catch((error)=>{
-        console.log('ERROR:', error);
-    }); 
-    
-});
-
-*/
 
   //firebase initialize
 firebase.initializeApp({
