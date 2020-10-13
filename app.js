@@ -887,6 +887,8 @@ function defaultReply(message, response){
             };
         
         const message = new TextMessage("Hey! Are u registered. Please Click register!.",KEYBOARD_JSON,null,null,null,3);
-}
+            response.send(KEYBOARD_JSON);
+    }       
+
 
 
