@@ -870,17 +870,9 @@ function defaultReply(message, response){
                 return response.send(new TextMessage(`Another line of text`)).then(()=>{
                    return response.send(new TextMessage(`Another another line of text`)).then(()=>{
                     return response.send(new TextMessage(`If you forget who you are, type 'who am i'`));
-                  
-                }); 
+                   }); 
                 });
-            
             });
-            
-            
-           
-
-                let actionKeyboard = new KeyboardMessage (`Please select your activity in keyboard menu`, actionKeyboard);    
-                response.send(actionKeyboard);
             
     }       
 
