@@ -65,7 +65,7 @@ app.post('/addorder',function(req,res){
     currentUser.item_received_date = req.body.item_received_date;
     
     let data = {
-        orderid: cusrrentUser.id,
+        orderid: currentUser.id,
         name: currentUser.name,
         phone: currentUser.phone,
         address: currentUser.address,
@@ -75,6 +75,12 @@ app.post('/addorder',function(req,res){
     
 
     db.collection('orderslist').doc(currentUser.id).set(data)
+    .then(()=>{
+          res.json({success:'success'});  
+
+    }).catch((error)=>{
+        console.log('ERROR:', error);
+    }); 
         
    
 });
