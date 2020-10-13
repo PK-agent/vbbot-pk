@@ -70,7 +70,7 @@ app.post('/addorder',function(req,res){
         received_date: orderUser.received_date
     }
 
-    db.collection('orderslist').doc(orderUser.id).set(data)
+    db.collection('orderslist').doc(orderUser.id).add(data)
     .then(()=>{
         res.json({success:'success'});  
 
