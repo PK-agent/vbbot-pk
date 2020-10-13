@@ -206,7 +206,7 @@ app.get('/customerOrder', async (req,res) => {
         data.push(user);        
     });   
  
-    res.render('merchants.ejs', {data:data}); 
+    res.render('addorder.ejs', {data:data}); 
     
 });
 
