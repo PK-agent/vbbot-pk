@@ -62,7 +62,7 @@ app.post('/addorder',function(req,res){
     orderUser.received_date = req.body.received_date;
 
     let data = {
-        
+        id: orderUser.id,
         name: orderUser.name,
         phone: orderUser.phone,
         address: orderUser.address,
@@ -70,7 +70,7 @@ app.post('/addorder',function(req,res){
         received_date: orderUser.received_date
     }
 
-    db.collection('orders').doc(orderUser.name).set(data)
+    db.collection('orderslist').doc(orderUser.id).set(data)
 
     .then(()=>{
         let data = {
