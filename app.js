@@ -146,8 +146,93 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/customerOrder',function(req,res){        
-   res.render('addorder.ejs');
+app.post('/register',function(req,res){   
+    
+    currentUser.name = req.body.name;
+    currentUser.phone = req.body.phone;
+    currentUser.address = req.body.address;
+
+    let data = {
+        viberid: currentUser.id,
+        name: currentUser.name,
+        phone: currentUser.phone,
+        address: currentUser.address
+    }
+
+   
+    db.collection('users').add(data)
+    .then(()=>{
+            let data = {
+                   "receiver":currentUser.id,
+                   "min_api_version":1,
+                   "sender":{
+                      "name":"PyaungKyi",
+                      "avatar":"http://api.adorable.io/avatar/200/isitup"
+                   },
+                   "tracking_data":"tracking data",
+                   "type":"text",
+                   "text": "Thank you!"+req.body.name
+                }                
+
+                fetch('https://chatapi.viber.com/pa/send_message', {
+                    method: 'post',
+                    body:    JSON.stringify(data),
+                    headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
+                })
+                .then(res => res.json())
+                .then(json => console.log('JSON', json))
+
+    }).catch((error)=>{
+        console.log('ERROR:', error);
+    });
+       
+});
+
+app.get('/customerOrder',function(req,res){  
+    const usersRef = db.collection('users');
+    const snapshot = await usersRef.get();
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
+    let data = [];
+    snapshot.forEach(doc => {
+
+        let user = {};
+        user.id = doc.id;
+        user.name = doc.data().name;
+        user.phone = doc.data().phone;         
+        user.address = doc.data().address;
+        data.push(user);        
+    }); 
+
+   res.render('addorder.ejs', {data:data});
+});
+
+app.post('/customerOrder', async (req,res) => {  
+   
+    let today = new Date();
+    let merchant_id = req.body.merchant_id;
+
+    let data = {
+        batch: req.body.item_batch,
+        type:req.body.item_type,
+        qty:parseInt(req.body.item_qty),
+        price:parseInt(req.body.item_price),
+        received_date:req.body.item_received_date,
+        comment:req.body.comment,    
+        created_on:today   
+    }
+   
+
+    db.collection('users').doc(merchant_id).collection('stocks').add(data)
+    .then(()=>{
+          res.json({success:'success'});  
+
+    }).catch((error)=>{
+        console.log('ERROR:', error);
+    }); 
+    
 });
 
 app.get('/admin/merchants', async (req,res) => {
