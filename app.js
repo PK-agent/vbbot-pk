@@ -141,26 +141,8 @@ app.post('/addorder',function(req,res){
     }
   
     db.collection('orders').doc(orderUser.id).set(data)
-    .then(()=>{
-            let data = {
-                   "receiver":orderUser.id,
-                   "min_api_version":1,
-                   "sender":{
-                      "name":"Pyaung Kyi",
-                      "avatar":"https://pp.netclipart.com/pp/s/293-2935777_corn-animation-png.png"
-                   },
-                   "tracking_data":"tracking data",
-                   "type":"text",
-                   "text": "Thank you!"+req.body.name
-                }                
-
-                fetch('https://chatapi.viber.com/pa/send_message', {
-                    method: 'post',
-                    body:    JSON.stringify(data),
-                    headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
-                })
-                .then(res => res.json())
-                .then(json => console.log('JSON', json))
+    .then(()=>{(res => res.json())
+            .then(json => console.log('JSON', json))
 
     }).catch((error)=>{
         console.log('ERROR:', error);
