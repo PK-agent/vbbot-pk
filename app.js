@@ -189,12 +189,6 @@ app.post('/register',function(req,res){
 });
 
 app.get('/customerOrder',function(req,res){  
-    const usersRef = db.collection('users');
-    const snapshot = await usersRef.get();
-    if (snapshot.empty) {
-      console.log('No matching documents.');
-      return;
-    } 
 
    res.render('addorder.ejs');
 });
