@@ -54,14 +54,24 @@ app.get('/addorder',function(req,res){
 });
 
 app.post('/addorder',function(req,res){   
-    
-    let name = req.body.name;
-    let    phone = req.body.phone;
-    let   address = req.body.address;
-    let    item_qty = req.body.item_qty;
-    let    item_received_date = req.body.item_received_date;
 
+    currentUser.name = req.body.name;
+    currentUser.phone = req.body.phone;
+    currentUser.address = req.body.address;
+    currentUser.item_qty = req.body.item_qty;
+    currentUser.item_received_date = req.body.item_received_date;
     
+    let data = {
+        orderid: cusrrentUser.id,
+        name: req.body.name,
+        phone: req.body.phone,
+        address: req.body.address,
+        item_qty: req.body.item_qty,
+        item_received_date: req.body.item_received_date
+    };
+
+
+    db.collection('orderslist').doc(name).set(data)
         res.json({name:name, phone:phone, address:address, item_qty:item_qty, item_received_date:item_received_date});  
 
    
