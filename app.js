@@ -120,10 +120,8 @@ app.post('/register',function(req,res){
        
 });
 
-app.post('admin/addorder',function(req,res){   
+app.post('customer/addorder',function(req,res){   
     
-    console.log('Data from form:', req.body);
-
     orderUser.id=generatePushID();
     orderUser.name = req.body.name;
     orderUser.phone = req.body.phone;
@@ -131,7 +129,7 @@ app.post('admin/addorder',function(req,res){
     orderUser.order_qty = req.body.order_qty;
     orderUser.order_received_date = req.body.order_received_date;
 
-    let orderUser = {
+    let data = {
         orderid: orderUser.id,
         name: orderUser.name,
         phone: orderUser.phone,
@@ -140,7 +138,9 @@ app.post('admin/addorder',function(req,res){
         order_received_date: orderUser.order_received_date
     }
   
-    console.log('name:name, phone:phone')
+      
+      // Add a new document in collection "cities" with ID 'LA'
+      let setDoc = db.collection('orders').doc('orderUser.id').set(data);
 });
 
 app.get('/admin/merchants', async (req,res) => {
