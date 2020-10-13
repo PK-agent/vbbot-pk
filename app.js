@@ -78,7 +78,7 @@ let actionKeyboard = {
 const bot = new ViberBot({
     authToken: process.env.AUTH_TOKEN, // <--- Paste your token here
     name: "PyaungKyi",  // <--- Your bot name here
-    avatar: "https://www.vectorstock.com/royalty-free-vector/mister-corn-boy-farm-mascot-logo-vector-28827083"
+    avatar: "http://api.adorable.io/avatar/200/isitup"
 });
 
 app.use("/viber/webhook", bot.middleware());
@@ -125,7 +125,7 @@ app.post('/register',function(req,res){
                    "min_api_version":1,
                    "sender":{
                       "name":"PyaungKyi",
-                      "avatar":"https://www.vectorstock.com/royalty-free-vector/mister-corn-boy-farm-mascot-logo-vector-28827083"
+                      "avatar":"http://api.adorable.io/avatar/200/isitup"
                    },
                    "tracking_data":"tracking data",
                    "type":"text",
