@@ -439,7 +439,7 @@ app.post('/test',function(req,res){
        "min_api_version":1,
        "sender":{
           "name":"PyaugnKyi",
-          "avatar":"https://www.google.com/url?sa=i&url=https%3A%2F%2Flanderbrewfest.com%2Fvendors%2Fcowboy-kettle-corn-logo&psig=AOvVaw0CuAKRCh-tSBl6P5Zf6gu4&ust=1602684478609000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLCt7Y7fsewCFQAAAAAdAAAAABAL"
+          "avatar":"http://api.adorable.io/avatar/200/isitup"
        },
        "tracking_data":"tracking data",
        "type":"text",
@@ -869,7 +869,10 @@ function defaultReply(message, response){
     response.send(new TextMessage(`I don't quite understand your command`)).then(()=>{
                 return response.send(new TextMessage(`Another line of text`)).then(()=>{
                    return response.send(new TextMessage(`Another another line of text`)).then(()=>{
-                    return response.send(new TextMessage(`If you forget who you are, type 'who am i'`));
+                    return response.send(new TextMessage(`If you forget who you are, type 'who am i'`)).then(()=>{
+                        return response.send = new TextMessage(`You need you register`, actionKeyboard)    
+          
+                    });
                    }); 
                 });
             });
