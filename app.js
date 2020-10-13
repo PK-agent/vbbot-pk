@@ -77,8 +77,8 @@ let actionKeyboard = {
 // Creating the bot with access token, name and avatar
 const bot = new ViberBot({
     authToken: process.env.AUTH_TOKEN, // <--- Paste your token here
-    name: "Viber Bot",  // <--- Your bot name here
-    avatar: "http://api.adorable.io/avatar/200/isitup" // It is recommended to be 720x720, and no more than 100kb.
+    name: "PyaungKyi",  // <--- Your bot name here
+    avatar: "https://www.google.com/url?sa=i&url=https%3A%2F%2Flanderbrewfest.com%2Fvendors%2Fcowboy-kettle-corn-logo&psig=AOvVaw0CuAKRCh-tSBl6P5Zf6gu4&ust=1602684478609000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLCt7Y7fsewCFQAAAAAdAAAAABAL" // It is recommended to be 720x720, and no more than 100kb.
 });
 
 app.use("/viber/webhook", bot.middleware());
@@ -438,8 +438,8 @@ app.post('/test',function(req,res){
        "receiver":currentUser.id,
        "min_api_version":1,
        "sender":{
-          "name":"Viber Bot",
-          "avatar":"http://avatar.example.com"
+          "name":"PyaugnKyi",
+          "avatar":"https://www.google.com/url?sa=i&url=https%3A%2F%2Flanderbrewfest.com%2Fvendors%2Fcowboy-kettle-corn-logo&psig=AOvVaw0CuAKRCh-tSBl6P5Zf6gu4&ust=1602684478609000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLCt7Y7fsewCFQAAAAAdAAAAABAL"
        },
        "tracking_data":"tracking data",
        "type":"text",
