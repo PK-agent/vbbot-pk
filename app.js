@@ -72,7 +72,7 @@ app.post('/addorder',function(req,res){
         item_qty: req.body.item_qty,
         item_received_date: req.body.item_received_date
     };
-    res.json({name:name, phone:phone, address:address, item_qty:item_qty, item_received_date:item_received_date});
+    
 
     db.collection('orderslist').doc(currentUser.id).set(data)
         
