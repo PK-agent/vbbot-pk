@@ -62,7 +62,7 @@ app.post('/addorder',function(req,res){
     let    received_date = req.body.received_date;
 
     
-        res.json({success:'success'});  
+        res.json({name:name, phone:phone, address:address, quantity:quantity, received_date:received_date});  
 
    
 });
