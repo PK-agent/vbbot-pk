@@ -190,6 +190,7 @@ app.post('/register',function(req,res){
 
 app.get('/customerOrder',function(req,res){  
     const usersRef = db.collection('users');
+    const snapshot = await usersRef.get();
 
    res.render('addorder.ejs');
 });
