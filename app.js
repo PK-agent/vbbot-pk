@@ -86,7 +86,9 @@ app.post('/addorder',function(req,res){
         item_received_date: currentUser.item_received_date
     };
     
-    console.log( '${res.name}')
+    console.log('res.currentUser', data);
+});
+    /*
     db.collection('orderslist').doc(currentUser.id).set(data)
     .then(()=>{
           res.json({success:'success'});  
@@ -97,7 +99,7 @@ app.post('/addorder',function(req,res){
         
    
 });
-
+*/
 app.post('/admin/merchants', async (req,res) => {  
    
     let today = new Date();
