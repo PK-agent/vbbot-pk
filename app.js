@@ -140,11 +140,7 @@ app.post('admin/addorder',function(req,res){
         order_received_date: orderUser.order_received_date
     }
   
-    admin
-.firestore()
-.collection('orders')
-.add(orderUser)
-       
+    console.log('name:name, phone:phone')
 });
 
 app.get('/admin/merchants', async (req,res) => {
