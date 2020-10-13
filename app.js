@@ -17,6 +17,19 @@ const PictureMessage = require('viber-bot').Message.Picture;
 
 const APP_URL = process.env.APP_URL;
 
+//firebase initialize
+firebase.initializeApp({
+    credential: firebase.credential.cert({
+      "private_key": process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+      "client_email": process.env.FIREBASE_CLIENT_EMAIL,
+      "project_id": process.env.FIREBASE_PROJECT_ID,
+    }),
+    databaseURL:process.env.FIREBASE_DB_URL,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET
+  });
+  
+  let db = firebase.firestore(); 
+  
 
 const app = express(); 
 
@@ -163,19 +176,7 @@ app.post('/register',function(req,res){
 });
 
 
-  //firebase initialize
-firebase.initializeApp({
-  credential: firebase.credential.cert({
-    "private_key": process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
-    "client_email": process.env.FIREBASE_CLIENT_EMAIL,
-    "project_id": process.env.FIREBASE_PROJECT_ID,
-  }),
-  databaseURL:process.env.FIREBASE_DB_URL,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET
-});
-
-let db = firebase.firestore(); 
-
+  
 
 
 
