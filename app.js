@@ -66,11 +66,11 @@ app.post('/addorder',function(req,res){
     
     let data = {
         orderid: cusrrentUser.id,
-        name: req.body.name,
-        phone: req.body.phone,
-        address: req.body.address,
-        item_qty: req.body.item_qty,
-        item_received_date: req.body.item_received_date
+        name: currentUser.name,
+        phone: currentUser.phone,
+        address: currentUser.address,
+        item_qty: currentUser.item_qty,
+        item_received_date: currentUser.item_received_date
     };
     
 
