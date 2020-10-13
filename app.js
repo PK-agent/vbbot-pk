@@ -535,10 +535,10 @@ bot.onTextMessage(/./, (message, response) => {
         case "register":
             registerUser(message, response);
             break;
-        case "my-stock":
-            checkStock(message, response);
+        case "add_order":
+            customerOrder(message, response);
             break;
-        case "my-balance":
+        case "tdy_stock":
             checkBalance(message, response);
             break;
         case "menu":
@@ -701,8 +701,8 @@ const registerUser = async (message, response) => {
                     "BgMediaType": "gif",
                     "BgMedia": "http://www.url.by/test.gif",
                     "BgLoop": true,
-                    "ActionType": "open-url",
-                    "ActionBody": "https://chat-pk.herokuapp.com/customerOrder",               
+                    "ActionType": "reply",
+                    "ActionBody": "add_order",               
                     "Text": "Add Order",
                     "TextVAlign": "middle",
                     "TextHAlign": "center",
