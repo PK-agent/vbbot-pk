@@ -870,50 +870,17 @@ function defaultReply(message, response){
                 return response.send(new TextMessage(`Another line of text`)).then(()=>{
                    return response.send(new TextMessage(`Another another line of text`)).then(()=>{
                     return response.send(new TextMessage(`If you forget who you are, type 'who am i'`));
-                   }); 
+                  
+                }); 
                 });
+            
             });
             
-            let actionKeyboard = {
-                "Type": "keyboard",
-                "Revision": 1,
-                "Buttons": [
-                    {
-                        "Columns": 6,
-                        "Rows": 1,
-                        "BgColor": "#2db9b9",
-                        "BgMediaType": "gif",
-                        "BgMedia": "http://www.url.by/test.gif",
-                        "BgLoop": true,
-                        "ActionType": "reply",
-                        "ActionBody": "my-stock",               
-                        "Text": "My Stock",
-                        "TextVAlign": "middle",
-                        "TextHAlign": "center",
-                        "TextOpacity": 60,
-                        "TextSize": "regular"
-                    },
-                    {
-                        "Columns": 6,
-                        "Rows": 1,
-                        "BgColor": "#2db9b9",
-                        "BgMediaType": "gif",
-                        "BgMedia": "http://www.url.by/test.gif",
-                        "BgLoop": true,
-                        "ActionType": "reply",
-                        "ActionBody": "my-balance",               
-                        "Text": "My Balance",
-                        "TextVAlign": "middle",
-                        "TextHAlign": "center",
-                        "TextOpacity": 60,
-                        "TextSize": "regular"
-                    },            
-                ]
-            };
-    
-              let bot_message3 = new TextMessage(`You are already registered`, actionKeyboard);    
-              response.send(bot_message3);
-           
+            
+
+                let bot_message = new TextMessage(`Please select your activity in keyboard menu`, actionKeyboard);    
+                response.send(bot_message);
+            
     }       
 
 
