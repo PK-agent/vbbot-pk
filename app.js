@@ -869,13 +869,24 @@ function defaultReply(message, response){
     response.send(new TextMessage(`I don't quite understand your command`)).then(()=>{
                 return response.send(new TextMessage(`Another line of text`)).then(()=>{
                    return response.send(new TextMessage(`Another another line of text`)).then(()=>{
-                    return response.send(new TextMessage(`If you forget who you are, type 'who am i'`)).then(()=>{
-                        return response.send = new TextMessage(`You need you register`, actionKeyboard)    
-          
-                    });
+                    return response.send(new TextMessage(`If you forget who you are, type 'who am i'`));
                    }); 
                 });
             });
+            let KEYBOARD_JSON = {
+                "Type": "keyboard",
+                "DefaultHeight": true,
+                "Buttons": [{
+                    "Columns": 6,
+                    "Rows": 1,
+                    "ActionType": "reply", // type of action
+                    "ActionBody": "register", // the value of the keyboard
+                    "Text": "Register", //this is text in keyboard
+                    "TextSize": "regular"
+                }]
+            };
+        
+        const message = new TextMessage("Hey! Are u registered. Please Click register!.",KEYBOARD_JSON,null,null,null,3);
 }
 
 
