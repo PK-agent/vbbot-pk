@@ -78,7 +78,7 @@ let actionKeyboard = {
 const bot = new ViberBot({
     authToken: process.env.AUTH_TOKEN, // <--- Paste your token here
     name: "PyaungKyi",  // <--- Your bot name here
-    avatar: "https://www.google.com/url?sa=i&url=https%3A%2F%2Flanderbrewfest.com%2Fvendors%2Fcowboy-kettle-corn-logo&psig=AOvVaw0CuAKRCh-tSBl6P5Zf6gu4&ust=1602684478609000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLCt7Y7fsewCFQAAAAAdAAAAABAL" // It is recommended to be 720x720, and no more than 100kb.
+    avatar: "https://www.pinterest.cl/pin/696228423630195861/"
 });
 
 app.use("/viber/webhook", bot.middleware());
