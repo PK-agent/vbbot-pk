@@ -22,7 +22,7 @@ const app = express();
 
 
 let currentUser = {};
-let orderUser = {};
+
 
 // Creating the bot with access token, name and avatar
 const bot = new ViberBot({
@@ -55,28 +55,16 @@ app.get('/addorder',function(req,res){
 
 app.post('/addorder',function(req,res){   
     
-    orderUser.name = req.body.name;
-    orderUser.phone = req.body.phone;
-    orderUser.address = req.body.address;
-    orderUser.quantity = req.body.quantity;
-    orderUser.received_date = req.body.received_date;
+    let name = req.body.name;
+    let    phone = req.body.phone;
+    let   address = req.body.address;
+    let    quantity = req.body.quantity;
+    let    received_date = req.body.received_date;
 
-    let data = {
-        id: orderUser.id,
-        name: orderUser.name,
-        phone: orderUser.phone,
-        address: orderUser.address,
-        quantity: orderUser.quantity,
-        received_date: orderUser.received_date
-    }
-
-    db.collection('orderslist').doc(orderUser.id).add(data)
-    .then(()=>{
+    
         res.json({success:'success'});  
 
-    }).catch((error)=>{
-    console.log('ERROR:', error);
-    });
+   
 });
 
 app.post('/admin/merchants', async (req,res) => {  
