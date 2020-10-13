@@ -146,6 +146,10 @@ app.post('/register',function(req,res){
        
 });
 
+app.get('/customerOrder',function(req,res){        
+   res.render('addorder.ejs');
+});
+
 app.get('/admin/merchants', async (req,res) => {
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
@@ -697,9 +701,9 @@ const registerUser = async (message, response) => {
                     "BgMediaType": "gif",
                     "BgMedia": "http://www.url.by/test.gif",
                     "BgLoop": true,
-                    "ActionType": "reply",
-                    "ActionBody": "my-stock",               
-                    "Text": "My Stock",
+                    "ActionType": "open-url",
+                    "ActionBody": "add_order",               
+                    "Text": "Add Order",
                     "TextVAlign": "middle",
                     "TextHAlign": "center",
                     "TextOpacity": 60,
@@ -713,8 +717,8 @@ const registerUser = async (message, response) => {
                     "BgMedia": "http://www.url.by/test.gif",
                     "BgLoop": true,
                     "ActionType": "reply",
-                    "ActionBody": "my-balance",               
-                    "Text": "My Balance",
+                    "ActionBody": "t",               
+                    "Text": "Today Stock",
                     "TextVAlign": "middle",
                     "TextHAlign": "center",
                     "TextOpacity": 60,

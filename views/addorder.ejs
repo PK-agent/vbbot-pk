@@ -10,10 +10,9 @@
   <h1>Add Order</h1>
   
 
-  <form id="form" action="knn
-  " method="post">
+  <form id="form" action="/customerOrder" method="post">
     <label for="name">Customer Name</label><br>
-    <input type="text" name="name" value="<%= data.orderlist_name %>" disabled/><br>
+    <input type="text" name="name"/><br>
     
 
     <label for="name">Phone Number</label><br>
@@ -23,15 +22,12 @@
     <textarea name="address" rows="4" cols="50"></textarea><br>
 
     <label for="name">Quantity</label><br>
-    <input type="number" name="item_qty"/><br>    
+    <input type="number" name="order_qty"/><br>    
 
     <label for="name">Received Date</label><br>
-    <input type="date" name="item_received_date"/><br>     
+    <input type="date" name="order_received_date"/><br>     
 
-    <input type="hidden" name="orderlist_name" value="<%= data.orderlist_name %>"/>
-    <input type="hidden" name="orderlist_id" value="<%= data.orderlist_id %>"/>
-
-    
+        
     <input type="submit" name="submit"/>
 
   </form>
