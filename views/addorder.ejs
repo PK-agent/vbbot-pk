@@ -32,7 +32,19 @@
   </form>
 
   
+  <script>
+    
+    const windowClose = () => {
+      setTimeout(()=>{
+        window.close();
+      },2000);    
+    }
   
+        
+    document.getElementById("form").addEventListener("submit", windowClose); 
+    
+   
+    </script>
   
   </body>
 
