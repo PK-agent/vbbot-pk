@@ -147,7 +147,7 @@ app.post('/register',function(req,res){
 });
 
 
-app.get('/customer/add-order', async (req,res) => {
+app.get('/customer/register/list', async (req,res) => {
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
@@ -165,7 +165,7 @@ app.get('/customer/add-order', async (req,res) => {
         data.push(user);        
     });   
  
-    res.render('orderlist.ejs', {data:data}); 
+    res.render('cus-reg-list.ejs', {data:data}); 
     
 });
 
@@ -661,7 +661,7 @@ const urlReply = (message, response) => {
 
 const customerOrder = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/customer/add-order/');   
+    let bot_message = new UrlMessage(APP_URL + '/customer/register/list');   
     response.send(bot_message);
 }
 
