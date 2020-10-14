@@ -165,6 +165,21 @@ app.get('/customer/add-order', async (req,res) => {
         data.push(user);        
     });   
  
+    res.render('addorder.ejs', {user:data}); 
+    
+});
+
+app.get('/customer/add-order:merchant_id', async (req,res) => {  
+    let data = { };        
+
+    let userRef = db.collection('users').doc(req.params.merchant_id);
+    let user = await userRef.get();
+    if (!user.exists) {
+      console.log('No such user!');        
+    } else {      
+      data.merchant_id = user.id; 
+      data.merchant_name = user.data().name;
+    }
     res.render('addorder.ejs', {data:data}); 
     
 });
