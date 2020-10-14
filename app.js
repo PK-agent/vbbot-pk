@@ -168,7 +168,7 @@ app.get('/customerOrder', async(req,res) => {
 
 app.post('/customerOrder', async (req,res) => {  
    
-    let today = new Date();
+    
     let order_id = req.body.order_id;
 
     let data = {
@@ -176,7 +176,7 @@ app.post('/customerOrder', async (req,res) => {
         phone:req.body.phone,
         qty: req.body.order_qty,
         received_date:req.body.order_received_date,          
-        created_on:today   
+         
     }
    
 
