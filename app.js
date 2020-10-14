@@ -147,7 +147,7 @@ app.post('/register',function(req,res){
 });
 
 
-app.get('/customer/register/list', async (req,res) => {
+app.get('/customer/add-order', async (req,res) => {
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
@@ -661,7 +661,7 @@ const urlReply = (message, response) => {
 
 const customerOrder = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/customer/register/list');   
+    let bot_message = new UrlMessage(APP_URL + '/customer/add-order/');   
     response.send(bot_message);
 }
 
