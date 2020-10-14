@@ -147,7 +147,7 @@ app.post('/register',function(req,res){
 });
 
 
-app.get('/customerOrder', async(req,res) => {  
+app.get('/customer/order', async(req,res) => {  
     const usersRef = db.collection('users');
     const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
@@ -166,23 +166,19 @@ app.get('/customerOrder', async(req,res) => {
    res.render('addorder.ejs', {user:user});
 });
 
-app.post('/customerOrder/', async (req,res) => {  
+app.post('/customer/order/', async (req,res) => {  
    
     let today = new Date();
     let merchant_id = req.body.merchant_id;
 
     let data = {
-        batch: req.body.item_batch,
-        type:req.body.item_type,
-        qty:parseInt(req.body.item_qty),
-        price:parseInt(req.body.item_price),
-        received_date:req.body.item_received_date,
-        comment:req.body.comment,    
+        qty:parseInt(req.body.order_qty),
+        received_date:req.body.order_received_date,           
         created_on:today   
     }
    
 
-    db.collection('users').doc(merchant_id).collection('stocks').add(data)
+    db.collection('users').doc(merchant_id).collection('orders').add(data)
     .then(()=>{
           res.json({success:'success'});  
 
