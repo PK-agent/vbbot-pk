@@ -679,7 +679,7 @@ const urlReply = (message, response) => {
 
 const customerOrder = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/customer/add-order/');   
+    let bot_message = new UrlMessage(APP_URL + '/customer/add-order');   
     response.send(bot_message);
 }
 
