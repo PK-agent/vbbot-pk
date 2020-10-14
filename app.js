@@ -148,7 +148,7 @@ app.post('/register',function(req,res){
 
 app.get('/customer/add-order', async(req,res) => {  
     const usersRef = db.collection('users');
-    const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
+    const snapshot = await usersRef.where('viberid', '==', merchants.id).limit(1).get();
     // const snapshot = await usersRef.get();
     if (snapshot.empty) {
       console.log('No matching documents.');
@@ -162,13 +162,13 @@ app.get('/customer/add-order', async(req,res) => {
         user.address = doc.data().address;       
     }); 
 
-   res.render('addorder.ejs', {data:data});
+   res.render('addorder.ejs', {user:user});
 });
 
 app.post('/customer/add-order', async (req,res) => {  
    
     let today = new Date();
-    let currentUser_id = req.body.currentUser_id;
+    let merchants_id = req.body.merchants_id;
 
     let data = {
         name: req.body.name,
@@ -180,7 +180,7 @@ app.post('/customer/add-order', async (req,res) => {
     }
    
 
-    db.collection('users').doc(currentUser_id).collection('stocks').add(data)
+    db.collection('users').doc(merchants_id).collection('orders').add(data)
     .then(()=>{
           res.json({success:'success'});  
 
