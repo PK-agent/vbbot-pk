@@ -10,11 +10,11 @@
   <h1>Add Order</h1>
   <form id="form" action="/customer/add-order" method="post">
     <label for="name">Customer Name</label><br>
-    <input type="text" name="name" /><br>
+    <input type="text" name="name" value="<%= user.name %>" disabled/><br>
     
 
     <label for="name">Phone Number</label><br>
-    <input type="tel" name="phone" pattern="[0-9]{5,15}" /><br>
+    <input type="tel" name="phone" pattern="[0-9]{5,15}" value="<%= user.phone %>"disabled /><br>
 
     <label for="name">Address</label><br>
     <textarea name="address" rows="4" cols="50"></textarea><br>
@@ -25,8 +25,7 @@
     <label for="name">Received Date</label><br>
     <input type="date" name="order_received_date"/><br>
 
-    <input type="hidden" name="merchant_name" value="<%= data.merchant_name %>"/>
-    <input type="hidden" name="merchant_id" value="<%= data.merchant_id %>"/>
+    
 
     <input type="submit" name="submit"/>
 
