@@ -169,7 +169,7 @@ app.get('/admin/orderlist', async (req,res) => {
     
 });
 
-app.get('/customer/order/:merchant_id', async (req,res) => {  
+app.get('/admin/addorder/:merchant_id', async (req,res) => {  
     let data = { };        
 
     let userRef = db.collection('users').doc(req.params.merchant_id);
@@ -197,7 +197,7 @@ app.post('/customer/order/', async (req,res) => {
     }
    
 
-    db.collection('users').doc(merchant_id).collection('orders').add(data)
+    db.collection('users').doc(merchant_id).collection('stocks').add(data)
     .then(()=>{
           res.json({success:'success'});  
 
