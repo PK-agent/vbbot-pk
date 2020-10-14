@@ -169,18 +169,18 @@ app.get('/customerOrder', async(req,res) => {
 app.post('/customerOrder', async (req,res) => {  
    
     
-    let order_id = req.body.order_id;
+    let merchants_id = req.body.merchants_id;
 
     let data = {
         name: req.body.name,
         phone:req.body.phone,
-        qty: req.body.order_qty,
-        received_date:req.body.order_received_date,          
+        order_qty: req.body.order_qty,
+        order_received_date:req.body.order_received_date,          
          
     }
    
 
-    db.collection('users').doc(order_id).collection('cusOrders').add(data)
+    db.collection('users').doc(merchants_id).collection('cusOrders').add(data)
     .then(()=>{
           res.json({success:'success'});  
 
