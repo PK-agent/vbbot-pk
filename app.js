@@ -653,7 +653,7 @@ const urlReply = (message, response) => {
 
 const customerOrder = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/CustomerOrder/');   
+    let bot_message = new UrlMessage(APP_URL + '/customer/order/');   
     response.send(bot_message);
 }
 
