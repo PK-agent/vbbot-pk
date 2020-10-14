@@ -146,59 +146,25 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/customer/add-order',function(req,res){   
-    let data = {
-      user_name: currentUser.name,
-    } 
-   res.render('addorder.ejs', {data:data});
+app.get('/customerOrder', async(req,res) => {  
+    const usersRef = db.collection('users');
+    const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
+    // const snapshot = await usersRef.get();
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
+    let user = {};
+    snapshot.forEach(doc => {
+        user.id = doc.id;
+        user.name = doc.data().name;
+        user.phone = doc.data().phone;         
+        user.address = doc.data().address;       
+    }); 
+
+   res.render('addorder.ejs', {user:user});
 });
 
-app.post('/customer/add-order',function(req,res){   
-    
-    currentUser.name = req.body.name;
-    currentUser.phone = req.body.phone;
-    currentUser.address = req.body.address;
-    currentUser.order_qty = parseInt (req.body.order_qty);
-    currentUser.order_received_date = req.body.order_received_date;
-
-    let data = {
-        viberid: currentUser.id,
-        name: currentUser.name,
-        phone: currentUser.phone,
-        address: currentUser.address,
-        order_qty: currentUser.order_qty,        
-        order_received_date: currentUser.order_received_date
-    }
-
-    db.collection('users').doc(currentUser_id).collection('orders').where("currentUser_id")
-    .then(()=>{
-            let data = {
-                   "receiver":currentUser.id,
-                   "min_api_version":1,
-                   "sender":{
-                      "name":"PyaungKyi",
-                      "avatar":"http://api.adorable.io/avatar/200/isitup"
-                   },
-                   "tracking_data":"tracking data",
-                   "type":"text",
-                   "text": "Thank you!"+req.body.name
-                }                
-
-                fetch('https://chatapi.viber.com/pa/send_message', {
-                    method: 'post',
-                    body:    JSON.stringify(data),
-                    headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
-                })
-                .then(res => res.json())
-                .then(json => console.log('JSON', json))
-
-    }).catch((error)=>{
-        console.log('ERROR:', error);
-    });
-       
-});
-
-/*
 app.post('/customer/add-order', async (req,res) => {  
    
     let today = new Date();
@@ -224,7 +190,7 @@ app.post('/customer/add-order', async (req,res) => {
     }); 
     
 });
-*/
+
 //admin/cus/order/list
 app.get('/cus/ord/lis', async (req,res) => {
     const usersRef = db.collection('users');

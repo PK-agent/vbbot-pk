@@ -2,49 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>OrderForm</title>
+    <title>Order Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
  </head>
 
   <body>
   <h1>Add Order</h1>
   <form id="form" action="/customer/add-order" method="post">
-    <label for="name">Customer Name</label><br>
-    <input type="text" name="name" /><br>
-    
-
-    <label for="name">Phone Number</label><br>
-    <input type="tel" name="phone" pattern="[0-9]{5,15}" /><br>
-
-    <label for="name">Address</label><br>
-    <textarea name="address" rows="4" cols="50"></textarea><br>
-
-    <label for="name">Quantity</label><br>
-    <input type="number" name="order_qty"/><br>    
-
-    <label for="name">Received Date</label><br>
-    <input type="date" name="order_received_date"/><br>
+    <form id="form" action="/CustomerOrder" method="post">
+      <label for="name">Customer Name</label><br>
+      <input type="text" name="name" value="<%= user.name %>" /><br>
+      
+  
+      <label for="name">Phone Number</label><br>
+      <input type="tel" name="phone" pattern="[0-9]{5,15}" value="<%= user.phone %>" /><br>
+  
+      <label for="name">Address</label><br>
+      <textarea name="address" rows="4" cols="50"></textarea><br>
+  
+      <label for="name">Quantity</label><br>
+      <input type="number" name="order_qty"/><br>    
+  
+      <label for="name">Received Date</label><br>
+      <input type="date" name="order_received_date"/><br>
 
     
     <input type="submit" name="submit"/>
 
   </form>
 
-  
-  <script>
-    
-    const windowClose = () => {
-      setTimeout(()=>{
-        window.close();
-      },2000);    
-    }
-  
-        
-    document.getElementById("form").addEventListener("submit", windowClose); 
-    
    
-    </script>
-  
   </body>
 
 </html>
