@@ -146,30 +146,7 @@ app.post('/register',function(req,res){
        
 });
 
-
-app.get('/customer/add-order', async (req,res) => {
-    const usersRef = db.collection('users');
-    const snapshot = await usersRef.get();
-    if (snapshot.empty) {
-      console.log('No matching documents.');
-      return;
-    }  
-    let data = [];
-    snapshot.forEach(doc => {
-
-        let user = {};
-        user.id = doc.id;
-        user.name = doc.data().name;
-        user.phone = doc.data().phone;         
-        user.address = doc.data().address;        
-        data.push(user);        
-    });   
- 
-    res.render('cus-ord-list.ejs', {data:data}); 
-    
-});
-
-app.get('/customer/add-order:merchant_id', async (req,res) => {  
+app.get('/customer/add-order/:merchant_id', async (req,res) => {  
     let data = { };        
 
     let userRef = db.collection('users').doc(req.params.merchant_id);
@@ -181,6 +158,32 @@ app.get('/customer/add-order:merchant_id', async (req,res) => {
       data.merchant_name = user.data().name;
     }
     res.render('addorder.ejs', {data:data}); 
+    
+});
+
+app.post('/customer/add-order/', async (req,res) => {  
+   
+    let today = new Date();
+    let merchant_id = req.body.merchant_id;
+
+    let data = {
+        batch: req.body.item_batch,
+        type:req.body.item_type,
+        qty:parseInt(req.body.item_qty),
+        price:parseInt(req.body.item_price),
+        received_date:req.body.item_received_date,
+        comment:req.body.comment,    
+        created_on:today   
+    }
+   
+
+    db.collection('users').doc(merchant_id).collection('stocks').add(data)
+    .then(()=>{
+          res.json({success:'success'});  
+
+    }).catch((error)=>{
+        console.log('ERROR:', error);
+    }); 
     
 });
 
