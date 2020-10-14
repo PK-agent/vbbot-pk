@@ -161,11 +161,11 @@ app.get('/customer/add-order', async (req,res) => {
         user.id = doc.id;
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
-        user.address = doc.data().address;
+        user.address = doc.data().address;        
         data.push(user);        
     });   
  
-    res.render('addorder.ejs', {data:data}); 
+    res.render('orderlist.ejs', {data:data}); 
     
 });
 
