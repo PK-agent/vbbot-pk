@@ -165,7 +165,7 @@ app.get('/customer/add-order', async (req,res) => {
         data.push(user);        
     });   
  
-    res.render('addorder.ejs', {data:data}); 
+    res.render('addorder.ejs', {user:user}); 
     
 });
 
