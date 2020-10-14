@@ -147,7 +147,7 @@ app.post('/register',function(req,res){
 });
 
 
-app.get('/customerOrder', async (req,res) => {
+app.get('/admin/orderlist', async (req,res) => {
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
