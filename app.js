@@ -157,15 +157,15 @@ app.get('/customer/add-order', async (req,res) => {
     let data = [];
     snapshot.forEach(doc => {
 
-        let user = {};
-        user.id = doc.id;
-        user.name = doc.data().name;
-        user.phone = doc.data().phone;         
-        user.address = doc.data().address;
-        data.push(user);        
+        let user1 = {};
+        user1.id = doc.id;
+        user1.name = doc.data().name;
+        user1.phone = doc.data().phone;         
+        user1.address = doc.data().address;
+        data.push(user1);        
     });   
  
-    res.render('addorder.ejs', {user:user}); 
+    res.render('addorder.ejs', {data:user1}); 
     
 });
 
