@@ -170,7 +170,7 @@ app.get('/customer/add-order', async (req,res) => {
 });
 
 //admin/cus/order/list
-app.get('/customer/register/list', async (req,res) => {
+app.get('/cus/reg/lis', async (req,res) => {
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
