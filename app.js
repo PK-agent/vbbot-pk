@@ -166,11 +166,10 @@ app.post('/customer/add-order',function(req,res){
         name: currentUser.name,
         phone: currentUser.phone,
         address: currentUser.address,
-        order_qty: currentUser.order_qty,
+        order_qty: parseInt(currentUser.order_qty),        
         order_received_date: currentUser.order_received_date
     }
 
-   
     db.collection('users').doc(currentUser_id).collection('orders').add(data)
     .then(()=>{
             let data = {
