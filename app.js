@@ -165,7 +165,7 @@ app.get('/customer/add-order', async (req,res) => {
         data.push(user);        
     });   
  
-    res.render('cus-reg-list.ejs', {data:data}); 
+    res.render('addorder.ejs', {data:data}); 
     
 });
 
@@ -188,7 +188,7 @@ app.get('/cus/ord/lis', async (req,res) => {
         data.push(user);        
     });   
  
-    res.render('cus-reg-list.ejs', {data:data}); 
+    res.render('cus-ord-list.ejs', {data:data}); 
     
 });
 
