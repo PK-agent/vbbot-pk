@@ -162,7 +162,7 @@ app.get('/customer/add-order', async(req,res) => {
         user.address = doc.data().address;       
     }); 
 
-   res.render('addorder.ejs', {data:user});
+   res.render('addorder.ejs', {data:data});
 });
 
 app.post('/customer/add-order', async (req,res) => {  
