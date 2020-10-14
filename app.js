@@ -146,7 +146,7 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/customer/add-order/', async (req,res) => {  
+app.get('/customer/add-order', async (req,res) => {  
     let data = { };        
 
     let userRef = db.collection('users').doc(req.params.merchant_id);
@@ -161,7 +161,7 @@ app.get('/customer/add-order/', async (req,res) => {
     
 });
 
-app.post('/customer/add-order/', async (req,res) => {  
+app.post('/customer/add-order', async (req,res) => {  
    
     let today = new Date();
     let merchant_id = req.body.merchant_id;
@@ -679,7 +679,7 @@ const urlReply = (message, response) => {
 
 const customerOrder = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/customer/add-order');   
+    let bot_message = new UrlMessage(APP_URL + '/customer/add-order/');   
     response.send(bot_message);
 }
 
