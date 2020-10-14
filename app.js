@@ -171,12 +171,11 @@ app.post('/customer/add-order', async (req,res) => {
     let merchant_id = req.body.merchant_id;
 
     let data = {
-        batch: req.body.item_batch,
-        type:req.body.item_type,
-        qty:parseInt(req.body.item_qty),
-        price:parseInt(req.body.item_price),
-        received_date:req.body.item_received_date,
-        comment:req.body.comment,    
+        name: req.body.name,
+        phone: req.body.item_type,
+        address: req.body.address,
+        qty: req.body.order_qty,
+        received_date:req.body.order_received_date,            
         created_on:today   
     }
    
