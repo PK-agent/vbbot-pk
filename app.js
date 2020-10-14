@@ -168,7 +168,7 @@ app.get('/customer/add-order', async(req,res) => {
 app.post('/customer/add-order', async (req,res) => {  
    
     let today = new Date();
-    let merchant_id = req.body.merchant_id;
+    let currentUser_id = req.body.currentUser_id;
 
     let data = {
         name: req.body.name,
@@ -180,7 +180,7 @@ app.post('/customer/add-order', async (req,res) => {
     }
    
 
-    db.collection('users').doc(merchant_id).collection('stocks').add(data)
+    db.collection('users').doc(currentUser_id).collection('stocks').add(data)
     .then(()=>{
           res.json({success:'success'});  
 
