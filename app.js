@@ -583,9 +583,13 @@ let KEYBOARD_JSON = {
 
 const message = new TextMessage("Welcome to my tea shop",KEYBOARD_JSON,null,null,null,3);
 
-bot.onConversationStarted((userProfile, isSubscribed, context) => {    
-    // bot.sendMessage(userProfile,message);
-    bot.sendMessage(userProfile, new TextMessage(`Welcome to my tea shop ${userProfile.id}`,KEYBOARD_JSON,null,null,null,3));
+bot.onConversationStarted((userProfile, isSubscribed, context) => {  
+    if(userProfile.id === "sXvG8AwXZmlLW7/LCSvMXw==")  {
+        bot.sendMessage(userProfile, new TextMessage(`Hello, Admin ${userProfile.name}! Nice to meet you.`));
+    }
+    else{
+        bot.sendMessage(userProfile,message);
+    }
 });
 
 
