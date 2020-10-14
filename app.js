@@ -169,6 +169,29 @@ app.get('/customer/add-order', async (req,res) => {
     
 });
 
+//admin/cus/order/list
+app.get('/customer/register/list', async (req,res) => {
+    const usersRef = db.collection('users');
+    const snapshot = await usersRef.get();
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
+    let data = [];
+    snapshot.forEach(doc => {
+
+        let user = {};
+        user.id = doc.id;
+        user.name = doc.data().name;
+        user.phone = doc.data().phone;         
+        user.address = doc.data().address;        
+        data.push(user);        
+    });   
+ 
+    res.render('cus-reg-list.ejs', {data:data}); 
+    
+});
+
 app.get('/customer/add-order/:orderlist_id', async (req,res) => {  
     let data = { };        
 
@@ -600,6 +623,9 @@ bot.onTextMessage(/./, (message, response) => {
         case "add_order":
             customerOrder(message, response);
             break;
+        case "order-list":
+            customerOrderList(message, response);
+            break;
         case "tdy_stock":
             customerTdyStock(message, response);
             break;
@@ -662,6 +688,12 @@ const urlReply = (message, response) => {
 const customerOrder = (message, response) => {    
 
     let bot_message = new UrlMessage(APP_URL + '/customer/add-order/');   
+    response.send(bot_message);
+}
+
+const customerOrderList = (message, response) => {    
+
+    let bot_message = new UrlMessage(APP_URL + '/cus/ord/lis');   
     response.send(bot_message);
 }
 
@@ -791,7 +823,7 @@ const registerUser = async (message, response) => {
                     "BgMedia": "http://www.url.by/test.gif",
                     "BgLoop": true,
                     "ActionType": "reply",
-                    "ActionBody": "t",               
+                    "ActionBody": "order-list",               
                     "Text": "Today Stock",
                     "TextVAlign": "middle",
                     "TextHAlign": "center",
