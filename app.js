@@ -146,7 +146,7 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/customer/add-order/:merchant_id', async (req,res) => {  
+app.get('/customer/add-order/', async (req,res) => {  
     let data = { };        
 
     let userRef = db.collection('users').doc(req.params.merchant_id);
@@ -225,32 +225,6 @@ app.get('/customer/add-order/:orderlist_id', async (req,res) => {
     
 });
 
-app.post('/customer/add-order', async (req,res) => {  
-   
-    let today = new Date();
-    let merchant_id = req.body.merchant_id;
-
-    let data = {
-        name: req.body.name,
-        phone:req.body.phone,
-        address:req.body.address,
-        qty:req.body.order_qty,
-        received_date:req.body.order_received_date,            
-        created_on:today
-        
-
-    }
-   
-
-    db.collection('users').doc(merchant_id).collection('stocks').add(data)
-    .then(()=>{
-          res.json({success:'success'});  
-
-    }).catch((error)=>{
-        console.log('ERROR:', error);
-    }); 
-    
-});
 
 
 app.get('/admin/merchants', async (req,res) => {
