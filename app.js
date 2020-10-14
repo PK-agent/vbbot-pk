@@ -158,12 +158,16 @@ app.post('/customer/add-order',function(req,res){
     currentUser.name = req.body.name;
     currentUser.phone = req.body.phone;
     currentUser.address = req.body.address;
+    currentUser.order_qty = req.body.order_qty;
+    currentUser.order_received_date = req.body.order_received_date
 
     let data = {
         viberid: currentUser.id,
         name: currentUser.name,
         phone: currentUser.phone,
-        address: currentUser.address
+        address: currentUser.address,
+        order_qty: currentUser.order_qty,
+        order_received_date: currentUser.order_received_date
     }
 
    
