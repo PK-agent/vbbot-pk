@@ -584,7 +584,8 @@ let KEYBOARD_JSON = {
 const message = new TextMessage("Welcome to my tea shop",KEYBOARD_JSON,null,null,null,3);
 
 bot.onConversationStarted((userProfile, isSubscribed, context) => {    
-    bot.sendMessage(userProfile,`${message}, ${userProfile}`);
+    // bot.sendMessage(userProfile,message);
+    bot.sendMessage(userProfile, new TextMessage(`Welcome to my tea shop ${userProfile}`,KEYBOARD_JSON,null,null,null,3));
 });
 
 
