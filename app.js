@@ -146,21 +146,56 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/customer/add-order', async (req,res) => {  
-    let data = { };        
-
-    let userRef = db.collection('users').doc(req.params.merchant_id);
-    let user = await userRef.get();
-    if (!user.exists) {
-      console.log('No such user!');        
-    } else {      
-      data.merchant_id = user.id; 
-      data.merchant_name = user.data().name;
-    }
-    res.render('addorder.ejs', {data:data}); 
-    
+app.get('/customer/add-order',function(req,res){   
+    let data = {
+      user_name: currentUser.name,
+    } 
+   res.render('addorder.ejs', {data:data});
 });
 
+app.post('/customer/add-order',function(req,res){   
+    
+    currentUser.name = req.body.name;
+    currentUser.phone = req.body.phone;
+    currentUser.address = req.body.address;
+
+    let data = {
+        viberid: currentUser.id,
+        name: currentUser.name,
+        phone: currentUser.phone,
+        address: currentUser.address
+    }
+
+   
+    db.collection('users').doc(currentUser_id).collection('orders').add(data)
+    .then(()=>{
+            let data = {
+                   "receiver":currentUser.id,
+                   "min_api_version":1,
+                   "sender":{
+                      "name":"PyaungKyi",
+                      "avatar":"http://api.adorable.io/avatar/200/isitup"
+                   },
+                   "tracking_data":"tracking data",
+                   "type":"text",
+                   "text": "Thank you!"+req.body.name
+                }                
+
+                fetch('https://chatapi.viber.com/pa/send_message', {
+                    method: 'post',
+                    body:    JSON.stringify(data),
+                    headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
+                })
+                .then(res => res.json())
+                .then(json => console.log('JSON', json))
+
+    }).catch((error)=>{
+        console.log('ERROR:', error);
+    });
+       
+});
+
+/*
 app.post('/customer/add-order', async (req,res) => {  
    
     let today = new Date();
@@ -186,7 +221,7 @@ app.post('/customer/add-order', async (req,res) => {
     }); 
     
 });
-
+*/
 //admin/cus/order/list
 app.get('/cus/ord/lis', async (req,res) => {
     const usersRef = db.collection('users');
