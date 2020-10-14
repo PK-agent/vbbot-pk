@@ -184,16 +184,20 @@ app.get('/admin/addorder/:merchant_id', async (req,res) => {
     
 });
 
-
-app.post('/customer/order/', async (req,res) => {  
+app.post('/customer/add-order', async (req,res) => {  
    
     let today = new Date();
     let merchant_id = req.body.merchant_id;
 
     let data = {
-        qty:parseInt(req.body.order_qty),
-        received_date:req.body.order_received_date,           
-        created_on:today   
+        name: req.body.name,
+        phone:req.body.phone,
+        address:req.body.address,
+        qty:req.body.order_qty,
+        received_date:req.body.order_received_date,            
+        created_on:today
+        
+
     }
    
 
@@ -206,6 +210,7 @@ app.post('/customer/order/', async (req,res) => {
     }); 
     
 });
+
 
 app.get('/admin/merchants', async (req,res) => {
     const usersRef = db.collection('users');
