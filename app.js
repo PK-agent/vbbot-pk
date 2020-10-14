@@ -172,8 +172,9 @@ app.post('/customerOrder', async (req,res) => {
     let merchants_id = req.body.merchants_id;
 
     let data = {
-        name: req.body.name,
-        phone:req.body.phone,
+        name: req.body.user.name,
+        phone: req.body.user.phone,
+        address: req.body.address,
         order_qty: req.body.order_qty,
         order_received_date:req.body.order_received_date,          
          
