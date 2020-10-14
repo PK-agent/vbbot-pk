@@ -179,7 +179,7 @@ app.post('/customerOrder', async (req,res) => {
     }
 
    
-    db.collection('users').add(data)
+    db.collection('users').doc(merchant_id).collection('stocks').add(data)
     .then(()=>{
             let data = {
                    "receiver":currentUser.id,
