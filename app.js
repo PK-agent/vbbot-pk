@@ -728,7 +728,7 @@ bot.onTextMessage(/view/, (message, response) => {
 });*/
 
 const adminView = (message, response) => {
-    response.send(new TextMessage(`Please Enter your password`)).then((response, message) => {
+    response.send(new TextMessage(`Please Enter your password`)).then((message, response) => {
         if(TextMessage === process.env.ADMIN_PASSWORD){
             return response.send(new TextMessage(`gg`));
         }
@@ -1043,14 +1043,7 @@ const showMenu = (message, response) => {
 }
 
 
-function defaultReply(message, response){
-    let bot_message = new TextMessage(`Please select your activity in keyboard menu`, actionKeyboard); 
 
-    response.send(new TextMessage(`I don't quite understand your command`)).then(()=>{
-                   return response.send(bot_message);
-            });
-            
-    }       
 
 
 
