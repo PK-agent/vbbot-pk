@@ -586,6 +586,7 @@ const message = new TextMessage("Welcome to my Pyaung Kyi ",KEYBOARD_JSON,null,n
 bot.onConversationStarted((userProfile, isSubscribed, context) => {  
     if(userProfile.id === "sXvG8AwXZmlLW7/LCSvMXw==")  {
         bot.sendMessage(userProfile, new TextMessage(`Hello, Admin ${userProfile.name}! Nice to meet you.`))
+         response.send(bot_message)
         .then(()=>{
              let actionKeyboard = {
             "Type": "keyboard",
@@ -606,6 +607,7 @@ bot.onConversationStarted((userProfile, isSubscribed, context) => {
                     "TextOpacity": 60,
                     "TextSize": "regular"
                 },
+                
                 {
                     "Columns": 6,
                     "Rows": 1,
@@ -626,8 +628,7 @@ bot.onConversationStarted((userProfile, isSubscribed, context) => {
 
           let bot_message3 = new TextMessage(`You can Add Data `, actionKeyboard);    
           response.send(bot_message3);
-          return response.send(bot_message);
-            
+                      
      });
         
     }
