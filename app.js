@@ -581,61 +581,61 @@ let KEYBOARD_JSON = {
         }]
     };
 
-// let actionKeyboard = {
-//     "Type": "keyboard",
-//     "BgColor": "#FFFFFF",
-//     "DefaultHeight": true,
-//     "Buttons": [
-//         {
-//             "Columns": 6,
-//             "Rows": 1,
-//             "BgColor": "#2db9b9",
-//             "BgMediaType": "gif",
-//             "BgMedia": "http://www.url.by/test.gif",
-//             "BgLoop": true,
-//             "ActionType": "reply",
-//             "ActionBody": "cus-view",               
-//             "Text": "Customer View",
-//             "TextVAlign": "middle",
-//             "TextHAlign": "center",
-//             "TextOpacity": 60,
-//             "TextSize": "regular"
-//         },
-//         {
-//             "Columns": 6,
-//             "Rows": 1,
-//             "BgColor": "#2db9b9",
-//             "BgMediaType": "gif",
-//             "BgMedia": "http://www.url.by/test.gif",
-//             "BgLoop": true,
-//             "ActionType": "reply",
-//             "ActionBody": "stf-view",               
-//             "Text": "Staff View",
-//             "TextVAlign": "middle",
-//             "TextHAlign": "center",
-//             "TextOpacity": 60,
-//             "TextSize": "regular"
-//         }, 
-//         {
-//             "Columns": 6,
-//             "Rows": 1,
-//             "BgColor": "#2db9b9",
-//             "BgMediaType": "gif",
-//             "BgMedia": "http://www.url.by/test.gif",
-//             "BgLoop": true,
-//             "ActionType": "reply",
-//             "ActionBody": "adm-view",               
-//             "Text": "Admin View",
-//             "TextVAlign": "middle",
-//             "TextHAlign": "center",
-//             "TextOpacity": 60,
-//             "TextSize": "regular"
-//         },
+let AdminCusStafKeyboard = {
+    "Type": "keyboard",
+    "BgColor": "#FFFFFF",
+    "DefaultHeight": true,
+    "Buttons": [
+        {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "cus-view",               
+            "Text": "Customer View",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },
+        {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "stf-view",               
+            "Text": "Staff View",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        }, 
+        {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "adm-view",               
+            "Text": "Admin View",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },
 
-//     ],
-// };
+    ],
+};
 
-const message = new TextMessage("Welcome to my tea shop",KEYBOARD_JSON,null,null,null,3);
+const message = new TextMessage("Welcome to my tea shop",AdminCusStafKeyboard,null,null,null,3);
 
 bot.onConversationStarted((userProfile, isSubscribed, context) => {  
     if(userProfile.id === "sXvG8AwXZmlLW7/LCSvMXw==")  {
