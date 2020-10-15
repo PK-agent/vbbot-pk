@@ -1068,7 +1068,7 @@ const adminView = (message, response) => {
 
 
 function defaultReply(message, response){
-    let bot_message = new TextMessage(`Please select your activity in keyboard menu`, actionKeyboard); 
+    let bot_message = new TextMessage(`Please select your activity in keyboard menu`, KEYBOARD_JSON); 
 
     response.send(new TextMessage(`I don't quite understand your command`)).then(()=>{
                    return response.send(bot_message);
