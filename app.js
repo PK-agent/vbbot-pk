@@ -638,12 +638,12 @@ let AdminCusStafKeyboard = {
 const message = new TextMessage("Welcome to my tea shop",AdminCusStafKeyboard,null,null,null,3);
 
 bot.onConversationStarted((userProfile, isSubscribed, context) => {  
-    if(userProfile.id === "sXvG8AwXZmlLW7/LCSvMXw==")  {
-        bot.sendMessage(userProfile, new TextMessage(`Hello, Admin ${userProfile.name}! Nice to meet you.`), AdminCusStafKeyboard);
-    }
-    else{
+    // if(userProfile.id === "sXvG8AwXZmlLW7/LCSvMXw==")  {
+    //     bot.sendMessage(userProfile, new TextMessage(`Hello, Admin ${userProfile.name}! Nice to meet you.`));
+    // }
+    // else{
         bot.sendMessage(userProfile,message);
-    }
+    // }
 });
 
 
@@ -673,6 +673,9 @@ bot.onTextMessage(/./, (message, response) => {
     switch(text){
         case "register":
             registerUser(message, response);
+            break;
+        case "adm-view":
+            adminView(message, response);
             break;
         case "add_order":
             customerOrder(message, response);
@@ -723,6 +726,10 @@ bot.onTextMessage(/./, (message, response) => {
 bot.onTextMessage(/view/, (message, response) => {
    viewTasks(message, response);  
 });*/
+
+const adminView = (message, response) => {
+    response.send(new TextMessage(`Please Enter your password`));
+}
 
 const whoAmI = (message, response) => {
     response.send(new TextMessage(`Hello ${response.userProfile.name}! It's so nice to meet you`));
