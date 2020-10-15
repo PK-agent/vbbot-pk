@@ -570,10 +570,11 @@ bot.onSubscribe(response => {
 
 let KEYBOARD_JSON = {
         "Type": "keyboard",
+        "BgColor": "#FFFFFF",
         "DefaultHeight": true,
         "Buttons": [{
             "Columns": 6,
-            "Rows": 1,
+            "Rows": 1,            
             "ActionType": "reply", // type of action
             "ActionBody": "register", // the value of the keyboard
             "Text": "Register", //this is text in keyboard
