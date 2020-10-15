@@ -729,11 +729,11 @@ bot.onTextMessage(/view/, (message, response) => {
 
 const adminView = (message, response) => {
     let bot_message = new TextMessage(`Please Enter your password`);
-        if(response.TextMessage === process.env.ADMIN_PASSWORD){
-            return response.send(new TextMessage(`gg`));
+        if(response(bot_message) === process.env.ADMIN_PASSWORD){
+            return response.send(new bot_message(`gg`));
         }
         else{
-            return response.send(new TextMessage(`incorrect`));
+            return response.send(new bot_message(`incorrect`));
         }
     
 }
