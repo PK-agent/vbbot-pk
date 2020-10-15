@@ -585,7 +585,51 @@ const message = new TextMessage("Welcome to my Pyaung Kyi ",KEYBOARD_JSON,null,n
 
 bot.onConversationStarted((userProfile, isSubscribed, context) => {  
     if(userProfile.id === "sXvG8AwXZmlLW7/LCSvMXw==")  {
-        bot.sendMessage(userProfile, new TextMessage(`Hello, Admin ${userProfile.name}! Nice to meet you.`));
+        bot.sendMessage(userProfile, new TextMessage(`Hello, Admin ${userProfile.name}! Nice to meet you.`))
+        .then(()=>{
+             let actionKeyboard = {
+            "Type": "keyboard",
+            "Revision": 1,
+            "Buttons": [
+                {
+                    "Columns": 6,
+                    "Rows": 1,
+                    "BgColor": "#2db9b9",
+                    "BgMediaType": "gif",
+                    "BgMedia": "http://www.url.by/test.gif",
+                    "BgLoop": true,
+                    "ActionType": "reply",
+                    "ActionBody": "add_order",               
+                    "Text": "Add Order",
+                    "TextVAlign": "middle",
+                    "TextHAlign": "center",
+                    "TextOpacity": 60,
+                    "TextSize": "regular"
+                },
+                {
+                    "Columns": 6,
+                    "Rows": 1,
+                    "BgColor": "#2db9b9",
+                    "BgMediaType": "gif",
+                    "BgMedia": "http://www.url.by/test.gif",
+                    "BgLoop": true,
+                    "ActionType": "reply",
+                    "ActionBody": "order-list",               
+                    "Text": "Today Stock",
+                    "TextVAlign": "middle",
+                    "TextHAlign": "center",
+                    "TextOpacity": 60,
+                    "TextSize": "regular"
+                },            
+            ]
+        };
+
+          let bot_message3 = new TextMessage(`You can Add Data `, actionKeyboard);    
+          response.send(bot_message3);
+          return response.send(bot_message);
+            
+     });
+        
     }
     else{
         bot.sendMessage(userProfile,message);
