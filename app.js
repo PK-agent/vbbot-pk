@@ -574,29 +574,51 @@ let KEYBOARD_JSON = {
         "DefaultHeight": true,
         "Buttons": [
             {
-            "Columns": 6,
-            "Rows": 1,            
-            "ActionType": "reply", // type of action
-            "ActionBody": "cus-view", // the value of the keyboard
-            "Text": "Customer View", //this is text in keyboard
-            "TextSize": "regular"
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "cus-view",               
+                "Text": "Customer View",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
             },
             {
                 "Columns": 6,
-                "Rows": 1,            
-                "ActionType": "reply", // type of action
-                "ActionBody": "stf-view", // the value of the keyboard
-                "Text": "Satff View", //this is text in keyboard
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "stf-view",               
+                "Text": "Staff View",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
                 "TextSize": "regular"
-                },
-                {
-                    "Columns": 6,
-                    "Rows": 1,            
-                    "ActionType": "reply", // type of action
-                    "ActionBody": "adm-view", // the value of the keyboard
-                    "Text": "Admin View", //this is text in keyboard
-                    "TextSize": "regular"
-                    }
+            }, 
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "adm-view",               
+                "Text": "Admin View",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },
+
         ]
     };
 
