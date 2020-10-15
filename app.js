@@ -728,14 +728,14 @@ bot.onTextMessage(/view/, (message, response) => {
 });*/
 
 const adminView = (message, response) => {
-    response.send(new TextMessage(`Please Enter your password`).then((message) => {
+    response.send(new TextMessage(`Please Enter your password`)).then((message) => {
         if(message === process.env.ADMIN_PASSWORD){
             return response.send(new TextMessage(`gg`));
         }
         else{
             return response.send(new TextMessage(`incorrect`));
         }
-    }));
+    });
 }
 
 const whoAmI = (message, response) => {
