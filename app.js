@@ -729,6 +729,25 @@ const customerOrder = (message, response) => {
 
 const customerOrderList = (message, response) => {    
 
+    let stock_message = '';
+    snapshot2.forEach(doc => {
+  
+        
+        name = doc.data().user.name;
+        phone = doc.data().user.phone;
+        address = doc.data().user.address;
+        qty = doc.data().order_qty;        
+        received_date = doc.data().order_received_date;    
+
+        stock_message += `${name}, ${phone}, ${address}, ${qty}, ${received_date}  in orders\n`; 
+   });
+   let bot_message = new TextMessage(`${stock_message}`);    
+        response.send(bot_message); 
+}
+    
+
+const customerOrderLists = (message, response) => {    
+
     let bot_message = new UrlMessage(APP_URL + '/cus/ord/lis');   
     response.send(bot_message);
 }
