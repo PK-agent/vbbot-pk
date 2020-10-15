@@ -639,7 +639,7 @@ const message = new TextMessage("Welcome to my tea shop",AdminCusStafKeyboard,nu
 
 bot.onConversationStarted((userProfile, isSubscribed, context) => {  
     if(userProfile.id === "sXvG8AwXZmlLW7/LCSvMXw==")  {
-        bot.sendMessage(userProfile, new TextMessage(`Hello, Admin ${userProfile.name}! Nice to meet you.`));
+        bot.sendMessage(userProfile, new TextMessage(`Hello, Admin ${userProfile.name}! Nice to meet you.`), AdminCusStafKeyboard);
     }
     else{
         bot.sendMessage(userProfile,message);
