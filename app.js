@@ -572,28 +572,39 @@ let KEYBOARD_JSON = {
         "Type": "keyboard",
         "BgColor": "#FFFFFF",
         "DefaultHeight": true,
-        "Buttons": [{
+        "Buttons": [
+            {
             "Columns": 6,
             "Rows": 1,            
             "ActionType": "reply", // type of action
-            "ActionBody": "register", // the value of the keyboard
-            "Text": "Register", //this is text in keyboard
+            "ActionBody": "cus-view", // the value of the keyboard
+            "Text": "Customer View", //this is text in keyboard
             "TextSize": "regular"
-        }]
+            },
+            {
+                "Columns": 6,
+                "Rows": 1,            
+                "ActionType": "reply", // type of action
+                "ActionBody": "stf-view", // the value of the keyboard
+                "Text": "Satff View", //this is text in keyboard
+                "TextSize": "regular"
+                },
+                {
+                    "Columns": 6,
+                    "Rows": 1,            
+                    "ActionType": "reply", // type of action
+                    "ActionBody": "adm-view", // the value of the keyboard
+                    "Text": "Admin View", //this is text in keyboard
+                    "TextSize": "regular"
+                    }
+        ]
     };
 
 const message = new TextMessage("Welcome to my Pyaung Kyi ",KEYBOARD_JSON,null,null,null,3);
 
-bot.onConversationStarted((userProfile, isSubscribed, context) => {  
-    if(userProfile.id === "sXvG8AwXZmlLW7/LCSvMXw==")  {
-        bot.sendMessage(userProfile, new TextMessage(`Hello, Admin ${userProfile.name}! Nice to meet you.`));
-         
-        
-    }
-    else{
-        bot.sendMessage(userProfile,message);
-    }
-});
+bot.onConversationStarted((userProfile, isSubscribed, context) =>     
+    bot.sendMessage(userProfile,message)
+);
 
 
 /*
