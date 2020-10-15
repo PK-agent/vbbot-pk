@@ -671,9 +671,6 @@ bot.onTextMessage(/./, (message, response) => {
 
     
     switch(text){
-        case process.env.ADMIN_PASSWORD:
-            response.send(new TextMessage(`Your password is correct`));
-            break;
         case "register":
             registerUser(message, response);
             break;
@@ -731,7 +728,14 @@ bot.onTextMessage(/view/, (message, response) => {
 });*/
 
 const adminView = (message, response) => {
-    response.send(new TextMessage(`Please Enter your password`));
+    response.send(new TextMessage(`Please Enter your password`).then((message) => {
+        if(message === process.env.ADMIN_PASSWORD){
+            return response.send(new TextMessage(`gg`));
+        }
+        else{
+            return response.send(new TextMessage(`incorrect`));
+        }
+    }));
 }
 
 const whoAmI = (message, response) => {
