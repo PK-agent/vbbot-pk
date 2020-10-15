@@ -36,58 +36,42 @@ let currentUser = {};
 
 
 let actionKeyboard = {
-    "Type": "keyboard",
-    "BgColor": "#FFFFFF",
-    "DefaultHeight": true,
-    "Buttons": [
-        {
-            "Columns": 6,
-            "Rows": 1,
-            "BgColor": "#2db9b9",
-            "BgMediaType": "gif",
-            "BgMedia": "http://www.url.by/test.gif",
-            "BgLoop": true,
-            "ActionType": "reply",
-            "ActionBody": "cus-view",               
-            "Text": "Customer View",
-            "TextVAlign": "middle",
-            "TextHAlign": "center",
-            "TextOpacity": 60,
-            "TextSize": "regular"
-        },
-        {
-            "Columns": 6,
-            "Rows": 1,
-            "BgColor": "#2db9b9",
-            "BgMediaType": "gif",
-            "BgMedia": "http://www.url.by/test.gif",
-            "BgLoop": true,
-            "ActionType": "reply",
-            "ActionBody": "stf-view",               
-            "Text": "Staff View",
-            "TextVAlign": "middle",
-            "TextHAlign": "center",
-            "TextOpacity": 60,
-            "TextSize": "regular"
-        }, 
-        {
-            "Columns": 6,
-            "Rows": 1,
-            "BgColor": "#2db9b9",
-            "BgMediaType": "gif",
-            "BgMedia": "http://www.url.by/test.gif",
-            "BgLoop": true,
-            "ActionType": "reply",
-            "ActionBody": "adm-view",               
-            "Text": "Admin View",
-            "TextVAlign": "middle",
-            "TextHAlign": "center",
-            "TextOpacity": 60,
-            "TextSize": "regular"
-        },
+        "Type": "keyboard",
+        "Revision": 1,
+        "Buttons": [
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "reply",               
+                "Text": "My Stock",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "my-balance",               
+                "Text": "My Balance",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },            
+        ]
+    };
 
-    ]
-};
 
 
 // Creating the bot with access token, name and avatar
@@ -584,20 +568,74 @@ bot.onSubscribe(response => {
     say(response, `Hi there ${response.userProfile.name}. I am ${bot.name}! Feel free to ask me if a web site is down for everyone or just you. Just send me a name of a website and I'll do the rest!`);
 });
 
-let KEYBOARD_JSON = {
-        "Type": "keyboard",
-        "DefaultHeight": true,
-        "Buttons": [{
+// let KEYBOARD_JSON = {
+//         "Type": "keyboard",
+//         "DefaultHeight": true,
+//         "Buttons": [{
+//             "Columns": 6,
+//             "Rows": 1,
+//             "ActionType": "reply", // type of action
+//             "ActionBody": "register", // the value of the keyboard
+//             "Text": "Register", //this is text in keyboard
+//             "TextSize": "regular"
+//         }]
+//     };
+
+let actionKeyboard = {
+    "Type": "keyboard",
+    "BgColor": "#FFFFFF",
+    "DefaultHeight": true,
+    "Buttons": [
+        {
             "Columns": 6,
             "Rows": 1,
-            "ActionType": "reply", // type of action
-            "ActionBody": "register", // the value of the keyboard
-            "Text": "Register", //this is text in keyboard
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "cus-view",               
+            "Text": "Customer View",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
             "TextSize": "regular"
-        }]
-    };
+        },
+        {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "stf-view",               
+            "Text": "Staff View",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        }, 
+        {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "adm-view",               
+            "Text": "Admin View",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },
 
-const message = new TextMessage("Welcome to my tea shop",KEYBOARD_JSON,null,null,null,3);
+    ],
+};
+
+const message = new TextMessage("Welcome to my tea shop",actionKeyboard,null,null,null,3);
 
 bot.onConversationStarted((userProfile, isSubscribed, context) => {  
     if(userProfile.id === "sXvG8AwXZmlLW7/LCSvMXw==")  {
