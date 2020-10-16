@@ -667,7 +667,7 @@ bot.onTextMessage(/^mingalarbar$/i, (message, response) =>
     response.send(new TextMessage(`Mingalarbar. Welcome to MCC`)));
  */
 bot.onTextMessage(/^admin@/i, (message, response) =>{
-    const text = messages.text;
+    const text = message.text;
     let bot_message;
     let pw_enter = text.substring(7);
 
