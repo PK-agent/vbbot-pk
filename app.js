@@ -191,7 +191,7 @@ app.post('/customer/add-order', async (req,res) => {
 });
 
 //admin/cus/order/list
-app.get('/cus/ord/lis', async (req,res) => {
+app.get('/admin/customer-orderlists', async (req,res) => {
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
