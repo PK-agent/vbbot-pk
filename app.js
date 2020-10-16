@@ -672,7 +672,7 @@ bot.onTextMessage(/^admin@/i, (message, response) =>{
     let pw_enter = text.substring(7);
 
     if(pw_enter == process.env.ADMIN_PASSWORD){
-        bot_message = new TextMessage(`Welcome to Admin`, actionKeyboard);
+        bot_message = new TextMessage(`Welcome to Admin`);
     }else{
         asKAdminpin(message, response);
     }
