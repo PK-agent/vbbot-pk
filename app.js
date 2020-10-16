@@ -761,7 +761,7 @@ const customerOrder = (message, response) => {
 
 const customerOrderList = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/cus/ord/lis');   
+    let bot_message = new UrlMessage(APP_URL + '/admin/customer-orderlists');   
     response.send(bot_message);
 }
 
