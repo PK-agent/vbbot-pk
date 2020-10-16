@@ -669,7 +669,7 @@ bot.onTextMessage(/^mingalarbar$/i, (message, response) =>
 bot.onTextMessage(/^admin@/i, (message, response) =>{
     const text = messages.text;
     let bot_message;
-    let pw_enter = text.substring(6);
+    let pw_enter = text.substring(7);
 
     if(pw_enter == process.env.ADMIN_PASSWORD){
         bot_message = new TextMessage(`Welcome to Admin`, actionKeyboard);
