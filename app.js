@@ -175,7 +175,7 @@ app.post('/customer/add-order', async (req,res) => {
         phone: req.body.phone,
         address: req.body.address,
         qty: req.body.order_qty,
-        received_date: req.body.order_received_date,            
+        received_date:req.body.order_received_date,            
         created_on:today   
     }
    
@@ -191,8 +191,8 @@ app.post('/customer/add-order', async (req,res) => {
 });
 
 //admin/cus/order/list
-app.get('/admin/customer-orderlists', async (req,res) => {
-    const usersRef = db.collection('users').doc(user_id).collection('orders');
+app.get('/cus/ord/lis', async (req,res) => {
+    const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
       console.log('No matching documents.');
@@ -205,9 +205,7 @@ app.get('/admin/customer-orderlists', async (req,res) => {
         user.id = doc.id;
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
-        user.address = doc.data().address; 
-        user.qty = doc.data().order_qty;
-        user.received_date = doc.data().order_received_date       
+        user.address = doc.data().address;        
         data.push(user);        
     });   
  
