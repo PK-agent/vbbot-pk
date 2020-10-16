@@ -192,7 +192,7 @@ app.post('/customer/add-order', async (req,res) => {
 
 //admin/cus/order/list
 app.get('/admin/customer-orderlists', async (req,res) => {
-    const usersRef = db.collection('users');
+    const usersRef = db.collection('users').doc(user_id).collection('orders');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
       console.log('No matching documents.');
