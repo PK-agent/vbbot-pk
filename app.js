@@ -179,15 +179,16 @@ app.post('/customer/add-order', async (req,res) => {
     let user_id = req.body.user_id;
 
     let data = {
+        created_on:today,
         name: req.body.name,
         phone: req.body.phone,
         address: req.body.address,
-        type: req.body.corn_type,
-        qty: req.body.corn_qty,
-        price: req.body.wanted_price,
+        corn_type: req.body.corn_type,
+        corn_qty: req.body.corn_qty,
+        wanted_price: req.body.wanted_price,
         comments: req.body.comment,
-        received_date:req.body.order_received_date,            
-        created_on:today   
+        received_date:req.body.order_received_date          
+           
     }
    
 
