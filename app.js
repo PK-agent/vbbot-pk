@@ -163,11 +163,11 @@ app.get('/customer/add-order', async(req,res) => {
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
         user.address = doc.data().address;  
-        user.type = doc.data().corn_type;
-        user.qty = doc.data().corn_qty;
-        user.price = doc.data().wanted_price;
-        user.comments = doc.data().comment;
-        user.received_date = doc.data().order_received_date    
+        user.corn_type = doc.data().corn_type;
+        user.corn_qty = doc.data().corn_qty;
+        user.wanted_price = doc.data().wanted_price;
+        user.comment = doc.data().comments;
+        user.order_received_date = doc.data().order_received_date    
     }); 
 
    res.render('addorder.ejs', {user:user});
