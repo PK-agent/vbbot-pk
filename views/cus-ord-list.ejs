@@ -16,6 +16,8 @@
     <th>Name</th>
     <th>Phone</th>
     <th>Address</th>   
+    <th>Quantity</th>
+    <th>Received Date</th>
         
   </tr>
 
@@ -25,6 +27,8 @@
        <td><%= user.name %></td>
        <td><%= user.phone %></td>
        <td><%= user.address %></td>
+       <td><%= user.order_qty %></td>
+       <td><%= user.order_received_date %></td>
       
      
        <td><a href="../admin/addstock/<%= user.id %>">Add Stock</a> | <a href="../admin/stocklist/<%= user.id %>">Stock List</a></td>
