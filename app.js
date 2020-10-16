@@ -132,9 +132,7 @@ app.post('/register',function(req,res){
                    "type":"text",
                    "text": "Thank you!"+req.body.name, 
                 }               
-                let bot_message = new KeyboardMessage("Let's start",actionKeyboard) 
-                response.send(bot_message);
-
+                
                 fetch('https://chatapi.viber.com/pa/send_message', {
                     method: 'post',
                     body:    JSON.stringify(data),
