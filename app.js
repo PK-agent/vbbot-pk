@@ -130,8 +130,10 @@ app.post('/register',function(req,res){
                    },
                    "tracking_data":"tracking data",
                    "type":"text",
-                   "text": "Thank you!"+req.body.name, actionKeyboard 
-                }               
+                   "text": "Thank you!"+req.body.name, 
+                   
+                }    
+                const message           
                 
                 fetch('https://chatapi.viber.com/pa/send_message', {
                     method: 'post',
@@ -160,7 +162,12 @@ app.get('/customer/add-order', async(req,res) => {
         user.id = doc.id;
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
-        user.address = doc.data().address;       
+        user.address = doc.data().address;  
+        user.type = doc.data().corn_type;
+        user.qty = doc.data().corn_qty;
+        user.price = doc.data().wanted_price;
+        user.comments = doc.data().comment;
+        user.received_date = doc.data().order_received_date    
     }); 
 
    res.render('addorder.ejs', {user:user});
@@ -175,7 +182,10 @@ app.post('/customer/add-order', async (req,res) => {
         name: req.body.name,
         phone: req.body.phone,
         address: req.body.address,
-        qty: req.body.order_qty,
+        type: req.body.corn_type,
+        qty: req.body.corn_qty,
+        price: req.body.wanted_price,
+        comments: req.body.comment,
         received_date:req.body.order_received_date,            
         created_on:today   
     }
