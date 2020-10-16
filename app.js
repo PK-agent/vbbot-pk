@@ -666,8 +666,18 @@ bot.onTextMessage(/^hi|hello$/i, (message, response) =>
 bot.onTextMessage(/^mingalarbar$/i, (message, response) =>
     response.send(new TextMessage(`Mingalarbar. Welcome to MCC`)));
  */
+bot.onTextMessage(/^admin@/i, (message, response) =>{
+    const text = messages.text;
+    let bot_message;
+    let pw_enter = text.substring(6);
 
-
+    if(pw_enter == process.env.ADMIN_PASSWORD){
+        bot_message = new TextMessage(`Welcome to Admin`, actionKeyboard);
+    }else{
+        asKAdminpin(message, response);
+    }
+    response.send(bot_message);
+});
 
 bot.onTextMessage(/./, (message, response) => {
 
@@ -687,7 +697,7 @@ bot.onTextMessage(/./, (message, response) => {
             registerUser(message, response);
             break;
         case "adm-view":
-            adminView(message, response);
+            asKAdminpin(message, response);
             break;
         case "stf-view":
             staffView(message, response);
@@ -742,15 +752,8 @@ bot.onTextMessage(/view/, (message, response) => {
    viewTasks(message, response);  
 });*/
 
-const adminView = (message, response) => {
-    response.send(new TextMessage(`Please Enter your password`)).then((message) => {
-        if(message === process.env.ADMIN_PASSWORD){
-            return response.send(new TextMessage(`gg`));
-        }
-        else{
-            return response.send(new TextMessage(`incorrect`));
-        }
-    });
+const asKAdminpin= (message, response) => {
+    response.send(new TextMessage(`Please Enter your password`));
 }
 
 const staffView = (message, response) => {
