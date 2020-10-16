@@ -204,11 +204,10 @@ app.post('/register',function(req,res){
                    },
                    "tracking_data":"tracking data",
                    "type":"text",
-                   "text": "Thank you!"+req.body.name, merchantKeyboard
+                   "text": "Thank you!"+req.body.name
                    
-                }    
-                        
-                
+                }   
+    
                 fetch('https://chatapi.viber.com/pa/send_message', {
                     method: 'post',
                     body:    JSON.stringify(data),
@@ -216,6 +215,7 @@ app.post('/register',function(req,res){
                 })
                 .then(res => res.json())
                 .then(json => console.log('JSON', json))
+                
 
     }).catch((error)=>{
         console.log('ERROR:', error);
@@ -753,6 +753,19 @@ bot.onTextMessage(/^admin@/i, (message, response) =>{
     response.send(bot_message);
 });
 
+bot.onTextMessage(/^staff@/i, (message, response) =>{
+    const text = message.text;
+    let bot_message;
+    let pw_enter = text.substring(6);
+
+    if(pw_enter == process.env.STAFF_PASSWORD){
+        bot_message = new TextMessage(`Welcome Staff`, staffKeyboard);
+    }else{
+        asKStaffpin(message, response);
+    }
+    response.send(bot_message);
+});
+
 bot.onTextMessage(/./, (message, response) => {
 
     const text = message.text.toLowerCase();
@@ -774,7 +787,7 @@ bot.onTextMessage(/./, (message, response) => {
             asKAdminpin(message, response);
             break;
         case "stf-view":
-            staffView(message, response);
+            asKStaffpin(message, response);
             break;        
         case "add_order":
             customerOrder(message, response);
@@ -827,18 +840,11 @@ bot.onTextMessage(/view/, (message, response) => {
 });*/
 
 const asKAdminpin= (message, response) => {
-    response.send(new TextMessage(`Please Enter your password`));
+    response.send(new TextMessage(`Please Enter admin password`));
 }
 
-const staffView = (message, response) => {
-    response.send(new TextMessage(`Please Enter your password`)).then((message) => {
-        if(message === process.env.ADMIN_PASSWORD){
-            return response.send(new TextMessage(`gg`));
-        }
-        else{
-            return response.send(new TextMessage(`incorrect`));
-        }
-    });
+const asKStaffpin = (message, response) => {
+    response.send(new TextMessage(`Please Enter staff password`));
 }
 
 const whoAmI = (message, response) => {
