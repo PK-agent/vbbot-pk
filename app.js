@@ -212,7 +212,7 @@ app.get('/admin/customer-orderlists', async (req,res) => {
         data.push(user);        
     });   
  
-    res.render('cus-ord-list.ejs', {user:data}); 
+    res.render('cus-ord-list.ejs', {user:user}); 
     
 });
 
