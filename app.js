@@ -728,11 +728,11 @@ bot.onTextMessage(/view/, (message, response) => {
 });*/
 
 const adminView = (message, response) => {
-    response.send(new TextMessage(`Please Enter your password`)).then((response, message) => {
-        if(TextMessage === process.env.ADMIN_PASSWORD){
+    response.send(new TextMessage(`Please Enter your password`)).then((message) => {
+        if(message === process.env.ADMIN_PASSWORD){
             return response.send(new TextMessage(`gg`));
         }
-        else {
+        else{
             return response.send(new TextMessage(`incorrect`));
         }
     });
@@ -761,7 +761,7 @@ const customerOrder = (message, response) => {
 
 const customerOrderList = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/admin/customer-orderlists');   
+    let bot_message = new UrlMessage(APP_URL + '/cus/ord/lis');   
     response.send(bot_message);
 }
 
@@ -1043,7 +1043,14 @@ const showMenu = (message, response) => {
 }
 
 
+function defaultReply(message, response){
+    let bot_message = new TextMessage(`Please select your activity in keyboard menu`, actionKeyboard); 
 
+    response.send(new TextMessage(`I don't quite understand your command`)).then(()=>{
+                   return response.send(bot_message);
+            });
+            
+    }       
 
 
 
