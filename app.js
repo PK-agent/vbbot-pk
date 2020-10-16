@@ -175,7 +175,7 @@ app.post('/customer/add-order', async (req,res) => {
         phone: req.body.phone,
         address: req.body.address,
         qty: req.body.order_qty,
-        received_date:req.body.order_received_date,            
+        received_date: req.body.order_received_date,            
         created_on:today   
     }
    
@@ -192,7 +192,6 @@ app.post('/customer/add-order', async (req,res) => {
 
 //admin/cus/order/list
 app.get('/admin/customer-orderlists', async (req,res) => {
-    let user_id = req.body.user_id;
     const usersRef = db.collection('users').doc(user_id).collection('orders');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
@@ -212,7 +211,7 @@ app.get('/admin/customer-orderlists', async (req,res) => {
         data.push(user);        
     });   
  
-    res.render('cus-ord-list.ejs', {user:user}); 
+    res.render('cus-ord-list.ejs', {data:data}); 
     
 });
 
