@@ -36,7 +36,7 @@ const app = express();
 let currentUser = {};
 
 
-let actionKeyboard = {
+let adminKeyboard = {
         "Type": "keyboard",
         "Revision": 1,
         "Buttons": [
@@ -48,8 +48,8 @@ let actionKeyboard = {
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "reply",               
-                "Text": "My Stock",
+                "ActionBody": "mkt-price",               
+                "Text": "Add Market Price",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
@@ -63,8 +63,82 @@ let actionKeyboard = {
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "my-balance",               
-                "Text": "My Balance",
+                "ActionBody": "merch-ent-list",               
+                "Text": "Merchant Entry List",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },            
+        ]
+    };
+
+    let staffKeyboard = {
+        "Type": "keyboard",
+        "Revision": 1,
+        "Buttons": [
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "add-pur-list",               
+                "Text": "Add Purchased Merchant List ",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "tdy-price",               
+                "Text": "Today's Purchase Price",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },            
+        ]
+    };
+
+    let merchantKeyboard = {
+        "Type": "keyboard",
+        "Revision": 1,
+        "Buttons": [
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "add-pur-list",               
+                "Text": "Today Market Price",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "tdy-price",               
+                "Text": "Register Inventory",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
@@ -130,7 +204,7 @@ app.post('/register',function(req,res){
                    },
                    "tracking_data":"tracking data",
                    "type":"text",
-                   "text": "Thank you!"+req.body.name, 
+                   "text": "Thank you!"+req.body.name, merchantKeyboard
                    
                 }    
                         
@@ -672,7 +746,7 @@ bot.onTextMessage(/^admin@/i, (message, response) =>{
     let pw_enter = text.substring(6);
 
     if(pw_enter == process.env.ADMIN_PASSWORD){
-        bot_message = new TextMessage(`Welcome to Admin`, actionKeyboard);
+        bot_message = new TextMessage(`Welcome Admin`, adminKeyboard);
     }else{
         asKAdminpin(message, response);
     }
