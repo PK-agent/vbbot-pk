@@ -671,12 +671,15 @@ bot.onTextMessage(/./, (message, response) => {
 
     
     switch(text){
-        case "register":
+        case "cus-view":
             registerUser(message, response);
             break;
         case "adm-view":
             adminView(message, response);
             break;
+        case "stf-view":
+            staffView(message, response);
+            break;        
         case "add_order":
             customerOrder(message, response);
             break;
@@ -728,6 +731,17 @@ bot.onTextMessage(/view/, (message, response) => {
 });*/
 
 const adminView = (message, response) => {
+    response.send(new TextMessage(`Please Enter your password`)).then((message) => {
+        if(message === process.env.ADMIN_PASSWORD){
+            return response.send(new TextMessage(`gg`));
+        }
+        else{
+            return response.send(new TextMessage(`incorrect`));
+        }
+    });
+}
+
+const staffView = (message, response) => {
     response.send(new TextMessage(`Please Enter your password`)).then((message) => {
         if(message === process.env.ADMIN_PASSWORD){
             return response.send(new TextMessage(`gg`));
@@ -891,7 +905,7 @@ const registerUser = async (message, response) => {
                     "BgMedia": "http://www.url.by/test.gif",
                     "BgLoop": true,
                     "ActionType": "reply",
-                    "ActionBody": "order-list",               
+                    "ActionBody": "tdy-stock",               
                     "Text": "Today Stock",
                     "TextVAlign": "middle",
                     "TextHAlign": "center",
