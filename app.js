@@ -6,6 +6,7 @@ const body_parser = require('body-parser');
 const { uuid } = require('uuidv4');
 const {format} = require('util');
 const multer  = require('multer');
+const { response } = require('express');
 
 const ViberBot  = require('viber-bot').Bot;
 const BotEvents = require('viber-bot').Events;
@@ -129,9 +130,10 @@ app.post('/register',function(req,res){
                    },
                    "tracking_data":"tracking data",
                    "type":"text",
-                   "text": "Thank you!"+req.body.name, actionKeyboard
+                   "text": "Thank you!"+req.body.name, 
                 }               
-                  
+                let bot_message = new KeyboardMessage("Let's start",actionKeyboard) 
+                response.send(bot_message);
 
                 fetch('https://chatapi.viber.com/pa/send_message', {
                     method: 'post',
