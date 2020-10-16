@@ -133,7 +133,7 @@ app.post('/register',function(req,res){
                    "text": "Thank you!"+req.body.name, 
                    
                 }    
-                const message           
+                        
                 
                 fetch('https://chatapi.viber.com/pa/send_message', {
                     method: 'post',
