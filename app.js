@@ -205,7 +205,9 @@ app.get('/admin/customer-orderlists', async (req,res) => {
         user.id = doc.id;
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
-        user.address = doc.data().address;        
+        user.address = doc.data().address; 
+        user.order_qty = doc.data().order_qty;
+        user.order_received_date = doc.data().order_received_date       
         data.push(user);        
     });   
  
