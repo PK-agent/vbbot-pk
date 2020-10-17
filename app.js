@@ -223,7 +223,7 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/amin/merchant/add-entry', async(req,res) => {  
+app.get('/admin/merchant/add-entry', async(req,res) => {  
     const usersRef = db.collection('users');
     const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
@@ -247,7 +247,7 @@ app.get('/amin/merchant/add-entry', async(req,res) => {
    res.render('addorder.ejs', {user:user});
 });
 
-app.post('/customer/add-order', async (req,res) => {  
+app.post('/admin/merchant/add-entry', async (req,res) => {  
    
     let today = new Date();
     let user_id = req.body.user_id;
@@ -869,7 +869,7 @@ const urlReply = (message, response) => {
 
 const merchantRegInv = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/amin/merchant/add-entry');   
+    let bot_message = new UrlMessage(APP_URL + '/admin/merchant/add-entry');   
     response.send(bot_message);
 }
 
