@@ -137,7 +137,7 @@ let adminKeyboard = {
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "tdy-price",               
+                "ActionBody": "reg-inv",               
                 "Text": "Register Inventory",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
@@ -789,13 +789,13 @@ bot.onTextMessage(/./, (message, response) => {
         case "stf-view":
             asKStaffpin(message, response);
             break;        
-        case "add_order":
-            customerOrder(message, response);
+        case "reg-inv":
+            customerRegInv(message, response);
             break;
-        case "order-list":
-            customerOrderList(message, response);
+        case "merch-ent-list":
+            MerchantEntryList(message, response);
             break;
-        case "tdy_stock":
+        case "reg-inv":
             customerTdyStock(message, response);
             break;
         case "my-stock":
@@ -862,13 +862,13 @@ const urlReply = (message, response) => {
     response.send(bot_message);
 }
 
-const customerOrder = (message, response) => {    
+const customerRegInv = (message, response) => {    
 
     let bot_message = new UrlMessage(APP_URL + '/customer/add-order');   
     response.send(bot_message);
 }
 
-const customerOrderList = (message, response) => {    
+const MerchantEntryList = (message, response) => {    
 
     let bot_message = new UrlMessage(APP_URL + '/cus/ord/lis');   
     response.send(bot_message);
