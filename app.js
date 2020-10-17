@@ -237,11 +237,11 @@ app.get('/merchant/register-inventory', async(req,res) => {
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
         user.address = doc.data().address;  
-        user.corn_type = doc.data().corn_type;
-        user.corn_qty = doc.data().corn_qty;
-        user.wanted_price = doc.data().wanted_price;
-        user.comment = doc.data().comment;
-        user.received_date = doc.data().received_date    
+        corn_type = doc.data().corn_type;
+        corn_qty = doc.data().corn_qty;
+        wanted_price = doc.data().wanted_price;
+        comment = doc.data().comment;
+        received_date = doc.data().received_date    
     }); 
 
    res.render('merchant-reg-inventory.ejs', {user:user});
