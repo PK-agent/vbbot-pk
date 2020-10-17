@@ -978,44 +978,7 @@ const registerUser = async (message, response) => {
         });
     }else{
         
-          let actionKeyboard = {
-            "Type": "keyboard",
-            "Revision": 1,
-            "Buttons": [
-                {
-                    "Columns": 6,
-                    "Rows": 1,
-                    "BgColor": "#2db9b9",
-                    "BgMediaType": "gif",
-                    "BgMedia": "http://www.url.by/test.gif",
-                    "BgLoop": true,
-                    "ActionType": "reply",
-                    "ActionBody": "add_order",               
-                    "Text": "Add Order",
-                    "TextVAlign": "middle",
-                    "TextHAlign": "center",
-                    "TextOpacity": 60,
-                    "TextSize": "regular"
-                },
-                {
-                    "Columns": 6,
-                    "Rows": 1,
-                    "BgColor": "#2db9b9",
-                    "BgMediaType": "gif",
-                    "BgMedia": "http://www.url.by/test.gif",
-                    "BgLoop": true,
-                    "ActionType": "reply",
-                    "ActionBody": "tdy-stock",               
-                    "Text": "Today Stock",
-                    "TextVAlign": "middle",
-                    "TextHAlign": "center",
-                    "TextOpacity": 60,
-                    "TextSize": "regular"
-                },            
-            ]
-        };
-
-          let bot_message3 = new TextMessage(`You are already registered`, actionKeyboard);    
+          let bot_message3 = new TextMessage(`You are already registered`, merchantKeyboard);    
           response.send(bot_message3);
     }  
   
