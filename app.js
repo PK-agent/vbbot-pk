@@ -244,7 +244,7 @@ app.get('/merchant/register-inventory', async(req,res) => {
         user.received_date = doc.data().received_date    
     }); 
 
-   res.render('merchant-reg-iventory.ejs', {user:user});
+   res.render('merchant-reg-inventory.ejs', {user:user});
 });
 
 app.post('/merchant/register-inventory', async (req,res) => {  
