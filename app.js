@@ -276,8 +276,8 @@ app.post('/customer/add-order', async (req,res) => {
     
 });
 
-//admin/cus/order/list
-app.get('/cus/ord/lis', async (req,res) => {
+//admin/merchant/entrylist
+app.get('/amdin/merchant/entrylist', async (req,res) => {
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
@@ -295,7 +295,7 @@ app.get('/cus/ord/lis', async (req,res) => {
         data.push(user);        
     });   
  
-    res.render('cus-ord-list.ejs', {data:data}); 
+    res.render('merch-entryList.ejs', {data:data}); 
     
 });
 
@@ -870,7 +870,7 @@ const customerRegInv = (message, response) => {
 
 const MerchantEntryList = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/cus/ord/lis');   
+    let bot_message = new UrlMessage(APP_URL + '/amdin/merchant/entrylist');   
     response.send(bot_message);
 }
 
