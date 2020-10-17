@@ -223,7 +223,7 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/customer/add-order', async(req,res) => {  
+app.get('/amin/merchant/add-entry', async(req,res) => {  
     const usersRef = db.collection('users');
     const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
@@ -260,8 +260,8 @@ app.post('/customer/add-order', async (req,res) => {
         corn_type: req.body.corn_type,
         corn_qty: req.body.corn_qty,
         wanted_price: req.body.wanted_price,
-        comments: req.body.comment,
-        received_date:req.body.order_received_date          
+        comments: req.body.comments,
+        received_date:req.body.received_date          
            
     }
    
@@ -795,7 +795,7 @@ bot.onTextMessage(/./, (message, response) => {
             asKStaffpin(message, response);
             break;        
         case "reg-inv":
-            customerRegInv(message, response);
+            merchantRegInv(message, response);
             break;
         case "merch-ent-list":
             MerchantEntryList(message, response);
@@ -867,9 +867,9 @@ const urlReply = (message, response) => {
     response.send(bot_message);
 }
 
-const customerRegInv = (message, response) => {    
+const merchantRegInv = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/customer/add-order');   
+    let bot_message = new UrlMessage(APP_URL + '/amin/merchant/add-entry');   
     response.send(bot_message);
 }
 
