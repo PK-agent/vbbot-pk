@@ -260,7 +260,7 @@ app.post('/admin/merchant/add-entry', async (req,res) => {
         corn_type: req.body.corn_type,
         corn_qty: req.body.corn_qty,
         wanted_price: req.body.wanted_price,
-        comments: req.body.comments,
+        comment: req.body.comment,
         received_date: req.body.received_date          
            
     }
