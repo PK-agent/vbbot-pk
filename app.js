@@ -240,8 +240,8 @@ app.get('/admin/merchant/add-entry', async(req,res) => {
         user.corn_type = doc.data().corn_type;
         user.corn_qty = doc.data().corn_qty;
         user.wanted_price = doc.data().wanted_price;
-        user.comment = doc.data().comments;
-        user.order_received_date = doc.data().order_received_date    
+        user.comment = doc.data().comment;
+        user.received_date = doc.data().received_date    
     }); 
 
    res.render('addorder.ejs', {user:user});
@@ -261,7 +261,7 @@ app.post('/admin/merchant/add-entry', async (req,res) => {
         corn_qty: req.body.corn_qty,
         wanted_price: req.body.wanted_price,
         comments: req.body.comments,
-        received_date:req.body.received_date          
+        received_date: req.body.received_date          
            
     }
    
