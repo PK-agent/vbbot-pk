@@ -63,7 +63,7 @@ let adminKeyboard = {
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "merch-ent-list",               
+                "ActionBody": "merch-entrylist",               
                 "Text": "Merchant Entry List",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
@@ -100,7 +100,7 @@ let adminKeyboard = {
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "tdy-price",               
+                "ActionBody": "tdy-pur-price",               
                 "Text": "Today's Purchase Price",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
@@ -122,7 +122,7 @@ let adminKeyboard = {
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "add-pur-list",               
+                "ActionBody": "tdy-mark-price",               
                 "Text": "Today Market Price",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
@@ -137,8 +137,8 @@ let adminKeyboard = {
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "reg-inv",               
-                "Text": "Register Inventory",
+                "ActionBody": "merch-reg-inv",               
+                "Text": "Merchant Register Inventory",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
@@ -171,15 +171,15 @@ app.get('/',function(req,res){
 });
 
 
-app.get('/register',function(req,res){   
+app.get('/merchant/register',function(req,res){   
       let data = {
         user_name: currentUser.name,
       } 
-     res.render('register.ejs', {data:data});
+     res.render('merchant.ejs', {data:data});
 });
 
 
-app.post('/register',function(req,res){   
+app.post('/merchant/register',function(req,res){   
     
     currentUser.name = req.body.name;
     currentUser.phone = req.body.phone;
@@ -223,7 +223,7 @@ app.post('/register',function(req,res){
        
 });
 
-app.get('/admin/merchant/add-entry', async(req,res) => {  
+app.get('/merchant/register-inventory', async(req,res) => {  
     const usersRef = db.collection('users');
     const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
@@ -244,10 +244,10 @@ app.get('/admin/merchant/add-entry', async(req,res) => {
         user.received_date = doc.data().received_date    
     }); 
 
-   res.render('addorder.ejs', {user:user});
+   res.render('merchant-reg-iventory.ejs', {user:user});
 });
 
-app.post('/admin/merchant/add-entry', async (req,res) => {  
+app.post('/merchant/register-inventory', async (req,res) => {  
    
     let today = new Date();
     let user_id = req.body.user_id;
@@ -685,8 +685,8 @@ let AdminCusStafKeyboard = {
             "BgMedia": "http://www.url.by/test.gif",
             "BgLoop": true,
             "ActionType": "reply",
-            "ActionBody": "cus-view",               
-            "Text": "Customer View",
+            "ActionBody": "merch-view",               
+            "Text": "Merchant",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -701,7 +701,7 @@ let AdminCusStafKeyboard = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "stf-view",               
-            "Text": "Staff View",
+            "Text": "Staff",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -716,7 +716,7 @@ let AdminCusStafKeyboard = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "adm-view",               
-            "Text": "Admin View",
+            "Text": "Admin",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -785,8 +785,8 @@ bot.onTextMessage(/./, (message, response) => {
 
     
     switch(text){
-        case "cus-view":
-            registerUser(message, response);
+        case "merch-view":
+            registerMerchant(message, response);
             break;
         case "adm-view":
             asKAdminpin(message, response);
@@ -794,10 +794,10 @@ bot.onTextMessage(/./, (message, response) => {
         case "stf-view":
             asKStaffpin(message, response);
             break;        
-        case "reg-inv":
+        case "merch-reg-inv":
             merchantRegInv(message, response);
             break;
-        case "merch-ent-list":
+        case "merch-entrylist":
             MerchantEntryList(message, response);
             break;
         case "reg-inv":
@@ -869,7 +869,7 @@ const urlReply = (message, response) => {
 
 const merchantRegInv = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/admin/merchant/add-entry');   
+    let bot_message = new UrlMessage(APP_URL + '/merchant/register-inventory');   
     response.send(bot_message);
 }
 
@@ -964,7 +964,7 @@ const keyboardReply = (message, response) => {
 
 
 
-const registerUser = async (message, response) => {   
+const registerMerchant = async (message, response) => {   
 
     const userRef = db.collection('users');    
     const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
@@ -972,7 +972,7 @@ const registerUser = async (message, response) => {
     if (snapshot.empty) {
         console.log('No such document!');
         let bot_message1 = new TextMessage(`Click on following link to register`, ); 
-        let bot_message2 = new UrlMessage(APP_URL + '/register/');   
+        let bot_message2 = new UrlMessage(APP_URL + '/merchant/register');   
         response.send(bot_message1).then(()=>{
             return response.send(bot_message2);
         });
