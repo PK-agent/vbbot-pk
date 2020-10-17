@@ -237,11 +237,11 @@ app.get('/merchant/register-inventory', async(req,res) => {
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
         user.address = doc.data().address;  
-        corn_type = doc.data().corn_type;
-        corn_qty = doc.data().corn_qty;
-        wanted_price = doc.data().wanted_price;
-        comment = doc.data().comment;
-        received_date = doc.data().received_date    
+        user.corn_type = doc.data().corn_type;
+        user.corn_qty = doc.data().corn_qty;
+        user.wanted_price = doc.data().wanted_price;
+        user.comment = doc.data().comment;
+        user.received_date = doc.data().received_date    
     }); 
 
    res.render('merchant-reg-inventory.ejs', {user:user});
@@ -278,7 +278,7 @@ app.post('/merchant/register-inventory', async (req,res) => {
 
 //admin/merchant/entrylist
 app.get('/amdin/merchant/entrylist', async (req,res) => {
-    const usersRef = db.collection('users');
+    const usersRef = db.collection('users').doc(req.params.orders_id).collection('orders');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
       console.log('No matching documents.');
@@ -299,10 +299,23 @@ app.get('/amdin/merchant/entrylist', async (req,res) => {
         user.received_date = doc.data().received_date      
         data.push(user);        
     });   
- 
-    res.render('merch-entryList.ejs', {data:data}); 
+    let merchant = { };        
+
+    let userRef = db.collection('users').doc(req.params.merchant_id);
+    let user = await userRef.get();
+    if (!user.exists) {
+      console.log('No such user!');        
+    } else {    
+      merchant.merchant_id = user.id;      
+      merchant.merchant_name = user.data().name;
+    } 
+           
+
+    res.render('merch-entryList.ejs', {data:data, merchant:merchant}); 
     
 });
+
+
 
 app.get('/customer/add-order/:orderlist_id', async (req,res) => {  
     let data = { };        
