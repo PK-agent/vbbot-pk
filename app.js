@@ -291,7 +291,12 @@ app.get('/amdin/merchant/entrylist', async (req,res) => {
         user.id = doc.id;
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
-        user.address = doc.data().address;        
+        user.address = doc.data().address; 
+        user.corn_type = doc.data().corn_type;
+        user.corn_qty = doc.data().corn_qty;
+        user.wanted_price = doc.data().wanted_price;
+        user.comment = doc.data().comment;
+        user.received_date = doc.data().received_date      
         data.push(user);        
     });   
  
