@@ -279,7 +279,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
 //admin/merchant/entrylist
 app.get('/admin/merchant/entrylist', async (req,res) => {
     const usersRef = db.collection('users');
-    const snapshot = await usersRef.get();
+    const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
     if (snapshot.empty) {
       console.log('No matching documents.');
       return;
@@ -300,7 +300,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
         data.push(user);        
     });   
     
-    
+    res.render('merch-entryList.ejs', {user:user});
 });
 
 
