@@ -277,7 +277,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
 });
 
 //admin/merchant/entrylist
-app.get('/amdin/merchant/entrylist', async (req,res) => {
+app.get('/admin/merchant/entrylist', async (req,res) => {
     const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
@@ -879,7 +879,7 @@ const merchantBookInventory = (message, response) => {
 
 const MerchantEntryList = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/amdin/merchant/entrylist');   
+    let bot_message = new UrlMessage(APP_URL + '/admin/merchant/entrylist');   
     response.send(bot_message);
 }
 
