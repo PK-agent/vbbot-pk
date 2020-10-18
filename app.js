@@ -137,7 +137,7 @@ let adminKeyboard = {
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "merch-reg-inv",               
+                "ActionBody": "merch-book-inv",               
                 "Text": "Merchant Book Inventory",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
