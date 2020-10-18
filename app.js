@@ -278,7 +278,7 @@ app.post('/merchant/register-inventory', async (req,res) => {
 
 //admin/merchant/entrylist
 app.get('/amdin/merchant/entrylist', async (req,res) => {
-    const usersRef = db.collection('users');
+    const usersRef = db.collection('users').doc(req.params.orders_id).collection('orders');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
       console.log('No matching documents.');
@@ -299,19 +299,7 @@ app.get('/amdin/merchant/entrylist', async (req,res) => {
         user.received_date = doc.data().received_date      
         data.push(user);        
     });   
-    let merchant = { };        
-
-    let userRef = db.collection('users').doc(req.params.merchant_id);
-    let user = await userRef.get();
-    if (!user.exists) {
-      console.log('No such user!');        
-    } else {    
-      merchant.merchant_id = user.id;      
-      merchant.merchant_name = user.data().name;
-    } 
-           
-
-    res.render('merch-entryList.ejs', {data:data, merchant:merchant}); 
+    
     
 });
 
