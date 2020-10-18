@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Merchant Entry Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ </head>
+
+  <body>
+  <h1>Add Entry</h1>
+  <form id="form" action="view/merchant/register-inventory" method="post">
+    
+      <label for="name">Merchant Name</label><br>
+      <input type="text" name="name" value="<%= user.name %>" /><br>
+      
+  
+      <label for="name">Phone Number</label><br>
+      <input type="tel" name="phone" pattern="[0-9]{5,15}" value="<%= user.phone %>" /><br>
+  
+      <label for="name">Address</label><br>
+      <textarea name="address" rows="4" cols="50"></textarea><br>
+
+      <label for="name">Corn Type</label><br>
+      <input type="number" name="corn_type"/><br>
+  
+      <label for="name">Quantity</label><br>
+      <input type="number" name="corn_qty"/><br>  
+      
+      <label for="name">Wanted Price</label><br>
+      <input type="number" name="wanted_price"/><br>
+
+      <label for="name">Comments</label><br>
+      <textarea name="comment" rows="4" cols="50"></textarea><br>
+  
+      <label for="name">Received Date</label><br>
+      <input type="date" name="received_date"/><br>
+
+      <input type="hidden" name="user_id" value="<%= user.id %>"/>
+    
+    <input type="submit" name="submit"/>
+
+  </form>
+  <script>
+    
+    const windowClose = () => {
+      setTimeout(()=>{
+        window.close();
+      },2000);    
+    }
+  
+        
+    document.getElementById("form").addEventListener("submit", windowClose); 
+    
+   
+    </script>
+   
+  </body>
+
+</html>

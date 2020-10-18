@@ -85,8 +85,8 @@ let adminKeyboard = {
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "add-pur-list",               
-                "Text": "Add Purchased Merchant List ",
+                "ActionBody": "view-booked-merchants",               
+                "Text": "View Booked Merchants ",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
@@ -138,7 +138,7 @@ let adminKeyboard = {
                 "BgLoop": true,
                 "ActionType": "reply",
                 "ActionBody": "merch-reg-inv",               
-                "Text": "Merchant Register Inventory",
+                "Text": "Merchant Book Inventory",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
@@ -223,7 +223,7 @@ app.post('/merchant/register',function(req,res){
        
 });
 
-app.get('/merchant/register-inventory', async(req,res) => {  
+app.get('/merchant/book-inventory', async(req,res) => {  
     const usersRef = db.collection('users');
     const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
@@ -244,10 +244,10 @@ app.get('/merchant/register-inventory', async(req,res) => {
         user.received_date = doc.data().received_date    
     }); 
 
-   res.render('merchant-reg-inventory.ejs', {user:user});
+   res.render('merchant-book-inventory.ejs', {user:user});
 });
 
-app.post('/merchant/register-inventory', async (req,res) => {  
+app.post('/merchant/book-inventory', async (req,res) => {  
    
     let today = new Date();
     let user_id = req.body.user_id;
@@ -278,7 +278,7 @@ app.post('/merchant/register-inventory', async (req,res) => {
 
 //admin/merchant/entrylist
 app.get('/amdin/merchant/entrylist', async (req,res) => {
-    const usersRef = db.collection('users').doc(req.params.orders_id).collection('orders');
+    const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
       console.log('No matching documents.');
@@ -727,7 +727,7 @@ let AdminCusStafKeyboard = {
     ],
 };
 
-const message = new TextMessage("Welcome to my tea shop",AdminCusStafKeyboard,null,null,null,3);
+const message = new TextMessage("Welcome to my Pyaung Kyi",AdminCusStafKeyboard,null,null,null,3);
 
 bot.onConversationStarted((userProfile, isSubscribed, context) => {  
     // if(userProfile.id === "sXvG8AwXZmlLW7/LCSvMXw==")  {
@@ -795,14 +795,17 @@ bot.onTextMessage(/./, (message, response) => {
         case "stf-view":
             asKStaffpin(message, response);
             break;        
-        case "merch-reg-inv":
-            merchantRegInv(message, response);
+        case "merch-book-inv":
+            merchantBookInventory(message, response);
             break;
         case "merch-entrylist":
             MerchantEntryList(message, response);
             break;
         case "reg-inv":
             customerTdyStock(message, response);
+            break;
+        case "view-booked-merchant":
+            ViewBookedMerchant(message, response);
             break;
         case "my-stock":
             checkStock(message, response);
@@ -868,15 +871,21 @@ const urlReply = (message, response) => {
     response.send(bot_message);
 }
 
-const merchantRegInv = (message, response) => {    
+const merchantBookInventory = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/merchant/register-inventory');   
+    let bot_message = new UrlMessage(APP_URL + '/merchant/book-inventory');   
     response.send(bot_message);
 }
 
 const MerchantEntryList = (message, response) => {    
 
     let bot_message = new UrlMessage(APP_URL + '/amdin/merchant/entrylist');   
+    response.send(bot_message);
+}
+
+const ViewBookedMerchant = (message, response) => {    
+
+    let bot_message = new UrlMessage(APP_URL + '/staff/merchant/Booklist');   
     response.send(bot_message);
 }
 
