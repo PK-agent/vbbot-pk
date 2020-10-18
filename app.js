@@ -278,7 +278,7 @@ app.post('/merchant/register-inventory', async (req,res) => {
 
 //admin/merchant/entrylist
 app.get('/amdin/merchant/entrylist', async (req,res) => {
-    const usersRef = db.collection('users').doc(req.params.orders_id).collection('orders');
+    const usersRef = db.collection('users');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
       console.log('No matching documents.');
