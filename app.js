@@ -331,7 +331,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     }  
     
     let data = [1,2,3];
-    userSnapshot.forEach(doc => { console.log(data); getOrder(doc.id, data)});  
+    userSnapshot.forEach(doc => { console.log(doc); });  
     console.log('gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg');
     res.render('merch-entryList.ejs', {data});     
 });
