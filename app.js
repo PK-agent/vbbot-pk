@@ -307,7 +307,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
       return;
     }  
     
-    userSnapshot.forEach(doc => {
+    userSnapshot.forEach(async doc => {
         if(doc.data().viberid === currentUser.id){  
             const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
             const orderSnapshot = await ordersRef.get();
