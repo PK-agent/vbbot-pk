@@ -299,42 +299,35 @@ app.post('/merchant/book-inventory', async (req,res) => {
 });
 
 //admin/merchant/entrylist
-app.get('/admin/merchant/entrylist', async (req,res) => {console.log('gg');
+app.get('/admin/merchant/entrylist', async (req,res) => {
     const usersRef = db.collection('users');
     const userSnapshot = await usersRef.get();
     if (userSnapshot.empty) {
       console.log('No matching documents.');
       return;
     }  
-    let userId;
-    userSnapshot.forEach(doc => {
-
-        // let user = {};
-        userId = doc.id;
-        // user.name = doc.data().name;
-        // user.phone = doc.data().phone;         
-        // user.address = doc.data().address;
-        // data.push(user);        
-    });  
     
-
-    const ordersRef = db.collection('users').doc(userId).collection('orders'); 
-    const orderSnapshot = await ordersRef.get();
-    if(orderSnapshot.empty) {
-        console.log('No matching documents.');
-        return;
-    }
-    let data = [];
-    orderSnapshot.forEach(doc => {
-        let user = {};
-        user.id = doc.id;
-        user.name = doc.data().name;
-        user.phone = doc.data().phone;         
-        user.address = doc.data().address;
-        data.push(user);  
-    })
- 
-    res.render('merchants.ejs', {data}); 
+    userSnapshot.forEach(doc => {
+        if(doc.data().viberid === currentUser.id){  
+            const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
+            const orderSnapshot = await ordersRef.get();
+            if(orderSnapshot.empty) {
+                console.log('No matching documents.');
+                return;
+            }
+            let data = [];
+            orderSnapshot.forEach(doc => {
+                let user = {};
+                user.id = doc.id;
+                user.name = doc.data().name;
+                user.phone = doc.data().phone;         
+                user.address = doc.data().address;
+                data.push(user);  
+            });
+         
+            res.render('merchants.ejs', {data}); 
+        }   
+    });  
     
 });
 
