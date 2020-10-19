@@ -206,7 +206,10 @@ app.post('/merchant/register',function(req,res){
                    "type":"text",
                    "text": "Thank you!"+req.body.name
                    
-                }   
+                }.then(()=>{
+                    let bot_message = new TextMessage(`Choose activity keyboard`, merchantKeyboard);    
+          response.send(bot_message);
+                })   
     
                 fetch('https://chatapi.viber.com/pa/send_message', {
                     method: 'post',
