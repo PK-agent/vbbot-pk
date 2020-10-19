@@ -214,7 +214,7 @@ app.post('/merchant/register',function(req,res){
                     headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
                 })
                 .then(res => res.json())
-                .then(json => console.log('JSON', json))
+                .then(json => console.log('JSON', json));
                 
 
     }).catch((error)=>{
@@ -308,9 +308,6 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     }  
     
     userSnapshot.forEach(async doc => {
-        console.log(doc.data().viberid);
-        console.log(currentUser.id);
-        console.log(doc.data().viberid === currentUser.id);
         if(doc.data().viberid === currentUser.id){  
             const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
             const orderSnapshot = await ordersRef.get();
@@ -325,10 +322,15 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
                 user.name = doc.data().name;
                 user.phone = doc.data().phone;         
                 user.address = doc.data().address;
+                user.corn_type = doc.data().corn_type;
+                user.corn_qty = doc.data().corn_qty;
+                user.wanted_price = doc.data().wanted_price;
+                user.comment = doc.data().comment;
+                user.received_date = doc.data().received_date;   
                 data.push(user);  
             });
          
-            res.render('merchants.ejs', {data}); 
+            res.render('merch-entryList.ejs', {data}); 
         }   
     });  
     
