@@ -308,7 +308,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     }  
     
     let data = [1,2,3];
-    userSnapshot.forEach( doc => { console.log(doc);
+    userSnapshot.forEach( doc => { console.log(doc.id);
         // const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
         // const ordersSnapshot = await ordersRef.get();
         
