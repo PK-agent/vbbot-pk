@@ -268,11 +268,33 @@ app.post('/merchant/book-inventory', async (req,res) => {
 
     db.collection('users').doc(user_id).collection('orders').add(data)
     .then(()=>{
-          res.json({success:'success'});  
+        let data = {
+               "receiver":currentUser.id,
+               "min_api_version":1,
+               "sender":{
+                  "name":"PyaungKyi",
+                  "avatar":"http://api.adorable.io/avatar/200/isitup"
+               },
+               "tracking_data":"tracking data",
+               "type":"text",
+               "text": "Thank you!"+req.body.name
+               
+            }   
 
-    }).catch((error)=>{
-        console.log('ERROR:', error);
-    }); 
+            fetch('https://chatapi.viber.com/pa/send_message', {
+                method: 'post',
+                body:    JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
+            })
+            .then(res => res.json())
+            .then(json => console.log('JSON', json))
+            
+
+}).catch((error)=>{
+    console.log('ERROR:', error);
+});
+    
+     
     
 });
 
@@ -300,7 +322,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
         data.push(user);        
     });   
     
-    res.render('merch-entryList.ejs', {data:data});
+    res.render('merch-entryList.ejs', {user:user});
 });
 
 
