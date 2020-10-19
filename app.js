@@ -300,22 +300,39 @@ app.post('/merchant/book-inventory', async (req,res) => {
 
 //admin/merchant/entrylist
 app.get('/admin/merchant/entrylist', async (req,res) => {console.log('gg');
-    const usersRef = db.collection('users').doc(currentUser.id).collection('orders');
-    const snapshot = await usersRef.get();
-    if (snapshot.empty) {
+    const usersRef = db.collection('users');
+    const userSnapshot = await usersRef.get();
+    if (userSnapshot.empty) {
       console.log('No matching documents.');
       return;
     }  
-    let data = [];
-    snapshot.forEach(doc => {
+    let userId;
+    userSnapshot.forEach(doc => {
 
+        // let user = {};
+        userId = doc.id;
+        // user.name = doc.data().name;
+        // user.phone = doc.data().phone;         
+        // user.address = doc.data().address;
+        // data.push(user);        
+    });  
+    
+
+    const ordersRef = db.collection('users').doc(userId).collection('orders'); 
+    const orderSnapshot = await ordersRef.get();
+    if(orderSnapshot.empty) {
+        console.log('No matching documents.');
+        return;
+    }
+    let data = [];
+    orderSnapshot.forEach(doc => {
         let user = {};
         user.id = doc.id;
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
         user.address = doc.data().address;
-        data.push(user);        
-    });   
+        data.push(user);  
+    })
  
     res.render('merchants.ejs', {data}); 
     
