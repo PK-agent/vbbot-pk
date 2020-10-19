@@ -311,7 +311,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     userSnapshot.forEach( async doc => { console.log(doc.id);
         const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
         console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
-        const ordersSnapshot = await ordersRef.get();
+        const ordersSnapshot = ordersRef.get();
         
         if(ordersSnapshot.empty) {
             console.log('No matching documents.');
