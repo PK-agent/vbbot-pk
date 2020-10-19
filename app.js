@@ -277,7 +277,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
                },
                "tracking_data":"tracking data",
                "type":"text",
-               "text": "Thank you!"+req.body.name
+               "text": "Thank you for your book!"+req.body.name
                
             }   
 

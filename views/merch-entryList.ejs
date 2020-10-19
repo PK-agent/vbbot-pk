@@ -21,6 +21,7 @@
     <th>Wanted Price</th>
     <th>Comments</th>
     <th>Received Date</th>
+    <th>Manage Merchants</th>
         
   </tr>
 
@@ -35,7 +36,7 @@
        <td><%= user.wanted_price %></td>
        <td><%= user.comment %></td>
        <td><%= user.received_date %></td>
-      
+       
      
        <td><a href="../admin/addstock/<%= user.id %>">Edit</a> | <a href="../admin/stocklist/<%= user.id %>">Delete</a></td>
        <td><a href="../admin/payment/<%= user.id %>">Payment History</a></td>
