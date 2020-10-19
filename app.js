@@ -309,30 +309,28 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     
     let data = [];
     userSnapshot.forEach(doc => {
-        const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
+        let user ={ id: 1, name: 'htetkhant' };
+        data.push(user);
+        // const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
         // const orderSnapshot = await ordersRef.get();
-
-        ordersRef.get()
-        .then(orderSnapshot => {            
-            if(orderSnapshot.empty) {
-                console.log('No matching documents.');
-                return;
-            }
-            orderSnapshot.forEach(doc => {
-                let user = {};
-                user.id = doc.id;
-                user.name = doc.data().name;
-                user.phone = doc.data().phone;         
-                user.address = doc.data().address;
-                user.corn_type = doc.data().corn_type;
-                user.corn_qty = doc.data().corn_qty;
-                user.wanted_price = doc.data().wanted_price;
-                user.comment = doc.data().comment;
-                user.received_date = doc.data().received_date;   
-                data.push(user);  
-            });           
-        });
-
+        
+        // if(orderSnapshot.empty) {
+        //     console.log('No matching documents.');
+        //     return;
+        // }
+        // orderSnapshot.forEach(doc => {
+        //     let user = {};
+        //     user.id = doc.id;
+        //     user.name = doc.data().name;
+        //     user.phone = doc.data().phone;         
+        //     user.address = doc.data().address;
+        //     user.corn_type = doc.data().corn_type;
+        //     user.corn_qty = doc.data().corn_qty;
+        //     user.wanted_price = doc.data().wanted_price;
+        //     user.comment = doc.data().comment;
+        //     user.received_date = doc.data().received_date;   
+        //     data.push(user);  
+        // });           
     });  
 
     res.render('merch-entryList.ejs', {data});     
