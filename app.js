@@ -300,7 +300,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
 
 //admin/merchant/entrylist
 app.get('/admin/merchant/entrylist', async (req,res) => {
-    const usersRef = db.collection('users').doc(user_id).collection('orders');
+    const usersRef = db.collection('users').doc(order_id).collection('orders');
     const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
     if (snapshot.empty) {
       console.log('No matching documents.');
@@ -310,7 +310,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     snapshot.forEach(doc => {
 
         let user = {};
-        user.id = doc.user_id;
+        user.id = doc.id;
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
         user.address = doc.data().address; 
