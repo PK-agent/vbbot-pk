@@ -307,28 +307,28 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
       return;
     }  
     
-    let data = [];
-    userSnapshot.forEach(async doc => {
-        const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
-        const ordersSnapshot = await ordersRef.get();
+    let data = [1,2,3];
+    userSnapshot.forEach( doc => { console.log(doc);
+        // const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
+        // const ordersSnapshot = await ordersRef.get();
         
-        if(ordersSnapshot.empty) {
-            console.log('No matching documents.');
-            return;
-        }
-        ordersSnapshot.forEach(doc1 => {
-            let user = {};
-            user.id = doc1.id;
-            user.name = doc1.data().name;
-            user.phone = doc1.data().phone;         
-            user.address = doc1.data().address;
-            user.corn_type = doc1.data().corn_type;
-            user.corn_qty = doc1.data().corn_qty;
-            user.wanted_price = doc1.data().wanted_price;
-            user.comment = doc1.data().comment;
-            user.received_date = doc1.data().received_date;   
-            data.push(user);  
-        });           
+        // if(ordersSnapshot.empty) {
+        //     console.log('No matching documents.');
+        //     return;
+        // }
+        // ordersSnapshot.forEach(doc1 => {
+        //     let user = {};
+        //     user.id = doc1.id;
+        //     user.name = doc1.data().name;
+        //     user.phone = doc1.data().phone;         
+        //     user.address = doc1.data().address;
+        //     user.corn_type = doc1.data().corn_type;
+        //     user.corn_qty = doc1.data().corn_qty;
+        //     user.wanted_price = doc1.data().wanted_price;
+        //     user.comment = doc1.data().comment;
+        //     user.received_date = doc1.data().received_date;   
+        //     data.push(user);  
+        // });           
     });  
 
     res.render('merch-entryList.ejs', {data});     
