@@ -299,7 +299,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
 });
 
 //admin/merchant/entrylist
-app.get('/admin/merchant/entrylist', async (req,res) => {
+app.get('/admin/merchant/entrylist', async (req,res) => {console.log('gg');
     const usersRef = db.collection('users').doc(currentUser.id).collection('orders');
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
