@@ -310,7 +310,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     snapshot.forEach(doc => {
 
         let user = {};
-        user.id = doc.id;
+        user.id = doc.user_id;
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
         user.address = doc.data().address; 
