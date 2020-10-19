@@ -308,8 +308,6 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     }  
     
     userSnapshot.forEach(async doc => {
-        console.log(doc.data().viberid);
-        console.log(currentUser.id);
         if(doc.data().viberid === currentUser.id){  
             const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
             const orderSnapshot = await ordersRef.get();
