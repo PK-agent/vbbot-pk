@@ -310,13 +310,12 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     let data = [];
     userSnapshot.forEach( async doc => {
         const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
-        console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
         const ordersSnapshot = await ordersRef.get();
         
         if(ordersSnapshot.empty) {
             console.log('No matching documents.');
             return;
-        }console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+        }
         ordersSnapshot.forEach(doc1 => {
             let user = {};
             user.id = doc1.id;
@@ -331,10 +330,8 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
             console.log(user);
             data.push(user);  
         });           
-        res.render('merch-entryList.ejs', {data});  
-    });  
-    console.log('ggggggggggggggggggggggggggggggggggggggggggggggggggggggg');
-    console.log('----------------------------------------------------------------------');   
+          
+    }).then(() => res.render('merch-entryList.ejs', {data}));    
 });
 
 
