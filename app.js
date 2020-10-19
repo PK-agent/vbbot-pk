@@ -206,7 +206,7 @@ app.post('/merchant/register',function(req,res){
                    "type":"text",
                    "text": "Thank you!"+req.body.name
                    
-                }   
+                }  
     
                 fetch('https://chatapi.viber.com/pa/send_message', {
                     method: 'post',
