@@ -298,8 +298,6 @@ app.post('/merchant/book-inventory', async (req,res) => {
     
 });
 
-
-
 //admin/merchant/entrylist
 app.get('/admin/merchant/entrylist', async (req,res) => {
     const usersRef = db.collection('users');
@@ -309,9 +307,30 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
       return;
     }  
     
-    let data = [1,2,3];
-    userSnapshot.forEach(doc => { console.log(doc); });  
-    console.log('gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg');
+    let data = [];
+    userSnapshot.forEach(doc => {
+        const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
+        const orderSnapshot = await ordersRef.get();
+        
+        if(orderSnapshot.empty) {
+            console.log('No matching documents.');
+            return;
+        }
+        orderSnapshot.forEach(doc => {
+            let user = {};
+            user.id = doc.id;
+            user.name = doc.data().name;
+            user.phone = doc.data().phone;         
+            user.address = doc.data().address;
+            user.corn_type = doc.data().corn_type;
+            user.corn_qty = doc.data().corn_qty;
+            user.wanted_price = doc.data().wanted_price;
+            user.comment = doc.data().comment;
+            user.received_date = doc.data().received_date;   
+            data.push(user);  
+        });           
+    });  
+
     res.render('merch-entryList.ejs', {data});     
 });
 
