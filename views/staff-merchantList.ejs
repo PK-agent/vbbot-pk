@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Merchants</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ </head>
+
+  <body>
+  <h1>Merchants</h1>
+
+ 
+  
+  <table cellspacing="1" cellpadding="5" border="1">
+    <tr>
+    
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Address</th>   
+    <th>Manage Stock</th>
+    <th>Payment</th>
+  </tr>
+
+  <% data.forEach(function(user){ %>
+     <tr>
+      
+       <td><%= user.name %></td>
+       <td><%= user.phone %></td>
+       <td><%= user.address %></td>
+     
+       <td><a href="../admin/addstock/<%= user.id %>">Add Stock</a> | <a href="../admin/stocklist/<%= user.id %>">Stock List</a></td>
+       <td><a href="../admin/payment/<%= user.id %>">Payment History</a></td>
+     </tr>
+  <% }); %>
+
+
+  
+
+	</table>
+
+ 
+ 
+
+  </body>
+
+</html>
