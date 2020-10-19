@@ -330,7 +330,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
         //     data.push(user);  
         // });           
     });  
-
+    console.log('ggggggggggggggggggggggggggggggggggggggggggggggggggggggg');
     res.render('merch-entryList.ejs', {data});     
 });
 
