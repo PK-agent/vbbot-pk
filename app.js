@@ -73,6 +73,43 @@ let adminKeyboard = {
         ]
     };
 
+    let adminAddmarketPrice = {
+        "Type": "keyboard",
+        "Revision": 1,
+        "Buttons": [
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "merchant-market-price",               
+                "Text": "Merchant Market Price",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "staff-market-price",               
+                "Text": "Staff Market Price",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },            
+        ]
+    };
+
     let staffKeyboard = {
         "Type": "keyboard",
         "Revision": 1,
@@ -902,47 +939,9 @@ const textReply = (message, response) => {
 }
 
 const addMarketPrice = (message, response) => {
-    let bot_message = new TextMessage(`Please select your option`)
-        let adminAddmarketPrice = {
-            "Type": "keyboard",
-            "Revision": 1,
-            "Buttons": [
-                {
-                    "Columns": 6,
-                    "Rows": 1,
-                    "BgColor": "#2db9b9",
-                    "BgMediaType": "gif",
-                    "BgMedia": "http://www.url.by/test.gif",
-                    "BgLoop": true,
-                    "ActionType": "reply",
-                    "ActionBody": "merchant-market-price",               
-                    "Text": "Merchant Market Price",
-                    "TextVAlign": "middle",
-                    "TextHAlign": "center",
-                    "TextOpacity": 60,
-                    "TextSize": "regular"
-                },
-                {
-                    "Columns": 6,
-                    "Rows": 1,
-                    "BgColor": "#2db9b9",
-                    "BgMediaType": "gif",
-                    "BgMedia": "http://www.url.by/test.gif",
-                    "BgLoop": true,
-                    "ActionType": "reply",
-                    "ActionBody": "staff-market-price",               
-                    "Text": "Staff Market Price",
-                    "TextVAlign": "middle",
-                    "TextHAlign": "center",
-                    "TextOpacity": 60,
-                    "TextSize": "regular"
-                },            
-            ]
-        };  
-
+    let bot_message = new TextMessage(`Please choose activity keyboard`, adminAddmarketPrice)   
     
-    
-    response.send(bot_message, adminAddmarketPrice);
+    response.send(bot_message);
 }
 
 const urlReply = (message, response) => {    
