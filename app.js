@@ -370,12 +370,12 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
                 user.wanted_price = doc1.data().wanted_price;
                 user.comment = doc1.data().comment;
                 user.received_date = doc1.data().received_date;   
-                console.log(user);
-                data.push(user);  
+                data.push(user); 
+                console.log('--------------------------'); 
             });                   
         });
     }); 
-    await gg;
+    await gg();
     res.render('merch-entryList.ejs', {data});    
 });
 
