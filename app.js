@@ -901,6 +901,11 @@ const textReply = (message, response) => {
     response.send(bot_message);
 }
 
+const addMarketPrice = (message, response) => {
+    let bot_message = new TextMessage(`Please Enter please select your option`);    
+    response.send(bot_message);
+}
+
 const urlReply = (message, response) => {    
 
     let bot_message = new UrlMessage(process.env.APP_URL + '/test/');   
