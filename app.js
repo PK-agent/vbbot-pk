@@ -343,18 +343,18 @@ function getOrders(){
 
 //admin/merchant/entrylist
 app.get('/admin/merchant/entrylist', async (req,res) => {
-    // const usersRef = db.collection('users');
-    // console.log('kkkkkkkkkkkkkkkk');
-    // const userSnapshot = await usersRef.get();
-    // console.log('ffffffffffffffffff');
-    // if (userSnapshot.empty) {
-    //   console.log('No matching documents.');
-    //   return;
-    // }  
+    const usersRef = db.collection('users');
+    console.log('kkkkkkkkkkkkkkkk');
+    const userSnapshot = await usersRef.get();
+    console.log('ffffffffffffffffff');
+    if (userSnapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
     
     let data = [];
-    // userSnapshot.forEach( async doc => {
-        const ordersRef = db.collection('users').doc('HUqj9qbTk7BQFLDTvdzG').collection('orders'); 
+    await userSnapshot.forEach( async doc => {
+        const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
         const ordersSnapshot = await ordersRef.get();
         if(ordersSnapshot.empty) {
             console.log('No matching documents.');
@@ -373,7 +373,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
             user.received_date = doc1.data().received_date;   
             data.push(user);  
         });                   
-    // });
+    });
     res.render('merch-entryList.ejs', {data});    
 });
 
