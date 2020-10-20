@@ -336,6 +336,11 @@ app.post('/merchant/book-inventory', async (req,res) => {
     
 });
 
+function getOrders(){
+    
+}
+
+
 //admin/merchant/entrylist
 app.get('/admin/merchant/entrylist', async (req,res) => {
     const usersRef = db.collection('users');
@@ -346,18 +351,15 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     }  
     
     let data = [];
-    console.log('hhhhhhhhhhhhhhhhh');
-    userSnapshot.forEach( doc => {
-        console.log('vvvvvvvvvvvv');
-        const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
-        console.log('ttttttttttttttttttttttttttttttt');
-        ordersRef.get().then(ordersSnapshot => {
-            console.log('----------------------');
+    const gg = new Promise(() => {
+        userSnapshot.forEach( async doc => {
+            const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
+            const ordersSnapshot = await ordersRef.get();
             if(ordersSnapshot.empty) {
                 console.log('No matching documents.');
                 return;
             }
-            ordersSnapshot.forEach(doc1 => { console.log('uuuuuuuuuuuuuuuuu');
+            ordersSnapshot.forEach(doc1 => {
                 let user = {};
                 user.id = doc1.id;
                 user.name = doc1.data().name;
@@ -370,13 +372,11 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
                 user.received_date = doc1.data().received_date;   
                 console.log(user);
                 data.push(user);  
-            });   
-            console.log('finish');                  
+            });                   
         });
-    });
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+    }); 
+    await gg;
     res.render('merch-entryList.ejs', {data});    
-    console.log('bbbbbbbbbbbbbbbbbbbb');
 });
 
 
