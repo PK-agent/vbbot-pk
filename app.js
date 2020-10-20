@@ -346,7 +346,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     }  
     
     let data = [];
-    const gg = () => userSnapshot.forEach( async doc => {
+    const gg = userSnapshot.forEach( async doc => {
         const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
         const ordersSnapshot = await ordersRef.get();
         
@@ -369,7 +369,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
             data.push(user);  
         });                     
     });
-    await gg();
+    await gg;
     res.render('merch-entryList.ejs', {data});    
 });
 
