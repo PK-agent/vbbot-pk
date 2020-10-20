@@ -839,6 +839,10 @@ bot.onTextMessage(/./, (message, response) => {
         case "view-booked-merchant":
             ViewBookedMerchant(message, response);
             break;
+        case "mkt-price":
+            addMarketPrice(message, response);
+            break;
+
         case "my-stock":
             checkStock(message, response);
             break;
