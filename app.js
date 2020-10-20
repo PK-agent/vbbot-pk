@@ -347,31 +347,32 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     
     let data = [];
     console.log('hhhhhhhhhhhhhhhhh');
-    userSnapshot.forEach( async doc => {
+    userSnapshot.forEach( doc => {
         console.log('vvvvvvvvvvvv');
         const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
         console.log('ttttttttttttttttttttttttttttttt');
-        const ordersSnapshot = await ordersRef.get();
-        console.log('----------------------');
-        if(ordersSnapshot.empty) {
-            console.log('No matching documents.');
-            return;
-        }
-        ordersSnapshot.forEach(doc1 => { console.log('uuuuuuuuuuuuuuuuu');
-            let user = {};
-            user.id = doc1.id;
-            user.name = doc1.data().name;
-            user.phone = doc1.data().phone;         
-            user.address = doc1.data().address;
-            user.corn_type = doc1.data().corn_type;
-            user.corn_qty = doc1.data().corn_qty;
-            user.wanted_price = doc1.data().wanted_price;
-            user.comment = doc1.data().comment;
-            user.received_date = doc1.data().received_date;   
-            console.log(user);
-            data.push(user);  
-        });   
-        console.log('finish');                  
+        ordersRef.get().then(ordersSnapshot => {
+            console.log('----------------------');
+            if(ordersSnapshot.empty) {
+                console.log('No matching documents.');
+                return;
+            }
+            ordersSnapshot.forEach(doc1 => { console.log('uuuuuuuuuuuuuuuuu');
+                let user = {};
+                user.id = doc1.id;
+                user.name = doc1.data().name;
+                user.phone = doc1.data().phone;         
+                user.address = doc1.data().address;
+                user.corn_type = doc1.data().corn_type;
+                user.corn_qty = doc1.data().corn_qty;
+                user.wanted_price = doc1.data().wanted_price;
+                user.comment = doc1.data().comment;
+                user.received_date = doc1.data().received_date;   
+                console.log(user);
+                data.push(user);  
+            });   
+            console.log('finish');                  
+        });
     });
     console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
     res.render('merch-entryList.ejs', {data});    
