@@ -376,7 +376,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
             user.received_date = doc1.data().received_date;   
             data.push(user); 
             console.log(user);
-            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa') ;
+            // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa') ;
         });                   
     });
     console.log(data);
