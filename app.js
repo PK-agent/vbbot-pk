@@ -347,15 +347,14 @@ app.post('/merchant/book-inventory', async (req,res) => {
 //admin/merchant/entrylist
 app.get('/admin/merchant/entrylist', async (req,res) => {
     const usersRef = db.collection('users');
-    // const userSnapshot = await usersRef.get();
-    // if (userSnapshot.empty) {
-    //   console.log('No matching documents.');
-    //   return;
-    // }  
-    let test = [1];
+    const userSnapshot = await usersRef.get();
+    if (userSnapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
     let data = [];
-    test.forEach( async doc => {
-        const ordersRef = db.collection('users').doc('HUqj9qbTk7BQFLDTvdzG').collection('orders');
+    await userSnapshot.forEach( doc => {
+        const ordersRef = db.collection('users').doc(doc.id).collection('orders');
         console.log('kkkkkkkkkkkkkkkk'); 
         const ordersSnapshot = await ordersRef.get();
         console.log('ffffffffffffffffff');
@@ -377,9 +376,9 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
             data.push(user); 
             console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa') ;
         });                   
-        console.log('start render');
-        res.render('merch-entryList.ejs', {data: data});    
     });
+    console.log('start render');
+    res.render('merch-entryList.ejs', {data: data});    
 });
 
 
