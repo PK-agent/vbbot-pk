@@ -334,7 +334,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
 //admin/merchant/entrylist
 app.get('/admin/merchant/entrylist', async (req,res) => {
     db.collection('users').get()
-    .then(userSnapshot => {
+    .then(async userSnapshot => {
         if (userSnapshot.empty) {
           console.log('No matching documents.');
           return;
@@ -343,7 +343,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     
         console.log(userSnapshot);
         
-        userSnapshot.forEach( async doc => {
+        await userSnapshot.forEach( async doc => {
             const ordersRef = db.collection('users').doc(doc.id).collection('orders');
             console.log('kkkkkkkkkkkkkkkk'); 
             const ordersSnapshot = await ordersRef.get();
