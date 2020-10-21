@@ -340,16 +340,11 @@ function getOrders(){
     
 }
 
-Array.prototype.forEach = async function forEach(callback, thisArg) {
-    if (typeof callback !== "function") {
-      throw new TypeError(callback + " is not a function");
+async function asyncForEach(array, callback) {
+    for (let index = 0; index < array.length; index++) {
+      await callback(array[index], index, array);
     }
-    var array = this;
-    thisArg = thisArg || this;
-    for (var i = 0, l = array.length; i !== l; ++i) {
-      await callback.call(thisArg, array[i], i, array);
-    }
-  };
+  }
 
 //admin/merchant/entrylist
 app.get('/admin/merchant/entrylist', async (req,res) => {
@@ -363,7 +358,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     }  
     
     let data = [];
-    await userSnapshot.forEach( async doc => {
+    await asyncForEach(userSnapshot, async doc => {
         const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
         const ordersSnapshot = await ordersRef.get();
         if(ordersSnapshot.empty) {
