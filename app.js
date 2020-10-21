@@ -191,19 +191,6 @@ const bot = new ViberBot({
     avatar: "http://api.adorable.io/avatar/200/isitup"
 });
 
-console.log('started foreach');
-Array.prototype.forEach = async function forEach(callback, thisArg) {
-    if (typeof callback !== "function") {
-      throw new TypeError(callback + " is not a function");
-    }
-    var array = this;
-    thisArg = thisArg || this;
-    for (var i = 0, l = array.length; i !== l; ++i) {
-      await callback.call(thisArg, array[i], i, array);
-    }
-  };
-console.log('end foreach');
-
 app.use("/viber/webhook", bot.middleware());
 
 app.use(body_parser.json());
@@ -353,7 +340,10 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
       return;
     }  
     let data = [];
-    await userSnapshot.forEach( async doc => {
+
+    console.log(userSnapshot);
+    
+    userSnapshot.forEach( async doc => {
         const ordersRef = db.collection('users').doc(doc.id).collection('orders');
         console.log('kkkkkkkkkkkkkkkk'); 
         const ordersSnapshot = await ordersRef.get();
