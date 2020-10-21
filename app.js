@@ -350,7 +350,6 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
 
     const outputs = await Promise.all(promises);
 
-    console.log(outputs);
     outputs.forEach(ordersSnapshot => {
         if(ordersSnapshot.empty) {
             console.log('No matching documents.');
@@ -368,11 +367,9 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
             user.comment = doc1.data().comment;
             user.received_date = doc1.data().received_date;   
             data.push(user); 
-            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa') ;
         }); 
     })
 
-    console.log('start render');
     res.render('merch-entryList.ejs', {data: data});    
 });
 
