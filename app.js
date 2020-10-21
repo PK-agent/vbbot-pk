@@ -29,7 +29,7 @@ firebase.initializeApp({
     storageBucket: process.env.FIREBASE_STORAGE_BUCKET
   });
   
-  let db = firebase.firestore(); 
+let db = firebase.firestore(); 
 const app = express(); 
 
 
@@ -73,118 +73,129 @@ let adminKeyboard = {
         ]
     };
 
-    let adminAddmarketPrice = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons": [
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "merchant-market-price",               
-                "Text": "Merchant Market Price",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "staff-market-price",               
-                "Text": "Staff Market Price",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },            
-        ]
-    };
+let adminAddmarketPrice = {
+    "Type": "keyboard",
+    "Revision": 1,
+    "Buttons": [
+        {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "merchant-market-price",               
+            "Text": "Merchant Market Price",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },
+        {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "staff-market-price",               
+            "Text": "Staff Market Price",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },            
+    ]
+};
 
-    let staffKeyboard = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons": [
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "view-booked-merchants",               
-                "Text": "View Booked Merchants ",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "tdy-pur-price",               
-                "Text": "Today's Purchase Price",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },            
-        ]
-    };
+let staffKeyboard = {
+    "Type": "keyboard",
+    "Revision": 1,
+    "Buttons": [
+        {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "view-booked-merchants",               
+            "Text": "View Booked Merchants ",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },
+        {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "tdy-pur-price",               
+            "Text": "Today's Purchase Price",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },            
+    ]
+};
 
-    let merchantKeyboard = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons": [
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "tdy-mark-price",               
-                "Text": "Today Market Price",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "merch-book-inv",               
-                "Text": "Merchant Book Inventory",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },            
-        ]
-    };
+let merchantKeyboard = {
+    "Type": "keyboard",
+    "Revision": 1,
+    "Buttons": [
+        {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "tdy-mark-price",               
+            "Text": "Today Market Price",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },
+        {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "merch-book-inv",               
+            "Text": "Merchant Book Inventory",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },            
+    ]
+};
 
-
+console.log('started foreach');
+Array.prototype.forEach = async function forEach(callback, thisArg) {
+    if (typeof callback !== "function") {
+      throw new TypeError(callback + " is not a function");
+    }
+    var array = this;
+    thisArg = thisArg || this;
+    for (var i = 0, l = array.length; i !== l; ++i) {
+      await callback.call(thisArg, array[i], i, array);
+    }
+  };
+console.log('end foreach');
 
 // Creating the bot with access token, name and avatar
 const bot = new ViberBot({
@@ -328,28 +339,14 @@ app.post('/merchant/book-inventory', async (req,res) => {
             
             let bot_message = new TextMessage(`Let's start!. Please choose activity keyboard.`, merchantKeyboard);    
             response.send(bot_message);
-}).catch((error)=>{
-    console.log('ERROR:', error);
+        }).catch((error)=>{
+            console.log('ERROR:', error);
+        });   
 });
-    
-     
-    
-});
-
-function getOrders(){
-    
-}
-
-async function asyncForEach(array, callback) {
-    for (let index = 0; index < array.length; index++) {
-      await callback(array[index], index, array);
-    }
-  }
 
 //admin/merchant/entrylist
 app.get('/admin/merchant/entrylist', async (req,res) => {
     const usersRef = db.collection('users');
-    console.log('kkkkkkkkkkkkkkkk');
     const userSnapshot = await usersRef.get();
     if (userSnapshot.empty) {
       console.log('No matching documents.');
@@ -357,11 +354,11 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     }  
     
     let data = [];
-    await asyncForEach(userSnapshot, async doc => {
-        const ordersRef = db.collection('users').doc(doc.id).collection('orders'); 
-        console.log('gggggggggggggggggg');
+    await userSnapshot.forEach( async doc => {
+        const ordersRef = db.collection('users').doc(doc.id).collection('orders');
+        console.log('kkkkkkkkkkkkkkkk'); 
         const ordersSnapshot = await ordersRef.get();
-        console.log('ttttttttttttttttt');
+        console.log('ffffffffffffffffff');
         if(ordersSnapshot.empty) {
             console.log('No matching documents.');
             return;
@@ -378,9 +375,10 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
             user.comment = doc1.data().comment;
             user.received_date = doc1.data().received_date;   
             data.push(user); 
-            console.log('---------------------'); 
+            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa') ;
         });                   
     });
+    console.log('start render');
     res.render('merch-entryList.ejs', {data});    
 });
 
