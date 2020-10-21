@@ -191,19 +191,6 @@ const bot = new ViberBot({
     avatar: "http://api.adorable.io/avatar/200/isitup"
 });
 
-console.log('started foreach');
-Array.prototype.forEach = async function forEach(callback, thisArg) {
-    if (typeof callback !== "function") {
-      throw new TypeError(callback + " is not a function");
-    }
-    var array = this;
-    thisArg = thisArg || this;
-    for (var i = 0, l = array.length; i !== l; ++i) {
-      await callback.call(thisArg, array[i], i, array);
-    }
-  };
-console.log('end foreach');
-
 app.use("/viber/webhook", bot.middleware());
 
 app.use(body_parser.json());
@@ -354,7 +341,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     // }  
     let test = [1];
     let data = [];
-    await test.forEach( async doc => {
+    test.forEach( async doc => {
         const ordersRef = db.collection('users').doc('HUqj9qbTk7BQFLDTvdzG').collection('orders');
         console.log('kkkkkkkkkkkkkkkk'); 
         const ordersSnapshot = await ordersRef.get();
@@ -378,7 +365,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
             console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa') ;
         });                   
         console.log('start render');
-        res.render('merch-entryLists.ejs', {data: data});    
+        res.render('merch-entryList.ejs', {data: data});    
     });
 });
 
