@@ -351,7 +351,6 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     const usersRef = db.collection('users');
     console.log('kkkkkkkkkkkkkkkk');
     const userSnapshot = await usersRef.get();
-    console.log('ffffffffffffffffff');
     if (userSnapshot.empty) {
       console.log('No matching documents.');
       return;
@@ -376,7 +375,8 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
             user.wanted_price = doc1.data().wanted_price;
             user.comment = doc1.data().comment;
             user.received_date = doc1.data().received_date;   
-            data.push(user);  
+            data.push(user); 
+            console.log('---------------------'); 
         });                   
     });
     res.render('merch-entryList.ejs', {data});    
