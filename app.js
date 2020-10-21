@@ -333,66 +333,42 @@ app.post('/merchant/book-inventory', async (req,res) => {
 
 //admin/merchant/entrylist
 app.get('/admin/merchant/entrylist', async (req,res) => {
-    const usersRef = db.collection('users');
-    const userSnapshot = await usersRef.get();
-    if (userSnapshot.empty) {
-      console.log('No matching documents.');
-      return;
-    }  
-    let data = [];
-
-    console.log(userSnapshot);
-
-    for(const doc of userSnapshot){
-        const ordersRef = db.collection('users').doc(doc.id).collection('orders');
-        console.log('kkkkkkkkkkkkkkkk'); 
-        const ordersSnapshot = await ordersRef.get();
-        console.log('ffffffffffffffffff');
-        if(ordersSnapshot.empty) {
-            console.log('No matching documents.');
-            return;
-        }
-        ordersSnapshot.forEach(doc1 => {
-            let user = {};
-            user.id = doc1.id;
-            user.name = doc1.data().name;
-            user.phone = doc1.data().phone;         
-            user.address = doc1.data().address;
-            user.corn_type = doc1.data().corn_type;
-            user.corn_qty = doc1.data().corn_qty;
-            user.wanted_price = doc1.data().wanted_price;
-            user.comment = doc1.data().comment;
-            user.received_date = doc1.data().received_date;   
-            data.push(user); 
-            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa') ;
-        });
-    }
+    db.collection('users').get()
+    .then( userSnapshot => {
+        if (userSnapshot.empty) {
+          console.log('No matching documents.');
+          return;
+        }  
+        let data = [];
     
-    // userSnapshot.forEach( async doc => {
-    //     const ordersRef = db.collection('users').doc(doc.id).collection('orders');
-    //     console.log('kkkkkkkkkkkkkkkk'); 
-    //     const ordersSnapshot = await ordersRef.get();
-    //     console.log('ffffffffffffffffff');
-    //     if(ordersSnapshot.empty) {
-    //         console.log('No matching documents.');
-    //         return;
-    //     }
-    //     ordersSnapshot.forEach(doc1 => {
-    //         let user = {};
-    //         user.id = doc1.id;
-    //         user.name = doc1.data().name;
-    //         user.phone = doc1.data().phone;         
-    //         user.address = doc1.data().address;
-    //         user.corn_type = doc1.data().corn_type;
-    //         user.corn_qty = doc1.data().corn_qty;
-    //         user.wanted_price = doc1.data().wanted_price;
-    //         user.comment = doc1.data().comment;
-    //         user.received_date = doc1.data().received_date;   
-    //         data.push(user); 
-    //         console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa') ;
-    //     });                   
-    // });
-    console.log('start render')
+        console.log(userSnapshot);
+        
+        await userSnapshot.forEach( async doc => {
+            const ordersRef = db.collection('users').doc(doc.id).collection('orders');
+            console.log('kkkkkkkkkkkkkkkk'); 
+            const ordersSnapshot = await ordersRef.get();
+            console.log('ffffffffffffffffff');
+            if(ordersSnapshot.empty) {
+                console.log('No matching documents.');
+                return;
+            }
+            ordersSnapshot.forEach(doc1 => {
+                let user = {};
+                user.id = doc1.id;
+                user.name = doc1.data().name;
+                user.phone = doc1.data().phone;         
+                user.address = doc1.data().address;
+                user.corn_type = doc1.data().corn_type;
+                user.corn_qty = doc1.data().corn_qty;
+                user.wanted_price = doc1.data().wanted_price;
+                user.comment = doc1.data().comment;
+                user.received_date = doc1.data().received_date;   
+                data.push(user); 
+                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa') ;
+            });                   
+        });
+    });
+    console.log('start render');
     res.render('merch-entryList.ejs', {data: data});    
 });
 
