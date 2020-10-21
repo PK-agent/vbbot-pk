@@ -378,7 +378,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
             console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa') ;
         });                   
         console.log('start render');
-        res.render('merch-entryList.ejs', {data: data});    
+        res.render('merch-entryLists.ejs', {data: data});    
     });
 });
 
