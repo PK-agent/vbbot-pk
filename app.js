@@ -184,6 +184,13 @@ let merchantKeyboard = {
     ]
 };
 
+// Creating the bot with access token, name and avatar
+const bot = new ViberBot({
+    authToken: process.env.AUTH_TOKEN, // <--- Paste your token here
+    name: "PyaungKyi",  // <--- Your bot name here
+    avatar: "http://api.adorable.io/avatar/200/isitup"
+});
+
 console.log('started foreach');
 Array.prototype.forEach = async function forEach(callback, thisArg) {
     if (typeof callback !== "function") {
@@ -196,13 +203,6 @@ Array.prototype.forEach = async function forEach(callback, thisArg) {
     }
   };
 console.log('end foreach');
-
-// Creating the bot with access token, name and avatar
-const bot = new ViberBot({
-    authToken: process.env.AUTH_TOKEN, // <--- Paste your token here
-    name: "PyaungKyi",  // <--- Your bot name here
-    avatar: "http://api.adorable.io/avatar/200/isitup"
-});
 
 app.use("/viber/webhook", bot.middleware());
 
