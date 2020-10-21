@@ -352,9 +352,9 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     //   console.log('No matching documents.');
     //   return;
     // }  
-    
+    let test = [1,2,3];
     let data = [];
-    await userSnapshot.forEach( async doc => {
+    await test.forEach( async doc => {
         const ordersRef = db.collection('users').doc('HUqj9qbTk7BQFLDTvdzG').collection('orders');
         console.log('kkkkkkkkkkkkkkkk'); 
         const ordersSnapshot = await ordersRef.get();
