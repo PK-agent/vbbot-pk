@@ -346,7 +346,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
 
 //admin/merchant/entrylist
 app.get('/admin/merchant/entrylist', async (req,res) => {
-    // const usersRef = db.collection('users');
+    const usersRef = db.collection('users');
     // const userSnapshot = await usersRef.get();
     // if (userSnapshot.empty) {
     //   console.log('No matching documents.');
