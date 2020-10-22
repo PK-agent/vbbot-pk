@@ -498,8 +498,8 @@ app.get('/staff/add-inventory/:user_id', async (req,res) => {
     if (!user.exists) {
       console.log('No such user!');        
     } else {      
-      data.user_id = user.id; 
-      data.user_name = user.data().name;
+      data.id = user.id; 
+      data.name = user.data().name;
     }
     res.render('staff-merchantList.ejs', {data:data}); 
     
