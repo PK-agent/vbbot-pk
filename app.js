@@ -324,10 +324,6 @@ app.post('/merchant/book-inventory', async (req,res) => {
             })
             .then(res => res.json())
             .then(json => console.log('JSON', json))
-            .then(()=>{
-                res.json({success:'success'});  
-      
-          })
             
             
         }).catch((error)=>{
