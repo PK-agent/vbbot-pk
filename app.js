@@ -391,7 +391,7 @@ app.get('/staff/merchant/add-inventory', async(req,res) => {
         user.address = doc.data().address;  
         user.corn_type = doc.data().corn_type;
         user.corn_qty = doc.data().corn_qty;
-        user.wanted_price = doc.data().purchased_price;
+        user.purchased_price = doc.data().purchased_price;
         user.comment = doc.data().comment;
         user.received_date = doc.data().received_date    
     }); 
