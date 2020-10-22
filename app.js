@@ -1018,9 +1018,12 @@ bot.onTextMessage(/./, (message, response) => {
         case "text":
             textReply(message, response);
             break; 
-        case "url":
-            urlReply(message, response);
+        case "test1":
+            test1(message, response);
             break;
+        case "test2":
+            test2(message, response);
+            break;    
         case "picture":
             pictureReply(message, response);
             break;
@@ -1070,15 +1073,15 @@ const addMarketPrice = (message, response) => {
     response.send(bot_message);
 }
 
-const urlReply = (message, response) => {    
+const test1 = (message, response) => {    
 
-    let bot_message = new UrlMessage(process.env.APP_URL + '/test1/');   
+    let bot_message = new UrlMessage(process.env.APP_URL + '/test1');   
     response.send(bot_message);
 }
 
-const urlReply = (message, response) => {    
+const test2 = (message, response) => {    
 
-    let bot_message = new UrlMessage(process.env.APP_URL + '/test2/');   
+    let bot_message = new UrlMessage(process.env.APP_URL + '/test2');   
     response.send(bot_message);
 }
 
