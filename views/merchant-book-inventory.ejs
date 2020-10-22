@@ -44,19 +44,19 @@
     <input type="submit" name="submit"/>
 
   </form>
-  <script>
-    
-    const windowClose = () => {
-      setTimeout(()=>{
-        window.close();
-      },2000);    
+  <script language="javascript" type="text/javascript">
+    function windowClose() {
+    window.open('','_parent','');
+    window.close();
     }
+    document.getElementById("form").addEventListener("submit", windowClose);
+    </script>
   
         
-    document.getElementById("form").addEventListener("submit", windowClose); 
+     
     
    
-    </script>
+    
    
   </body>
 

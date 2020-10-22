@@ -785,20 +785,53 @@ app.post('/admin/savepayment', async (req,res) => {
 });
 
 
-
-
-
-
-
-app.get('/test1',function(req,res){ 
-     let data = {
-        title:"staff",
-        name:"today price"
-     }   
-     res.render('staff-todayprice.ejs', data);
+app.get('/staff-todayprice',function(req,res){ 
+    let user = {};
+    snapshot.forEach(doc => {
+        user.id = doc.id;
+        user.name = doc.data().name;
+        user.phone = doc.data().phone;         
+        user.address = doc.data().address;  
+        user.corn_type = doc.data().corn_type;
+        user.corn_qty = doc.data().corn_qty;
+        user.wanted_price = doc.data().wanted_price;
+        user.comment = doc.data().comment;
+        user.received_date = doc.data().received_date    
+    }); 
+     res.render('staff-todayprice.ejs', {user:user});
 });
 
-app.get('/test2',function(req,res){ 
+app.post('/merchant/book-inventory', async (req,res) => {  
+let today = new Date();
+    let user_id = req.body.user_id;
+
+    let data = {
+        created_on:today,
+        name: req.body.name,
+        phone: req.body.phone,
+        address: req.body.address,
+        corn_type: req.body.corn_type,
+        corn_qty: req.body.corn_qty,
+        wanted_price: req.body.wanted_price,
+        comment: req.body.comment,
+        received_date: req.body.received_date          
+           
+    }
+   
+
+    db.collection('admin').doc(user_id) .add(data)
+    .then(()=>{                 
+                res.json({success:'success'});        
+                      
+            
+        }).catch((error)=>{
+            console.log('ERROR:', error);
+        });   
+});
+
+
+
+app.get('/merchant-todayprice',function(req,res){ 
     let data = {
        title:"merchant",
        name:"today price"
