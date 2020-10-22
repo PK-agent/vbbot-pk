@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Merchant Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ </head>
+
+  <body>
+  
+  
+	<form id="form" action="/merchant/register" method="post">
+        <label for="name">Today Date</label><br>
+        <input type="date" name="received_date"/><br>
+
+        <label for="name">Corn Type</label><br>
+        <input type="number" name="corn_type"/><br>
+
+        <label for="name">Today Price</label><br>
+        <select>
+            <option value="0" onclick="anders('1')">Anders</option>
+            <option value="200" onclick="anders('');" selected="selected">&#8364; 200,-</option>
+            <option value="300" onclick="anders('')">&#8364; 300,-</option>
+            <option value="400" onclick="anders('')">&#8364; 400,-</option>
+            <option value="500" onclick="anders('')">&#8364; 500,-</option>
+            </select>
+    
+    <input type="submit" name="Confirm"/>
+
+  </form>
+
+
+  <script>
+    
+  const windowClose = () => {
+    setTimeout(()=>{
+      window.close();
+    },2000);    
+  }
+
+      
+  document.getElementById("form").addEventListener("submit", windowClose); 
+	
+ 
+  </script>
+  </body>
+
+</html>

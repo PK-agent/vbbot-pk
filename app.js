@@ -784,12 +784,20 @@ app.post('/admin/savepayment', async (req,res) => {
 
 
 
-app.get('/newpage',function(req,res){ 
+app.get('/test1',function(req,res){ 
      let data = {
-        title:"Hello",
-        name:"Effy"
+        title:"staff",
+        name:"today price"
      }   
-     res.render('newpage.ejs', data);
+     res.render('staff-todayprice.ejs', data);
+});
+
+app.get('/test2',function(req,res){ 
+    let data = {
+       title:"merchant",
+       name:"today price"
+    }   
+    res.render('merchant-todayprice.ejs', data);
 });
 
 app.post('/test',function(req,res){
