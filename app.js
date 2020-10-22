@@ -873,7 +873,7 @@ let AdminCusStafKeyboard = {
             "BgMedia": "http://www.url.by/test.gif",
             "BgLoop": true,
             "ActionType": "reply",
-            "ActionBody": "merch-register",               
+            "ActionBody": "merchant register",               
             "Text": "Merchant",
             "TextVAlign": "middle",
             "TextHAlign": "center",
@@ -973,7 +973,7 @@ bot.onTextMessage(/./, (message, response) => {
 
     
     switch(text){
-        case "merch-register":
+        case "merchant register":
             registerMerchant(message, response);
             break;
         case "adm-view":
