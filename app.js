@@ -468,7 +468,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
     const outputs = await Promise.all(promises);
 
     outputs.forEach(booksSnapshot => {
-        if(bookSnapshot.empty) {
+        if(booksSnapshot.empty) {
             console.log('No matching documents.');
             return;
         }
