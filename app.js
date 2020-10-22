@@ -449,10 +449,10 @@ app.post('/staff/merchant/add-inventory', async (req,res) => {
 
 //staff/merchant/entrylist
 
-app.get('/staff/merchant/add-inventory', async (req,res) => {
-    const staffRef = db.collection('staff');
-    const staffSnapshot = await staffRef.get();
-    if (staffSnapshot.empty) {
+app.get('/staff/merchant/inventory-list', async (req,res) => {
+    const userRef = db.collection('users');
+    const userSnapshot = await userRef.get();
+    if (userSnapshot.empty) {
       console.log('No matching documents.');
       return;
     }  
@@ -460,19 +460,19 @@ app.get('/staff/merchant/add-inventory', async (req,res) => {
 
     let promises = [];
     
-    staffSnapshot.forEach( async doc => {
-        const purchasedPriceRef = db.collection('staff').doc(doc.id).collection('Purchased_Price');
-        promises.push(purchasedPriceRef.get());                  
+    userSnapshot.forEach( async doc => {
+        const booksRef = db.collection('users').doc(doc.id).collection('books');
+        promises.push(booksRef.get());                  
     });
 
     const outputs = await Promise.all(promises);
 
-    outputs.forEach(purchasedPriceSnapshot => {
-        if(purchasedPriceSnapshot.empty) {
+    outputs.forEach(booksSnapshot => {
+        if(booksSnapshot.empty) {
             console.log('No matching documents.');
             return;
         }
-        purchasedPriceSnapshot.forEach(doc1 => {
+        booksSnapshot.forEach(doc1 => {
             let user = {};
             user.id = doc1.id;
             user.name = doc1.data().name;
@@ -1080,7 +1080,7 @@ const MerchantEntryList = (message, response) => {
 
 const BookedMerchantList = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/staff/merchant/add-inventory');   
+    let bot_message = new UrlMessage(APP_URL + '/staff/merchant/inventory-list');   
     response.send(bot_message);
 }
 
