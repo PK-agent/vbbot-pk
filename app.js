@@ -396,7 +396,7 @@ app.get('/staff/add-inventory', async(req,res) => {
         user.received_date = doc.data().received_date    
     }); 
 
-   res.render('staff-merchant-ADDinventory.ejs', {user:user});
+   res.render('merch-entryList.ejs', {user:user});
 });
 
 app.post('/staff/merchant/add-inventory', async (req,res) => {  
@@ -501,7 +501,7 @@ app.get('/staff/add-inventory/:user_id', async (req,res) => {
       data.user_id = user.id; 
       data.user_name = user.data().name;
     }
-    res.render('merch-entryList.ejs', {data:data}); 
+    res.render('staff-merchantList.ejs', {data:data}); 
     
 });
 
