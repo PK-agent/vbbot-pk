@@ -313,7 +313,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
                },
                "tracking_data":"tracking data",
                "type":"text",
-               "text": "Thank you! Now your book successed!"+req.body.name
+               "text": "Thank you! Now your book successed!" +req.body.name
                
             }   
 
@@ -432,7 +432,7 @@ app.post('/staff/merchant/add-inventory', async (req,res) => {
                },
                "tracking_data":"tracking data",
                "type":"text",
-               "text": "Thank you! Now Your added Purchase Price success!"+req.body.name
+               "text": "Thank you! Now Your added Purchase Price success!" +req.body.name
                
             }   
 
@@ -443,7 +443,10 @@ app.post('/staff/merchant/add-inventory', async (req,res) => {
             })
             .then(res => res.json())
             .then(json => console.log('JSON', json))
-            
+            .then(()=>{
+                res.json({success:'success'});  
+      
+          })
          
         }).catch((error)=>{
             console.log('ERROR:', error);
