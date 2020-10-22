@@ -256,9 +256,7 @@ app.post('/merchant/register',function(req,res){
     }).catch((error)=>{
         console.log('ERROR:', error);
     });
-    let bot_message = new TextMessage(`Now, You can use activity keyborad`, merchantKeyboard);    
-     response.send(bot_message);
-       
+           
 });
 
 app.get('/merchant/book-inventory', async(req,res) => {  
@@ -873,7 +871,7 @@ let AdminCusStafKeyboard = {
             "BgMedia": "http://www.url.by/test.gif",
             "BgLoop": true,
             "ActionType": "reply",
-            "ActionBody": "merchant register",               
+            "ActionBody": "merchant-register",               
             "Text": "Merchant",
             "TextVAlign": "middle",
             "TextHAlign": "center",
@@ -973,7 +971,7 @@ bot.onTextMessage(/./, (message, response) => {
 
     
     switch(text){
-        case "merchant register":
+        case "merchant-register":
             registerMerchant(message, response);
             break;
         case "adm-view":
