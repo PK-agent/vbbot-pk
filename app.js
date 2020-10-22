@@ -1010,6 +1010,8 @@ bot.onTextMessage(/^staff@/i, (message, response) =>{
 
 bot.onTextMessage(/./, (message, response) => {
 
+    currentUserProfile = response.userProfile;
+    
     const text = message.text.toLowerCase();
 
     console.log('MESSAGE:', message);
