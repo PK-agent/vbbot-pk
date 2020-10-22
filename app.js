@@ -490,7 +490,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
     res.render('staff-merchantList.ejs', {data: data});    
 });
 
-app.get('/staff/add-inventory:user_id', async (req,res) => {  
+app.get('/staff/add-inventory/:user_id', async (req,res) => {  
     let data = { };        
 
     let userRef = db.collection('users').doc(req.params.user_id);
