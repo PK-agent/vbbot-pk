@@ -251,8 +251,8 @@ app.post('/merchant/register',function(req,res){
                 .then(res => res.json())
                 .then(json => console.log('JSON', json));
           
-                let bot_message = new TextMessage(`Now, You can use activity keyborad`, merchantKeyboard);    
-                return response.send(bot_message);
+                const bot_message = new TextMessage(`Now, You can use activity keyborad`, merchantKeyboard);    
+                 response.send(bot_message);
 
     }).catch((error)=>{
         console.log('ERROR:', error);
@@ -872,7 +872,7 @@ let AdminCusStafKeyboard = {
             "BgMedia": "http://www.url.by/test.gif",
             "BgLoop": true,
             "ActionType": "reply",
-            "ActionBody": "merch-view",               
+            "ActionBody": "merch-register",               
             "Text": "Merchant",
             "TextVAlign": "middle",
             "TextHAlign": "center",
@@ -972,7 +972,7 @@ bot.onTextMessage(/./, (message, response) => {
 
     
     switch(text){
-        case "merch-view":
+        case "merch-register":
             registerMerchant(message, response);
             break;
         case "adm-view":
