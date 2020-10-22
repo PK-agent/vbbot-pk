@@ -450,9 +450,9 @@ app.post('/staff/merchant/add-inventory', async (req,res) => {
 //staff/merchant/entrylist
 
 app.get('/staff/merchant/inventory-list', async (req,res) => {
-    const userRef = db.collection('users');
-    const userSnapshot = await userRef.get();
-    if (userSnapshot.empty) {
+    const usersRef = db.collection('users');
+    const usersSnapshot = await usersRef.get();
+    if (usersSnapshot.empty) {
       console.log('No matching documents.');
       return;
     }  
@@ -460,7 +460,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
 
     let promises = [];
     
-    userSnapshot.forEach( async doc => {
+    usersSnapshot.forEach( async doc => {
         const booksRef = db.collection('users').doc(doc.id).collection('books');
         promises.push(booksRef.get());                  
     });
@@ -468,7 +468,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
     const outputs = await Promise.all(promises);
 
     outputs.forEach(booksSnapshot => {
-        if(booksSnapshot.empty) {
+        if(bookSnapshot.empty) {
             console.log('No matching documents.');
             return;
         }
@@ -487,7 +487,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
         }); 
     })
 
-    res.render('merchant-entryList.ejs', {data: data});    
+    res.render('merch-entryList.ejs', {data: data});    
 });
 
 app.get('/customer/add-order/:orderlist_id', async (req,res) => {  
