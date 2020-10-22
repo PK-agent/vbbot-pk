@@ -34,6 +34,7 @@ const app = express();
 
 
 let currentUser = {};
+let currentUserProfile;
 
 
 let adminKeyboard = {
@@ -251,10 +252,10 @@ app.post('/merchant/register',function(req,response){
                 .then(res => res.json())
                 .then(json => console.log('JSON', json));
                 
-                let gg = new TextMessage(`You are already registered`, merchantKeyboard);    
+                let gg = new TextMessage(`test`, merchantKeyboard);    
                 // response.send(bot_message3);
 
-                bot.sendMessage(userProfile, gg);
+                bot.sendMessage(currentUserProfile, gg);
           
                 
 
@@ -969,6 +970,7 @@ bot.onConversationStarted((userProfile, isSubscribed, context) => {
     //     bot.sendMessage(userProfile, new TextMessage(`Hello, Admin ${userProfile.name}! Nice to meet you.`));
     // }
     // else{
+        currentUserProfile = userProfile;
         bot.sendMessage(userProfile,message);
     // }
 });
