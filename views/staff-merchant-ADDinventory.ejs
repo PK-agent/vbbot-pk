@@ -36,11 +36,13 @@
       <input type="date" name="received_date"/><br>
 
       <input type="hidden" name="user_id" value="<%= user.id %>"/>
+
+      <input type="hidden" name="user_name" value="<%= data.user_name %>"/>
+    <input type="hidden" name="user_id" value="<%= data.user_id %>"/>
     
     <input type="submit" name="Add Purchased Merchant"/>
     
-    <input type="hidden" name="merchant_name" value="<%= data.merchant_name %>"/>
-    <input type="hidden" name="merchant_id" value="<%= data.merchant_id %>"/>
+    
 
   </form>
   <script>
