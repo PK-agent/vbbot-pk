@@ -8,7 +8,7 @@
 
   <body>
   <h1>Add Inventory</h1>
-  <form id="form" action="/staff/merchant/add-inventory" method="post">
+  <form id="form" action="../../staff/add-inventory" method="post">
     
       <label for="name">Merchant Name</label><br>
       <input type="text" name="name" value="<%= user.name %>" /><br>
@@ -38,6 +38,9 @@
       <input type="hidden" name="user_id" value="<%= user.id %>"/>
     
     <input type="submit" name="Add Purchased Merchant"/>
+    
+    <input type="hidden" name="merchant_name" value="<%= data.merchant_name %>"/>
+    <input type="hidden" name="merchant_id" value="<%= data.merchant_id %>"/>
 
   </form>
   <script>

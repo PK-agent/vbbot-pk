@@ -490,6 +490,21 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
     res.render('staff-merchantList.ejs', {data: data});    
 });
 
+app.get('/staff/merchant/add-inventory:merchant_id', async (req,res) => {  
+    let data = { };        
+
+    let userRef = db.collection('users').doc(req.params.merchant_id);
+    let user = await userRef.get();
+    if (!user.exists) {
+      console.log('No such user!');        
+    } else {      
+      data.merchant_id = user.id; 
+      data.merchant_name = user.data().name;
+    }
+    res.render('staff-merchant-ADDinventory.ejs', {data:data}); 
+    
+});
+
 app.get('/customer/add-order/:orderlist_id', async (req,res) => {  
     let data = { };        
 
