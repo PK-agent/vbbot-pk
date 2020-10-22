@@ -324,10 +324,12 @@ app.post('/merchant/book-inventory', async (req,res) => {
             })
             .then(res => res.json())
             .then(json => console.log('JSON', json))
-            res.json({success:'success'});
+            .then(()=>{
+                res.json({success:'success'});  
+      
+          })
             
-            let bot_message = new TextMessage(`Let's start!. Please choose activity keyboard.`, merchantKeyboard);    
-            response.send(bot_message);
+            
         }).catch((error)=>{
             console.log('ERROR:', error);
         });   
