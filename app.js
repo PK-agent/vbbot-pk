@@ -376,8 +376,8 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
 
 
 app.get('/staff/merchant/add-inventory', async(req,res) => {  
-    const staffRef = db.collection('staff');
-    const snapshot = await staffRef.where('viberid', '==', currentUser.id).limit(1).get();
+    const userRef = db.collection('users');
+    const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
     if (snapshot.empty) {
       console.log('No matching documents.');
@@ -449,7 +449,7 @@ app.post('/staff/merchant/add-inventory', async (req,res) => {
 
 //staff/merchant/entrylist
 
-app.get('/admin/merchant/entrylist', async (req,res) => {
+app.get('/staff/merchant/add-inventory', async (req,res) => {
     const staffRef = db.collection('staff');
     const staffSnapshot = await staffRef.get();
     if (staffSnapshot.empty) {
