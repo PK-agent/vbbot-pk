@@ -871,7 +871,7 @@ let AdminCusStafKeyboard = {
             "BgMedia": "http://www.url.by/test.gif",
             "BgLoop": true,
             "ActionType": "reply",
-            "ActionBody": "merchant-register",               
+            "ActionBody": "register",               
             "Text": "Merchant",
             "TextVAlign": "middle",
             "TextHAlign": "center",
@@ -971,7 +971,7 @@ bot.onTextMessage(/./, (message, response) => {
 
     
     switch(text){
-        case "merchant-register":
+        case "register":
             registerMerchant(message, response);
             break;
         case "adm-view":
@@ -1080,7 +1080,7 @@ const MerchantEntryList = (message, response) => {
 
 const BookedMerchantList = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + 'staff/merchant/add-inventory');   
+    let bot_message = new UrlMessage(APP_URL + '/staff/merchant/add-inventory');   
     response.send(bot_message);
 }
 

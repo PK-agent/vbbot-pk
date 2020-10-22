@@ -9,7 +9,7 @@
   <body>
   
   
-	<form id="form" action="https://chat-pk.herokuapp.com/merchant/register" method="post">
+	<form id="form" action="/merchant/register" method="post">
     <label for="name">Full Name</label><br>
     <input type="text" name="name" value="<%= data.user_name  %>"/><br>
 
@@ -19,7 +19,7 @@
     <label for="name">Address</label><br>
     <textarea name="address" rows="4" cols="50"></textarea><br>
     
-    <input type="submit" name="Register"/>
+    <input type="submit" name="Submit"/>
 
   </form>
 
@@ -33,7 +33,7 @@
   }
 
       
-  document.getElementById("form").addEventListener("Register", windowClose); 
+  document.getElementById("form").addEventListener("submit", windowClose); 
 	
  
   </script>
