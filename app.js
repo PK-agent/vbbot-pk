@@ -480,14 +480,14 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
             user.address = doc1.data().address;
             user.corn_type = doc1.data().corn_type;
             user.corn_qty = doc1.data().corn_qty;
-            user.pruchased_price = doc1.data().pruchased_price;
+            user.wanted_price = doc1.data().wanted_price;
             user.comment = doc1.data().comment;
             user.received_date = doc1.data().received_date;   
             data.push(user); 
         }); 
     })
 
-    res.render('staff-merchantList.ejs', {data: data});    
+    res.render('merchant-entryList.ejs', {data: data});    
 });
 
 app.get('/customer/add-order/:orderlist_id', async (req,res) => {  
