@@ -214,7 +214,7 @@ app.get('/merchant/register',function(req,res){
 });
 
 
-app.post('/merchant/register',function(req,res){   
+app.post('/merchant/register',function(req,response){   
     
     currentUser.name = req.body.name;
     currentUser.phone = req.body.phone;
@@ -249,7 +249,11 @@ app.post('/merchant/register',function(req,res){
                     headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
                 })
                 .then(res => res.json())
-                .then(json => console.log('JSON', json));
+                .then(json => console.log('JSON', json))
+                .then(() => {
+                    let bot_message3 = new TextMessage(`You are already registered`, merchantKeyboard);    
+                    response.send(bot_message3);
+                });
           
                 
 
