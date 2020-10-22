@@ -487,7 +487,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
         }); 
     })
 
-    res.render('merch-entryList.ejs', {data: data});    
+    res.render('staff-merchantList.ejs', {data: data});    
 });
 
 app.get('/customer/add-order/:orderlist_id', async (req,res) => {  

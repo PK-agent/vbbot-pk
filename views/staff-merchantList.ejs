@@ -17,10 +17,10 @@
     <th>Address</th>  
     <th>Corn Type</th>  
     <th>Quantity</th>
-    <th>Purchased Price</th>
+    <th>Wanted Price</th>
     <th>Comments</th>
     <th>Received Date</th>
-    <th>Manage Merchants</th>
+    <th>Purchase Price</th>
         
   </tr>
 
@@ -32,12 +32,12 @@
        <td><%= user.address %></td>
        <td><%= user.corn_type %></td>
        <td><%= user.corn_qty %></td>
-       <td><%= user.purchased_price %></td>
+       <td><%= user.wanted_price %></td>
        <td><%= user.comment %></td>
        <td><%= user.received_date %></td>
        
      
-       <td><a href="../staff/add-merchant/<%= user.id %>">Edit</a> | <a href="../admin/stocklist/<%= user.id %>">Delete</a></td>
+       <td><a href="../staff/add-inventory/<%= user.id %>">Add Inventory</a> | <a href="../admin/stocklist/<%= user.id %>">Delete</a></td>
      </tr>
   <% }); %>
  
