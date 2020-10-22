@@ -122,8 +122,8 @@ let staffKeyboard = {
             "BgMedia": "http://www.url.by/test.gif",
             "BgLoop": true,
             "ActionType": "reply",
-            "ActionBody": "view-booked-merchants",               
-            "Text": "View Booked Merchants ",
+            "ActionBody": "booked-merchants-list",               
+            "Text": "Booked Merchants List",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -301,7 +301,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
     }
    
 
-    db.collection('users').doc(user_id).collection('orders').add(data)
+    db.collection('users').doc(user_id).collection('books').add(data)
     .then(()=>{
         let data = {
                "receiver":currentUser.id,
@@ -312,7 +312,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
                },
                "tracking_data":"tracking data",
                "type":"text",
-               "text": "Thank you for your book!"+req.body.name
+               "text": "Thank you! Now your book successed!"+req.body.name
                
             }   
 
@@ -344,7 +344,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     let promises = [];
     
     userSnapshot.forEach( async doc => {
-        const ordersRef = db.collection('users').doc(doc.id).collection('orders');
+        const ordersRef = db.collection('users').doc(doc.id).collection('books');
         promises.push(ordersRef.get());                  
     });
 
@@ -374,6 +374,120 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
 });
 
 
+app.get('/staff/merchant/add-inventory', async(req,res) => {  
+    const staffRef = db.collection('staff');
+    const snapshot = await staffRef.where('viberid', '==', currentUser.id).limit(1).get();
+    // const snapshot = await usersRef.get();
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
+    let user = {};
+    snapshot.forEach(doc => {
+        user.id = doc.id;
+        user.name = doc.data().name;
+        user.phone = doc.data().phone;         
+        user.address = doc.data().address;  
+        user.corn_type = doc.data().corn_type;
+        user.corn_qty = doc.data().corn_qty;
+        user.wanted_price = doc.data().purchased_price;
+        user.comment = doc.data().comment;
+        user.received_date = doc.data().received_date    
+    }); 
+
+   res.render('staff-merchant-ADDinventory.ejs', {user:user});
+});
+
+app.post('/staff/merchant/add-inventory', async (req,res) => {  
+   
+    let today = new Date();
+    let user_id = req.body.user_id;
+
+    let data = {
+        created_on:today,
+        name: req.body.name,
+        phone: req.body.phone,
+        address: req.body.address,
+        corn_type: req.body.corn_type,
+        corn_qty: req.body.corn_qty,
+        purchased_price: req.body.purchased_price,
+        comment: req.body.comment,
+        received_date: req.body.received_date          
+           
+    }
+   
+
+    db.collection('staff').doc(user_id).collection('Purchased_Price').add(data)
+    .then(()=>{
+        let data = {
+               "receiver":currentUser.id,
+               "min_api_version":1,
+               "sender":{
+                  "name":"PyaungKyi",
+                  "avatar":"http://api.adorable.io/avatar/200/isitup"
+               },
+               "tracking_data":"tracking data",
+               "type":"text",
+               "text": "Thank you! Now Your added Purchase Price success!"+req.body.name
+               
+            }   
+
+            fetch('https://chatapi.viber.com/pa/send_message', {
+                method: 'post',
+                body:    JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
+            })
+            .then(res => res.json())
+            .then(json => console.log('JSON', json))
+            
+         
+        }).catch((error)=>{
+            console.log('ERROR:', error);
+        });   
+});
+
+//staff/merchant/entrylist
+
+app.get('/admin/merchant/entrylist', async (req,res) => {
+    const staffRef = db.collection('staff');
+    const staffSnapshot = await staffRef.get();
+    if (staffSnapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
+    let data = [];
+
+    let promises = [];
+    
+    staffSnapshot.forEach( async doc => {
+        const purchasedPriceRef = db.collection('staff').doc(doc.id).collection('Purchased_Price');
+        promises.push(purchasedPriceRef.get());                  
+    });
+
+    const outputs = await Promise.all(promises);
+
+    outputs.forEach(purchasedPriceSnapshot => {
+        if(purchasedPriceSnapshot.empty) {
+            console.log('No matching documents.');
+            return;
+        }
+        purchasedPriceSnapshot.forEach(doc1 => {
+            let user = {};
+            user.id = doc1.id;
+            user.name = doc1.data().name;
+            user.phone = doc1.data().phone;         
+            user.address = doc1.data().address;
+            user.corn_type = doc1.data().corn_type;
+            user.corn_qty = doc1.data().corn_qty;
+            user.pruchased_price = doc1.data().pruchased_price;
+            user.comment = doc1.data().comment;
+            user.received_date = doc1.data().received_date;   
+            data.push(user); 
+        }); 
+    })
+
+    res.render('staff-merchantList.ejs', {data: data});    
+});
 
 app.get('/customer/add-order/:orderlist_id', async (req,res) => {  
     let data = { };        
@@ -874,8 +988,8 @@ bot.onTextMessage(/./, (message, response) => {
         case "reg-inv":
             customerTdyStock(message, response);
             break;
-        case "view-booked-merchant":
-            ViewBookedMerchant(message, response);
+        case "booked-merchants-list":
+            BookedMerchantList(message, response);
             break;
         case "mkt-price":
             addMarketPrice(message, response);
@@ -963,7 +1077,7 @@ const MerchantEntryList = (message, response) => {
     response.send(bot_message);
 }
 
-const ViewBookedMerchant = (message, response) => {    
+const BookedMerchantList = (message, response) => {    
 
     let bot_message = new UrlMessage(APP_URL + '/staff/merchant/Booklist');   
     response.send(bot_message);
