@@ -1072,7 +1072,13 @@ const addMarketPrice = (message, response) => {
 
 const urlReply = (message, response) => {    
 
-    let bot_message = new UrlMessage(process.env.APP_URL + '/test/');   
+    let bot_message = new UrlMessage(process.env.APP_URL + '/test1/');   
+    response.send(bot_message);
+}
+
+const urlReply = (message, response) => {    
+
+    let bot_message = new UrlMessage(process.env.APP_URL + '/test2/');   
     response.send(bot_message);
 }
 
