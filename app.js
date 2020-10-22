@@ -375,7 +375,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
 });
 
 
-app.get('/staff/merchant/add-inventory', async(req,res) => {  
+app.get('/staff/add-inventory', async(req,res) => {  
     const userRef = db.collection('users');
     const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
@@ -490,18 +490,18 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
     res.render('staff-merchantList.ejs', {data: data});    
 });
 
-app.get('/staff/merchant/add-inventory:merchant_id', async (req,res) => {  
+app.get('/staff/add-inventory:user_id', async (req,res) => {  
     let data = { };        
 
-    let userRef = db.collection('users').doc(req.params.merchant_id);
+    let userRef = db.collection('users').doc(req.params.user_id);
     let user = await userRef.get();
     if (!user.exists) {
       console.log('No such user!');        
     } else {      
-      data.merchant_id = user.id; 
-      data.merchant_name = user.data().name;
+      data.user_id = user.id; 
+      data.user_name = user.data().name;
     }
-    res.render('staff-merchant-ADDinventory.ejs', {data:data}); 
+    res.render('merch-entryList.ejs', {data:data}); 
     
 });
 
