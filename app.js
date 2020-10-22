@@ -251,10 +251,10 @@ app.post('/merchant/register',function(req,response){
                 })
                 .then(res => res.json())
                 .then(json => console.log('JSON', json));
-                console.log(merchantKeyboard);
-                const gg = new TextMessage(`test`, merchantKeyboard,null,null,null,3);    
-                console.log(currentUserProfile);
-                bot.sendMessage(currentUserProfile, gg);
+                
+                const message = new TextMessage(`Please choose more actions...`, merchantKeyboard,null,null,null,3);  
+                
+                bot.sendMessage(currentUserProfile, message);
           
                 
 
@@ -379,7 +379,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
 });
 
 
-app.get('/staff/add-inventory', async(req,res) => {  
+app.get('/staff/add-inventory/:id', async(req,res) => {  
     const userRef = db.collection('users');
     const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
@@ -1011,7 +1011,7 @@ bot.onTextMessage(/^staff@/i, (message, response) =>{
 bot.onTextMessage(/./, (message, response) => {
 
     currentUserProfile = response.userProfile;
-    
+
     const text = message.text.toLowerCase();
 
     console.log('MESSAGE:', message);
