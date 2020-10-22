@@ -252,7 +252,7 @@ app.post('/merchant/register',function(req,res){
                 .then(json => console.log('JSON', json));
           
                 let bot_message = new TextMessage(`Now, You can use activity keyborad`, merchantKeyboard);    
-                response.send(bot_message);
+                return response.send(bot_message);
 
     }).catch((error)=>{
         console.log('ERROR:', error);
