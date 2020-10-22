@@ -1079,7 +1079,7 @@ const MerchantEntryList = (message, response) => {
 
 const BookedMerchantList = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/staff/merchant/Booklist');   
+    let bot_message = new UrlMessage(APP_URL + 'staff/merchant/add-inventory');   
     response.send(bot_message);
 }
 
