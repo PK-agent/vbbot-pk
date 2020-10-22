@@ -251,10 +251,9 @@ app.post('/merchant/register',function(req,response){
                 })
                 .then(res => res.json())
                 .then(json => console.log('JSON', json));
-                
-                let gg = new TextMessage(`test`, merchantKeyboard);    
-                // response.send(bot_message3);
-
+                console.log(merchantKeyboard);
+                const gg = new TextMessage(`test`, merchantKeyboard,null,null,null,3);    
+                console.log(currentUserProfile);
                 bot.sendMessage(currentUserProfile, gg);
           
                 
