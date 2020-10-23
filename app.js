@@ -801,31 +801,30 @@ app.get('/admin/staff-todayprice',function(req,res){
      res.render('staff-todayprice.ejs', {data:data});
 });
 
-app.post('/admin/staff-todayprice', async (req,res) => {  
-let today = new Date();
-    let admin_id = req.body.admin_id;
+// app.post('/admin/staff-todayprice', async (req,res) => {  
+// let today = new Date();
+//     let admin_id = req.body.admin_id;
 
-    let data = {
-        created_on:today,
-        id = req.body.admin_id,
-        date = req.body.filled_date,
-        time = req.body.filled_time,       
-        corn_type = req.body.corn_type,  
-        corn_quality = req.body.corn_qty,
-        corn_price = req.body.price         
+//     let data = {
+//         created_on:today,        
+//         date = req.body.filled_date,
+//         time = req.body.filled_time,       
+//         corn_type = req.body.corn_type,  
+//         corn_quality = req.body.corn_qty,
+//         corn_price = req.body.price         
            
-    }
+//     }
    
 
-    db.collection('admin').doc(admin_id) .add(data)
-    .then(()=>{                 
-                res.json({success:'success'});        
+//     db.collection('admin').doc(admin_id) .add(data)
+//     .then(()=>{                 
+//                 res.json({success:'success'});        
                       
             
-        }).catch((error)=>{
-            console.log('ERROR:', error);
-        });   
-});
+//         }).catch((error)=>{
+//             console.log('ERROR:', error);
+//         });   
+// });
 
 
 
