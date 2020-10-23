@@ -970,7 +970,6 @@ bot.onConversationStarted((userProfile, isSubscribed, context) => {
     //     bot.sendMessage(userProfile, new TextMessage(`Hello, Admin ${userProfile.name}! Nice to meet you.`));
     // }
     // else{
-        currentUserProfile = userProfile;
         bot.sendMessage(userProfile,message);
     // }
 });
