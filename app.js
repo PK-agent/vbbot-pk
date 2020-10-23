@@ -34,7 +34,7 @@ const app = express();
 
 
 let currentUser = {};
-// let currentUserProfile;
+let currentUserProfile;
 
 
 let adminKeyboard = {
@@ -253,7 +253,7 @@ app.post('/merchant/register',function(req,response){
                 .then(res => res.json())
                 .then(json => console.log('JSON', json));
                 
-                const message = new TextMessage(`Please choose more actions...`, merchantKeyboard,null,null,null,3);  
+                // const message = new TextMessage(`Please choose more actions...`, merchantKeyboard,null,null,null,3);  
                 
                 // bot.sendMessage(currentUserProfile, message);
           
