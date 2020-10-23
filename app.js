@@ -7,7 +7,6 @@ const { uuid } = require('uuidv4');
 const {format} = require('util');
 const multer  = require('multer');
 const { response } = require('express');
-const { admin } = require('firebase-admin/lib/database');
 
 const ViberBot  = require('viber-bot').Bot;
 const BotEvents = require('viber-bot').Events;
@@ -787,42 +786,44 @@ app.post('/admin/savepayment', async (req,res) => {
 });
 
 
-// app.get('/admin/staff-todayprice/',function(req,res){ 
-//     let data = {
-//         user_date: admin.date,
-//       } 
-//      res.render('staff-todayprice.ejs', {data:data}); 
-// });
+app.get('/admin/staff-todayprice',function(req,res){ 
+    let admin = {};
+    snapshot.forEach(doc => {
+        admin.id = doc.id;
+        admin.date = doc.data().filled_date;
+        admin.time = doc.data().filled_time;         
+        admin.type = doc.data().corn_type;  
+        admin.quality = doc.data().corn_qty;
+        admin.price = doc.data().price
+           
+    }); 
+     res.render('staff-todayprice.ejs', {admin:admin});
+});
 
+app.post('/admin/staff-todayprice', async (req,res) => {  
+let today = new Date();
+    let admin_id = req.body.admin_id;
 
-// app.post('/admin/staff-todayprice/',function(req,response){   
-  
-//   admin.date = req.body.filled_date;
-//   admin.time = req.body.filled_time;
-//   admin.corn_type = req.body.corn_type;
-//   admin.corn_qty = req.body.corn_qty;
-//   admin.price = req.body.price
+    let data = {
+        created_on:today,
+        date = req.body.date,
+        time = req.body.time,       
+        corn_type = req.body.type,  
+        corn_quality = req.body.quality,
+        corn_price = req.body.price         
+           
+    }
+   
 
-//   let today = new Date();
-//   let data = {
-//     created_on:today,
-//       date: admin.date,
-//       time: admin.time,
-//       corn_type: admin.corn_type,
-//       corn_qty: admin.corn_qty,
-//       price:admin.price
-//   } 
-
-
-//     db.collection('admin').doc(admin_id) .add(data)
-//     .then(()=>{                 
-//                 res.json({success:'success'});        
+    db.collection('admin').doc(admin_id) .add(data)
+    .then(()=>{                 
+                res.json({success:'success'});        
                       
             
-//         }).catch((error)=>{
-//             console.log('ERROR:', error);
-//         });   
-// });
+        }).catch((error)=>{
+            console.log('ERROR:', error);
+        });   
+});
 
 
 
@@ -1118,7 +1119,7 @@ const test1 = (message, response) => {
 
 const adminAddStaffprice = (message, response) => {    
 
-    let bot_message = new UrlMessage(process.env.APP_URL + '/admin/staff-todayprice/');   
+    let bot_message = new UrlMessage(process.env.APP_URL + '/admin/staff-todayprice');   
     response.send(bot_message);
 }
 
