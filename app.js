@@ -806,11 +806,11 @@ let today = new Date();
 
     let data = {
         created_on:today,
-        date = req.body.name.filled_date,
-        time = req.body.name.filled_time,       
-        type = req.body.name.corn_type,  
-        quality = req.body.name.corn_qty,
-        price = req.body.name.price         
+        date = req.body.date,
+        time = req.body.time,       
+        corn_type = req.body.type,  
+        corn_quality = req.body.quality,
+        corn_price = req.body.price         
            
     }
    
@@ -1059,8 +1059,8 @@ bot.onTextMessage(/./, (message, response) => {
         case "test1":
             test1(message, response);
             break;
-        case "test2":
-            test2(message, response);
+        case "staff-market-price":
+            adminAddStaffprice(message, response);
             break;    
         case "picture":
             pictureReply(message, response);
@@ -1117,9 +1117,9 @@ const test1 = (message, response) => {
     response.send(bot_message);
 }
 
-const test2 = (message, response) => {    
+const adminAddStaffprice = (message, response) => {    
 
-    let bot_message = new UrlMessage(process.env.APP_URL + '/test2');   
+    let bot_message = new UrlMessage(process.env.APP_URL + '/admin/staff-todayprice');   
     response.send(bot_message);
 }
 
