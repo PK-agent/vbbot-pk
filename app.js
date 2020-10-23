@@ -1118,7 +1118,7 @@ const test1 = (message, response) => {
 
 const adminAddStaffprice = (message, response) => {    
 
-    let bot_message = new UrlMessage(process.env.APP_URL + '/admin/staff-todayprice');   
+    let bot_message = new UrlMessage(process.env.APP_URL + '/admin/staff-todayprice/');   
     response.send(bot_message);
 }
 
