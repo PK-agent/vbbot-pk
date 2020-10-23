@@ -787,12 +787,12 @@ app.post('/admin/savepayment', async (req,res) => {
 });
 
 
-app.get('/admin/staff-todayprice/',function(req,res){ 
-    let data = {
-        user_date: admin.date,
-      } 
-     res.render('staff-todayprice.ejs', {data:data}); 
-});
+// app.get('/admin/staff-todayprice/',function(req,res){ 
+//     let data = {
+//         user_date: admin.date,
+//       } 
+//      res.render('staff-todayprice.ejs', {data:data}); 
+// });
 
 
 // app.post('/admin/staff-todayprice/',function(req,response){   
