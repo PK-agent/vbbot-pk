@@ -786,41 +786,36 @@ app.post('/admin/savepayment', async (req,res) => {
 });
 
 
-app.get('/staff-todayprice',function(req,res){ 
-    let user = {};
+app.get('/admin/staff-todayprice',function(req,res){ 
+    let admin = {};
     snapshot.forEach(doc => {
-        user.id = doc.id;
-        user.name = doc.data().name;
-        user.phone = doc.data().phone;         
-        user.address = doc.data().address;  
-        user.corn_type = doc.data().corn_type;
-        user.corn_qty = doc.data().corn_qty;
-        user.wanted_price = doc.data().wanted_price;
-        user.comment = doc.data().comment;
-        user.received_date = doc.data().received_date    
+        admin.id = doc.id;
+        admin.date = doc.data().filled_date;
+        admin.time = doc.data().filled_time;         
+        admin.type = doc.data().corn_type;  
+        admin.quality = doc.data().corn_qty;
+        admin.price = doc.data().price
+           
     }); 
-     res.render('staff-todayprice.ejs', {user:user});
+     res.render('staff-todayprice.ejs', {admin:admin});
 });
 
-app.post('/merchant/book-inventory', async (req,res) => {  
+app.post('/admin/staff-todayprice', async (req,res) => {  
 let today = new Date();
-    let user_id = req.body.user_id;
+    let admin_id = req.body.admin_id;
 
     let data = {
         created_on:today,
-        name: req.body.name,
-        phone: req.body.phone,
-        address: req.body.address,
-        corn_type: req.body.corn_type,
-        corn_qty: req.body.corn_qty,
-        wanted_price: req.body.wanted_price,
-        comment: req.body.comment,
-        received_date: req.body.received_date          
+        date = req.body.name.filled_date,
+        time = req.body.name.filled_time,       
+        type = req.body.name.corn_type,  
+        quality = req.body.name.corn_qty,
+        price = req.body.name.price         
            
     }
    
 
-    db.collection('admin').doc(user_id) .add(data)
+    db.collection('admin').doc(admin_id) .add(data)
     .then(()=>{                 
                 res.json({success:'success'});        
                       
