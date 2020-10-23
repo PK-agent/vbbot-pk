@@ -787,44 +787,36 @@ app.post('/admin/savepayment', async (req,res) => {
 
 
 app.get('/admin/staff-todayprice',function(req,res){ 
-    let data = {};
-    snapshot.forEach(doc => {
-        let admin = {};
-        admin.id = doc.id;
-        admin.date = doc.data().filled_date;
-        admin.time = doc.data().filled_time;         
-        admin.type = doc.data().corn_type;  
-        admin.quality = doc.data().corn_qty;
-        admin.price = doc.data().price
-           
-    }); 
-     res.render('staff-todayprice.ejs', {data:data}); console.log('gggggggggggggggggggggggg')
+    let data = {
+        admin_name: currentUser.name,
+      } 
+     res.render('staff-todayprice.ejs', {data:data}); 
 });
 
-// app.post('/admin/staff-todayprice', async (req,res) => {  
-// let today = new Date();
-//     let admin_id = req.body.admin_id;
+app.post('/admin/staff-todayprice', async (req,res) => {  
+let today = new Date();
+    let admin_id = req.body.admin_id;
 
-//     let data = {
-//         created_on:today,        
-//         date = req.body.filled_date,
-//         time = req.body.filled_time,       
-//         corn_type = req.body.corn_type,  
-//         corn_quality = req.body.corn_qty,
-//         corn_price = req.body.price         
+    let data = {
+        created_on:today,        
+        date = req.body.filled_date,
+        time = req.body.filled_time,       
+        corn_type = req.body.corn_type,  
+        corn_quality = req.body.corn_qty,
+        corn_price = req.body.price         
            
-//     }
+    }
    
 
-//     db.collection('admin').doc(admin_id) .add(data)
-//     .then(()=>{                 
-//                 res.json({success:'success'});        
+    db.collection('admin').doc(admin_id) .add(data)
+    .then(()=>{                 
+                res.json({success:'success'});        
                       
             
-//         }).catch((error)=>{
-//             console.log('ERROR:', error);
-//         });   
-// });
+        }).catch((error)=>{
+            console.log('ERROR:', error);
+        });   
+});
 
 
 
