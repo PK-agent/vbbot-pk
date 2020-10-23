@@ -34,7 +34,7 @@ const app = express();
 
 
 let currentUser = {};
-let currentUserProfile;
+// let currentUserProfile;
 
 
 let adminKeyboard = {
@@ -255,7 +255,7 @@ app.post('/merchant/register',function(req,response){
                 
                 const message = new TextMessage(`Please choose more actions...`, merchantKeyboard,null,null,null,3);  
                 
-                bot.sendMessage(currentUserProfile, message);
+                // bot.sendMessage(currentUserProfile, message);
           
                 
 
@@ -1009,7 +1009,7 @@ bot.onTextMessage(/^staff@/i, (message, response) =>{
 
 bot.onTextMessage(/./, (message, response) => {
 
-    currentUserProfile = response.userProfile;
+    // currentUserProfile = response.userProfile;
 
     const text = message.text.toLowerCase();
 
