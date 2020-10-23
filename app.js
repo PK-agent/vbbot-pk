@@ -1013,8 +1013,7 @@ bot.onTextMessage(/./, (message, response) => {
 
     const text = message.text.toLowerCase();
 
-    console.log('MESSAGE:', message);
-    //console.log('USER', response.userProfile);
+    console.log(response.userProfile.id);
 
     currentUser.id = response.userProfile.id;
     currentUser.name = response.userProfile.name;
@@ -1236,7 +1235,6 @@ const registerMerchant = async (message, response) => {
     const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
 
     if (snapshot.empty) {
-        console.log('No such document!');
         let bot_message1 = new TextMessage(`Click on following link to register`, ); 
         let bot_message2 = new UrlMessage(APP_URL + '/merchant/register');   
         response.send(bot_message1).then(()=>{
