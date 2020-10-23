@@ -806,10 +806,10 @@ let today = new Date();
 
     let data = {
         created_on:today,
-        date = req.body.date,
-        time = req.body.time,       
-        corn_type = req.body.type,  
-        corn_quality = req.body.quality,
+        date = req.body.filled_date,
+        time = req.body.filled_time,       
+        corn_type = req.body.corn_type,  
+        corn_quality = req.body.corn_qty,
         corn_price = req.body.price         
            
     }
