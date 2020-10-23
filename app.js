@@ -211,12 +211,13 @@ app.get('/merchant/register',function(req,res){
       let data = {
         user_name: currentUser.name,
       } 
+      console.log(currentUser);
      res.render('merchant.ejs', {data:data});
 });
 
 
 app.post('/merchant/register',function(req,response){   
-    
+    console.log(currentUser);
     currentUser.name = req.body.name;
     currentUser.phone = req.body.phone;
     currentUser.address = req.body.address;
