@@ -795,34 +795,34 @@ app.get('/admin/staff-todayprice/',function(req,res){
 });
 
 
-app.post('/admin/staff-todayprice/',function(req,response){   
+// app.post('/admin/staff-todayprice/',function(req,response){   
   
-  admin.date = req.body.filled_date;
-  admin.time = req.body.filled_time;
-  admin.corn_type = req.body.corn_type;
-  admin.corn_qty = req.body.corn_qty;
-  admin.price = req.body.price
+//   admin.date = req.body.filled_date;
+//   admin.time = req.body.filled_time;
+//   admin.corn_type = req.body.corn_type;
+//   admin.corn_qty = req.body.corn_qty;
+//   admin.price = req.body.price
 
-  let today = new Date();
-  let data = {
-    created_on:today,
-      date: admin.date,
-      time: admin.time,
-      corn_type: admin.corn_type,
-      corn_qty: admin.corn_qty,
-      price:admin.price
-  } 
+//   let today = new Date();
+//   let data = {
+//     created_on:today,
+//       date: admin.date,
+//       time: admin.time,
+//       corn_type: admin.corn_type,
+//       corn_qty: admin.corn_qty,
+//       price:admin.price
+//   } 
 
 
-    db.collection('admin').doc(admin_id) .add(data)
-    .then(()=>{                 
-                res.json({success:'success'});        
+//     db.collection('admin').doc(admin_id) .add(data)
+//     .then(()=>{                 
+//                 res.json({success:'success'});        
                       
             
-        }).catch((error)=>{
-            console.log('ERROR:', error);
-        });   
-});
+//         }).catch((error)=>{
+//             console.log('ERROR:', error);
+//         });   
+// });
 
 
 
