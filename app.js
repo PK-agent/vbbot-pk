@@ -787,8 +787,9 @@ app.post('/admin/savepayment', async (req,res) => {
 
 
 app.get('/admin/staff-todayprice',function(req,res){ 
-    let admin = {};
+    let data = {};
     snapshot.forEach(doc => {
+        let admin = {};
         admin.id = doc.id;
         admin.date = doc.data().filled_date;
         admin.time = doc.data().filled_time;         
@@ -797,7 +798,7 @@ app.get('/admin/staff-todayprice',function(req,res){
         admin.price = doc.data().price
            
     }); 
-     res.render('staff-todayprice.ejs', {admin:admin});
+     res.render('staff-todayprice.ejs', {data:data});
 });
 
 app.post('/admin/staff-todayprice', async (req,res) => {  
@@ -806,6 +807,7 @@ let today = new Date();
 
     let data = {
         created_on:today,
+        id = req.bod.id,
         date = req.body.filled_date,
         time = req.body.filled_time,       
         corn_type = req.body.corn_type,  
