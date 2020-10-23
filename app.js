@@ -798,7 +798,7 @@ app.get('/admin/staff-todayprice',function(req,res){
         admin.price = doc.data().price
            
     }); 
-     res.render('staff-todayprice.ejs', {data:data});
+     res.render('staff-todayprice.ejs', {data:data}); console.log('gggggggggggggggggggggggg')
 });
 
 // app.post('/admin/staff-todayprice', async (req,res) => {  
