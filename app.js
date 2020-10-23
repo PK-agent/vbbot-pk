@@ -787,22 +787,15 @@ app.post('/admin/savepayment', async (req,res) => {
 });
 
 
-app.get('/admin/staff-todayprice',function(req,res){ 
+app.get('/admin/staff-todayprice/',function(req,res){ 
     let data = {
-        admin_name: currentUser.name,
+        user_date: admin.date,
       } 
      res.render('staff-todayprice.ejs', {data:data}); 
 });
 
-app.get('/merchant/register',function(req,res){   
-    let data = {
-      user_date: admin.date,
-    } 
-   res.render('merchant.ejs', {data:data});
-});
 
-
-app.post('/merchant/register',function(req,response){   
+app.post('/admin/staff-todayprice/',function(req,response){   
   
   admin.date = req.body.filled_date;
   admin.time = req.body.filled_time;
