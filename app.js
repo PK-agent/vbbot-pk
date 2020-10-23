@@ -807,7 +807,7 @@ let today = new Date();
 
     let data = {
         created_on:today,
-        id = req.bod.id,
+        id = req.body.id,
         date = req.body.filled_date,
         time = req.body.filled_time,       
         corn_type = req.body.corn_type,  
