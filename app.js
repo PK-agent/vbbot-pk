@@ -788,7 +788,7 @@ app.post('/admin/savepayment', async (req,res) => {
 
 
 app.get('/admin/staff-todayprice', async (req,res) =>{              
-    const usersRef = db.collection('users');
+    const usersRef = db.collection('admin');
     const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
     if (snapshot.empty) {
@@ -819,7 +819,7 @@ app.post('/admin/staff-todayprice', async (req,res) => {
         time: req.body.filled_time,
         corn_type: req.body.corn_type,        
         corn_qty: req.body.corn_qty,
-          
+        price: req.body.price  
            
     }
    
