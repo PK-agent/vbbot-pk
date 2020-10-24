@@ -790,6 +790,7 @@ app.post('/admin/savepayment', async (req,res) => {
 app.get('/admin/staff-todayprice',function(req,res){              
    
     let data = {};
+        data.id = doc2.data().admin_id;
         data.date = doc2.data().filled_date;
         date.time = doc2.data().filled_time;
         data.corn_type = doc2.data().corn_type;
@@ -801,7 +802,7 @@ app.get('/admin/staff-todayprice',function(req,res){
 
 app.post('/admin/staff-todayprice', async (req,res) => {  
 let today = new Date();  
-    
+    let admin_id = req.body.admin_id;
 
     let data = {
         created_on:today,
