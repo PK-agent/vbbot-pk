@@ -790,7 +790,7 @@ app.post('/admin/savepayment', async (req,res) => {
 
 app.get('/admin/staff-todayprice',function(req,res){              
     let data = {
-        admin_name: admin.name,
+        admin_id: admin.id,
       } 
    res.render('staff-todayprice.ejs', {data:data});
 });
@@ -814,7 +814,7 @@ app.post('/admin/staff-todayprice', async (req,res) => {
     }
    
 
-    db.collection('admin').doc(admin.id).set(data)
+    db.collection('admin').doc(admin_id).set(data)
     .then(()=>{
         let data = {
                "receiver":currentUser.id,
