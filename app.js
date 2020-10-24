@@ -789,11 +789,14 @@ app.post('/admin/savepayment', async (req,res) => {
 
 
 app.get('/admin/staff-todayprice',function(req,res){       
-      
+    let data = {
+        admin_id: currentUser.id,
+      }   
      res.render('staff-todayprice.ejs', {data:data});
     }); 
 
 app.post('/admin/staff-todayprice', async (req,res) => {  
+    let admin = {};
     admin.date = req.body.filled_date;
     admin.time = req.body.filled_time;
     admin.corn_type = req.body.corn_type;
@@ -807,11 +810,11 @@ app.post('/admin/staff-todayprice', async (req,res) => {
         time: admin.time,
         corn_type: admin.corn_type,        
         corn_qty: admin.corn_qty,
-        price: admin.price              
+        price: req.body.price              
            
     }   
 
-    db.collection('admin').add(data)
+    db.collection('admin').doc(admin_id).collection('staff').add(data)
     .then(()=>{                 
                 res.json({success:'success'});        
                       
