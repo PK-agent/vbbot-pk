@@ -787,7 +787,7 @@ app.post('/admin/savepayment', async (req,res) => {
 });
 
 
-app.get('/staff-todayprice',function(req,res){ 
+app.get('/admin/staff-todayprice',function(req,res){ 
     let user = {};
     snapshot.forEach(doc => {
         user.id = doc.id;
@@ -1056,8 +1056,8 @@ bot.onTextMessage(/./, (message, response) => {
         case "text":
             textReply(message, response);
             break; 
-        case "test1":
-            test1(message, response);
+        case "staff-market-price":
+            adminAddStaffPurchasePrice(message, response);
             break;
         case "test2":
             test2(message, response);
@@ -1111,9 +1111,9 @@ const addMarketPrice = (message, response) => {
     response.send(bot_message);
 }
 
-const test1 = (message, response) => {    
+const adminAddStaffPurchasePrice = (message, response) => {    
 
-    let bot_message = new UrlMessage(process.env.APP_URL + '/test1');   
+    let bot_message = new UrlMessage(process.env.APP_URL + '/admin/staff-todayprice');   
     response.send(bot_message);
 }
 
