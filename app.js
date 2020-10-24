@@ -787,44 +787,25 @@ app.post('/admin/savepayment', async (req,res) => {
 });
 
 
-app.get('/admin/staff-todayprice', async (req,res) =>{              
-    const usersRef = db.collection('admin');
-    const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
-    // const snapshot = await usersRef.get();
-    if (snapshot.empty) {
-      console.log('No matching documents.');
-      return;
-    }  
-    let user = {};
-    snapshot.forEach(doc => {
-        user.id = doc.id;
-        user.filled_date = doc.data().filled_date;
-        user.filled_time = doc.data().filled_time;         
-        user.corn_type = doc.data().corn_type;        
-        user.corn_qty = doc.data().corn_qty;
-        user.price = doc.data().price;
-            
-    }); 
-
-   res.render('staff-todayprice.ejs', {user:user});
+app.get('/admin/staff-todayprice',function(req,res){              
+    
+   res.render('staff-todayprice.ejs');
 });
 
 app.post('/admin/staff-todayprice', async (req,res) => {  
     let today = new Date();
-    let user_id = req.body.user_id;
-
-    let data = {
+        let data = {
         created_on:today,
         date: req.body.filled_date,
         time: req.body.filled_time,
         corn_type: req.body.corn_type,        
         corn_qty: req.body.corn_qty,
-        price: req.body.price  
+        price: req.body.price   
            
     }
    
 
-    db.collection('admin').doc(user_id).collection('staff').add(data)
+    db.collection('admin').add(data)
     .then(()=>{
         let data = {
                "receiver":currentUser.id,
