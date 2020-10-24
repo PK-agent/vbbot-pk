@@ -790,7 +790,7 @@ app.post('/admin/savepayment', async (req,res) => {
 
 app.get('/admin/staff-todayprice',function(req,res){       
     
-     res.render('staff-todayprice.ejs', {data:data});
+     res.render('staff-todayprice.ejs');
     }); 
 
 app.post('/admin/staff-todayprice', async (req,res) => {      
