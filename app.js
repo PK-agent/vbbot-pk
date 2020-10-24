@@ -810,7 +810,7 @@ app.post('/admin/staff-todayprice', async (req,res) => {
         time: admin.time,
         corn_type: admin.corn_type,        
         corn_qty: admin.corn_qty,
-        price: req.body.price              
+        price: admin.price              
            
     }   
 
