@@ -38,8 +38,8 @@
       
       
       <input type="hidden" name="user_id" value="<%= data.user_id %>"/>
-    
-    <input type="submit" name="Add Purchased Merchant"/>
+      <input type="hidden" name="user_name" value="<%= data.user_name %>"/>
+    <input type="submit" name="submit"/>
     
     
 
@@ -53,7 +53,7 @@
     }
   
         
-    document.getElementById("form").addEventListener("Add Purchased Merchant", windowClose); 
+    document.getElementById("form").addEventListener("submit", windowClose); 
     
    
     </script>
