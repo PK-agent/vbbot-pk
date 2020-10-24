@@ -7,7 +7,6 @@ const { uuid } = require('uuidv4');
 const {format} = require('util');
 const multer  = require('multer');
 const { response } = require('express');
-const { admin } = require('firebase-admin/lib/database');
 
 const ViberBot  = require('viber-bot').Bot;
 const BotEvents = require('viber-bot').Events;
@@ -788,23 +787,24 @@ app.post('/admin/savepayment', async (req,res) => {
 });
 
 
-app.get('/admin/staff-todayprice',function(req,res){       
+app.get('/admin/staff-todayprice',function(req,res){              
     
      res.render('staff-todayprice.ejs');
     }); 
 
-app.post('/admin/staff-todayprice', async (req,res) => {      
-
-    let today = new Date();
+app.post('/admin/staff-todayprice', async (req,res) => {  
+let today = new Date();  
+    
     let data = {
         created_on:today,
         date: req.body.filled_date,
         time: req.body.filled_time,
         corn_type: req.body.corn_type,        
         corn_qty: req.body.corn_qty,
-        price: req.body.price             
+        price: req.body.price              
            
-    }   
+    }
+   
 
     db.collection('admin').add(data)
     .then(()=>{                 
