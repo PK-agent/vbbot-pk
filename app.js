@@ -427,7 +427,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
     res.render('staff-merchantList.ejs', {data: data});    
 });
 
-app.get('/staff/merchant/add-inventory:user_id', async (req,res) => {  
+app.get('/staff/merchant/add-inventory/:user_id', async (req,res) => {  
     let data = { };        
 
     let userRef = db.collection('users').doc(req.params.user_id);
@@ -444,7 +444,7 @@ app.get('/staff/merchant/add-inventory:user_id', async (req,res) => {
     
 });
 
-app.post('/staff/merchant/add-inventory', async (req,res) => {  
+app.post('/staff/merchant/add-inventory/', async (req,res) => {  
    
     let today = new Date();
     let user_id = req.body.user_id;
