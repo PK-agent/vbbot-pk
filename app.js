@@ -803,10 +803,9 @@ let today = new Date();
         corn_qty: req.body.corn_qty,
         price: req.body.price              
            
-    }
-   
+    }   
 
-    db.collection('admin').add(data)
+    db.collection('users').doc(user_id).collection('booksList').add(data)
     .then(()=>{                 
                 res.json({success:'success'});        
                       
