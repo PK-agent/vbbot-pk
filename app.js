@@ -789,7 +789,7 @@ app.post('/admin/savepayment', async (req,res) => {
 
 app.get('/admin/staff-todayprice',function(req,res){              
     
-     res.render('staff-todayprice.ejs', {user:user});
+     res.render('staff-todayprice.ejs');
     }); 
 
 app.post('/merchant/book-inventory', async (req,res) => {  
