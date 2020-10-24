@@ -443,7 +443,7 @@ app.get('/staff/merchant/add-inventory/:user_id', async (req,res) => {
     
 });
 
-app.post('/staff/merchant/add-inventory/', async (req,res) => {  
+app.post('../../staff/merchant/add-inventory/', async (req,res) => {  
    
     let today = new Date();
     let user_id = req.body.user_id;
