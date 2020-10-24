@@ -787,12 +787,12 @@ app.post('/admin/savepayment', async (req,res) => {
 });
 
 
-app.get('/admin/staff-todayprice',function(req,res){              
+app.get('/admin/staff-todayprice/',function(req,res){              
     
      res.render('staff-todayprice.ejs');
     }); 
 
-app.post('/admin/staff-todayprice', async (req,res) => {  
+app.post('/admin/staff-todayprice/', async (req,res) => {  
 let today = new Date();  
     let user_id = req.body.user_id; 
     let data = {
