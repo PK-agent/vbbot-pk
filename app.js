@@ -460,7 +460,7 @@ app.post('/staff/merchant/add-inventory/', async (req,res) => {
         received_date: req.body.received_date          
            
     }
-   
+   console.log(gggg)
 
     db.collection('users').doc(user_id).collection('staff-stocklist').add(data)
     .then(()=>{
