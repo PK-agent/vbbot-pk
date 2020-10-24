@@ -787,26 +787,25 @@ app.post('/admin/savepayment', async (req,res) => {
 });
 
 
-app.get('/admin/staff-todayprice/',function(req,res){              
+app.get('/admin/staff-todayprice',function(req,res){              
     
      res.render('staff-todayprice.ejs');
     }); 
 
-app.post('/admin/staff-todayprice/', async (req,res) => {  
+app.post('/admin/staff-todayprice', async (req,res) => {  
 let today = new Date();  
-    let user_id = req.body.user_id; 
+    
     let data = {
         created_on:today,
         date: req.body.filled_date,
         time: req.body.filled_time,
         corn_type: req.body.corn_type,        
         corn_qty: req.body.corn_qty,
-        price: req.body.price,               
+        price: req.body.price              
            
-    }
-   
+    }   
 
-    db.collection('admin').doc(user_id).collection('Staff').add(data)
+    db.collection('admin').doc(admin_id).collection('Staff').add(data)
     .then(()=>{                 
                 res.json({success:'success'});        
                       
@@ -1101,7 +1100,7 @@ const addMarketPrice = (message, response) => {
 
 const adminAddStaffPurchasePrice = (message, response) => {    
 
-    let bot_message = new UrlMessage(process.env.APP_URL + '/admin/staff-todayprice/');   
+    let bot_message = new UrlMessage(process.env.APP_URL + '/admin/staff-todayprice');   
     response.send(bot_message);
 }
 
