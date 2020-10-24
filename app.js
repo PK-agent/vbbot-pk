@@ -439,7 +439,7 @@ app.get('/staff/merchant/add-inventory/:user_id', async (req,res) => {
       user_name = user.data().name;
       
     }
-    res.render('staff-merchant-ADDinventory.ejs', {data:user}); 
+    res.render('staff-merchant-ADDinventory.ejs', {user:user}); 
     
 });
 
