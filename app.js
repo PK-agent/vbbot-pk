@@ -791,14 +791,11 @@ app.get('/staff-todayprice',function(req,res){
     let user = {};
     snapshot.forEach(doc => {
         user.id = doc.id;
-        user.name = doc.data().name;
-        user.phone = doc.data().phone;         
-        user.address = doc.data().address;  
+        user.filled_date = doc.data().filled_date;
+        user.filled_time = doc.data().filled_time;         
         user.corn_type = doc.data().corn_type;
         user.corn_qty = doc.data().corn_qty;
-        user.wanted_price = doc.data().wanted_price;
-        user.comment = doc.data().comment;
-        user.received_date = doc.data().received_date    
+        user.price = doc.data().price         
     }); 
      res.render('staff-todayprice.ejs', {user:user});
 });
