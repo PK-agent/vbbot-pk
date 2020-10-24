@@ -794,7 +794,7 @@ app.get('/admin/staff-todayprice',function(req,res){
 
 app.post('/admin/staff-todayprice', async (req,res) => {  
 let today = new Date();  
-    let admin_id = req.body.admin_id; 
+    let admin_id = req.body.user_id; 
     let data = {
         created_on:today,
         date: req.body.filled_date,
@@ -806,7 +806,7 @@ let today = new Date();
     }
    
 
-    db.collection('admin').doc(admin_id).collection('staff-purchased-price').add(data)
+    db.collection('admin').doc(admin_id).collection('StaffPurchasedPrice').add(data)
     .then(()=>{                 
                 res.json({success:'success'});        
                       
