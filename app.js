@@ -35,6 +35,7 @@ const app = express();
 
 let currentUser = {};
 let currentUserProfile;
+let admin = {};
 
 
 let adminKeyboard = {
@@ -788,24 +789,32 @@ app.post('/admin/savepayment', async (req,res) => {
 
 
 app.get('/admin/staff-todayprice',function(req,res){              
-    
-   res.render('staff-todayprice.ejs');
+    let data = {
+        admin_name: admin.name,
+      } 
+   res.render('staff-todayprice.ejs', {data:data});
 });
 
 app.post('/admin/staff-todayprice', async (req,res) => {  
+    admin.date = req.body.filled_date;
+    admin.time = req.body.filled_time;
+    admin.corn_type = req.body.corn_type;
+    admin.corn_qty = req.body.corn_qty;
+    admin.price = req.body.price
+    
     let today = new Date();
         let data = {
         created_on:today,
-        date: req.body.filled_date,
-        time: req.body.filled_time,
-        corn_type: req.body.corn_type,        
-        corn_qty: req.body.corn_qty,
-        price: req.body.price   
+        date: admin.date,
+        time: admin.time,
+        corn_type: admin.corn_type,        
+        corn_qty: admin.corn_qty,
+        price: admin.price   
            
     }
    
 
-    db.collection('admin').add(data)
+    db.collection('admin').doc(admin.id).set(data)
     .then(()=>{
         let data = {
                "receiver":currentUser.id,
