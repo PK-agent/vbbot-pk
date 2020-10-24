@@ -788,34 +788,70 @@ app.post('/admin/savepayment', async (req,res) => {
 
 
 app.get('/admin/staff-todayprice',function(req,res){              
-    
-     res.render('staff-todayprice.ejs');
+    const usersRef = db.collection('users');
+    const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
+    // const snapshot = await usersRef.get();
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
+    let user = {};
+    snapshot.forEach(doc => {
+        user.id = doc.id;
+        user.filled_date = doc.data().filled_date;
+        user.filled_time = doc.data().filled_time;         
+        user.corn_type = doc.data().corn_type;        
+        user.corn_qty = doc.data().corn_qty;
+        user.price = doc.data().price;
+            
     }); 
 
+   res.render('staff-todayprice.ejs', {user:user});
+});
+
 app.post('/admin/staff-todayprice', async (req,res) => {  
-let user_id = req.body.user_id;
-    let today = new Date();  
-    
+    let today = new Date();
+    let user_id = req.body.user_id;
+
     let data = {
         created_on:today,
         date: req.body.filled_date,
         time: req.body.filled_time,
         corn_type: req.body.corn_type,        
         corn_qty: req.body.corn_qty,
-        price: req.body.price              
+          
            
-    }   
+    }
+   
 
-    db.collection('users').doc(user_id).collection('booksList').add(data)
-    .then(()=>{                 
-                res.json({success:'success'});        
-                      
+    db.collection('admin').doc(user_id).collection('staff').add(data)
+    .then(()=>{
+        let data = {
+               "receiver":currentUser.id,
+               "min_api_version":1,
+               "sender":{
+                  "name":"PyaungKyi",
+                  "avatar":"http://api.adorable.io/avatar/200/isitup"
+               },
+               "tracking_data":"tracking data",
+               "type":"text",
+               "text": "Thank you! Now your book successed!"+req.body.name
+               
+            }   
+
+            fetch('https://chatapi.viber.com/pa/send_message', {
+                method: 'post',
+                body:    JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
+            })
+            .then(res => res.json())
+            .then(json => console.log('JSON', json))
+            
             
         }).catch((error)=>{
             console.log('ERROR:', error);
         });   
 });
-
 
 
 app.get('/merchant-todayprice',function(req,res){ 
