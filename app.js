@@ -789,9 +789,7 @@ app.post('/admin/savepayment', async (req,res) => {
 
 
 app.get('/admin/staff-todayprice',function(req,res){       
-    let data = {
-        currentUser_id: admin.id,
-      }   
+      
      res.render('staff-todayprice.ejs', {data:data});
     }); 
 
