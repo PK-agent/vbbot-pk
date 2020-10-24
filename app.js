@@ -428,7 +428,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
 });
 
 app.get('/staff/merchant/add-inventory/:user_id', async (req,res) => {  
-    let data = { };        
+    let data = {};        
 
     let userRef = db.collection('users').doc(req.params.user_id);
     let user = await userRef.get();
