@@ -414,7 +414,12 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
             user.name = doc1.data().name;
             user.phone = doc1.data().phone;         
             user.address = doc1.data().address;
-               
+            user.corn_type = doc1.data().corn_type;
+            user.corn_qty = doc1.data().corn_qty;   
+            user.wanted_price = doc1.data().wanted_price;
+            user.comment = doc1.data().comment;
+            user.received_date = doc1.data().received_date
+
             data.push(user); 
         }); 
     })
