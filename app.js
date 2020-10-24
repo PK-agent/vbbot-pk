@@ -35,7 +35,7 @@ const app = express();
 
 let currentUser = {};
 let currentUserProfile;
-let admin = {};
+
 
 
 let adminKeyboard = {
@@ -789,60 +789,31 @@ app.post('/admin/savepayment', async (req,res) => {
 
 
 app.get('/admin/staff-todayprice',function(req,res){              
-    let data = {
-        admin_id: admin.id,
-      } 
-   res.render('staff-todayprice.ejs', {data:data});
+    
+   res.render('staff-todayprice.ejs');
 });
 
 app.post('/admin/staff-todayprice', async (req,res) => {  
-    admin.date = req.body.filled_date;
-    admin.time = req.body.filled_time;
-    admin.corn_type = req.body.corn_type;
-    admin.corn_qty = req.body.corn_qty;
-    admin.price = req.body.price
-    
     let today = new Date();
         let data = {
         created_on:today,
-        date: admin.date,
-        time: admin.time,
-        corn_type: admin.corn_type,        
-        corn_qty: admin.corn_qty,
-        price: admin.price   
+        date: req.body.filled_date,
+        time: req.body.filled_time,
+        corn_type: req.body.corn_type,        
+        corn_qty: req.body.corn_qty,
+        price: req.body.price   
            
     }
    
 
-    db.collection('admin').doc(admin_id).set(data)
+    db.collection('users').add(data)
     .then(()=>{
-        let data = {
-               "receiver":currentUser.id,
-               "min_api_version":1,
-               "sender":{
-                  "name":"PyaungKyi",
-                  "avatar":"http://api.adorable.io/avatar/200/isitup"
-               },
-               "tracking_data":"tracking data",
-               "type":"text",
-               "text": "Thank you! Now your book successed!"+req.body.name
-               
-            }   
+          res.json({success:'success'});  
 
-            fetch('https://chatapi.viber.com/pa/send_message', {
-                method: 'post',
-                body:    JSON.stringify(data),
-                headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
-            })
-            .then(res => res.json())
-            .then(json => console.log('JSON', json))
-            
-            
-        }).catch((error)=>{
-            console.log('ERROR:', error);
-        });   
+    }).catch((error)=>{
+        console.log('ERROR:', error);
+    }); 
 });
-
 
 app.get('/merchant-todayprice',function(req,res){ 
     let data = {
