@@ -414,11 +414,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
             user.name = doc1.data().name;
             user.phone = doc1.data().phone;         
             user.address = doc1.data().address;
-            user.corn_type = doc1.data().corn_type;
-            user.corn_qty = doc1.data().corn_qty;
-            user.wanted_price = doc1.data().wanted_price;
-            user.comment = doc1.data().comment;
-            user.received_date = doc1.data().received_date;   
+               
             data.push(user); 
         }); 
     })
@@ -426,16 +422,16 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
     res.render('staff-merchantList.ejs', {data: data});    
 });
 
-app.get('/staff/merchant/add-inventory:merchant_id', async (req,res) => {  
+app.get('/staff/merchant/add-inventory:user_id', async (req,res) => {  
     let data = { };        
 
-    let userRef = db.collection('users').doc(req.params.merchant_id);
+    let userRef = db.collection('users').doc(req.params.user_id);
     let user = await userRef.get();
     if (!user.exists) {
       console.log('No such user!');        
     } else {      
-      data.merchant_id = user.data().viberid; 
-      data.merchant_name = user.data().name;
+      data.user_id = user.data().viberid; 
+      data.user_name = user.data().name;
     }
     res.render('staff-merchant-ADDinventory.ejs', {data:data}); 
     
@@ -444,7 +440,7 @@ app.get('/staff/merchant/add-inventory:merchant_id', async (req,res) => {
 app.post('/staff/merchant/add-inventory', async (req,res) => {  
    
     let today = new Date();
-    let merchant_id = req.body.merchant_id;
+    let user_id = req.body.user_id;
 
     let data = {
         created_on:today,
@@ -460,7 +456,7 @@ app.post('/staff/merchant/add-inventory', async (req,res) => {
     }
    
 
-    db.collection('admin').doc(merchant_id).collection('staff-stocklist').add(data)
+    db.collection('admin').doc(user_id).collection('staff-stocklist').add(data)
     .then(()=>{
         let data = {
                "receiver":currentUser.id,
