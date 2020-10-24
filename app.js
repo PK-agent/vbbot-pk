@@ -788,13 +788,21 @@ app.post('/admin/savepayment', async (req,res) => {
 
 
 app.get('/admin/staff-todayprice',function(req,res){              
-    
-     res.render('staff-todayprice.ejs');
+   
+    let data = {};
+        data.date = doc2.data().filled_date;
+        date.time = doc2.data().filled_time;
+        data.corn_type = doc2.data().corn_type;
+        data.corn_qty = doc2.data().corn_qty;
+        data.price = doc2.data().price
+            
+     res.render('staff-todayprice.ejs', {data});
     }); 
 
 app.post('/admin/staff-todayprice', async (req,res) => {  
 let today = new Date();  
     
+
     let data = {
         created_on:today,
         date: req.body.filled_date,
