@@ -437,8 +437,7 @@ app.get('/staff/merchant/add-inventory/:user_id', async (req,res) => {
     } else {      
       data.user_id = user.data().viberid; 
       data.user_name = user.data().name;
-      data.user_phone = user.data().phone;
-      data.user_address = user.data().address
+      
     }
     res.render('staff-merchant-ADDinventory.ejs', {data:data}); 
     
