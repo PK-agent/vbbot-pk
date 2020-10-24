@@ -787,18 +787,10 @@ app.post('/admin/savepayment', async (req,res) => {
 });
 
 
-app.get('/admin/staff-todayprice',function(req,res){ 
-    let user = {};
-    snapshot.forEach(doc => {
-        user.id = doc.id;
-        user.filled_date = doc.data().filled_date;
-        user.filled_time = doc.data().filled_time;         
-        user.corn_type = doc.data().corn_type;
-        user.corn_qty = doc.data().corn_qty;
-        user.price = doc.data().price         
-    }); 
+app.get('/admin/staff-todayprice',function(req,res){              
+    
      res.render('staff-todayprice.ejs', {user:user});
-});
+    }); 
 
 app.post('/merchant/book-inventory', async (req,res) => {  
 let today = new Date();
