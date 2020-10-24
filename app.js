@@ -787,7 +787,7 @@ app.post('/admin/savepayment', async (req,res) => {
 });
 
 
-app.get('/admin/staff-todayprice',function(req,res){              
+app.get('/admin/staff-todayprice', async (req,res) =>{              
     const usersRef = db.collection('users');
     const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
