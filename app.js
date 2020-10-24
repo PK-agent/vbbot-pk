@@ -460,7 +460,7 @@ app.post('/staff/merchant/add-inventory', async (req,res) => {
     }
    
 
-    db.collection('staff').doc(merchant_id).collection('staff-stock').add(data)
+    db.collection('admin').doc(merchant_id).collection('staff-stocklist').add(data)
     .then(()=>{
         let data = {
                "receiver":currentUser.id,
