@@ -428,18 +428,18 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
 });
 
 app.get('/staff/merchant/add-inventory/:user_id', async (req,res) => {  
-    let data = { };        
+    let user = { };        
 
     let userRef = db.collection('users').doc(req.params.user_id);
     let user = await userRef.get();
     if (!user.exists) {
       console.log('No such user!');        
     } else {      
-      data.user_id = user.data().viberid; 
-      data.user_name = user.data().name;
+      user_id = user.data().viberid; 
+      user_name = user.data().name;
       
     }
-    res.render('staff-merchant-ADDinventory.ejs', {data:data}); 
+    res.render('staff-merchant-ADDinventory.ejs', {data:user}); 
     
 });
 
