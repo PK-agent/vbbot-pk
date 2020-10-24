@@ -381,80 +381,7 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
 });
 
 
-app.get('/staff/add-inventory/:id', async(req,res) => {  
-    const userRef = db.collection('users');
-    const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
-    // const snapshot = await usersRef.get();
-    if (snapshot.empty) {
-      console.log('No matching documents.');
-      return;
-    }  
-    let user = {};
-    snapshot.forEach(doc => {
-        user.id = doc.id;
-        user.name = doc.data().name;
-        user.phone = doc.data().phone;         
-        user.address = doc.data().address;  
-        user.corn_type = doc.data().corn_type;
-        user.corn_qty = doc.data().corn_qty;
-        user.purchased_price = doc.data().purchased_price;
-        user.comment = doc.data().comment;
-        user.received_date = doc.data().received_date    
-    }); 
 
-   res.render('merch-entryList.ejs', {user:user});
-});
-
-app.post('/staff/merchant/add-inventory', async (req,res) => {  
-   
-    let today = new Date();
-    let user_id = req.body.user_id;
-
-    let data = {
-        created_on:today,
-        name: req.body.name,
-        phone: req.body.phone,
-        address: req.body.address,
-        corn_type: req.body.corn_type,
-        corn_qty: req.body.corn_qty,
-        purchased_price: req.body.purchased_price,
-        comment: req.body.comment,
-        received_date: req.body.received_date          
-           
-    }
-   
-
-    db.collection('staff').doc(user_id).collection('Purchased_Price').add(data)
-    .then(()=>{
-        let data = {
-               "receiver":currentUser.id,
-               "min_api_version":1,
-               "sender":{
-                  "name":"PyaungKyi",
-                  "avatar":"http://api.adorable.io/avatar/200/isitup"
-               },
-               "tracking_data":"tracking data",
-               "type":"text",
-               "text": "Thank you! Now Your added Purchase Price success!"+req.body.name
-               
-            }   
-
-            fetch('https://chatapi.viber.com/pa/send_message', {
-                method: 'post',
-                body:    JSON.stringify(data),
-                headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
-            })
-            .then(res => res.json())
-            .then(json => console.log('JSON', json))
-            .then(()=>{
-                res.json({success:'success'});  
-      
-          })
-         
-        }).catch((error)=>{
-            console.log('ERROR:', error);
-        });   
-});
 
 //staff/merchant/entrylist
 
@@ -499,22 +426,71 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
     res.render('staff-merchantList.ejs', {data: data});    
 });
 
-app.get('/staff/add-inventory/:user_id', async (req,res) => {  
+app.get('/staff/merchant/add-inventory:merchant_id', async (req,res) => {  
     let data = { };        
 
-    let userRef = db.collection('users').doc(req.params.user_id);
+    let userRef = db.collection('users').doc(req.params.merchant_id);
     let user = await userRef.get();
     if (!user.exists) {
       console.log('No such user!');        
     } else {      
-      data.id = user.id; 
-      data.name = user.data().name;
+      data.merchant_id = user.data().viberid; 
+      data.merchant_name = user.data().name;
     }
-    res.render('staff-merchantList.ejs', {data:data}); 
+    res.render('staff-merchant-ADDinventory.ejs', {data:data}); 
     
 });
 
+app.post('/staff/merchant/add-inventory', async (req,res) => {  
+   
+    let today = new Date();
+    let merchant_id = req.body.merchant_id;
 
+    let data = {
+        created_on:today,
+        name: req.body.name,
+        phone: req.body.phone,
+        address: req.body.address,
+        corn_type: req.body.corn_type,
+        corn_qty: req.body.corn_qty,
+        purchased_price: req.body.purchased_price,
+        comment: req.body.comment,
+        received_date: req.body.received_date          
+           
+    }
+   
+
+    db.collection('staff').doc(merchant_id).collection('staff-stock').add(data)
+    .then(()=>{
+        let data = {
+               "receiver":currentUser.id,
+               "min_api_version":1,
+               "sender":{
+                  "name":"PyaungKyi",
+                  "avatar":"http://api.adorable.io/avatar/200/isitup"
+               },
+               "tracking_data":"tracking data",
+               "type":"text",
+               "text": "Thank you! Now Your added Purchase Price success!"+req.body.name
+               
+            }   
+
+            fetch('https://chatapi.viber.com/pa/send_message', {
+                method: 'post',
+                body:    JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
+            })
+            .then(res => res.json())
+            .then(json => console.log('JSON', json))
+            .then(()=>{
+                res.json({success:'success'});  
+      
+          })
+         
+        }).catch((error)=>{
+            console.log('ERROR:', error);
+        });   
+});
 
 
 
@@ -806,7 +782,7 @@ app.post('/admin/staff-todayprice', async (req,res) => {
     }
    
 
-    db.collection('users').add(data)
+    db.collection('admin').add(data)
     .then(()=>{
           res.json({success:'success'});  
 
