@@ -807,7 +807,7 @@ let today = new Date();
     }
    
 
-    db.collection('admin').doc(user_id) .add(data)
+    db.collection('admin').add(data)
     .then(()=>{                 
                 res.json({success:'success'});        
                       
