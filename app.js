@@ -787,22 +787,13 @@ app.post('/admin/savepayment', async (req,res) => {
 });
 
 
-app.get('/admin/staff-todayprice',function(req,res){              
-   
-    let data = {};
-        data.id = doc2.data().admin_id;
-        data.date = doc2.data().filled_date;
-        date.time = doc2.data().filled_time;
-        data.corn_type = doc2.data().corn_type;
-        data.corn_qty = doc2.data().corn_qty;
-        data.price = doc2.data().price
+app.get('/admin/staff-todayprice',function(req,res){       
             
-     res.render('staff-todayprice.ejs', {data});
+     res.render('staff-todayprice.ejs', {data:data});
     }); 
 
 app.post('/admin/staff-todayprice', async (req,res) => {  
-let today = new Date();  
-    let admin_id = req.body.admin_id;
+let today = new Date();     
 
     let data = {
         created_on:today,
@@ -814,7 +805,7 @@ let today = new Date();
            
     }   
 
-    db.collection('admin').doc(admin_id).collection('Staff').add(data)
+    db.collection('admin').add(data)
     .then(()=>{                 
                 res.json({success:'success'});        
                       
