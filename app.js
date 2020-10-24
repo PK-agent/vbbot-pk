@@ -793,8 +793,7 @@ app.get('/admin/staff-todayprice',function(req,res){
     }); 
 
 app.post('/admin/staff-todayprice', async (req,res) => {  
-let today = new Date();
-    let user_id = req.body.user_id;
+let today = new Date();  
 
     let data = {
         created_on:today,
