@@ -427,16 +427,16 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
     res.render('staff-merchantList.ejs', {data: data});    
 });
 
-app.get('/staff/merchant/add-inventory/:merchant_id', async (req,res) => {  
+app.get('/staff/merchant/add-inventory/:user_id', async (req,res) => {  
     let data = { };        
 
-    let merchantRef = db.collection('users').doc(req.params.merchant_id);
-    let merchant = await merchantRef.get();
-    if (!merchant.exists) {
+    let userRef = db.collection('users').doc(req.params.user_id);
+    let user = await userRef.get();
+    if (!user.exists) {
       console.log('No such user!');        
     } else {      
-      data.merchant_id = merchant.data().viberid; 
-      data.merchant_name = merchant.data().name;
+      data.user_id = user.data().viberid; 
+      data.user_name = user.data().name;
       
     }
     res.render('staff-merchant-ADDinventory.ejs', {data:data}); 
@@ -446,7 +446,7 @@ app.get('/staff/merchant/add-inventory/:merchant_id', async (req,res) => {
 app.post('/staff/merchant/add-inventory/', async (req,res) => {  
    
     let today = new Date();
-    let merchant_id = req.body.viberid;
+    let user_id = req.body.user_id;
 
     let data = {
         created_on:today,
@@ -462,7 +462,7 @@ app.post('/staff/merchant/add-inventory/', async (req,res) => {
     }
    
 
-    db.collection('users').doc(merchant_id).collection('stocks').add(data)
+    db.collection('users').doc(user_id).collection('stocks').add(data)
     .then(()=>{
           res.json({success:'success'});  
 
