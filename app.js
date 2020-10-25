@@ -408,7 +408,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
         }
         booksSnapshot.forEach(doc1 => {
             let book = {};
-            console.log(doc.ref.parent.parent.id);
+            console.log(doc1.ref.parent.parent.id);
             book.id = doc1.id;
             book.name = doc1.data().name;
             book.phone = doc1.data().phone;         
