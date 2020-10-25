@@ -427,16 +427,16 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
     res.render('staff-merchantList.ejs', {data: data});    
 });
 
-app.get('/staff/merchant/add-inventory/:user_id', async (req,res) => {  
+app.get('/staff/merchant/add-inventory/:merchant_id', async (req,res) => {  
     let data = { };        
 
-    let userRef = db.collection('users').doc(req.params.user_id);
-    let user = await userRef.get();
-    if (!user.exists) {
+    let merchantRef = db.collection('users').doc(req.params.merchant_id);
+    let merchant = await merchantRef.get();
+    if (!merchant.exists) {
       console.log('No such user!');        
     } else {      
-      data.user_id = user.data().viberid; 
-      data.user_name = user.data().name;
+      data.merchant_id = merchant.data().viberid; 
+      data.merchant_name = merchant.data().name;
       
     }
     res.render('staff-merchant-ADDinventory.ejs', {data:data}); 
