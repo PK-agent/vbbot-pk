@@ -408,7 +408,6 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
         }
         booksSnapshot.forEach(doc1 => {
             let book = {};
-            // console.log(doc1.ref.parent.parent.id);
             book.userId = doc1.ref.parent.parent.id;
             book.id = doc1.id;
             book.name = doc1.data().name;
@@ -434,8 +433,7 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
     let userDoc = await userRef.get();
     if (!userDoc.exists) {
       console.log('No such user!');        
-    } else { 
-        console.log(userDoc.data());     
+    } else {     
       data.userId = userDoc.data().viberid; 
       data.name = userDoc.data().name;
       data.phone = userDoc.data().phone;
