@@ -438,11 +438,11 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
       data.name = userDoc.data().name;
       data.phone = userDoc.data().phone;
       data.address = userDoc.data().address;
-      data.corn_type = doc1.data().corn_type;
-      data.corn_qty = doc1.data().corn_qty;
-      data.purchased_price = doc1.data().purchased_price;
-      data.comment = doc1.data().comment;
-      data.received_date = doc1.data().received_date
+      data.corn_type = userDoc.data().corn_type;
+      data.corn_qty = userDoc.data().corn_qty;
+      data.purchased_price = userDoc.data().purchased_price;
+      data.comment = userDoc.data().comment;
+      data.received_date = userDoc.data().received_date
     }
     res.render('staff-merchant-ADDinventory.ejs', {data:data}); 
     
@@ -451,7 +451,7 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
 app.post('/staff/merchant/add-inventory/', async (req,res) => {  
    
     let today = new Date();   
-    let user_id = req.body.user_id;
+    let user_id = req.body.userId;
     let data = {
         created_on:today,
         name: req.body.name,
