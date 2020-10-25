@@ -446,7 +446,7 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
 app.post('/staff/merchant/add-inventory/', async (req,res) => {  
    
     let today = new Date();
-    let user_id = req.body.user_id;
+    let user_id = req.body.id;
 
     let data = {
         created_on:today,
@@ -462,7 +462,7 @@ app.post('/staff/merchant/add-inventory/', async (req,res) => {
     }
    
 
-    db.collection('users').doc(user_id).collection('stocks').add(data)
+    db.collection('users').doc(user_id).collection('staff').add(data)
     .then(()=>{
           res.json({success:'success'});  
 
