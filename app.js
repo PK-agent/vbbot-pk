@@ -435,7 +435,7 @@ app.get('/staff/merchant/add-inventory/:merchant_id', async (req,res) => {
     if (!merchant.exists) {
       console.log('No such user!');        
     } else {      
-      data.merchant_id = merchant.data().id; 
+      data.merchant_id = merchant.data().viberid; 
       data.merchant_name = merchant.data().name;
       
     }
@@ -446,7 +446,7 @@ app.get('/staff/merchant/add-inventory/:merchant_id', async (req,res) => {
 app.post('/staff/merchant/add-inventory/', async (req,res) => {  
    
     let today = new Date();
-    let merchant_id = req.body.merchant_id;
+    let merchant_id = req.body.viberid;
 
     let data = {
         created_on:today,
