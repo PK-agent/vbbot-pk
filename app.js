@@ -408,7 +408,8 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
         }
         booksSnapshot.forEach(doc1 => {
             let book = {};
-            console.log(doc1.ref.parent.parent.id);
+            // console.log(doc1.ref.parent.parent.id);
+            book.userId = doc1.ref.parent.parent.id;
             book.id = doc1.id;
             book.name = doc1.data().name;
             book.phone = doc1.data().phone;         
@@ -427,16 +428,18 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
 });
 
 app.get('/staff/merchant/add-inventory/:id', async (req,res) => {  
-    let data = { };        
+    let data = {};        
 
     let userRef = db.collection('users').doc(req.params.id);
-    let user = await userRef.get();
-    if (!user.exists) {
+    let userDoc = await userRef.get();
+    if (!userDoc.exists) {
       console.log('No such user!');        
-    } else {      
-      data.user_id = user.data().viberid; 
-      data.user_name = user.data().name;
-      
+    } else { 
+        console.log(userDoc.data());     
+      data.userId = userDoc.data().viberid; 
+      data.name = userDoc.data().name;
+      data.phone = userDoc.data().phone;
+      data.address = userDoc.data().address;
     }
     res.render('staff-merchant-ADDinventory.ejs', {data:data}); 
     
