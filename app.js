@@ -392,7 +392,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
 
     let promises = [];
     
-    usersSnapshot.forEach( async doc => {
+    usersSnapshot.forEach( doc => {
         const booksRef = db.collection('users').doc(doc.id).collection('books');
         promises.push(booksRef.get());                  
     });
@@ -401,28 +401,26 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
 
     const outputs = await Promise.all(promises);
 
-    usersSnapshot.forEach(doc => {
-        outputs.forEach(booksSnapshot => {
-            if(booksSnapshot.empty) {
-                console.log('No matching documents.');
-                return;
-            }
-            booksSnapshot.forEach(doc1 => {
-                let book = {};
-                book.userId = doc.id;
-                book.id = doc1.id;
-                book.name = doc1.data().name;
-                book.phone = doc1.data().phone;         
-                book.address = doc1.data().address;
-                book.corn_type = doc1.data().corn_type;
-                book.corn_qty = doc1.data().corn_qty;   
-                book.wanted_price = doc1.data().wanted_price;
-                book.comment = doc1.data().comment;
-                book.received_date = doc1.data().received_date
-    
-                data.push(book); 
-            }); 
-        });
+    outputs.forEach(booksSnapshot => {
+        if(booksSnapshot.empty) {
+            console.log('No matching documents.');
+            return;
+        }
+        booksSnapshot.forEach(doc1 => {
+            let book = {};
+            console.log(doc.ref.parent.parent.id);
+            book.id = doc1.id;
+            book.name = doc1.data().name;
+            book.phone = doc1.data().phone;         
+            book.address = doc1.data().address;
+            book.corn_type = doc1.data().corn_type;
+            book.corn_qty = doc1.data().corn_qty;   
+            book.wanted_price = doc1.data().wanted_price;
+            book.comment = doc1.data().comment;
+            book.received_date = doc1.data().received_date
+
+            data.push(book); 
+        }); 
     });
 
     res.render('staff-merchantList.ejs', {data: data});    
