@@ -380,9 +380,6 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
     res.render('merch-entryList.ejs', {data: data});    
 });
 
-
-
-
 //staff/merchant/entrylist
 
 app.get('/staff/merchant/inventory-list', async (req,res) => {
@@ -392,7 +389,6 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
       console.log('No matching documents.');
       return;
     }  
-    let data = [];
 
     let promises = [];
     
@@ -401,36 +397,41 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
         promises.push(booksRef.get());                  
     });
 
+    let data = [];
+
     const outputs = await Promise.all(promises);
 
-    outputs.forEach(booksSnapshot => {
-        if(booksSnapshot.empty) {
-            console.log('No matching documents.');
-            return;
-        }
-        booksSnapshot.forEach(doc1 => {
-            let user = {};
-            user.id = doc1.id;
-            user.name = doc1.data().name;
-            user.phone = doc1.data().phone;         
-            user.address = doc1.data().address;
-            user.corn_type = doc1.data().corn_type;
-            user.corn_qty = doc1.data().corn_qty;   
-            user.wanted_price = doc1.data().wanted_price;
-            user.comment = doc1.data().comment;
-            user.received_date = doc1.data().received_date
-
-            data.push(user); 
-        }); 
-    })
+    usersSnapshot.forEach(doc => {
+        outputs.forEach(booksSnapshot => {
+            if(booksSnapshot.empty) {
+                console.log('No matching documents.');
+                return;
+            }
+            booksSnapshot.forEach(doc1 => {
+                let book = {};
+                book.userId = doc.id;
+                book.id = doc1.id;
+                book.name = doc1.data().name;
+                book.phone = doc1.data().phone;         
+                book.address = doc1.data().address;
+                book.corn_type = doc1.data().corn_type;
+                book.corn_qty = doc1.data().corn_qty;   
+                book.wanted_price = doc1.data().wanted_price;
+                book.comment = doc1.data().comment;
+                book.received_date = doc1.data().received_date
+    
+                data.push(book); 
+            }); 
+        });
+    });
 
     res.render('staff-merchantList.ejs', {data: data});    
 });
 
-app.get('/staff/merchant/add-inventory/:user_id', async (req,res) => {  
+app.get('/staff/merchant/add-inventory/:id', async (req,res) => {  
     let data = { };        
 
-    let userRef = db.collection('users').doc(req.params.user_id);
+    let userRef = db.collection('users').doc(req.params.id);
     let user = await userRef.get();
     if (!user.exists) {
       console.log('No such user!');        

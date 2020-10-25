@@ -24,20 +24,20 @@
         
   </tr>
 
-  <% data.forEach(function(user){ %>
+  <% data.forEach(function(book){ %>
      <tr>
       
-       <td><%= user.name %></td>
-       <td><%= user.phone %></td>
-       <td><%= user.address %></td>
-       <td><%= user.corn_type %></td>
-       <td><%= user.corn_qty %></td>
-       <td><%= user.wanted_price %></td>
-       <td><%= user.comment %></td>
-       <td><%= user.received_date %></td>
+       <td><%= book.name %></td>
+       <td><%= book.phone %></td>
+       <td><%= book.address %></td>
+       <td><%= book.corn_type %></td>
+       <td><%= book.corn_qty %></td>
+       <td><%= book.wanted_price %></td>
+       <td><%= book.comment %></td>
+       <td><%= book.received_date %></td>
        
      
-       <td><a href="/staff/merchant/add-inventory/<%= user.id %>">Add Inventory</a> | <a href="../admin/stocklist/<%= user.id %>">Delete</a></td>
+       <td><a href="/staff/merchant/add-inventory/<%= book.id %>">Add Inventory</a> | <a href="../admin/stocklist/<%= book.id %>">Delete</a></td>
      </tr>
   <% }); %>
  
