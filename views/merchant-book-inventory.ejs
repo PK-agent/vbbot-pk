@@ -2,41 +2,41 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Merchant Book Inventory Form</title>
+    <title>ပြောင်းအရောင်းစာရင်းသွင်းရန်</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
  </head>
 
   <body>
-  <h1>Book Inventory Details</h1>
+  <h1>အရောင်းစာရင်းသွင်းရန်</h1>
   <form id="form" action="/merchant/book-inventory" method="post">
     
-      <label for="name">Merchant Name</label><br>
+      <label for="name">ကုန်သည်အမည်</label><br>
       <input type="text" name="name" value="<%= user.name %>" /><br>
       
   
-      <label for="name">Phone Number</label><br>
+      <label for="name">ဖုန်းနံပါတ်</label><br>
       <input type="tel" name="phone" pattern="[0-9]{5,15}" value="<%= user.phone %>" /><br>
   
-      <label for="name">Address</label><br>
+      <label for="name">နေရပ်လိပ်စာ</label><br>
       <textarea name="address" rows="4" cols="50"></textarea><br>
 
-      <label for="name">Corn Type</label><br>
+      <label for="name">ပြောင်းအမျိုးအစား</label><br>
       <select type="option" name="corn_type">
         <option value="888">CP-888</option>
         <option value="222">CP-222</option>
         <option value=336>CP-336</option>          
       </select><br>
    
-      <label for="name">Quantity</label><br>
+      <label for="name">တင်းအရေအတွက်</label><br>
       <input type="number" name="corn_qty"/><br>  
       
-      <label for="name">Wanted Price</label><br>
+      <label for="name">ရောင်းလိုသည့်စေ ျးနှုန်း</label><br>
       <input type="number" name="wanted_price"/><br>
 
-      <label for="name">Comments</label><br>
+      <label for="name">မှတ်ချက်</label><br>
       <textarea name="comment" rows="4" cols="50"></textarea><br>
   
-      <label for="name">Received Date</label><br>
+      <label for="name">စာရင်းသွင်းသည့်ရက်စွဲ</label><br>
       <input type="date" name="received_date"/><br>
 
       <input type="hidden" name="user_id" value="<%= user.id %>"/>
