@@ -459,13 +459,9 @@ app.post('/staff/merchant/add-inventory/', async (req,res) => {
         received_date: req.body.received_date
     }
 
-    console.log(user_id);
-    console.log(data);
-
     db.collection('admin').doc(user_id).collection('staff').add(data)
-    .then(()=>{
-          res.json({success:'success'});  
-
+    .then(()=>{  
+        console.log('Success');
     }).catch((error)=>{
         console.log('ERROR:', error);
     }); 
