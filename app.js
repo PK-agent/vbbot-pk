@@ -445,7 +445,6 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
 });
 
 app.post('/staff/merchant/add-inventory/', async (req,res) => {  
-    console.log('--------------------------------=======================--------------------------------------');
     let today = new Date();   
     let user_id = req.body.userId;
     let data = {
@@ -457,10 +456,11 @@ app.post('/staff/merchant/add-inventory/', async (req,res) => {
         corn_qty: req.body.corn_qty,
         purchased_price: req.body.purchased_price,
         comment: req.body.comment,
-        received_date: req.body.received_date          
-           
+        received_date: req.body.received_date
     }
-   
+
+    console.log(user_id);
+    console.log(data);
 
     db.collection('admin').doc(user_id).collection('staff').add(data)
     .then(()=>{
