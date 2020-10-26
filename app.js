@@ -434,7 +434,7 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
     if (!userDoc.exists) {
       console.log('No such user!');        
     } else {     
-      data.userId = userDoc.data().viberid; 
+      data.userId = userDoc.id;
       data.name = userDoc.data().name;
       data.phone = userDoc.data().phone;
       data.address = userDoc.data().address;
