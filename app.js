@@ -1052,7 +1052,7 @@ const addMarketPrice = (message, response) => {
 }
 
 const adminAddStaffPurchasePrice = (message, response) => {    
-
+    
     let bot_message = new UrlMessage(process.env.APP_URL + '/admin/staff-todayprice');   
     response.send(bot_message);
 }
@@ -1064,7 +1064,7 @@ const test2 = (message, response) => {
 }
 
 const merchantBookInventory = (message, response) => {    
-
+    let bot_message = new TextMessage(`link ကိုနှိပ်ပြီးစာရင်းသွင်းရန်`);
     let bot_message = new UrlMessage(APP_URL + '/merchant/book-inventory');   
     response.send(bot_message);
 }
