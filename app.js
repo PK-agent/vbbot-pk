@@ -51,7 +51,7 @@ let adminKeyboard = {
                 "BgLoop": true,
                 "ActionType": "reply",
                 "ActionBody": "mkt-price",               
-                "Text": "Add Market Price",
+                "Text": "ပေါက်စေ ျးထည့်ရန်",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
@@ -66,7 +66,7 @@ let adminKeyboard = {
                 "BgLoop": true,
                 "ActionType": "reply",
                 "ActionBody": "merch-entrylist",               
-                "Text": "Merchant Entry List",
+                "Text": "ကုန်သည်အဝင်စာရင်း",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
@@ -88,7 +88,7 @@ let adminAddmarketPrice = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "merchant-market-price",               
-            "Text": "Merchant Market Price",
+            "Text": "ကုန်သည်အ၀ယ်စေ ျးနှုန်း",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -103,7 +103,7 @@ let adminAddmarketPrice = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "staff-market-price",               
-            "Text": "Staff Market Price",
+            "Text": "အလုပ်သမားအဝယ်စေ ျးနှုန်း",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -125,7 +125,7 @@ let staffKeyboard = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "booked-merchants-list",               
-            "Text": "Booked Merchants List",
+            "Text": "ဝယ်ယူရမည့်ကုန်သည်စာရင်း",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -140,7 +140,7 @@ let staffKeyboard = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "tdy-pur-price",               
-            "Text": "Today's Purchase Price",
+            "Text": "ယနေ့အဝယ်စေ ျးနှုန်း",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -162,7 +162,7 @@ let merchantKeyboard = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "tdy-mark-price",               
-            "Text": "Today Market Price",
+            "Text": "ယနေ့ပြောင်းပေါက်စေ ျး",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -177,7 +177,7 @@ let merchantKeyboard = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "merch-book-inv",               
-            "Text": "Merchant Book Inventory",
+            "Text": "ရောင်းမည်",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -189,7 +189,7 @@ let merchantKeyboard = {
 // Creating the bot with access token, name and avatar
 const bot = new ViberBot({
     authToken: process.env.AUTH_TOKEN, // <--- Paste your token here
-    name: "PyaungKyi",  // <--- Your bot name here
+    name: "ပြေင်းကြည့်",  // <--- Your bot name here
     avatar: "http://api.adorable.io/avatar/200/isitup"
 });
 
@@ -438,11 +438,7 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
       data.name = userDoc.data().name;
       data.phone = userDoc.data().phone;
       data.address = userDoc.data().address;
-      data.corn_type = userDoc.data().corn_type;
-      data.corn_qty = userDoc.data().corn_qty;
-      data.purchased_price = userDoc.data().purchased_price;
-      data.comment = userDoc.data().comment;
-      data.received_date = userDoc.data().received_date
+      
     }
     res.render('staff-merchant-ADDinventory.ejs', {data:data}); 
     
@@ -864,7 +860,7 @@ let AdminCusStafKeyboard = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "register",               
-            "Text": "Merchant",
+            "Text": "ပြောင်းကုန်သည်",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -879,7 +875,7 @@ let AdminCusStafKeyboard = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "stf-view",               
-            "Text": "Staff",
+            "Text": "အလုပ်သမား",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -904,7 +900,7 @@ let AdminCusStafKeyboard = {
     ],
 };
 
-const message = new TextMessage("Welcome to my Pyaung Kyi",AdminCusStafKeyboard,null,null,null,3);
+const message = new TextMessage("'ပြောင်းကြည့်' ပြောင်းအ၀ယ်စင်တာမှကြိုဆိုပါတယ်",AdminCusStafKeyboard,null,null,null,3);
 
 bot.onConversationStarted((userProfile, isSubscribed, context) => {  
     // if(userProfile.id === "sXvG8AwXZmlLW7/LCSvMXw==")  {
@@ -928,7 +924,7 @@ bot.onTextMessage(/^admin@/i, (message, response) =>{
     let pw_enter = text.substring(6);
 
     if(pw_enter == process.env.ADMIN_PASSWORD){
-        bot_message = new TextMessage(`Welcome Admin`, adminKeyboard);
+        bot_message = new TextMessage(`အကောင့်၀င်မှု့အောင်မြင်ပါသည်`, adminKeyboard);
     }else{
         asKAdminpin(message, response);
     }
@@ -941,7 +937,7 @@ bot.onTextMessage(/^staff@/i, (message, response) =>{
     let pw_enter = text.substring(6);
 
     if(pw_enter == process.env.STAFF_PASSWORD){
-        bot_message = new TextMessage(`Welcome Staff`, staffKeyboard);
+        bot_message = new TextMessage(`အကောင့်၀င်မှု့အောင်မြင်ပါသည်`, staffKeyboard);
     }else{
         asKStaffpin(message, response);
     }
@@ -1033,11 +1029,11 @@ bot.onTextMessage(/view/, (message, response) => {
 });*/
 
 const asKAdminpin= (message, response) => {
-    response.send(new TextMessage(`Please Enter admin password`));
+    response.send(new TextMessage(`admin စကား၀ှက်ရိုက်ထည့်ပါ`));
 }
 
 const asKStaffpin = (message, response) => {
-    response.send(new TextMessage(`Please Enter staff password`));
+    response.send(new TextMessage(`အလုပ်သမား စကား၀ှက်ရိုက်ထည့်ပါ`));
 }
 
 const whoAmI = (message, response) => {
@@ -1050,7 +1046,7 @@ const textReply = (message, response) => {
 }
 
 const addMarketPrice = (message, response) => {
-    let bot_message = new TextMessage(`Please choose activity keyboard`, adminAddmarketPrice)   
+    let bot_message = new TextMessage(`ကုန်သည်နှင့် အလုပ်သမားပေါက်စေ ျးထည့်ရန် ကီးဘုတ်တွင်ရွေးချယ်ပါ`, adminAddmarketPrice)   
     
     response.send(bot_message);
 }
@@ -1176,14 +1172,14 @@ const registerMerchant = async (message, response) => {
     const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
 
     if (snapshot.empty) {
-        let bot_message1 = new TextMessage(`Click on following link to register`, ); 
+        let bot_message1 = new TextMessage(`အကောင့်၀င်ရန် link ကိုနှိပ်ပါ`, ); 
         let bot_message2 = new UrlMessage(APP_URL + '/merchant/register');   
         response.send(bot_message1).then(()=>{
             return response.send(bot_message2);
         });
     }else{
         
-          let bot_message3 = new TextMessage(`You are already registered`, merchantKeyboard);    
+          let bot_message3 = new TextMessage(`အကောင့်၀င်ပြီးသားဖြစ်ပါသည်။ ကီးဘုတ်ကိုတွင်ရွေးချယ်ပါ`, merchantKeyboard);    
           response.send(bot_message3);
     }  
   

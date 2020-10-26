@@ -10,29 +10,29 @@
   <h1>Add Inventory</h1>
   <form id="form" action="/staff/merchant/add-inventory" method="post">
     
-      <label for="name">Merchant Name</label><br>
+      <label for="name">ကုန်သည်အမည်</label><br>
       <input type="text" name="name" value="<%= data.name %>" /><br>
       
   
-      <label for="name">Phone Number</label><br>
+      <label for="name">ဖုန်းနံပါတ်</label><br>
       <input type="tel" name="phone" pattern="[0-9]{5,15}" value="<%= data.phone %>"  /><br>
   
-      <label for="name">Address</label><br>
+      <label for="name">နေရပ်လိပ်စာ</label><br>
       <textarea name="address" rows="4" cols="50"><%= data.address %></textarea><br>
 
-      <label for="name">Corn Type</label><br>
+      <label for="name">ပြောင်းအမျိုးအစား</label><br>
       <input type="number" name="corn_type"/><br>
   
-      <label for="name">Quantity</label><br>
+      <label for="name">တင်းအရေအတွက်</label><br>
       <input type="number" name="corn_qty"/><br>  
       
-      <label for="name">Purchase Price</label><br>
+      <label for="name">ပေးချေခဲ့သည့်‌စေ ျးနှုန်း</label><br>
       <input type="number" name="purchased_price"/><br>
 
-      <label for="name">Comments</label><br>
+      <label for="name">မှတ်ချက်ရိုက်ရန်</label><br>
       <textarea name="comment" rows="4" cols="50"></textarea><br>
   
-      <label for="name">Received Date</label><br>
+      <label for="name">၀ယ်ခဲ့သည့်ရက်စွဲ</label><br>
       <input type="date" name="received_date"/><br>
 
       
