@@ -1064,9 +1064,11 @@ const test2 = (message, response) => {
 }
 
 const merchantBookInventory = (message, response) => {    
-    let bot_message = new TextMessage(`link ကိုနှိပ်ပြီးစာရင်းသွင်းရန်`);
-    let bot_message = new UrlMessage(APP_URL + '/merchant/book-inventory');   
-    response.send(bot_message);
+    let bot_message1 = new TextMessage(`link ကိုနှိပ်ပြီးစာရင်းသွင်းရန်`);
+    let bot_message2 = new UrlMessage(APP_URL + '/merchant/book-inventory');   
+    response.send(bot_message1).then(() =>{
+     return response.send(bot_message2)
+    });
 }
 
 const MerchantEntryList = (message, response) => {    
