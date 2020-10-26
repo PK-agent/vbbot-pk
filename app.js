@@ -445,7 +445,7 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
 });
 
 app.post('/staff/merchant/add-inventory/', async (req,res) => {  
-   
+    console.log('--------------------------------=======================--------------------------------------');
     let today = new Date();   
     let user_id = req.body.userId;
     let data = {
