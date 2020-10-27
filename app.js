@@ -276,6 +276,7 @@ app.get('/merchant/book-inventory', async(req,res) => {
     }  
     let merchant = {};
     boossnapshot.forEach(doc => {
+        Merchant.userId = doc.ref.parent.parent.id;
         merchant.id = doc.id;
         merchant.name = doc.data().name;
         merchant.phone = doc.data().phone;         
