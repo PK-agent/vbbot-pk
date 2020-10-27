@@ -276,7 +276,7 @@ app.get('/merchant/book-inventory', async (req,res) => {
     }  
     let merchant = {};
     snapshot.forEach(doc => {        
-        merchant.id = doc.id;
+        merchant.viberid = doc.data().viberid;
         merchant.name = doc.data().name;
         merchant.phone = doc.data().phone;         
         merchant.address = doc.data().address;  
