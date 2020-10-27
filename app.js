@@ -1166,7 +1166,7 @@ const keyboardReply = (message, response) => {
 
 const registerMerchant = async (message, response) => {   
 
-    const userRef = db.collection('users');    
+    const userRef = db.collection('merchants');    
     const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
 
     if (snapshot.empty) {
