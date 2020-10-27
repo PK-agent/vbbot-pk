@@ -279,12 +279,7 @@ app.get('/merchant/book-inventory', async (req,res) => {
         merchant.id = doc.id;
         merchant.name = doc.data().name;
         merchant.phone = doc.data().phone;         
-        merchant.address = doc.data().address;  
-        merchant.corn_type = doc.data().corn_type;
-        merchant.corn_qty = doc.data().corn_qty;
-        merchant.wanted_price = doc.data().wanted_price;
-        merchant.comment = doc.data().comment;
-        merchant.received_date = doc.data().received_date    
+        merchant.address = doc.data().address;   
     }); 
 
    res.render('merchant-book-inventory.ejs', {merchant:merchant});
@@ -309,7 +304,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
     }
    
 
-    db.collection('merchants').doc(merchant_id).collection('merchant-books').add(data)
+    db.collection('books').add(data)
     .then(()=>{
         let data = {
                "receiver":currentUser.id,
