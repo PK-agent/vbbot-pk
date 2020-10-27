@@ -280,7 +280,6 @@ app.get('/merchant/book-inventory', async (req,res) => {
         merchant.name = doc.data().name;
         merchant.phone = doc.data().phone;         
         merchant.address = doc.data().address;  
-        console.log(merchant); 
     }); 
 
    res.render('merchant-book-inventory.ejs', {merchant:merchant});
