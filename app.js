@@ -434,7 +434,7 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
     if (!userDoc.exists) {
       console.log('No such user!');        
     } else {     
-      data.userId = userDoc.data().viberid; 
+      data.userId = userDoc.id;
       data.name = userDoc.data().name;
       data.phone = userDoc.data().phone;
       data.address = userDoc.data().address;
@@ -445,9 +445,8 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
 });
 
 app.post('/staff/merchant/add-inventory/', async (req,res) => {  
-   
     let today = new Date();   
-    let user_id = req.body.userId;
+    let user_id = req.body.user_id;
     let data = {
         created_on:today,
         name: req.body.name,
@@ -457,15 +456,12 @@ app.post('/staff/merchant/add-inventory/', async (req,res) => {
         corn_qty: req.body.corn_qty,
         purchased_price: req.body.purchased_price,
         comment: req.body.comment,
-        received_date: req.body.received_date          
-           
+        received_date: req.body.received_date
     }
-   
 
     db.collection('admin').doc(user_id).collection('staff').add(data)
-    .then(()=>{
-          res.json({success:'success'});  
-
+    .then(()=>{  
+        console.log('Success');
     }).catch((error)=>{
         console.log('ERROR:', error);
     }); 
