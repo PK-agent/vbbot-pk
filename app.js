@@ -231,7 +231,7 @@ app.post('/merchant/register',function(req,response){
     }
 
    
-    db.collection('users').add(data)
+    db.collection('merchants').add(data)
     .then(()=>{
             let data = {
                    "receiver":currentUser.id,
@@ -267,7 +267,7 @@ app.post('/merchant/register',function(req,response){
 });
 
 app.get('/merchant/book-inventory', async(req,res) => {  
-    const usersRef = db.collection('users');
+    const usersRef = db.collection('merchants');
     const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
     if (snapshot.empty) {
@@ -276,7 +276,7 @@ app.get('/merchant/book-inventory', async(req,res) => {
     }  
     let user = {};
     snapshot.forEach(doc => {
-        user.id = doc.id;
+        user.id = doc.viberid;
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
         user.address = doc.data().address;  
@@ -309,7 +309,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
     }
    
 
-    db.collection('users').doc(user_id).collection('books').add(data)
+    db.collection('merchants').doc(user_id).add(data)
     .then(()=>{
         let data = {
                "receiver":currentUser.id,
