@@ -287,7 +287,7 @@ app.get('/merchant/book-inventory', async(req,res) => {
         merchant.received_date = doc.data().received_date    
     }); 
 
-   res.render('merchant-book-inventory.ejs', {user:user});
+   res.render('merchant-book-inventory.ejs', {merchant:merchant});
 });
 
 app.post('/merchant/book-inventory', async (req,res) => {  
