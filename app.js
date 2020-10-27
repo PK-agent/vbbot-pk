@@ -300,8 +300,8 @@ app.post('/merchant/book-inventory', async (req,res) => {
         corn_qty: req.body.corn_qty,
         wanted_price: req.body.wanted_price,
         comment: req.body.comment,
-        received_date: req.body.received_date          
-           
+        received_date: req.body.received_date,          
+        merchant_id: merchant_id   
     }
    
 
