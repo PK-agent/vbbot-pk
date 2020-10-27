@@ -335,9 +335,9 @@ app.post('/merchant/book-inventory', async (req,res) => {
 
 //admin/merchant/entrylist
 app.get('/admin/merchant/book-list', async (req,res) => {
-    const adminRef = db.collection('merchant-books');
-    const adminSnapshot = await adminRef.get();
-    if (adminSnapshot.empty) {
+    const booksRef = db.collection('merchant-books');
+    const booksSnapshot = await booksRef.get();
+    if (booksSnapshot.empty) {
       console.log('No matching documents.');
       return;
     }  
@@ -345,21 +345,21 @@ app.get('/admin/merchant/book-list', async (req,res) => {
 
     let promises = [];
     
-    adminSnapshot.forEach( async doc => {
-        const booksRef = db.collection('merchant-books').doc(doc.id);
-        promises.push(booksRef.get());                  
+    booksSnapshot.forEach( async doc => {
+        const bookRef = db.collection('merchant-books');
+        promises.push(bookRef.get());                  
     });
 
     const outputs = await Promise.all(promises);
 
-    outputs.forEach(merchantSnapshot => {
-        if(merchantSnapshot.empty) {
+    outputs.forEach(bookSnapshot => {
+        if(bookSnapshot.empty) {
             console.log('No matching documents.');
             return;
         }
-        merchantSnapshot.forEach(doc1 => {
+        bookSnapshot.forEach(doc1 => {
             let book = {};
-            book.id = doc1.viberid;
+            book.id = doc1.data().viberid;
             book.name = doc1.data().name;
             book.phone = doc1.data().phone;         
             book.address = doc1.data().address;
