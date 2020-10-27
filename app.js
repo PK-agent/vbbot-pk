@@ -293,7 +293,7 @@ app.get('/merchant/book-inventory', async(req,res) => {
 app.post('/merchant/book-inventory', async (req,res) => {  
    
     let today = new Date();
-    let user_id = req.body.user_id;
+    let user_id = req.body.viberid;
 
     let data = {
         created_on:today,
