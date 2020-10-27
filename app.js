@@ -213,7 +213,7 @@ app.get('/merchant/register',function(req,res){
         user_name: currentUser.name,
       } 
       console.log(currentUser);
-     res.render('merchant.ejs', {data:data});
+     res.render('merchant-register.ejs', {data:data});
 });
 
 
@@ -334,10 +334,10 @@ app.post('/merchant/book-inventory', async (req,res) => {
 });
 
 //admin/merchant/entrylist
-app.get('/admin/merchant/entrylist', async (req,res) => {
-    const usersRef = db.collection('users');
-    const userSnapshot = await usersRef.get();
-    if (userSnapshot.empty) {
+app.get('/admin/merchant/book-list', async (req,res) => {
+    const adminRef = db.collection('merchant-books');
+    const adminSnapshot = await adminRef.get();
+    if (adminSnapshot.empty) {
       console.log('No matching documents.');
       return;
     }  
@@ -345,34 +345,34 @@ app.get('/admin/merchant/entrylist', async (req,res) => {
 
     let promises = [];
     
-    userSnapshot.forEach( async doc => {
-        const ordersRef = db.collection('users').doc(doc.id).collection('books');
-        promises.push(ordersRef.get());                  
+    adminSnapshot.forEach( async doc => {
+        const booksRef = db.collection('merchant-books').doc(doc.id);
+        promises.push(booksRef.get());                  
     });
 
     const outputs = await Promise.all(promises);
 
-    outputs.forEach(ordersSnapshot => {
-        if(ordersSnapshot.empty) {
+    outputs.forEach(booksSnapshot => {
+        if(booksSnapshot.empty) {
             console.log('No matching documents.');
             return;
         }
-        ordersSnapshot.forEach(doc1 => {
-            let user = {};
-            user.id = doc1.id;
-            user.name = doc1.data().name;
-            user.phone = doc1.data().phone;         
-            user.address = doc1.data().address;
-            user.corn_type = doc1.data().corn_type;
-            user.corn_qty = doc1.data().corn_qty;
-            user.wanted_price = doc1.data().wanted_price;
-            user.comment = doc1.data().comment;
-            user.received_date = doc1.data().received_date;   
-            data.push(user); 
+        booksSnapshot.forEach(doc1 => {
+            let book = {};
+            book.id = doc1.id;
+            book.name = doc1.data().name;
+            book.phone = doc1.data().phone;         
+            book.address = doc1.data().address;
+            book.corn_type = doc1.data().corn_type;
+            book.corn_qty = doc1.data().corn_qty;
+            book.wanted_price = doc1.data().wanted_price;
+            book.comment = doc1.data().comment;
+            book.received_date = doc1.data().received_date;   
+            data.push(book); 
         }); 
     })
 
-    res.render('merch-entryList.ejs', {data: data});    
+    res.render('merchant-bookList.ejs', {data: data});    
 });
 
 //staff/merchant/entrylist
@@ -1064,7 +1064,7 @@ const merchantBookInventory = (message, response) => {
 
 const MerchantEntryList = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/admin/merchant/entrylist');   
+    let bot_message = new UrlMessage(APP_URL + '/admin/merchant/book-list');   
     response.send(bot_message);
 }
 
