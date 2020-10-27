@@ -266,7 +266,7 @@ app.post('/merchant/register',function(req,response){
            
 });
 
-app.get('/merchant/book-inventory', async(req,res) => {  
+app.get('/merchant/book-inventory', async (req,res) => {  
     const merchantsRef = db.collection('merchants');
     const snapshot = await merchantsRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
@@ -276,7 +276,7 @@ app.get('/merchant/book-inventory', async(req,res) => {
     }  
     let merchant = {};
     snapshot.forEach(doc => {        
-        merchant.id = doc.viberid;
+        merchant.id = doc.id;
         merchant.name = doc.data().name;
         merchant.phone = doc.data().phone;         
         merchant.address = doc.data().address;  
@@ -287,7 +287,7 @@ app.get('/merchant/book-inventory', async(req,res) => {
         merchant.received_date = doc.data().received_date    
     }); 
 
-   res.render('merchant-book-inventory.ejs', {merchant:merchant});
+   res.render('merchant-book-inventory.ejs', {user:merchant});
 });
 
 app.post('/merchant/book-inventory', async (req,res) => {  
