@@ -345,10 +345,10 @@ app.get('/admin/merchant/book-list', async (req,res) => {
 
     let promises = [];
     
-    // booksSnapshot.forEach( async doc => {
-    //     const bookRef = db.collection('merchant-books');
-    //     promises.push(bookRef.get());                  
-    // });
+    booksSnapshot.forEach( async doc => {
+        const bookRef = db.collection('merchant-books');
+        promises.push(bookRef.get());                  
+    });
 
     const outputs = await Promise.all(promises);
 
