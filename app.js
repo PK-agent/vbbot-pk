@@ -352,14 +352,14 @@ app.get('/admin/merchant/book-list', async (req,res) => {
 
     const outputs = await Promise.all(promises);
 
-    outputs.forEach(booksSnapshot => {
-        if(booksSnapshot.empty) {
+    outputs.forEach(merchantSnapshot => {
+        if(merchantSnapshot.empty) {
             console.log('No matching documents.');
             return;
         }
-        booksSnapshot.forEach(doc1 => {
+        merchantSnapshot.forEach(doc1 => {
             let book = {};
-            book.id = doc1.id;
+            book.id = doc1.viberid;
             book.name = doc1.data().name;
             book.phone = doc1.data().phone;         
             book.address = doc1.data().address;
