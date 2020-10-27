@@ -276,7 +276,7 @@ app.get('/merchant/book-inventory', async(req,res) => {
     }  
     let user = {};
     snapshot.forEach(doc => {
-        user.id = doc.viberid;
+        user.viberid = doc.viberid;
         user.name = doc.data().name;
         user.phone = doc.data().phone;         
         user.address = doc.data().address;  
@@ -309,7 +309,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
     }
    
 
-    db.collection('merchants').doc(user_id).add(data)
+    db.collection('books').doc(user_id).add(data)
     .then(()=>{
         let data = {
                "receiver":currentUser.id,
