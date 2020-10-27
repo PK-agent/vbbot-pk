@@ -268,14 +268,14 @@ app.post('/merchant/register',function(req,response){
 
 app.get('/merchant/book-inventory', async(req,res) => {  
     const merchantsRef = db.collection('merchants');
-    const bookssnapshot = await merchantsRef.where('viberid', '==', currentUser.id).limit(1).get();
+    const snapshot = await merchantsRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
-    if (bookssnapshot.empty) {
+    if (snapshot.empty) {
       console.log('No matching documents.');
       return;
     }  
     let merchant = {};
-    boossnapshot.forEach(doc => {
+    snapshot.forEach(doc => {
         Merchant.userId = doc.ref.parent.parent.id;
         merchant.id = doc.id;
         merchant.name = doc.data().name;
