@@ -11,11 +11,11 @@
   <form id="form" action="/merchant/book-inventory" method="post">
     
       <label for="name">ကုန်သည်အမည်</label><br>
-      <input type="text" name="name" value="<%= user.name %>" /><br>
+      <input type="text" name="name" value="<%= merchant.name %>" /><br>
       
   
       <label for="name">ဖုန်းနံပါတ်</label><br>
-      <input type="tel" name="phone" pattern="[0-9]{5,15}" value="<%= user.phone %>" /><br>
+      <input type="tel" name="phone" pattern="[0-9]{5,15}" value="<%= merchant.phone %>" /><br>
   
       <label for="name">နေရပ်လိပ်စာ</label><br>
       <textarea name="address" rows="4" cols="50"></textarea><br>
@@ -39,7 +39,7 @@
       <label for="name">စာရင်းသွင်းသည့်ရက်စွဲ</label><br>
       <input type="date" name="received_date"/><br>
 
-      <input type="hidden" name="user_id" value="<%= user.id %>"/>
+      <input type="hidden" name="merchant_id" value="<%= merchant.id %>"/>
     
     <input type="submit" name="submit"/>
 

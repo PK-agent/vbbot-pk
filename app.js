@@ -267,24 +267,24 @@ app.post('/merchant/register',function(req,response){
 });
 
 app.get('/merchant/book-inventory', async(req,res) => {  
-    const usersRef = db.collection('merchants');
-    const snapshot = await usersRef.where('viberid', '==', currentUser.id).limit(1).get();
+    const merchantsRef = db.collection('merchants');
+    const snapshot = await merchantsRef.where('viberid', '==', currentUser.id).limit(1).get();
     // const snapshot = await usersRef.get();
     if (snapshot.empty) {
       console.log('No matching documents.');
       return;
     }  
-    let user = {};
+    let merchant = {};
     snapshot.forEach(doc => {
-        user.id = doc.id;
-        user.name = doc.data().name;
-        user.phone = doc.data().phone;         
-        user.address = doc.data().address;  
-        user.corn_type = doc.data().corn_type;
-        user.corn_qty = doc.data().corn_qty;
-        user.wanted_price = doc.data().wanted_price;
-        user.comment = doc.data().comment;
-        user.received_date = doc.data().received_date    
+        merchant.id = doc.id;
+        merchant.name = doc.data().name;
+        merchant.phone = doc.data().phone;         
+        merchant.address = doc.data().address;  
+        merchant.corn_type = doc.data().corn_type;
+        merchant.corn_qty = doc.data().corn_qty;
+        merchant.wanted_price = doc.data().wanted_price;
+        merchant.comment = doc.data().comment;
+        merchant.received_date = doc.data().received_date    
     }); 
 
    res.render('merchant-book-inventory.ejs', {user:user});
@@ -293,7 +293,7 @@ app.get('/merchant/book-inventory', async(req,res) => {
 app.post('/merchant/book-inventory', async (req,res) => {  
    
     let today = new Date();
-    let user_id = req.body.user_id;
+    let merchant_id = req.body.merchant_id;
 
     let data = {
         created_on:today,
@@ -309,7 +309,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
     }
    
 
-    db.collection('books').doc(user_id).add(data)
+    db.collection('books').doc(merchant_id).add(data)
     .then(()=>{
         let data = {
                "receiver":currentUser.id,
