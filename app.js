@@ -51,7 +51,7 @@ let adminKeyboard = {
                 "BgLoop": true,
                 "ActionType": "reply",
                 "ActionBody": "mkt-price",               
-                "Text": "ပေါက်စေ ျးထည့်ရန်",
+                "Text": "ပေါက်စျေးထည့်ရန်",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
@@ -1042,7 +1042,7 @@ const textReply = (message, response) => {
 }
 
 const addMarketPrice = (message, response) => {
-    let bot_message = new TextMessage(`ကုန်သည်နှင့် အလုပ်သမားပေါက်စေ ျးထည့်ရန် ကီးဘုတ်တွင်ရွေးချယ်ပါ`, adminAddmarketPrice)   
+    let bot_message = new TextMessage(`ကုန်သည်နှင့် အလုပ်သမားပေါက်စျေးထည့်ရန် ကီးဘုတ်တွင်ရွေးချယ်ပါ`, adminAddmarketPrice)   
     
     response.send(bot_message);
 }
