@@ -304,7 +304,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
     }
    
 
-    db.collection('merchant books').add(data)
+    db.collection('merchant-books').add(data)
     .then(()=>{
         let data = {
                "receiver":currentUser.id,
