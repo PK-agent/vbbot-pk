@@ -207,6 +207,11 @@ app.get('/',function(req,res){
     res.send('your app is up and running');
 });
 
+app.get('/test2',function(req,res){   
+    
+   res.render('merchant-todayprice.ejs');
+});
+
 
 app.get('/merchant/register',function(req,res){   
       let data = {
