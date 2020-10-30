@@ -39,7 +39,7 @@
           
           <!-- <td><a href="../admin/addstock/<%= merchant.id %>">Confirm</a> | <a href="../admin/stocklist/<%= merchant.id %>">Delete</a></td> -->
           <td>
-            <input type="hidden" name="id" value="merchant.id" />
+            <input type="hidden" name="docId" value="merchant.docId" />
             <input type="hidden" name="viberid" value="merchant.viberid" />
             <% if(merchant.already_confirmed == false) { %><input type="submit" name="action" value="Confirm" />  | <% } %>
             <input type="submit" name="action" value="Delete" />

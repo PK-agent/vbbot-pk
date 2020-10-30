@@ -352,7 +352,7 @@ app.get('/admin/merchant/book-list', async (req,res) => {
     booksSnapshot.forEach(doc => {
 
         let book = {};
-        book.id = doc.id;
+        book.docId = doc.id;
         book.viberid = doc.data().viberid;
         book.name = doc.data().name;
         book.phone = doc.data().phone;         
@@ -374,10 +374,10 @@ app.post('/admin/merchant/book-list', async (req,res) => {
     let action = req.body.action;
 
     if(action == "Confirm"){
-        let id = req.body.id;
+        let docId = req.body.docId;
         let viberid = req.body.viberid;
-        
-        const bookRef = db.collection('merchant-books').doc(id);
+        console.log(`${docId}------------------------------------------------------`);
+        const bookRef = db.collection('merchant-books').doc(docId);
         bookRef.update({
             "already_confirmed": true
         })
