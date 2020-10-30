@@ -383,11 +383,9 @@ app.post('/admin/merchant/book-list', async (req,res) => {
         })
         .then((result) => {
             console.log(result);
-            res.json(result);
         })
         .catch((error) => {
             console.log(error);
-            res.json(error);
         });
     }
     else{
