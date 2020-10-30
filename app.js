@@ -369,6 +369,18 @@ app.get('/admin/merchant/book-list', async (req,res) => {
     res.render('merchant-bookList.ejs', {data});  
 });
 
+
+app.post('/admin/merchant/book-list', async (req,res) => {
+    let action = req.body.action;
+
+    if(action == "Confirm"){
+        console.log("Confirm action ---------------------------------");
+    }
+    else{
+        console.log("Delete action -----------------------------");
+    }
+});
+
 //staff/merchant/entrylist
 
 app.get('/staff/merchant/inventory-list', async (req,res) => {
