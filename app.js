@@ -342,7 +342,6 @@ app.post('/merchant/book-inventory', async (req,res) => {
 //admin/merchant/entrylist
 app.get('/admin/merchant/book-list', async (req,res) => {
 
-
     const bookRef = db.collection('merchant-books');
     const booksSnapshot = await bookRef.get();
     if (booksSnapshot.empty) {
@@ -375,10 +374,24 @@ app.post('/admin/merchant/book-list', async (req,res) => {
     let action = req.body.action;
 
     if(action == "Confirm"){
-        console.log("Confirm action ---------------------------------");
+        let id = req.body.id;
+        let viberid = req.body.viberid;
+        
+        const bookRef = db.collection('merchant-books').doc(id);
+        bookRef.update({
+            "already_confirmed": true
+        })
+        .then((result) => {
+            console.log(result);
+            res.json(result);
+        })
+        .catch((error) => {
+            console.log(error);
+            res.json(error);
+        });
     }
     else{
-        console.log("Delete action -----------------------------");
+
     }
 });
 
