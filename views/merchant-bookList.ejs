@@ -9,7 +9,6 @@
   <body>
   <h1>ပြောင်းကုန်သည်အော်ဒါစာရင်း</h1>
 
-  <form id="form" action="/admin/merchant/book-list" method="post">
     <table cellspacing="1" cellpadding="5" border="1">
       <tr>
       
@@ -26,31 +25,32 @@
       </tr>
     
       <% data.forEach(function(merchant){ %>
-        <tr>
-          
-          <td><%= merchant.name %></td>
-          <td><%= merchant.phone %></td>
-          <td><%= merchant.address %></td>
-          <td><%= merchant.corn_type %></td>
-          <td><%= merchant.corn_qty %></td>
-          <td><%= merchant.wanted_price %></td>
-          <td><%= merchant.comment %></td>
-          <td><%= merchant.received_date %></td>
-          
-          <!-- <td><a href="../admin/addstock/<%= merchant.id %>">Confirm</a> | <a href="../admin/stocklist/<%= merchant.id %>">Delete</a></td> -->
-          <td>
-            <input type="hidden" name="docId" value="<%= merchant.docId %>" />
-            <input type="hidden" name="viberid" value="<%= merchant.viberid %>" />
-            <% if(merchant.already_confirmed == false) { %><input type="submit" name="action" value="Confirm" />  | <% } %>
-            <input type="submit" name="action" value="Delete" />
-          </td>
-        </tr>
+        <form id="form" action="/admin/merchant/book-list" method="post">
+          <tr>
+            
+            <td><%= merchant.name %></td>
+            <td><%= merchant.phone %></td>
+            <td><%= merchant.address %></td>
+            <td><%= merchant.corn_type %></td>
+            <td><%= merchant.corn_qty %></td>
+            <td><%= merchant.wanted_price %></td>
+            <td><%= merchant.comment %></td>
+            <td><%= merchant.received_date %></td>
+            
+            <!-- <td><a href="../admin/addstock/<%= merchant.id %>">Confirm</a> | <a href="../admin/stocklist/<%= merchant.id %>">Delete</a></td> -->
+            <td>
+              <input type="hidden" name="docId" value="<%= merchant.docId %>" />
+              <input type="hidden" name="viberid" value="<%= merchant.viberid %>" />
+              <% if(merchant.already_confirmed == false) { %><input type="submit" name="action" value="Confirm" />  | <% } %>
+              <input type="submit" name="action" value="Delete" />
+            </td>
+          </tr>
+        </form> 
       <% }); %> 
-    </table> 
-  </form>  
+    </table>  
 
 
-  <script>
+  <!-- <script>
     
     const reload = () => {
       setTimeout(()=>{
@@ -60,7 +60,7 @@
   
     document.getElementById("form").addEventListener("submit", reload); 
      
-    </script>
+    </script> -->
   </body>
 
 </html>
