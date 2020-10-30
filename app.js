@@ -340,44 +340,72 @@ app.post('/merchant/book-inventory', async (req,res) => {
 
 //admin/merchant/entrylist
 app.get('/admin/merchant/book-list', async (req,res) => {
-    const booksRef = db.collection('merchant-books');
-    const booksSnapshot = await booksRef.get();
+
+
+    const bookRef = db.collection('merchant-books');
+    const booksSnapshot = await bookRef.get();
     if (booksSnapshot.empty) {
       console.log('No matching documents.');
       return;
     }  
     let data = [];
+    booksSnapshot.forEach(doc => {
 
-    let promises = [];
+        let book = {};
+        book.id = doc.id;
+        book.viberid = doc.data().viberid;
+        book.name = doc.data().name;
+        book.phone = doc.data().phone;         
+        book.address = doc.data().address;
+        book.corn_type = doc.data().corn_type;
+        book.corn_qty = doc.data().corn_qty;
+        book.wanted_price = doc.data().wanted_price;
+        book.comment = doc.data().comment;
+        book.received_date = doc.data().received_date;   
+        data.push(book);       
+    });   
+
+    res.render('merchant-bookList.ejs', {data}); 
+
+
+    // const booksRef = db.collection('merchant-books');
+    // const booksSnapshot = await booksRef.get();
+    // if (booksSnapshot.empty) {
+    //   console.log('No matching documents.');
+    //   return;
+    // }  
+    // let data = [];
+
+    // let promises = [];
     
-    booksSnapshot.forEach( async doc => {
-        const bookRef = db.collection('merchant-books');
-        promises.push(bookRef.get());                  
-    });
+    // booksSnapshot.forEach( async doc => {
+    //     const bookRef = db.collection('merchant-books');
+    //     promises.push(bookRef.get());                  
+    // });
 
-    const outputs = await Promise.all(promises);
+    // const outputs = await Promise.all(promises);
 
-    outputs.forEach(bookSnapshot => {
-        if(bookSnapshot.empty) {
-            console.log('No matching documents.');
-            return;
-        }
-        bookSnapshot.forEach(doc1 => {
-            let book = {};
-            book.id = doc1.data().viberid;
-            book.name = doc1.data().name;
-            book.phone = doc1.data().phone;         
-            book.address = doc1.data().address;
-            book.corn_type = doc1.data().corn_type;
-            book.corn_qty = doc1.data().corn_qty;
-            book.wanted_price = doc1.data().wanted_price;
-            book.comment = doc1.data().comment;
-            book.received_date = doc1.data().received_date;   
-            data.push(book); 
-        }); 
-    })
+    // outputs.forEach(bookSnapshot => {
+    //     if(bookSnapshot.empty) {
+    //         console.log('No matching documents.');
+    //         return;
+    //     }
+    //     bookSnapshot.forEach(doc1 => {
+    //         let book = {};
+    //         book.id = doc1.data().viberid;
+    //         book.name = doc1.data().name;
+    //         book.phone = doc1.data().phone;         
+    //         book.address = doc1.data().address;
+    //         book.corn_type = doc1.data().corn_type;
+    //         book.corn_qty = doc1.data().corn_qty;
+    //         book.wanted_price = doc1.data().wanted_price;
+    //         book.comment = doc1.data().comment;
+    //         book.received_date = doc1.data().received_date;   
+    //         data.push(book); 
+    //     }); 
+    // })
 
-    res.render('merchant-bookList.ejs', {data: data});    
+    // res.render('merchant-bookList.ejs', {data: data});    
 });
 
 //staff/merchant/entrylist
