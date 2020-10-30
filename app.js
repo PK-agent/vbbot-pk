@@ -376,7 +376,7 @@ app.post('/admin/merchant/book-list', async (req,res) => {
     if(action == "Confirm"){
         let docId = req.body.docId;
         let viberid = req.body.viberid;
-        console.log(`${docId}------------------------------------------------------`);
+        
         const bookRef = db.collection('merchant-books').doc(docId);
         bookRef.update({
             "already_confirmed": true
@@ -389,7 +389,16 @@ app.post('/admin/merchant/book-list', async (req,res) => {
         });
     }
     else{
+        let docId = req.body.docId;
 
+        const bookRef = db.collection('merchant-books').doc(docId);
+        bookRef.delete()
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }
 });
 
