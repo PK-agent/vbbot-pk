@@ -344,27 +344,29 @@ app.get('/admin/merchant/book-list', async (req,res) => {
 
     const bookRef = db.collection('merchant-books');
     const booksSnapshot = await bookRef.get();
+    
+    let data = [];
     if (booksSnapshot.empty) {
       console.log('No matching documents.');
-      return;
     }  
-    let data = [];
-    booksSnapshot.forEach(doc => {
+    else{
+        booksSnapshot.forEach(doc => {
 
-        let book = {};
-        book.docId = doc.id;
-        book.viberid = doc.data().viberid;
-        book.name = doc.data().name;
-        book.phone = doc.data().phone;         
-        book.address = doc.data().address;
-        book.corn_type = doc.data().corn_type;
-        book.corn_qty = doc.data().corn_qty;
-        book.wanted_price = doc.data().wanted_price;
-        book.comment = doc.data().comment;
-        book.received_date = doc.data().received_date;   
-        book.already_confirmed = doc.data().already_confirmed;
-        data.push(book);       
-    });   
+            let book = {};
+            book.docId = doc.id;
+            book.viberid = doc.data().viberid;
+            book.name = doc.data().name;
+            book.phone = doc.data().phone;         
+            book.address = doc.data().address;
+            book.corn_type = doc.data().corn_type;
+            book.corn_qty = doc.data().corn_qty;
+            book.wanted_price = doc.data().wanted_price;
+            book.comment = doc.data().comment;
+            book.received_date = doc.data().received_date;   
+            book.already_confirmed = doc.data().already_confirmed;
+            data.push(book);       
+        }); 
+    }  
 
     res.render('merchant-bookList.ejs', {data});  
 });
