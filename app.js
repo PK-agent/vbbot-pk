@@ -344,7 +344,7 @@ app.get('/admin/merchant/book-list', async (req,res) => {
 
 
     const bookRef = db.collection('merchant-books');
-    const booksSnapshot = await bookRef.where('already_confirmed', '==', false).get();
+    const booksSnapshot = await bookRef.get();
     if (booksSnapshot.empty) {
       console.log('No matching documents.');
       return;
@@ -363,6 +363,7 @@ app.get('/admin/merchant/book-list', async (req,res) => {
         book.wanted_price = doc.data().wanted_price;
         book.comment = doc.data().comment;
         book.received_date = doc.data().received_date;   
+        book.already_confirmed = doc.data().already_confirmed;
         data.push(book);       
     });   
 
