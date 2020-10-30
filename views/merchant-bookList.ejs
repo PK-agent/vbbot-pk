@@ -25,7 +25,7 @@
       </tr>
     
       <% data.forEach(function(merchant){ %>
-        <form id="form" action="/admin/merchant/book-list" method="post">
+        <form class="form" action="/admin/merchant/book-list" method="post">
           <tr>
             
             <td><%= merchant.name %></td>
@@ -58,7 +58,7 @@
       },3000);    
     }
   
-    document.getElementById("form").addEventListener("submit", reload); 
+    document.getElementsByClassName("form").addEventListener("submit", reload); 
      
     </script>
   </body>
