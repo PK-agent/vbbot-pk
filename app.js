@@ -408,8 +408,8 @@ app.post('/admin/merchant/book-list', async (req,res) => {
 //staff/merchant/entrylist
 
 app.get('/staff/merchant/inventory-list', async (req,res) => {
-    const merchantsRef = db.collection('merchant-books').doc(docId);
-    const booksSnapshot = await merchantsRef.where('already_confirmed', '==', ture).limit(1).get();
+    const staffsRef = db.collection('merchant-books');
+    const booksSnapshot = await staffsRef.where('already_confirmed', '==', ture).limit(1).get();
     // const snapshot = await usersRef.get();
     let data = [];
     if (booksSnapshot.empty) {
