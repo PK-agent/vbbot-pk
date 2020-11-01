@@ -409,7 +409,7 @@ app.post('/admin/merchant/book-list', async (req,res) => {
 
 app.get('/staff/merchant/inventory-list', async (req,res) => {
     const staffsRef = db.collection('merchant-books');
-    const booksSnapshot = await staffsRef.where('merchant.already_confirmed', '==', ture).limit(1).get();
+    const booksSnapshot = await staffsRef.where('book.already_confirmed', '==', ture).limit(1).get();
     // const snapshot = await usersRef.get();
     let data = [];
     if (booksSnapshot.empty) {
