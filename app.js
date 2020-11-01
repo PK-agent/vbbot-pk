@@ -418,18 +418,18 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
     else{
         booksSnapshot.forEach(doc1 => {
 
-            let book = {};
-            book.docId = doc1.id;
-            book.viberid = doc1.data().viberid;
-            book.name = doc1.data().name;
-            book.phone = doc1.data().phone;         
-            book.address = doc1.data().address;
-            book.corn_type = doc1.data().corn_type;
-            book.corn_qty = doc1.data().corn_qty;
-            book.wanted_price = doc1.data().wanted_price;
-            book.comment = doc1.data().comment;
-            book.received_date = doc1.data().received_date;  
-            book.already_confirmed = doc1.data().already_confirmed;         
+            let confirm = {};
+            confirm.docId = doc1.id;
+            confirm.viberid = doc1.data().viberid;
+            confirm.name = doc1.data().name;
+            confirm.phone = doc1.data().phone;         
+            confirm.address = doc1.data().address;
+            confirm.corn_type = doc1.data().corn_type;
+            confirm.corn_qty = doc1.data().corn_qty;
+            confirm.wanted_price = doc1.data().wanted_price;
+            confirm.comment = doc1.data().comment;
+            confirm.received_date = doc1.data().received_date;  
+            confirm.already_confirmed = doc1.data().already_confirmed;         
             data.push(book);       
         }); 
     }  
