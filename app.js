@@ -409,7 +409,7 @@ app.post('/admin/merchant/book-list', async (req,res) => {
 
 app.get('/staff/merchant/inventory-list', async (req,res) => {
     const merchantsRef = db.collection('merchant-books');
-    const snapshot = await merchantsRef.where('merchant.already_confirmed' == ture).limit(1).get();
+    const booksSnapshot = await merchantsRef.where('merchant.already_confirmed', '==', ture).limit(1).get();
     // const snapshot = await usersRef.get();
     let data = [];
     if (booksSnapshot.empty) {
@@ -428,8 +428,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
             book.corn_qty = doc.data().corn_qty;
             book.wanted_price = doc.data().wanted_price;
             book.comment = doc.data().comment;
-            book.received_date = doc.data().received_date;   
-            book.already_confirmed = doc.data().already_confirmed;
+            book.received_date = doc.data().received_date;           
             data.push(book);       
         }); 
     }  
