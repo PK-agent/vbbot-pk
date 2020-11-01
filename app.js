@@ -429,7 +429,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
             book.wanted_price = doc1.data().wanted_price;
             book.comment = doc1.data().comment;
             book.received_date = doc1.data().received_date;  
-            book.already_confirmed = doc.data().already_confirmed;         
+            book.already_confirmed = doc1.data().already_confirmed;         
             data.push(book);       
         }); 
     }  
