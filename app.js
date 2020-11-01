@@ -434,7 +434,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
         }); 
     }  
 
-    res.render('merchant-bookList.ejs', {data});  
+    res.render('staff-merchantList.ejs', {data});  
 });
 
 app.get('/staff/merchant/add-inventory/:id', async (req,res) => {  
