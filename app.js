@@ -408,27 +408,27 @@ app.post('/admin/merchant/book-list', async (req,res) => {
 //staff/merchant/entrylist
 
 app.get('/staff/merchant/inventory-list', async (req,res) => {
-    const merchantsRef = db.collection('merchant-books');
-    const booksSnapshot = await merchantsRef.where('merchant.already_confirmed', '==', ture).limit(1).get();
+    const merchantsRef = db.collection('merchant-books').doc(docId);
+    const booksSnapshot = await merchantsRef.where('already_confirmed', '==', ture).limit(1).get();
     // const snapshot = await usersRef.get();
     let data = [];
     if (booksSnapshot.empty) {
       console.log('No matching documents.');
     }  
     else{
-        booksSnapshot.forEach(doc => {
+        booksSnapshot.forEach(doc1 => {
 
             let book = {};
-            book.docId = doc.id;
-            book.viberid = doc.data().viberid;
-            book.name = doc.data().name;
-            book.phone = doc.data().phone;         
-            book.address = doc.data().address;
-            book.corn_type = doc.data().corn_type;
-            book.corn_qty = doc.data().corn_qty;
-            book.wanted_price = doc.data().wanted_price;
-            book.comment = doc.data().comment;
-            book.received_date = doc.data().received_date;           
+            book.docId = doc1.id;
+            book.viberid = doc1.data().viberid;
+            book.name = doc1.data().name;
+            book.phone = doc1.data().phone;         
+            book.address = doc1.data().address;
+            book.corn_type = doc1.data().corn_type;
+            book.corn_qty = doc1.data().corn_qty;
+            book.wanted_price = doc1.data().wanted_price;
+            book.comment = doc1.data().comment;
+            book.received_date = doc1.data().received_date;           
             data.push(book);       
         }); 
     }  
