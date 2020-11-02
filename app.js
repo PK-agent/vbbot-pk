@@ -247,7 +247,7 @@ app.post('/merchant/register',function(req,response){
                    },
                    "tracking_data":"tracking data",
                    "type":"text",
-                   "text": "Thank you!"+req.body.name
+                   "text": "Thank you..."+req.body.name
                    
                 }  
     
