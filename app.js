@@ -434,7 +434,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
         }); 
     }  
 
-    res.render('staff-merchantList.ejs', {data});  
+    res.render('merchant-bookList.ejs', {data});  
 });
 
 app.get('/staff/merchant/add-inventory/:id', async (req,res) => {  
@@ -451,7 +451,7 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
       data.address = userDoc.data().address;
       
     }
-    res.render('staff-merchant-ADDinventory.ejs', {data:data}); 
+    res.render('staff-Addinventory.ejs', {data:data}); 
     
 });
 
