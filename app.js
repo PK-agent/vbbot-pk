@@ -321,7 +321,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
                },
                "tracking_data":"tracking data",
                "type":"text",
-               "text": "အော်ဒါတင်ခြင်းအောင်မြင်ပါသည်။ ကျေးဇူးတင်ပါသည်..." +req.body.name
+               "text": "အော်ဒါတင်ခြင်းအောင်မြင်ပါသည်။ ကျေးဇူးတင်ပါသည်..."+req.body.name
                
             }   
 
