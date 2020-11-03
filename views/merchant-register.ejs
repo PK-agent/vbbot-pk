@@ -8,8 +8,8 @@
     *{
       margin: 0;
       padding: 0;
+
     }
-    
     body{
       background-image: url(../img/pk.png) ;
       background-position: center;
@@ -121,14 +121,14 @@
     <div class="main">
       <form id="form" action="/merchant/register" method="post">
         <div id="name">
-        <label class="merclabel" for="name">ကုန်သည်အမည်</label>
-        <input class="mercname" type="text" name="name" value="<%= data.user_name  %>"/>
+        <label class="merclabel" for="name">ကုန်သည်အမည်</label><br>
+        <input class="mercname" type="text" name="name" value="<%= data.user_name  %>"/><br>
     
-        <label class="phonelabel" for="name">ဖုန်းနံပါတ်</label>
-        <input class="phonename" type="tel" name="phone" pattern="[0-9]{5,15}">
+        <label class="phonelabel" for="name">ဖုန်းနံပါတ်</label><br>
+        <input class="phonename" type="tel" name="phone" pattern="[0-9]{5,15}"><br>
     
-        <label class="addrlabel" for="name">နေရပ်လိပ်စာ</label>
-        <textarea class="addrname" name="address" rows="2" cols="30"></textarea>
+        <label class="addrlabel" for="name">နေရပ်လိပ်စာ</label><br>
+        <textarea class="addrname" name="address" rows="2" cols="30"></textarea><br>
         
         <input class="btnsubmit" type="submit" name="Submit"/>
       </div>
