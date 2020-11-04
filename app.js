@@ -51,7 +51,7 @@ let adminKeyboard = {
                 "BgLoop": true,
                 "ActionType": "reply",
                 "ActionBody": "mkt-price",               
-                "Text": "ပေါက်စျေးထည့်ရန်",
+                "Text": "ပေါက်ဈေး ထည့်ရန်",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
@@ -66,51 +66,31 @@ let adminKeyboard = {
                 "BgLoop": true,
                 "ActionType": "reply",
                 "ActionBody": "merch-entrylist",               
-                "Text": "ကုန်သည်အဝင်စာရင်း",
+                "Text": "စာရင်းသွင်းထားသည့် ကုန်သည်များ",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
                 "TextSize": "regular"
-            },            
+            },
+            {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "merch-entrylist",               
+                "Text": "အလုပ်သမား အဝယ်စာရင်း",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },                        
         ]
     };
 
-let adminAddmarketPrice = {
-    "Type": "keyboard",
-    "Revision": 1,
-    "Buttons": [
-        {
-            "Columns": 6,
-            "Rows": 1,
-            "BgColor": "#2db9b9",
-            "BgMediaType": "gif",
-            "BgMedia": "http://www.url.by/test.gif",
-            "BgLoop": true,
-            "ActionType": "reply",
-            "ActionBody": "merchant-market-price",               
-            "Text": "ကုန်သည်အ၀ယ်စျေးနှုန်း",
-            "TextVAlign": "middle",
-            "TextHAlign": "center",
-            "TextOpacity": 60,
-            "TextSize": "regular"
-        },
-        {
-            "Columns": 6,
-            "Rows": 1,
-            "BgColor": "#2db9b9",
-            "BgMediaType": "gif",
-            "BgMedia": "http://www.url.by/test.gif",
-            "BgLoop": true,
-            "ActionType": "reply",
-            "ActionBody": "staff-market-price",               
-            "Text": "အလုပ်သမားအဝယ်စျေးနှုန်း",
-            "TextVAlign": "middle",
-            "TextHAlign": "center",
-            "TextOpacity": 60,
-            "TextSize": "regular"
-        },            
-    ]
-};
+
 
 let staffKeyboard = {
     "Type": "keyboard",
@@ -124,13 +104,13 @@ let staffKeyboard = {
             "BgMedia": "http://www.url.by/test.gif",
             "BgLoop": true,
             "ActionType": "reply",
-            "ActionBody": "booked-merchants-list",               
-            "Text": "ဝယ်ယူရမည့်ကုန်သည်စာရင်း",
+            "ActionBody": "tdy-pur-price",               
+            "Text": "ယနေ့ အဝယ်ဈေးနှုန်း",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
             "TextSize": "regular"
-        },
+        },         
         {
             "Columns": 6,
             "Rows": 1,
@@ -139,13 +119,14 @@ let staffKeyboard = {
             "BgMedia": "http://www.url.by/test.gif",
             "BgLoop": true,
             "ActionType": "reply",
-            "ActionBody": "tdy-pur-price",               
-            "Text": "ယနေ့အဝယ်စျေးနှုန်း",
+            "ActionBody": "booked-merchants-list",               
+            "Text": "ဝယ်ယူရမည့် ကုန်သည်စာရင်း",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
             "TextSize": "regular"
-        },            
+        },
+           
     ]
 };
 
@@ -162,7 +143,7 @@ let merchantKeyboard = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "tdy-mark-price",               
-            "Text": "ယနေ့ပြောင်းပေါက်စျေး",
+            "Text": "ယနေ့ ပြောင်းပေါက်ဈေး",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -177,7 +158,7 @@ let merchantKeyboard = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "merch-book-inv",               
-            "Text": "ရောင်းမည်",
+            "Text": "အရောင်းစာရင်း သွင်းရန်",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -321,7 +302,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
                },
                "tracking_data":"tracking data",
                "type":"text",
-               "text": "အော်ဒါလုပ်ခြင်းအောင်မြင်ပါသည်။ ကျေးဇူးတင်ပါသည်။..." +req.body.name
+               "text": "အော်ဒါလုပ်ခြင်းအောင်မြင်ပါသည်။ ကျေးဇူးတင်ပါသည်။..."+req.body.name
                
             }   
 
