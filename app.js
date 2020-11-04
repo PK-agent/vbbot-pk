@@ -81,7 +81,7 @@ let adminKeyboard = {
                 "BgLoop": true,
                 "ActionType": "reply",
                 "ActionBody": "merch-entrylist",               
-                "Text": "အလုပ်သမား အဝယ်စာရင်း",
+                "Text": "အလုပ်သမား ဝယ်ပြီးစာရင်း",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
