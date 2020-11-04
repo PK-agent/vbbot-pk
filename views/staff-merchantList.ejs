@@ -4,12 +4,39 @@
     <meta charset="UTF-8">
     <title>အလုပ်သမားဝယ်ရမည့်စာရင်း</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      .head{
+        width: auto;
+        background-color:rgb(78, 189, 240) ;
+        margin: auto;
+        color: #FFFFFF;
+        padding: 5px 0px 5px 0px;
+        text-align: center;
+        border-radius: 5px 5px 0px 0px;
+      }
+      .header{
+        font-size: 25px;      
+        color:white;
+      }
+      .main{
+        background-color: rgb(147, 213, 243) ;
+        width: auto;      
+        margin:auto;
+        height: auto;      
+        text-align: center;
+      }
+      .table{
+        padding: 5px;
+        margin-left: 80px;
+      }
+      </style>
  </head>
 
   <body>
-  <h1>အလုပ်သမား ဝယ်ရမည့်စာရင်း</h1>
+  <div class="head"><h1 class="header">အလုပ်သမား ဝယ်ရမည့်စာရင်း</h1></div>
+  <div class="main"></div>
     
-  <table cellspacing="1" cellpadding="5" border="1">
+  <table class="table" cellspacing="1" cellpadding="5" border="1">
     <tr>
     
     <th>ကုန်သည်အမည်</th>
@@ -34,16 +61,14 @@
        <td><%= book.corn_qty %></td>
        <td><%= book.wanted_price %></td>
        <td><%= book.comment %></td>
-       <td><%= book.received_date %></td>
-       
+       <td><%= book.received_date %></td>       
      
        <td><a href="/staff/merchant/add-inventory/<%= book.docId %>">Add Inventory</a> | <a href="../admin/stocklist/<%= book.docId %>">Delete</a></td>
      </tr>
-  <% }); %>
- 
+  <% }); %> 
 
   </table> 
-
+</div>
 
   </body>
 
