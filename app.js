@@ -472,11 +472,13 @@ app.post('/admin/add-price', async (req,res) => {
         created_on:today,
         date: req.body.filled_date,
         time: req.body.filled_time,
-        corn_type: req.body.corn_type,        
+        corn_type: req.body.corn_type,
+        quality_1: req.body.quality1,
+        quality_2: req.body.quality2,
+        quality_3: req.body.quality3,
+        merchant_price: req.body.mc       
         
-        
-    }
-   
+    }   
 
     db.collection('admin').add(data)
     .then(()=>{
