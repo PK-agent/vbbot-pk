@@ -411,7 +411,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
             confirm.comment = doc1.data().comment;
             confirm.received_date = doc1.data().received_date;  
             confirm.already_confirmed = doc1.data().already_confirmed;         
-            data.push(book);       
+            data.push(confirm);       
         }); 
     }  
 
