@@ -490,6 +490,10 @@ app.post('/admin/add-price', async (req,res) => {
     }); 
 });
 
+app.get('/staff/todayprice',function(req,res){              
+    
+    res.render('staff-todayprice.ejs');
+ });
 
 app.listen(process.env.PORT || 8080, () => {
     console.log(`webhook is listening`);
@@ -665,7 +669,9 @@ bot.onTextMessage(/./, (message, response) => {
         case "tdy-merchant-price":
             test2(message, response);
             break;    
-        
+        case "tdy-pur-price":
+            staffTodayPrice(message, response);
+            break;
               
         default:
             defaultReply(message, response);
@@ -705,6 +711,12 @@ const adminAddStaffPurchasePrice = (message, response) => {
 const test2 = (message, response) => {    
 
     let bot_message = new UrlMessage(process.env.APP_URL + '/test2');   
+    response.send(bot_message);
+}
+
+const staffTodayPrice = (message, response) => {    
+
+    let bot_message = new UrlMessage(process.env.APP_URL + '/staff/todayprice');   
     response.send(bot_message);
 }
 
