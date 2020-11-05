@@ -2,64 +2,344 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Admin Add Price</title>
+    <title>ပေါက်ဈေးများထည့်ရန်</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
- </head>
+    <style type="text/css">
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      body{
+      background-image: url(../img/pk.png) ;
+      background-position: center;
+      background-size: cover;
+      font-family: sans-serif;
+      margin-top: 40px;
+    }
+    .addinventory{
+      width: 550px;
+      background-color:rgb(40, 154, 207) ;
+      margin: auto;
+      color: #FFFFFF;
+      padding: 10px 0px 10px 0px;
+      text-align: center;
+      border-radius: 10px 10px 0px 0px;
+    }
+    .header{
+      font-size: 25px;      
+      color:white;
+    }
+    .main{
+      background-color: rgb(114, 185, 218) ;
+      width: 550px;
+      height: 630px;
+      margin:auto;
+    }
+    .form{
+      padding: 10px;
+    }
+    #name{
+      width: 100%;
+      height: 100px;
+    }
+    .name{
+      margin-left: 25px;
+      margin-top: 35px;
+      width: 135px;
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .label1{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 10px;
+      top: 17px;
+    }
+    .label2{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 10px;
+      top: 20px;
+    }
+    .label3{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 10px;
+      top: 25px;
+    }
+    .label4{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 160px;
+      top: 23px;
+    }
+    .label5{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 160px;
+      top: 23px;
+    }
+    .label6{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 160px;
+      top: 23px;
+    }
+    .label7{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 160px;
+      top: 23px;
+    }
+    .label8{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 160px;
+      top: 23px;
+    }
+    .label9{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 160px;
+      top: 23px;
+    }
+    .label10{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 160px;
+      top: 23px;
+    }
+    .label11{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 160px;
+      top: 23px;
+    }
+    .label12{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 160px;
+      top: 23px;
+    }
+    .label13{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 160px;
+      top: 23px;
+    }
+    .label14{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 160px;
+      top: 23px;
+    }
+    .date{
+      position: relative;
+      left: 160px;
+      top: -10px;
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    .time{
+      position: relative;
+      left: 160px;
+      top: -10px;
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    .cp222q1{
+      position: relative;
+      left: 160px;
+      top: -10px;      
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    .cp222q2{
+      position: relative;
+      left: 160px;
+      top: -10px;      
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    .cp222q3{
+      position: relative;
+      left: 160px;
+      top: -10px;      
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    .cp222mc{
+      position: relative;
+      left: 160px;
+      top: -10px;      
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    .cp888q1{
+      position: relative;
+      left: 160px;
+      top: -10px;      
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    .cp888q2{
+      position: relative;
+      left: 160px;
+      top: -10px;      
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    .cp888q3{
+      position: relative;
+      left: 160px;
+      top: -10px;      
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    .cp888mc{
+      position: relative;
+      left: 160px;
+      top: -10px;      
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    .cp336q1{
+      position: relative;
+      left: 160px;
+      top: -10px;      
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    .cp336q2{
+      position: relative;
+      left: 160px;
+      top: -10px;      
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    .cp336q3{
+      position: relative;
+      left: 160px;
+      top: -10px;      
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    .cp336mc{
+      position: relative;
+      left: 160px;
+      top: -10px;      
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }
+    
+    .submit{
+      position: relative;     
+      left: 320px;
+      top: 27px;
+      padding: 5px;
+      font-size: 14px;
+      font-style: italic;
+      font-weight: lighter;
+    }
 
+    </style>
+ </head>
   <body>
-  
-  
-	<form id="form" action="/admin/add-price" method="post">
-        <label for="name">Today Date</label><br>
+    <div class="head"><h1 class="header">ပေါက်ဈေးများထည့်ရန်</h1></div> 
+    <div class="main"> 
+  <form id="form" action="/admin/add-price" method="post">
+    <div id="corntype">
+        <label class="lable1" for="name">Today Date</label><br>
         <input type="date" name="filled_date"/><br>
 
         <label for="name">Time</label><br>
         <input type="time" name="filled_time"/><br>
 
-        <label for="name">Corn Type</label><br>
-        <label for="name">cp222q1</label><br>
+        <label class="lable2" for="name">Corn Type</label><br>
+        <label class="label3" for="name">cp222q1</label><br>
         <input type = "number" name="cp222q1"/><br>
 
-        <label for="name">cp222q2</label><br>
+        <label class="label4" for="name">cp222q2</label><br>
         <input type = "number" name="cp222q2"/><br>
 
-        <label for="name">cp222q3</label><br> 
+        <label class="label5" for="name">cp222q3</label><br> 
         <input type = "number" name="cp222q3"/><br> 
 
-        <label for="name">cp222mc</label><br>
+        <label class="label6" for="name">cp222mc</label><br>
         <input type = "number" name="cp222mc"/><br> 
 
         
-        <label for="name">cp888q1</label><br>
+        <label class="label7" for="name">cp888q1</label><br>
         <input type = "number" name="cp888q1"/><br> 
         
-        <label for="name">cp888q2</label><br>
+        <label class="label8" for="name">cp888q2</label><br>
         <input type = "number" name="cp888q2"/><br> 
         
-        <label for="name">cp888q3</label><br>
+        <label class="label9" for="name">cp888q3</label><br>
         <input type = "number" name="cp888q3"/><br>
         
-        <label for="name">cp888qmc</label><br>
+        <label class="label10" for="name">cp888qmc</label><br>
         <input type = "number" name="cp888mc"/><br>
 
-        <label for="name">cp336q1</label><br>
+        <label class="label11" for="name">cp336q1</label><br>
         <input type = "number" name="cp336q1"/><br>
 
-        <label for="name">cp336q2</label><br>
+        <label class="label12" for="name">cp336q2</label><br>
         <input type = "number" name="cp336q2"/><br>
 
-        <label for="name">cp336q3</label><br>
+        <label class="label13" for="name">cp336q3</label><br>
         <input type = "number" name="cp336q3"/><br>
 
-        <label for="name">cp336mc</label><br>
+        <label class="label14" for="name">cp336mc</label><br>
         <input type = "number" name="cp336mc"/><br> 
-
-        
     
     <input type="submit" name="submit"/>
-
+  </div>
   </form>
-
+</div>
 
   <script>
     
