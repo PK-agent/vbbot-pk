@@ -476,7 +476,7 @@ app.post('/admin/add-price', async (req,res) => {
         quality_1: req.body.quality1,
         quality_2: req.body.quality2,
         quality_3: req.body.quality3,
-        merchant_price: req.body.merchant-price       
+        merchant_price: req.body.merchant_price       
         
     }   
 
