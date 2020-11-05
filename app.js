@@ -172,7 +172,7 @@ let merchantKeyboard = {
 const bot = new ViberBot({
     authToken: process.env.AUTH_TOKEN, // <--- Paste your token here
     name: "ပြေင်းကြည့်",  // <--- Your bot name here
-    avatar: "http://api.adorable.io/avatar/200/isitup"
+    avatar: "https://chat-pk.herokuapp.com/img/pk.png"
 });
 
 app.use("/viber/webhook", bot.middleware());
