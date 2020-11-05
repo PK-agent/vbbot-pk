@@ -37,24 +37,10 @@
       text-align: center;
       font-size: 16px;
     }
-    .form{
-      padding: 10px;
-    }
     .table{
       padding: 10px;
     }
-    #name{
-      width: 100%;
-      height: 100px;
-    }
-    .name{
-      margin-left: 25px;
-      margin-top: 35px;
-      width: 135px;
-      color: white;
-      font-size: 18px;
-      font-weight: 700;
-    }     
+     
     
     </style>
  </head>
@@ -63,7 +49,7 @@
   <div class="head"><h1 class="header">ပြောင်းကုန်သည် အဝင်လက်ခံစာရင်း</h1></div>
     <div class="main">
     <table class="table" cellspacing="1" cellpadding="5" border="1">
-      <div id="name">
+      
       <tr>
       
         <th>ကုန်သည်အမည်</th>
@@ -79,7 +65,7 @@
       </tr>
     
       <% data.forEach(function(merchant){ %>
-        <form class="form" action="/admin/merchant/book-list" method="post">
+        <form action="/admin/merchant/book-list" method="post">
           <tr>
             
             <td><%= merchant.name %></td>
@@ -101,7 +87,7 @@
           </tr>
         </form> 
       <% }); %> 
-    </div>
+   
     </table>  
   </div>
 
