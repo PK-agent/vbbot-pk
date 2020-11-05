@@ -576,7 +576,7 @@ let AdminCusStafKeyboard = {
     ],
 };
 
-const message = new TextMessage("'ပြောင်းကြည့်' ပြောင်းအ၀ယ်စင်တာမှကြိုဆိုပါတယ်",AdminCusStafKeyboard,null,null,null,3);
+const message = new TextMessage("'ပြောင်းကြည့်' ပြောင်းအဝယ်စင်တာမှကြိုဆိုပါတယ်",AdminCusStafKeyboard,null,null,null,3);
 
 bot.onConversationStarted((userProfile, isSubscribed, context) => {  
     // if(userProfile.id === "sXvG8AwXZmlLW7/LCSvMXw==")  {
@@ -600,7 +600,7 @@ bot.onTextMessage(/^admin@/i, (message, response) =>{
     let pw_enter = text.substring(6);
 
     if(pw_enter == process.env.ADMIN_PASSWORD){
-        bot_message = new TextMessage(`အကောင့်၀င်မှု့အောင်မြင်ပါသည်`, adminKeyboard);
+        bot_message = new TextMessage(`အကောင့်ဝင်မှု့အောင်မြင်ပါသည်`, adminKeyboard);
     }else{
         asKAdminpin(message, response);
     }
@@ -613,7 +613,7 @@ bot.onTextMessage(/^staff@/i, (message, response) =>{
     let pw_enter = text.substring(6);
 
     if(pw_enter == process.env.STAFF_PASSWORD){
-        bot_message = new TextMessage(`အကောင့်၀င်မှု့အောင်မြင်ပါသည်`, staffKeyboard);
+        bot_message = new TextMessage(`အကောင့်ဝင်မှု့အောင်မြင်ပါသည်`, staffKeyboard);
     }else{
         asKStaffpin(message, response);
     }
@@ -742,14 +742,14 @@ const registerMerchant = async (message, response) => {
     const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
 
     if (snapshot.empty) {
-        let bot_message1 = new TextMessage(`အကောင့်၀င်ရန် link ကိုနှိပ်ပါ`, ); 
+        let bot_message1 = new TextMessage(`အကောင့်ဝင်ရန် link ကိုနှိပ်ပါ`, ); 
         let bot_message2 = new UrlMessage(APP_URL + '/merchant/register');   
         response.send(bot_message1).then(()=>{
             return response.send(bot_message2);
         });
     }else{
         
-          let bot_message3 = new TextMessage(`အကောင့်၀င်ပြီးသားဖြစ်ပါသည်။ ကီးဘုတ်ကိုတွင်ရွေးချယ်ပါ`, merchantKeyboard);    
+          let bot_message3 = new TextMessage(`အကောင့်ဝင်ပြီးသားဖြစ်ပါသည်။ ကီးဘုတ်ကိုတွင်ရွေးချယ်ပါ`, merchantKeyboard);    
           response.send(bot_message3);
     }  
   
