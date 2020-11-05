@@ -50,7 +50,7 @@ let adminKeyboard = {
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "mkt-price",               
+                "ActionBody": "admin-add-price",               
                 "Text": "ပေါက်ဈေး ထည့်ရန်",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
@@ -80,7 +80,7 @@ let adminKeyboard = {
                 "BgMedia": "http://www.url.by/test.gif",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "merch-entrylist",               
+                "ActionBody": "staff-entrylist",               
                 "Text": "အလုပ်သမား ဝယ်ပြီးစာရင်း",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
@@ -142,7 +142,7 @@ let merchantKeyboard = {
             "BgMedia": "http://www.url.by/test.gif",
             "BgLoop": true,
             "ActionType": "reply",
-            "ActionBody": "tdy-mark-price",               
+            "ActionBody": "tdy-merchant-price",               
             "Text": "ယနေ့ ပြောင်းပေါက်ဈေး",
             "TextVAlign": "middle",
             "TextHAlign": "center",
@@ -461,21 +461,20 @@ app.post('/staff/merchant/add-inventory/', async (req,res) => {
 });
 
 
-app.get('/admin/staff-todayprice',function(req,res){              
+app.get('/admin/add-price',function(req,res){              
     
-   res.render('staff-todayprice.ejs');
+   res.render('adminAddprice.ejs');
 });
 
-app.post('/admin/staff-todayprice', async (req,res) => {  
+app.post('/admin/add-price', async (req,res) => {  
     let today = new Date();
         let data = {
         created_on:today,
         date: req.body.filled_date,
         time: req.body.filled_time,
         corn_type: req.body.corn_type,        
-        corn_qty: req.body.corn_qty,
-        price: req.body.price   
-           
+        
+        
     }
    
 
@@ -487,50 +486,6 @@ app.post('/admin/staff-todayprice', async (req,res) => {
         console.log('ERROR:', error);
     }); 
 });
-
-app.get('/merchant-todayprice',function(req,res){ 
-    let data = {
-       title:"merchant",
-       name:"today price"
-    }   
-    res.render('merchant-todayprice.ejs', data);
-});
-
-app.post('/test',function(req,res){
-
-    console.log('USER ID', currentUser.id);
-
-    
-    let data = {
-       "receiver":currentUser.id,
-       "min_api_version":1,
-       "sender":{
-          "name":"PyaugnKyi",
-          "avatar":"http://api.adorable.io/avatar/200/isitup"
-       },
-       "tracking_data":"tracking data",
-       "type":"text",
-       "text": "Thank you!"+req.body.name
-    }
-
-    
-
-    fetch('https://chatapi.viber.com/pa/send_message', {
-        method: 'post',
-        body:    JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
-    })
-    .then(res => res.json())
-    .then(json => console.log(json))   
-    
-});
-
-
-
-
-
-
-
 
 
 app.listen(process.env.PORT || 8080, () => {
@@ -698,40 +653,17 @@ bot.onTextMessage(/./, (message, response) => {
         case "booked-merchants-list":
             BookedMerchantList(message, response);
             break;
-        case "mkt-price":
+        case "admin-add-price":
             addMarketPrice(message, response);
-            break;
-
-        case "my-stock":
-            checkStock(message, response);
-            break;
-        case "my-balance":
-            checkBalance(message, response);
-            break;
-        case "menu":
-            showMenu(message, response);
-            break;
-        case "text":
-            textReply(message, response);
-            break; 
+            break;         
         case "staff-market-price":
             adminAddStaffPurchasePrice(message, response);
             break;
-        case "test2":
+        case "tdy-merchant-price":
             test2(message, response);
             break;    
-        case "picture":
-            pictureReply(message, response);
-            break;
-        case "rich media":
-            richMediaReply(message, response);
-            break;  
-        case "keyboard":
-            keyboardReply(message, response);
-            break;           
-        case "who am i":
-            whoAmI(message, response);
-            break;       
+        
+              
         default:
             defaultReply(message, response);
             
@@ -754,18 +686,10 @@ const asKStaffpin = (message, response) => {
     response.send(new TextMessage(`အလုပ်သမား စကား၀ှက်ရိုက်ထည့်ပါ`));
 }
 
-const whoAmI = (message, response) => {
-    response.send(new TextMessage(`Hello ${response.userProfile.name}! It's so nice to meet you`));
-}
 
-const textReply = (message, response) => {
-    let bot_message = new TextMessage(`You have sent message: ${message.text}`);    
-    response.send(bot_message);
-}
 
 const addMarketPrice = (message, response) => {
-    let bot_message = new TextMessage(`ကုန်သည်နှင့် အလုပ်သမားပေါက်စျေးထည့်ရန် ကီးဘုတ်တွင်ရွေးချယ်ပါ`, adminAddmarketPrice)   
-    
+    let bot_message = new UrlMessage(process.env.APP_URL + '/admin/add-price');   
     response.send(bot_message);
 }
 
@@ -801,88 +725,11 @@ const BookedMerchantList = (message, response) => {
     response.send(bot_message);
 }
 
-const pictureReply = (message, response) => {
-    const bot_message = new PictureMessage('https://upload.wikimedia.org/wikipedia/en/6/69/Effy_Stonem.jpg');
 
-    response.send(bot_message).catch(error=>{
-        console.error('ERROR', error);
-        process.exit(1);
-    });
-}
 
-const richMediaReply = (message, response) => {
-    const SAMPLE_RICH_MEDIA = {
-    "ButtonsGroupColumns": 6,
-    "ButtonsGroupRows": 7,
-    "BgColor": "#FFFFFF",
-    "Buttons": [
-        {
-        "Columns":6,
-        "Rows":5,
-        "ActionType":"none",           
-        "Image":"https://upload.wikimedia.org/wikipedia/en/6/69/Effy_Stonem.jpg"
-        }, 
-        {
-        "Columns":6,
-                "Rows":1,
-                "Text": "sample text",
-                "ActionType":"none",
-                "TextSize":"medium",
-                "TextVAlign":"middle",
-                "TextHAlign":"left"
-        },
-        {
-            "Columns":6,
-            "Rows":1,
-            "ActionType":"reply",
-            "ActionBody": "click",
-            "Text":"Click",
-            "TextSize":"large",
-            "TextVAlign":"middle",
-            "TextHAlign":"middle",
-        }
-    ]
-    };
 
-    let bot_message = new RichMediaMessage(SAMPLE_RICH_MEDIA);
-    
-    response.send(bot_message).catch(error=>{
-        console.error('ERROR', error);
-        process.exit(1);
-    });
-
-}
 
 //https://developers.viber.com/docs/tools/keyboard-examples/
-
-const keyboardReply = (message, response) => {
-    let SAMPLE_KEYBOARD = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons": [
-            {
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": true,
-                "ActionType": "open-url",
-                "ActionBody": "https://en.wikipedia.org/wiki/Effy_Stonem",
-                "Image": "https://upload.wikimedia.org/wikipedia/en/6/69/Effy_Stonem.jpg",
-                "Text": "Key text",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            }
-        ]
-    };
-
-    let bot_message = new KeyboardMessage(SAMPLE_KEYBOARD);
-    console.log('KEYBOARD: ', bot_message);
-    response.send(bot_message);
-}
 
 
 
@@ -903,141 +750,6 @@ const registerMerchant = async (message, response) => {
           response.send(bot_message3);
     }  
   
-}
-
-const checkStock = async (message, response) => {
-
-    let user_id = '';
-
-    const userRef = db.collection('users');    
-    const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
-
-    if (snapshot.empty) {
-        console.log('No such document!');
-        let bot_message1 = new TextMessage(`Click on following link to register`, ); 
-        let bot_message2 = new UrlMessage(APP_URL + '/register/');   
-        response.send(bot_message1).then(()=>{
-            return response.send(bot_message2);
-        });
-    }else{
-        snapshot.forEach(doc => {
-            user_id = doc.id;         
-        });
-     }
-
-    const stocksRef = db.collection('users').doc(user_id).collection('stocks').where("qty", ">", 0);
-    const snapshot2 = await stocksRef.get();
-    if (snapshot2.empty) {
-        let bot_message = new TextMessage(`You have no stock`);    
-        response.send(bot_message);
-    }  
-
- 
-    let stock_message = '';
-    snapshot2.forEach(doc => {
-  
-        
-        batch = doc.data().batch;
-        type = doc.data().type;
-        qty = doc.data().qty;        
-        received_date = doc.data().received_date;    
-
-        stock_message += `Your batch ${batch} of type ${type} has ${qty} in stock\n`;   
-        
-               
-    }); 
-
-    let bot_message = new TextMessage(`${stock_message}`);    
-        response.send(bot_message); 
-    
-}
-
-
-
-const checkBalance = async (message, response) => {
-
-    
-    
-    let total_sale = 0;
-    let total_paid = 0;
-    let payment_history_message = "";
-
-
-    let user_id = '';
-
-    const userRef = db.collection('users');    
-    const snapshot = await userRef.where('viberid', '==', currentUser.id).limit(1).get();
-
-    if (snapshot.empty) {
-        console.log('No such document!');
-        let bot_message1 = new TextMessage(`Click on following link to register`, ); 
-        let bot_message2 = new UrlMessage(APP_URL + '/register/');   
-        response.send(bot_message1).then(()=>{
-            return response.send(bot_message2);
-        });
-    }else{
-        snapshot.forEach(doc => {
-            user_id = doc.id;         
-        });
-     }
-    
-    
-
-    const salesRef = db.collection('users').doc(user_id).collection('sales');
-    const snapshot2 = await salesRef.get();
-    if (snapshot2.empty) {
-        total_sale = 0;
-        let bot_message = new TextMessage(`You have no sales`);    
-        response.send(bot_message);       
-    } else{    
-        snapshot2.forEach(doc => {   
-        total_sale += doc.data().amount;                   
-    });
-    } 
-
-    console.log('TOTAL SALE:', total_sale);
-
-       
-
-    const paymentsRef = db.collection('users').doc(user_id).collection('payments').orderBy('date', 'desc').limit(5);
-    const snapshot3 = await paymentsRef.get();
-    if (snapshot3.empty) {
-      total_paid = 0;           
-    } else{
-        snapshot3.forEach(doc => {        
-            total_paid += doc.data().amount; 
-          
-            date = doc.data().date; 
-            amount = doc.data().amount; 
-
-            payment_history_message += `Amount: ${amount} is paid on ${date}\n`;
-                       
-        }); 
-    }
-
-    console.log('TOTAL PAID:', total_paid);
-
-    let total_balance = total_sale - total_paid;
-
-    console.log('TOTAL BALANCE:', total_balance);
-
-    let bot_message1 = new TextMessage(`Your total sale is ${total_sale} and total paid is ${total_paid}. Your balance is ${total_balance}`);    
-    let bot_message2 = new TextMessage(`${payment_history_message}`);
-
-
-
-      
-    response.send(bot_message1).then(()=>{
-        return response.send(bot_message2);
-    });  
-    
-}
-
-
-const showMenu = (message, response) => {
-
-    let bot_message = new TextMessage(`Please select your activity in keyboard menu`, actionKeyboard);    
-    response.send(bot_message);
 }
 
 
