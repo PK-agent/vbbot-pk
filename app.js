@@ -16,6 +16,7 @@ const RichMediaMessage = require('viber-bot').Message.RichMedia;
 const KeyboardMessage = require('viber-bot').Message.Keyboard;
 const PictureMessage = require('viber-bot').Message.Picture;
 
+
 const APP_URL = process.env.APP_URL;
 
 //firebase initialize
@@ -178,7 +179,7 @@ app.use("/viber/webhook", bot.middleware());
 
 app.use(body_parser.json());
 app.use(body_parser.urlencoded());
-
+app.use(express.static('public'))
 app.set('view engine', 'ejs');
 app.set('views', __dirname+'/views');
 
