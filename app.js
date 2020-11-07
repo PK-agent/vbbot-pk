@@ -493,7 +493,13 @@ app.post('/admin/add-price', async (req,res) => {
 app.get('/staff/todayprice',function(req,res){              
     
     res.render('staff-todayprice.ejs');
- });
+});
+
+app.post('/staff/todayprice', async (req, res) => {
+    let date = req.body.filled_date;
+    let corn_quality = req.body.corn_quality;
+    console.log(date, corn_quality, '--------------------------------------------');
+});
 
 app.listen(process.env.PORT || 8080, () => {
     console.log(`webhook is listening`);
