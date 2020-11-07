@@ -481,7 +481,7 @@ app.post('/admin/add-price', async (req,res) => {
         
     }   
 
-    db.collection('admin').add(data)
+    db.collection('market-prices').add(data)
     .then(()=>{
           res.json({success:'success'});  
 
