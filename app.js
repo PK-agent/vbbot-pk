@@ -502,7 +502,7 @@ app.post('/staff/todayprice', async (req, res) => {
     data.date = date;
     data.corn_quality = corn_quality;
     console.log(data, '--------------------------------------------');
-    res.render('staff-marketprices.ejs', data);
+    res.render('staff-marketprices.ejs', {data});
 });
 
 app.listen(process.env.PORT || 8080, () => {
