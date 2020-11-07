@@ -496,9 +496,13 @@ app.get('/staff/todayprice',function(req,res){
 });
 
 app.post('/staff/todayprice', async (req, res) => {
+    let data = {};
     let date = req.body.filled_date;
     let corn_quality = req.body.corn_quality;
-    console.log(date, corn_quality, '--------------------------------------------');
+    data.date = date;
+    data.corn_quality = corn_quality;
+    console.log(data, '--------------------------------------------');
+    res.render('staff-marketprices.ejs', data);
 });
 
 app.listen(process.env.PORT || 8080, () => {
