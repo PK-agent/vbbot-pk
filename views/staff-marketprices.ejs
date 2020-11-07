@@ -6,7 +6,11 @@
     <title>Staff MarketPrices</title>
 </head>
 <body>
-    <label><%= data.date %></label>
-    <label><%= data.corn_quality %></label>
+    <% data.forEach(function(marketPrice){ %>
+        <label><%= marketPrice.date %></label>
+        <label><%= marketPrice.corn_type %></label>
+        <label><%= marketPrice.price %></label>
+        <br>
+    <% }); %> 
 </body>
 </html>

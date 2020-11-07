@@ -496,12 +496,36 @@ app.get('/staff/todayprice',function(req,res){
 });
 
 app.post('/staff/todayprice', async (req, res) => {
-    let data = {};
     let date = req.body.filled_date;
     let corn_quality = req.body.corn_quality;
-    data.date = date;
-    data.corn_quality = corn_quality;
-    console.log(data, '--------------------------------------------');
+    
+    const marketPricesRef = db.collection('market-prices');
+    const marketPricesSnapshot = await marketPricesRef.where('date', '==', date).get();
+    
+    let data = [];
+    if (marketPricesSnapshot.empty) {
+      console.log('No matching documents.');
+    }  
+    else{
+        marketPricesSnapshot.forEach(doc => {
+
+            let marketPrice = {};
+            marketPrice.docId = doc.id;
+            marketPrice.date = doc.data().date;
+            marketPrice.corn_type = doc.data().corn_type;
+            if(corn_quality === 'Q1'){
+                marketPrice.price = doc.data().quality_1; 
+            }
+            else if(corn_quality === 'Q2'){
+                marketPrice.price = doc.data().quality_2;
+            }
+            else {
+                marketPrice.price = doc.data().quality_3;
+            }      
+            data.push(marketPrice);       
+        }); 
+    }
+
     res.render('staff-marketprices.ejs', {data});
 });
 
