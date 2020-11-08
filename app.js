@@ -422,17 +422,22 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
 });
 
 app.get('/staff/merchant/add-inventory/:id', async (req,res) => {  
-    let data = {};        
+    
+    let docId = req.params.id;
 
-    let userRef = db.collection('users').doc(req.params.id);
-    let userDoc = await userRef.get();
-    if (!userDoc.exists) {
-      console.log('No such user!');        
+    let merchantBooksRef = db.collection('merchant-books').doc(docId);
+    let merchantBooksSnapshot = await merchantBooksRef.get();
+
+    let data = {};        
+    if (!merchantBooksSnapshot.exists) {
+        console.log('No such user!');        
     } else {     
-      data.userId = userDoc.id;
-      data.name = userDoc.data().name;
-      data.phone = userDoc.data().phone;
-      data.address = userDoc.data().address;
+      data.docId = merchantBooksSnapshot.id;
+      data.merchantId = merchantBooksSnapshot.data().merchant_id;
+      data.name = merchantBooksSnapshot.data().name;
+      data.phone = merchantBooksSnapshot.data().phone;
+      data.address = merchantBooksSnapshot.data().address;
+      data.cornType = merchantBooksSnapshot.data().corn_type;
       
     }
     res.render('staff-Addinventory.ejs', {data:data}); 
@@ -440,9 +445,12 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
 });
 
 app.post('/staff/merchant/add-inventory/', async (req,res) => {  
-    let today = new Date();   
-    let user_id = req.body.user_id;
+
+    let today = new Date(); 
+    let docId = req.body.doc_id;
+
     let data = {
+        merchantId : req.body.merchant_id,
         created_on:today,
         name: req.body.name,
         phone: req.body.phone,
@@ -454,7 +462,7 @@ app.post('/staff/merchant/add-inventory/', async (req,res) => {
         received_date: req.body.received_date
     }
 
-    db.collection('admin').doc(user_id).collection('staff').add(data)
+    db.collection('staffPurchasedList').add(data)
     .then(()=>{  
         console.log('Success');
     }).catch((error)=>{
