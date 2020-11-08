@@ -287,7 +287,8 @@ app.post('/merchant/book-inventory', async (req,res) => {
         wanted_price: req.body.wanted_price,
         comment: req.body.comment,
         received_date: req.body.received_date, 
-        already_confirmed: false,         
+        already_confirmed: false,    
+        already_purchased: false,     
         merchant_id: merchant_id   
     }
    
@@ -346,6 +347,7 @@ app.get('/admin/merchant/book-list', async (req,res) => {
             book.comment = doc.data().comment;
             book.received_date = doc.data().received_date;   
             book.already_confirmed = doc.data().already_confirmed;
+            book.already_purchased = doc.data().already_purchased;
             data.push(book);       
         }); 
     }  
@@ -360,7 +362,7 @@ app.post('/admin/merchant/book-list', async (req,res) => {
     if(action == "Confirm"){
         let docId = req.body.docId;
         let viberid = req.body.viberid;
-        console.log(`${docId} -------------------------------------------------`);
+        
         const bookRef = db.collection('merchant-books').doc(docId);
         bookRef.update({
             "already_confirmed": true
@@ -374,7 +376,6 @@ app.post('/admin/merchant/book-list', async (req,res) => {
     }
     else{
         let docId = req.body.docId;
-        console.log(`${docId} -------------------------------------------------`);
 
         const bookRef = db.collection('merchant-books').doc(docId);
         bookRef.delete()
@@ -391,7 +392,7 @@ app.post('/admin/merchant/book-list', async (req,res) => {
 
 app.get('/staff/merchant/inventory-list', async (req,res) => {
     const staffsRef = db.collection('merchant-books');
-    const booksSnapshot = await staffsRef.where('already_confirmed', '==', true).get();
+    const booksSnapshot = await staffsRef.where('already_confirmed', '==', true).where('already_purchased', '==', false).get();
     // const snapshot = await usersRef.get();
     let data = [];
     if (booksSnapshot.empty) {
@@ -411,7 +412,8 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
             confirm.wanted_price = doc1.data().wanted_price;
             confirm.comment = doc1.data().comment;
             confirm.received_date = doc1.data().received_date;  
-            confirm.already_confirmed = doc1.data().already_confirmed;         
+            confirm.already_confirmed = doc1.data().already_confirmed;     
+            confirm.already_purchased = doc1.data().already_purchased;    
             data.push(confirm);       
         }); 
     }  
