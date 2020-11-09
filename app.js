@@ -465,11 +465,11 @@ app.post('/staff/merchant/add-inventory', async (req,res, next) => {
     db.collection('staff-purchased-list').add(data)
     .then(()=>{  
         console.log('-----------------------------------------------------------success');
-        next();
     })
     .catch((error)=>{
         console.log('ERROR:', error);
     }); 
+    next();
 });
 
 
