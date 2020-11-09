@@ -464,7 +464,7 @@ app.post('/staff/merchant/add-inventory/', async (req,res) => {
 
     db.collection('staff-purchased-list').add(data)
     .then(()=>{  
-        
+        res.json({success:'success'});  
     })
     .catch((error)=>{
         console.log('ERROR:', error);
@@ -494,7 +494,7 @@ app.post('/admin/add-price', async (req,res) => {
 
     db.collection('market-prices').add(data)
     .then(()=>{
-          res.json({success:'success'});  
+          console.log('success');
 
     }).catch((error)=>{
         console.log('ERROR:', error);
