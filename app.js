@@ -295,7 +295,26 @@ app.post('/merchant/book-inventory', async (req,res) => {
 
     db.collection('merchant-books').add(data)
     .then(()=>{
-        
+        let data = {
+               "receiver":currentUser.id,
+               "min_api_version":1,
+               "sender":{
+                  "name":"PyaungKyi",
+                  "avatar":"http://api.adorable.io/avatar/200/isitup"
+               },
+               "tracking_data":"tracking data",
+               "type":"text",
+               "text": "အော်ဒါလုပ်ခြင်းအောင်မြင်ပါသည်။ ကျေးဇူးတင်ပါသည်။..."+req.body.name
+               
+            }   
+
+            fetch('https://chatapi.viber.com/pa/send_message', {
+                method: 'post',
+                body:    JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
+            })
+            .then(res => res.json())
+            .then(json => console.log('JSON', json))
             
             
         }).catch((error)=>{
@@ -445,7 +464,7 @@ app.post('/staff/merchant/add-inventory/', async (req,res) => {
 
     db.collection('staff-purchased-list').add(data)
     .then(()=>{  
-        res.json({success:'success'});  
+        
     })
     .catch((error)=>{
         console.log('ERROR:', error);
