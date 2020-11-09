@@ -194,7 +194,7 @@
   <body>
   <div class="addinventory"><h1 class="header">ဝယ်ယူပြီးသည့်ကုန်သည် စာရင်းသွင်းရန်</h1></div>
     <div class="main">
-      <form id="form" action="/staff/merchant/add-inventory" method="post">
+      <form id="form" action="/staff/merchant/add-inventory/<%= data.docId %>" method="post">
         <div id="name">
       
           <label class="label5" for="name">တင်းအရေအတွက်</label><br>
@@ -209,7 +209,6 @@
           <label class="label8" for="name">၀ယ်ယူခဲ့သည့်ရက်စွဲ</label><br>
           <input class="receiveddate" type="date" name="received_date"/><br>      
           
-          <input type="hidden" name="doc_id" value="<%= data.docId %>"/>
           <input type="hidden" name="merchant_id" value="<%= data.merchantId %>"/>
           <input type="hidden" name="name" value="<%= data.name %>"/>
           <input type="hidden" name="phone" value="<%= data.phone %>"/>

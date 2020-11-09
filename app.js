@@ -444,10 +444,10 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
     
 });
 
-app.post('/staff/merchant/add-inventory', async (req,res) => {  
+app.post('/staff/merchant/add-inventory/:id', async (req,res) => {  
 
     let today = new Date(); 
-    let docId = req.body.doc_id;
+    let docId = req.params.id;
 
     let data = {
         merchantId : req.body.merchant_id,
