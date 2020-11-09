@@ -444,7 +444,7 @@ app.get('/staff/merchant/add-inventory/:id', async (req,res) => {
     
 });
 
-app.post('/staff/merchant/add-inventory', async (req,res) => {  
+app.post('/staff/merchant/add-inventory', async (req,res, next) => {  
 
     let today = new Date(); 
     let docId = req.body.doc_id;
@@ -465,12 +465,11 @@ app.post('/staff/merchant/add-inventory', async (req,res) => {
     db.collection('staff-purchased-list').add(data)
     .then(()=>{  
         console.log('-----------------------------------------------------------success');
-        return;
+        next();
     })
     .catch((error)=>{
         console.log('ERROR:', error);
     }); 
-    console.log('finish----------------------------------------------');
 });
 
 
