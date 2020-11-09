@@ -465,6 +465,7 @@ app.post('/staff/merchant/add-inventory/', async (req,res) => {
     db.collection('staff-purchased-list').add(data)
     .then(()=>{  
         console.log('-----------------------------------------------------------success');
+        window.close();
     })
     .catch((error)=>{
         console.log('ERROR:', error);
