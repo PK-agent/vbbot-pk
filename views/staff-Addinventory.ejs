@@ -216,14 +216,15 @@
       <input type="hidden" name="address" value="<%= data.address %>"/>
       <input type="hidden" name="corn_type" value="<%= data.cornType %>"/>
       
-    <input class="submit" type="submit" name="submit"/>    
-  </div>
+      <input class="submit" type="submit" name="submit"/>    
+    </div>
   </form>
 </div>
   <script>
     
     const windowClose = () => {
       setTimeout(()=>{
+        console.log('gggggggggggggggggggggggggggg');
         window.close();
       },2000);    
     }

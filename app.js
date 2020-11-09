@@ -462,10 +462,11 @@ app.post('/staff/merchant/add-inventory/', async (req,res) => {
         received_date: req.body.received_date
     }
 
-    db.collection('staffPurchasedList').add(data)
+    db.collection('staff-purchased-list').add(data)
     .then(()=>{  
         console.log('Success');
-    }).catch((error)=>{
+    })
+    .catch((error)=>{
         console.log('ERROR:', error);
     }); 
     
