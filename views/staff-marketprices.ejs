@@ -4,13 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ယနေ့အလုပ်သမားအဝယ်ဈေးနှုန်း</title>
+    <style type="text/css">
+        *{
+          margin: 0;
+          padding: 0;
+        }
+        body{
+        background-image: url(https://wallpaperaccess.com/full/89878.jpg) ;
+        background-position: center;
+        background-size: cover;
+        font-family: sans-serif;
+        margin-top: 40px;
+      }
+      .head{
+        width: 550px;
+        background-color:rgb(40, 154, 207) ;
+        margin: auto;
+        color: #FFFFFF;
+        padding: 10px 0px 10px 0px;
+        text-align: center;
+        border-radius: 10px 10px 0px 0px;
+      }
+     
+      .main{
+        background-color: rgb(114, 185, 218) ;
+        width: 550px;
+        height: 300px;
+        margin:auto;
+      }
+            
+      .lab1{
+        position: relative;
+        color: rgba(51, 12, 224, 0.979);
+        font-size: 14px;
+        left: 10px;
+        top: 17px;
+      }
+      
+      .lab2{
+        position: relative;
+        color: rgba(51, 12, 224, 0.979);
+        font-size: 14px;
+        left: 10px;
+        top: 18px;
+      }
+      .lab3{
+        position: relative;
+        color: rgba(51, 12, 224, 0.979);
+        font-size: 14px;
+        left: 10px;
+        top: 18px;
+      }
+     
+      .lab4{
+        position: relative;
+        left: 190px;
+        top: -10px;
+        line-height: 30px;
+        border-radius: 5px;        
+        padding:0 22px;
+        font-size: 14px;
+      }
+      
+      .lab5{
+        position: relative;
+        left: 190px;
+        top: -10px; 
+        line-height: 30px;      
+        border-radius: 5px;
+        padding:0 22px;
+        font-size: 14px;
+      }
+      .lab{
+        position: relative;
+        left: 190px;
+        top: -10px;
+        line-height: 30px;      
+        border-radius: 5px;
+        padding:0 22px;
+        font-size: 14px;
+      }
+      
+      
+  
+      </style>
 </head>
 <body>
+    <div class="main">
     <% data.forEach(function(marketPrice){ %>
-        <label><%= marketPrice.date %></label>
-        <label><%= marketPrice.corn_type %></label>
-        <label><%= marketPrice.price %></label>
+        <label class="lab1">ရက်စွဲ</label>
+        <label class="lab2"><%= marketPrice.date %></label>
+        <label class="lab3">အမျိုးအစား</label>
+        <label class="lab4"><%= marketPrice.corn_type %></label>
+        <label class="lab5">ဈေးနှုန်း</label>
+        <label class="lab6"><%= marketPrice.price %></label>
         <br>
-    <% }); %> 
+    <% }); %>
+</div> 
 </body>
 </html>
