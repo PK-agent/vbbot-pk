@@ -133,29 +133,27 @@
   <div class="addinventory"><h1 class="header">ဝယ်ယူပြီးသည့်ကုန်သည် စာရင်းသွင်းရန်</h1></div>
     <div class="main">
       <form id="form" action="/staff/merchant/add-inventory" method="post">
-        <div id="name">
       
-          <label class="label5" for="name">တင်းအရေအတွက်</label><br>
-          <input class="cornqty" type="number" name="corn_qty"/><br>  
-          
-          <label class="label6" for="name">ပေးချေခဲ့သည့်‌စျေးနှုန်း</label><br>
-          <input class="purchasedprice" type="number" name="purchased_price"/><br>
+        <label class="label5" for="name">တင်းအရေအတွက်</label><br>
+        <input class="cornqty" type="number" name="corn_qty"/><br>  
+        
+        <label class="label6" for="name">ပေးချေခဲ့သည့်‌စျေးနှုန်း</label><br>
+        <input class="purchasedprice" type="number" name="purchased_price"/><br>
 
-          <label class="label7" for="name">မှတ်ချက်</label><br>
-          <textarea class="comment" name="comment" rows="2" cols="30"></textarea><br>
-      
-          <label class="label8" for="name">၀ယ်ယူခဲ့သည့်ရက်စွဲ</label><br>
-          <input class="receiveddate" type="date" name="received_date"/><br>      
-          
-          <input type="hidden" name="doc_id" value="<%= data.docId %>"/>
-          <input type="hidden" name="merchant_id" value="<%= data.merchantId %>"/>
-          <input type="hidden" name="name" value="<%= data.name %>"/>
-          <input type="hidden" name="phone" value="<%= data.phone %>"/>
-          <input type="hidden" name="address" value="<%= data.address %>"/>
-          <input type="hidden" name="corn_type" value="<%= data.cornType %>"/>
-          
-          <input class="submit" type="submit" name="submit"/>    
-        </div>
+        <label class="label7" for="name">မှတ်ချက်</label><br>
+        <textarea class="comment" name="comment" rows="2" cols="30"></textarea><br>
+    
+        <label class="label8" for="name">၀ယ်ယူခဲ့သည့်ရက်စွဲ</label><br>
+        <input class="receiveddate" type="date" name="received_date"/><br>      
+        
+        <input type="hidden" name="doc_id" value="<%= data.docId %>"/>
+        <input type="hidden" name="merchant_id" value="<%= data.merchantId %>"/>
+        <input type="hidden" name="name" value="<%= data.name %>"/>
+        <input type="hidden" name="phone" value="<%= data.phone %>"/>
+        <input type="hidden" name="address" value="<%= data.address %>"/>
+        <input type="hidden" name="corn_type" value="<%= data.cornType %>"/>
+        
+        <input class="submit" type="submit" name="submit"/>    
       </form>
     </div>
 

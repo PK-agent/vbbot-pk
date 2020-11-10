@@ -475,29 +475,29 @@ app.post('/staff/merchant/inventory-list/:id', async (req, res) => {
 
 app.post('/staff/merchant/add-inventory', async (req,res) => {  
 
-    let today = new Date(); 
-    let docId = req.body.doc_id;
+    // let today = new Date(); 
+    // let docId = req.body.doc_id;
 
-    let data = {
-        merchantId : req.body.merchant_id,
-        created_on:today,
-        name: req.body.name,
-        phone: req.body.phone,
-        address: req.body.address,
-        corn_type: req.body.corn_type,
-        corn_qty: req.body.corn_qty,
-        purchased_price: req.body.purchased_price,
-        comment: req.body.comment,
-        received_date: req.body.received_date
-    }
+    // let data = {
+    //     merchantId : req.body.merchant_id,
+    //     created_on:today,
+    //     name: req.body.name,
+    //     phone: req.body.phone,
+    //     address: req.body.address,
+    //     corn_type: req.body.corn_type,
+    //     corn_qty: req.body.corn_qty,
+    //     purchased_price: req.body.purchased_price,
+    //     comment: req.body.comment,
+    //     received_date: req.body.received_date
+    // }
 
-    db.collection('staff-purchased-list').add(data)
-    .then(()=>{  
-        console.log('-----------------------------------------------------------success');
-    })
-    .catch((error)=>{
-        console.log('ERROR:', error);
-    }); 
+    // db.collection('staff-purchased-list').add(data)
+    // .then(()=>{  
+    //     console.log('-----------------------------------------------------------success');
+    // })
+    // .catch((error)=>{
+    //     console.log('ERROR:', error);
+    // }); 
 });
 
 
