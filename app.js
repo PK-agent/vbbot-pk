@@ -421,28 +421,57 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
     res.render('staff-merchantList.ejs', {data});  
 });
 
-app.get('/staff/merchant/add-inventory/:id', async (req,res) => {  
-    
+app.post('/staff/merchant/inventory-list/:id', async (req, res) => {  
+
+    let action = req.body.action;
     let docId = req.params.id;
 
-    let merchantBooksRef = db.collection('merchant-books').doc(docId);
-    let merchantBooksSnapshot = await merchantBooksRef.get();
-
-    let data = {};        
-    if (!merchantBooksSnapshot.exists) {
-        console.log('No such user!');        
-    } else {     
-      data.docId = merchantBooksSnapshot.id;
-      data.merchantId = merchantBooksSnapshot.data().merchant_id;
-      data.name = merchantBooksSnapshot.data().name;
-      data.phone = merchantBooksSnapshot.data().phone;
-      data.address = merchantBooksSnapshot.data().address;
-      data.cornType = merchantBooksSnapshot.data().corn_type;
-      
-    }
-    res.render('staff-Addinventory.ejs', {data:data}); 
+    if(action == "Add Inventory") {
+        let merchantBooksRef = db.collection('merchant-books').doc(docId);
+        let merchantBooksSnapshot = await merchantBooksRef.get();
     
+        let data = {};        
+        if (!merchantBooksSnapshot.exists) {
+            console.log('No such user!');        
+        } else {     
+          data.docId = merchantBooksSnapshot.id;
+          data.merchantId = merchantBooksSnapshot.data().merchant_id;
+          data.name = merchantBooksSnapshot.data().name;
+          data.phone = merchantBooksSnapshot.data().phone;
+          data.address = merchantBooksSnapshot.data().address;
+          data.cornType = merchantBooksSnapshot.data().corn_type;
+        }
+        console.log(data);
+        res.render('staff-Addinventory.ejs', {data:data});
+    }
+    else {
+
+    }
+ 
 });
+
+// app.get('/staff/merchant/add-inventory/:id', async (req,res) => {  
+    
+//     let docId = req.params.id;
+
+//     let merchantBooksRef = db.collection('merchant-books').doc(docId);
+//     let merchantBooksSnapshot = await merchantBooksRef.get();
+
+//     let data = {};        
+//     if (!merchantBooksSnapshot.exists) {
+//         console.log('No such user!');        
+//     } else {     
+//       data.docId = merchantBooksSnapshot.id;
+//       data.merchantId = merchantBooksSnapshot.data().merchant_id;
+//       data.name = merchantBooksSnapshot.data().name;
+//       data.phone = merchantBooksSnapshot.data().phone;
+//       data.address = merchantBooksSnapshot.data().address;
+//       data.cornType = merchantBooksSnapshot.data().corn_type;
+      
+//     }
+//     res.render('staff-Addinventory.ejs', {data:data}); 
+    
+// });
 
 app.post('/staff/merchant/add-inventory', async (req,res) => {  
 

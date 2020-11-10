@@ -69,6 +69,7 @@
   </tr>
 
   <% data.forEach(function(book){ %>
+    <form class="form" action="/staff/merchant/inventory-list/<%= book.docId %>" method="post">
      <tr>
       
        <td><%= book.name %></td>
@@ -80,8 +81,10 @@
        <td><%= book.comment %></td>
        <td><%= book.received_date %></td>       
      
-       <td><a href="/staff/merchant/add-inventory/<%= book.docId %>">Add Inventory</a> | <a href="../admin/stocklist/<%= book.docId %>">Delete</a></td>
-     </tr>
+       <!-- <td><a href="/staff/merchant/add-inventory/<%= book.docId %>">Add Inventory</a> | <a href="../admin/stocklist/<%= book.docId %>">Delete</a></td> -->
+       <td><input type="submit" name="action" value="Add Inventory" /> | <input type="submit" name="action" value="Delete"></td>
+      </tr>
+    </form>
   <% }); %> 
 
   </table> 
