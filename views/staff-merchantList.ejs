@@ -69,7 +69,7 @@
   </tr>
 
   <% data.forEach(function(book){ %>
-    <form id="form">
+    <form class="form" action="/staff/merchant/inventory-list/<%= book.docId %>" method="post">
      <tr>
       
        <td><%= book.name %></td>
@@ -89,16 +89,7 @@
 
   </table> 
 </div>
-<script>
 
-  const windowClose = () => {
-    setTimeout(()=>{
-      window.close();
-    },2000);    
-  }  
-  document.getElementById("form").addEventListener("submit", windowClose); 
-
-  </script>
   </body>
 
 </html>
