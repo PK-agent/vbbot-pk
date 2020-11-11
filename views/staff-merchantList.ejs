@@ -90,6 +90,21 @@
   </table> 
 </div>
 
+<script>
+  
+  const reload = () => {
+    setTimeout(()=>{
+      window.close();
+    },4000);    
+  }
+
+  let formElements = document.getElementsByClassName("form");
+  for(var i=0; i < formElements.length; i++){
+    formElements[i].addEventListener("submit", reload); 
+  }
+  
+  </script>
+
   </body>
 
 </html>
