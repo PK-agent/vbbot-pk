@@ -493,7 +493,16 @@ app.post('/staff/merchant/add-inventory', async (req,res) => {
 
     db.collection('staff-purchased-list').add(data)
     .then(()=>{  
-        console.log('-----------------------------------------------------------success');
+        const merchantBookRef = db.collection('merchant-books').doc(docId);
+        merchantBookRef.update({
+            "already_purchased": true
+        })
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     })
     .catch((error)=>{
         console.log('ERROR:', error);
