@@ -442,7 +442,7 @@ app.post('/staff/merchant/inventory-list/:id', async (req, res) => {
           data.cornType = merchantBooksSnapshot.data().corn_type;
         }
         console.log(data);
-        // res.render('staff-Addinventory.ejs', {data:data});
+        res.render('staff-Addinventory.ejs', {data:data});
     }
     else {
 

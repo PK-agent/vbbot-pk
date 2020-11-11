@@ -51,60 +51,44 @@
 
   <body>
   <div class="head"><h1 class="header">အလုပ်သမား ဝယ်ရမည့်စာရင်း</h1></div>
-  <div class="main">
-    
-  <table class="table" cellspacing="1" cellpadding="5" border="1">
-    <tr>
-    
-    <th>ကုန်သည်အမည်</th>
-    <th>ဖုန်းနံပါတ်</th>
-    <th>နေရပ်လိပ်စာ</th>  
-    <th>ပြောင်းအမျိုးအစား</th>  
-    <th>တင်းအရေအတွက်</th>
-    <th>ရောင်းလိုသည့်စျေးနှုန်း</th>
-    <th>မှတ်ချက်</th>
-    <th>စာရင်းသွင်းသည့်ရက်စွဲ</th>
-    <th>၀ယ်ယူရမည့် ကုန်သည်စာရင်း</th>
-        
-  </tr>
-
-  <% data.forEach(function(book){ %>
-    <form class="form" action="/staff/merchant/inventory-list/<%= book.docId %>" method="post">
-     <tr>
+    <div class="main">
       
-       <td><%= book.name %></td>
-       <td><%= book.phone %></td>
-       <td><%= book.address %></td>
-       <td><%= book.corn_type %></td>
-       <td><%= book.corn_qty %></td>
-       <td><%= book.wanted_price %></td>
-       <td><%= book.comment %></td>
-       <td><%= book.received_date %></td>       
-     
-       <!-- <td><a href="/staff/merchant/add-inventory/<%= book.docId %>">Add Inventory</a> | <a href="../admin/stocklist/<%= book.docId %>">Delete</a></td> -->
-       <td><input type="submit" name="action" value="Add Inventory" /> | <input type="submit" name="action" value="Delete"></td>
+      <table class="table" cellspacing="1" cellpadding="5" border="1">
+        <tr>
+        
+        <th>ကုန်သည်အမည်</th>
+        <th>ဖုန်းနံပါတ်</th>
+        <th>နေရပ်လိပ်စာ</th>  
+        <th>ပြောင်းအမျိုးအစား</th>  
+        <th>တင်းအရေအတွက်</th>
+        <th>ရောင်းလိုသည့်စျေးနှုန်း</th>
+        <th>မှတ်ချက်</th>
+        <th>စာရင်းသွင်းသည့်ရက်စွဲ</th>
+        <th>၀ယ်ယူရမည့် ကုန်သည်စာရင်း</th>
+            
       </tr>
-    </form>
-  <% }); %> 
 
-  </table> 
-</div>
+      <% data.forEach(function(book){ %>
+        <form class="form" action="/staff/merchant/inventory-list/<%= book.docId %>" method="post">
+        <tr>
+          
+          <td><%= book.name %></td>
+          <td><%= book.phone %></td>
+          <td><%= book.address %></td>
+          <td><%= book.corn_type %></td>
+          <td><%= book.corn_qty %></td>
+          <td><%= book.wanted_price %></td>
+          <td><%= book.comment %></td>
+          <td><%= book.received_date %></td>       
+        
+          <!-- <td><a href="/staff/merchant/add-inventory/<%= book.docId %>">Add Inventory</a> | <a href="../admin/stocklist/<%= book.docId %>">Delete</a></td> -->
+          <td><input type="submit" name="action" value="Add Inventory" /> | <input type="submit" name="action" value="Delete"></td>
+          </tr>
+        </form>
+      <% }); %> 
 
-<script>
-  
-  const reload = () => {
-    setTimeout(()=>{
-      window.close();
-    },4000);    
-  }
-
-  let formElements = document.getElementsByClassName("form");
-  for(var i=0; i < formElements.length; i++){
-    formElements[i].addEventListener("submit", reload); 
-  }
-  
-  </script>
-
+      </table> 
+    </div>
   </body>
 
 </html>
