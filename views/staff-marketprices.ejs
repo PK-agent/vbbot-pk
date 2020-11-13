@@ -94,12 +94,11 @@
     <div class="main">
     <% data.forEach(function(marketPrice){ %>
         <label class="lab1">ရက်စွဲ</label>-<br>
-        <label class="lab4"><%= marketPrice.date %></label><br>
+        <input class="lab4" value="<%= marketPrice.date %>"/> <br>
         <label class="lab2">အမျိုးအစား</label>-<br>
-        <label class="lab5"><%= marketPrice.corn_type %></label><br>
+        <input class="lab5" value="<%= marketPrice.corn_type %>" /> <br>
         <label class="lab3">ဈေးနှုန်း</label>-<br>
-        <label class="lab6"><%= marketPrice.price %></label>
-        <br>
+        <input class="lab6" value="<%= marketPrice.price %>" /> <br>
     <% }); %>
 </div> 
 </body>
