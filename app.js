@@ -880,7 +880,7 @@ const registerMerchant = async (message, response) => {
 
 
 function defaultReply(message, response){
-    let bot_message = new TextMessage(`Please select your activity in keyboard menu`, actionKeyboard); 
+    let bot_message = new TextMessage(`Please select your activity in keyboard menu`, AdminCusStafKeyboard); 
 
     response.send(new TextMessage(`I don't quite understand your command`)).then(()=>{
                    return response.send(bot_message);
