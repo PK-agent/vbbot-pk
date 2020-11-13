@@ -582,7 +582,7 @@ app.get('/merchant/market-price',function(req,res){
     res.render('merchant.marketprice.ejs');
 });
 
-app.post('/staff/todayprice', async (req, res) => {
+app.post('/merchant/market-price', async (req, res) => {
     let date = req.body.filled_date;
        
     const marketPricesRef = db.collection('market-prices');
@@ -778,7 +778,7 @@ bot.onTextMessage(/./, (message, response) => {
             adminAddStaffPurchasePrice(message, response);
             break;
         case "tdy-merchant-price":
-            test2(message, response);
+            merchantPrice(message, response);
             break;    
         case "tdy-pur-price":
             staffTodayPrice(message, response);
@@ -819,9 +819,9 @@ const adminAddStaffPurchasePrice = (message, response) => {
     response.send(bot_message);
 }
 
-const test2 = (message, response) => {    
+const merchantPrice = (message, response) => {    
 
-    let bot_message = new UrlMessage(process.env.APP_URL + '/test2');   
+    let bot_message = new UrlMessage(process.env.APP_URL + '/merchant/market-price');   
     response.send(bot_message);
 }
 
