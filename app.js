@@ -603,7 +603,7 @@ app.post('/merchant/market-price', async (req, res) => {
         }); 
     }
 
-    res.render('merchant-marketprice.ejs', {data});
+    res.render('merchant.marketprice.ejs', {data});
 });
 
 app.listen(process.env.PORT || 8080, () => {
