@@ -92,7 +92,9 @@
 <body>
     <div class="head"><h1 class="header">ယနေ့ဈေးနှုန်း</h1></div>
     <div class="main">
-    <% console.log(data.length) %>
+    <% if(data.length == 0) { %>
+      <label>No Data Found</label>
+    <% } %>
 
     <% data.forEach(function(marketPrice){ %>
         <label class="lab1">ရက်စွဲ</label>-<br>
