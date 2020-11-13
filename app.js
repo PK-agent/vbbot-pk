@@ -598,7 +598,7 @@ app.post('/merchant/market-price', async (req, res) => {
             let marketPrice = {};
             marketPrice.docId = doc.id;
             marketPrice.date = doc.data().date;
-           
+            marketPrice.merchantPrice = doc.data().merchant_price;
             data.push(marketPrice);       
         }); 
     }
