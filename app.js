@@ -598,12 +598,13 @@ app.post('/merchant/market-price', async (req, res) => {
             let marketPrice = {};
             marketPrice.docId = doc.id;
             marketPrice.date = doc.data().date;
+            marketPrice.cornType = doc.data().corn_type;
             marketPrice.merchantPrice = doc.data().merchant_price;
             data.push(marketPrice);       
         }); 
     }
 
-    res.render('merchant.marketprice.ejs', {data});
+    res.render('merchant-price.ejs', {data});
 });
 
 app.listen(process.env.PORT || 8080, () => {
