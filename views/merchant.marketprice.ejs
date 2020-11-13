@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>ပြောင်းအဝယ်ဈေးကြည့်ရန်</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      body{
+      background-image: url(https://wallpaperaccess.com/full/89878.jpg) ;
+      background-position: center;
+      background-size: cover;
+      font-family: sans-serif;
+      margin-top: 40px;
+    }
+    .head{
+      width: 550px;
+      background-color:rgb(40, 154, 207) ;
+      margin: auto;
+      color: #FFFFFF;
+      padding: 10px 0px 10px 0px;
+      text-align: center;
+      border-radius: 10px 10px 0px 0px;
+    }
+    .header{
+      font-size: 25px;      
+      color:white;
+    }
+    .main{
+      background-color: rgb(114, 185, 218) ;
+      width: 550px;
+      height: 300px;
+      margin:auto;
+    }
+    .form{
+      padding: 10px;
+    }
+    
+    .label1{
+      position: relative;
+      color: rgba(51, 12, 224, 0.979);
+      font-size: 14px;
+      left: 10px;
+      top: 17px;
+    }
+    
+    
+    .date{
+      position: relative;
+      left: 190px;
+      top: -10px;
+      line-height: 30px;
+      border-radius: 5px;
+      padding:0 22px;
+      font-size: 14px;
+    }   
+    
+    .submit{
+      position: relative;     
+      left: 350px;
+      top: 27px;
+      padding: 5px;
+      font-size: 14px;
+      font-style: italic;
+      font-weight: lighter;
+    }
+
+    </style>
+ </head>
+
+  <body>
+  <div class="head"><h1 class="header">ပေါက်ဈေးကြည့်ရန်</h1></div>
+  <div class="main">
+  <form id="form" action="/staff/todayprice" method="post">
+    
+        <label class="label1" for="name">ရက်စွဲ</label><br>
+        <input class="date" type="date" name="filled_date"/><br>        
+    
+    <input class="submit" type="submit" name="submit"/>
+ 
+  </form>
+</div>
+
+  <script>
+    
+  // const windowClose = () => {
+  //   setTimeout(()=>{
+  //     window.close();
+  //   },2000);    
+  // }
+      
+  // document.getElementById("form").addEventListener("submit", windowClose); 
+	
+  </script>
+  </body>
+
+</html>

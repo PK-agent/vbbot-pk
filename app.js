@@ -577,6 +577,35 @@ app.post('/staff/todayprice', async (req, res) => {
     res.render('staff-marketprices.ejs', {data});
 });
 
+app.get('/merchant/market-price',function(req,res){              
+    
+    res.render('merchant.marketprice.ejs');
+});
+
+app.post('/staff/todayprice', async (req, res) => {
+    let date = req.body.filled_date;
+       
+    const marketPricesRef = db.collection('market-prices');
+    const marketPricesSnapshot = await marketPricesRef.where('date', '==', date).get();
+    
+    let data = [];
+    if (marketPricesSnapshot.empty) {
+      console.log('No matching documents.');
+    }  
+    else{
+        marketPricesSnapshot.forEach(doc => {
+
+            let marketPrice = {};
+            marketPrice.docId = doc.id;
+            marketPrice.date = doc.data().date;
+           
+            data.push(marketPrice);       
+        }); 
+    }
+
+    res.render('merchant-marketprice.ejs', {data});
+});
+
 app.listen(process.env.PORT || 8080, () => {
     console.log(`webhook is listening`);
     bot.setWebhook(`${process.env.APP_URL}/viber/webhook`).catch(error => {
