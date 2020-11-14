@@ -315,7 +315,10 @@ app.post('/merchant/book-inventory', async (req,res) => {
             })
             .then(res => res.json())
             .then(json => console.log('JSON', json))
-            
+
+                const message = new TextMessage(`Please choose more actions...`, merchantKeyboard,null,null,null,3);  
+         
+                 bot.sendMessage(currentUserProfile, message);
             
         }).catch((error)=>{
             console.log('ERROR:', error);
