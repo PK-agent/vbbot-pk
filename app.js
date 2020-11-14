@@ -531,11 +531,35 @@ app.post('/admin/add-price', async (req,res) => {
 
     db.collection('market-prices').add(data)
     .then(()=>{
-          console.log('success');
+        let data = {
+            "receiver":currentUser.id,
+            "min_api_version":1,
+            "sender":{
+               "name":"PyaungKyi",
+               "avatar":"http://api.adorable.io/avatar/200/isitup"
+            },
+            "tracking_data":"tracking data",
+            "type":"text",
+            "text": "ပေါက်ဈေးထည်သွင်းပြီးပါပြီ..."+req.body.name
+            
+         }  
 
-    }).catch((error)=>{
+         fetch('https://chatapi.viber.com/pa/send_message', {
+             method: 'post',
+             body:    JSON.stringify(data),
+             headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
+         })
+         .then(res => res.json())
+         .then(json => console.log('JSON', json));
+         
+         const message = new TextMessage(`Please choose more actions...`, adminKeyboard,null,null,null,3);  
+         
+         bot.sendMessage(currentUserProfile, message);         
+
+     }).catch((error)=>{
         console.log('ERROR:', error);
-    }); 
+    });
+    
 });
 
 app.get('/staff/todayprice',function(req,res){              
