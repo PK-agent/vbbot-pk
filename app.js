@@ -52,7 +52,7 @@ let adminKeyboard = {
                 "BgLoop": true,
                 "ActionType": "reply",
                 "ActionBody": "admin-add-price",               
-                "Text": "ပေါက်ဈေး ထည့်ရန်",
+                "Text": "ပေါက်ဈေးထည့်ရန်",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
@@ -67,7 +67,7 @@ let adminKeyboard = {
                 "BgLoop": true,
                 "ActionType": "reply",
                 "ActionBody": "merch-entrylist",               
-                "Text": "စာရင်းသွင်းထားသည့် ကုန်သည်များ",
+                "Text": "စာရင်းသွင်းထားသည့်ကုန်သည်များ",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
@@ -82,7 +82,7 @@ let adminKeyboard = {
                 "BgLoop": true,
                 "ActionType": "reply",
                 "ActionBody": "staff-entrylist",               
-                "Text": "အလုပ်သမား ဝယ်ပြီးစာရင်း",
+                "Text": "အလုပ်သမားဝယ်ပြီးစာရင်း",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
@@ -106,7 +106,7 @@ let staffKeyboard = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "tdy-pur-price",               
-            "Text": "ယနေ့ အဝယ်ဈေးနှုန်း",
+            "Text": "ယနေ့အဝယ်ဈေးနှုန်း",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -120,8 +120,8 @@ let staffKeyboard = {
             "BgMedia": "http://www.url.by/test.gif",
             "BgLoop": true,
             "ActionType": "reply",
-            "ActionBody": "booked-merchants-list",               
-            "Text": "ဝယ်ယူရမည့် ကုန်သည်စာရင်း",
+            "ActionBody": "booked-merchants",               
+            "Text": "ဝယ်ယူရမည့်ကုန်သည်စာရင်း",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -144,7 +144,7 @@ let merchantKeyboard = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "tdy-merchant-price",               
-            "Text": "ယနေ့ ပြောင်းပေါက်ဈေး",
+            "Text": "ယနေ့ပြောင်းပေါက်ဈေး",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -159,7 +159,7 @@ let merchantKeyboard = {
             "BgLoop": true,
             "ActionType": "reply",
             "ActionBody": "merch-book-inv",               
-            "Text": "အရောင်းစာရင်း သွင်းရန်",
+            "Text": "အရောင်းစာရင်းသွင်းရန်",
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
@@ -224,8 +224,8 @@ app.post('/merchant/register',function(req,response){
                    "receiver":currentUser.id,
                    "min_api_version":1,
                    "sender":{
-                      "name":"PyaungKyi",
-                      "avatar":"http://api.adorable.io/avatar/200/isitup"
+                      "name":"ပြောင်းကြည့်",
+                      "avatar":"https://chat-pk.herokuapp.com/img/pk.png"
                    },
                    "tracking_data":"tracking data",
                    "type":"text",
@@ -299,8 +299,8 @@ app.post('/merchant/book-inventory', async (req,res) => {
                "receiver":currentUser.id,
                "min_api_version":1,
                "sender":{
-                  "name":"PyaungKyi",
-                  "avatar":"http://api.adorable.io/avatar/200/isitup"
+                  "name":"ပြောင်းကြည့်",
+                  "avatar":"https://chat-pk.herokuapp.com/img/pk.png"
                },
                "tracking_data":"tracking data",
                "type":"text",
@@ -535,8 +535,8 @@ app.post('/admin/add-price', async (req,res) => {
             "receiver":currentUser.id,
             "min_api_version":1,
             "sender":{
-               "name":"PyaungKyi",
-               "avatar":"http://api.adorable.io/avatar/200/isitup"
+               "name":"ပြောင်းကြည့်",
+               "avatar":"https://chat-pk.herokuapp.com/img/pk.png"
             },
             "tracking_data":"tracking data",
             "type":"text",
@@ -793,7 +793,7 @@ bot.onTextMessage(/./, (message, response) => {
         case "reg-inv":
             customerTdyStock(message, response);
             break;
-        case "booked-merchants-list":
+        case "booked-merchants":
             BookedMerchantList(message, response);
             break;
         case "admin-add-price":
@@ -808,7 +808,9 @@ bot.onTextMessage(/./, (message, response) => {
         case "tdy-pur-price":
             staffTodayPrice(message, response);
             break;
-              
+        case "staff-entrylist":
+            staffPurchasedList(message, response);
+            break;              
         default:
             defaultReply(message, response);
             
@@ -876,7 +878,11 @@ const BookedMerchantList = (message, response) => {
     response.send(bot_message);
 }
 
+const staffPurchasedList = (message, response) => {    
 
+    let bot_message = new UrlMessage(APP_URL + '/staff/merchant/inventory-list');   
+    response.send(bot_message);
+}
 
 
 
