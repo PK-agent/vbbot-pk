@@ -683,7 +683,7 @@ app.get('/staff/purchased/inventory-list', async (req,res) => {
         }); 
     }  
 
-    res.render('staff-purchase-list.ejs', {data});  
+    res.render('staff-purchased-list.ejs', {data});  
 });
 
 app.listen(process.env.PORT || 8080, () => {
