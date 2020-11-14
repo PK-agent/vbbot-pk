@@ -58,7 +58,7 @@
      
       .lab4{
         position: relative;
-        left: 150px;
+        left: 130px;
         top: -10px;
         line-height: 30px;
         border-radius: 5px;        
@@ -68,7 +68,7 @@
       
       .lab5{
         position: relative;
-        left: 150px;
+        left: 130px;
         top: -10px; 
         line-height: 30px;      
         border-radius: 5px;
@@ -98,11 +98,11 @@
 
     <% data.forEach(function(marketPrice){ %>
         <label class="lab1">ရက်စွဲ</label>-<br>
-        <input class="lab4" value="<%= marketPrice.date %>"/> <br>
+        <input class="lab4" value="<%= marketPrice.date %>" disabled/> <br>
         <label class="lab2">အမျိုးအစား</label>-<br>
-        <input class="lab5" value="<%= marketPrice.cornType %>" /> <br>
+        <input class="lab5" value="<%= marketPrice.cornType %>" disabled/> <br>
         <label class="lab3">ဈေးနှုန်း</label>-<br>
-        <input class="lab6" value="<%= marketPrice.merchantPrice %>" /> <br>
+        <input class="lab6" value="<%= marketPrice.merchantPrice %>" disabled/> <br>
     <% }); %>
 </div> 
 </body>
