@@ -500,8 +500,31 @@ app.post('/staff/merchant/add-inventory', async (req,res) => {
         merchantBookRef.update({
             "already_purchased": true
         })
-        .then((result) => {
-            console.log(result);
+        .then(() => {
+            let data = {
+                "receiver":currentUser.id,
+                "min_api_version":1,
+                "sender":{
+                   "name":"ပြောင်းကြည့်",
+                   "avatar":"https://chat-pk.herokuapp.com/img/pk.png"
+                },
+                "tracking_data":"tracking data",
+                "type":"text",
+                "text": "အဝယ်စာရင်းထည့်သွင်းပြီးပါပြီ..."
+                
+             }  
+    
+             fetch('https://chatapi.viber.com/pa/send_message', {
+                 method: 'post',
+                 body:    JSON.stringify(data),
+                 headers: { 'Content-Type': 'application/json', 'X-Viber-Auth-Token': process.env.AUTH_TOKEN },
+             })
+             .then(res => res.json())
+             .then(json => console.log('JSON', json));
+             
+             const message = new TextMessage(`Please choose more actions...`, staffKeyboard,null,null,null,3);  
+             
+             bot.sendMessage(currentUserProfile, message);             
         })
         .catch((error) => {
             console.log(error);
@@ -632,6 +655,35 @@ app.post('/merchant/market-price', async (req, res) => {
     }
 
     res.render('merchant-price.ejs', {data});
+});
+
+app.get('/staff/purchased/inventory-list', async (req,res) => {
+    const purchasedRef = db.collection('staff-purchased-list');
+    const purchasedSnapshot = await purchasedRef.get();
+    // const snapshot = await usersRef.get();
+    let data = [];
+    if (purchasedSnapshot.empty) {
+      console.log('No matching documents.');
+    }  
+    else{
+        purchasedSnapshot.forEach(doc1 => {
+
+            let confirm = {};
+            confirm.docId = doc1.id;
+            confirm.viberid = doc1.data().merchantId;
+            confirm.name = doc1.data().name;
+            confirm.phone = doc1.data().phone;         
+            confirm.address = doc1.data().address;
+            confirm.corn_type = doc1.data().corn_type;
+            confirm.corn_qty = doc1.data().corn_qty;
+            confirm.purchased_price = doc1.data().purchased_price;
+            confirm.comment = doc1.data().comment;
+            confirm.received_date = doc1.data().received_date;               
+            data.push(confirm);       
+        }); 
+    }  
+
+    res.render('staff-purchase-list.ejs', {data});  
 });
 
 app.listen(process.env.PORT || 8080, () => {
@@ -883,7 +935,7 @@ const BookedMerchantList = (message, response) => {
 
 const staffPurchasedList = (message, response) => {    
 
-    let bot_message = new UrlMessage(APP_URL + '/staff/merchant/inventory-list');   
+    let bot_message = new UrlMessage(APP_URL + '/staff/purchased/inventory-list');   
     response.send(bot_message);
 }
 
