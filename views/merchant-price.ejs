@@ -84,6 +84,15 @@
         padding:0 22px;
         font-size: 14px;
       }
+      .lab7{
+        position: relative;
+        left: 90px;
+        top: 0px;
+        line-height: 30px;      
+        border-radius: 5px;
+        padding:0 22px;
+        font-size: 14px;
+      }
       
       
   
@@ -93,7 +102,7 @@
     <div class="head"><h1 class="header">ယနေ့ပေါက်ဈေးနှုန်း</h1></div>
     <div class="main">
     <% if(data.length == 0) { %>
-      <label>No Data Found</label>
+      <label class="lab7">No Data Found</label>
     <% } %>
 
     <% data.forEach(function(marketPrice){ %>

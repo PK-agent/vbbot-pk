@@ -92,14 +92,18 @@
 <body>
     <div class="head"><h1 class="header">ယနေ့အဝယ်ဈေးနှုန်း</h1></div>
     <div class="main">
-    <% data.forEach(function(marketPrice){ %>
-        <label class="lab1">ရက်စွဲ</label><br>
-        <input class="lab4" value="<%= marketPrice.date %>" readonly/><br>
-        <label class="lab2">အမျိုးအစား</label><br>
-        <input class="lab5" value="<%= marketPrice.corn_type %>" readonly/><br>
-        <label class="lab3">ဈေးနှုန်း</label><br>
-        <input class="lab6" value="<%= marketPrice.price %>" readonly/><br>
-    <% }); %>
+      <% if(data.length == 0) { %>
+        <label class="lab7">No Data Found</label>
+      <% } %>
+      <% data.forEach(function(marketPrice){ %>
+          <label class="lab1">ရက်စွဲ</label><br>
+          <input class="lab4" value="<%= marketPrice.date %>" readonly/><br>
+          <label class="lab2">အမျိုးအစား</label><br>
+          <input class="lab5" value="<%= marketPrice.corn_type %>" readonly/><br>
+          <label class="lab3">ဈေးနှုန်း</label><br>
+          <input class="lab6" value="<%= marketPrice.price %>" readonly/><br>
+      <% }); %>
+      
 </div> 
 </body>
 </html>
