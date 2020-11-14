@@ -304,7 +304,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
                },
                "tracking_data":"tracking data",
                "type":"text",
-               "text": "အော်ဒါလုပ်ခြင်းအောင်မြင်ပါသည်။ ကျေးဇူးတင်ပါသည်။..."+req.body.name
+               "text": "အော်ဒါလုပ်ခြင်းအောင်မြင်ပါသည်။ ကျေးဇူးတင်ပါသည်..."+req.body.name
                
             }   
 
@@ -540,7 +540,7 @@ app.post('/admin/add-price', async (req,res) => {
             },
             "tracking_data":"tracking data",
             "type":"text",
-            "text": "ပေါက်ဈေးထည်သွင်းပြီးပါပြီ..."+req.body.name
+            "text": "ပေါက်ဈေးထည့်သွင်းပြီးပါပြီ..."
             
          }  
 
