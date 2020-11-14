@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>အလုပ်သမားဝယ်ရမည့်စာရင်း</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      *{
+          margin: 0;
+          padding: 0;
+        }
+        body{
+        background-image: url(https://wallpaperaccess.com/full/89878.jpg) ;
+        background-position: center;
+        background-size: cover;
+        font-family: sans-serif;
+        margin-top: 40px;
+      }
+      .head{
+        width: 1300px;
+        background-color:rgb(78, 189, 240) ;
+        margin: auto;
+        color: #FFFFFF;
+        padding: 5px 0px 5px 0px;
+        text-align: center;
+        border-radius: 5px 5px 0px 0px;
+      }
+      .header{
+        font-size: 25px;      
+        color:white;
+      }
+      .main{
+        background-color: rgb(147, 213, 243) ;
+        width: 1300px;      
+        margin:auto;
+        height: auto;      
+        text-align: center;
+        font-size: 16px;
+      }
+      .table{
+        padding: 10px;
+        width: 1300px;
+      }
+      .tr{
+        padding: 10px;
+  
+      }
+      
+      </style>
+ </head>
+
+  <body>
+  <div class="head"><h1 class="header">အလုပ်သမား ဝယ်ရမည့်စာရင်း</h1></div>
+    <div class="main">
+      
+      <table class="table" cellspacing="1" cellpadding="5" border="1">
+        <tr>
+        
+        <th>ကုန်သည်အမည်</th>
+        <th>ဖုန်းနံပါတ်</th>
+        <th>နေရပ်လိပ်စာ</th>  
+        <th>ပြောင်းအမျိုးအစား</th>  
+        <th>တင်းအရေအတွက်</th>
+        <th>ရောင်းလိုသည့်စျေးနှုန်း</th>
+        <th>မှတ်ချက်</th>
+        <th>စာရင်းသွင်းသည့်ရက်စွဲ</th>        
+            
+      </tr>
+
+      <% data.forEach(function(book){ %>
+        
+        <tr>
+          
+          <td><%= book.name %></td>
+          <td><%= book.phone %></td>
+          <td><%= book.address %></td>
+          <td><%= book.corn_type %></td>
+          <td><%= book.corn_qty %></td>
+          <td><%= book.pruchased_price %></td>
+          <td><%= book.comment %></td>
+          <td><%= book.received_date %></td>       
+                  
+          </tr>
+       
+      <% }); %> 
+
+      </table> 
+    </div>
+  </body>
+
+</html>
