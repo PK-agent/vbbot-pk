@@ -171,7 +171,7 @@ let merchantKeyboard = {
 // Creating the bot with access token, name and avatar
 const bot = new ViberBot({
     authToken: process.env.AUTH_TOKEN, // <--- Paste your token here
-    name: "ပြေင်းကြည့်",  // <--- Your bot name here
+    name: "ပြောင်းကြည့်",  // <--- Your bot name here
     avatar: "https://chat-pk.herokuapp.com/img/pk.png"
 });
 
