@@ -164,6 +164,21 @@ let merchantKeyboard = {
             "TextHAlign": "center",
             "TextOpacity": 60,
             "TextSize": "regular"
+        },
+        {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "address",               
+            "Text": "ပွဲရုံတည်နေရာ",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
         },            
     ]
 };
@@ -241,7 +256,7 @@ app.post('/merchant/register',function(req,response){
                 .then(res => res.json())
                 .then(json => console.log('JSON', json));
                 
-                const message = new TextMessage(`Please choose more actions...`, merchantKeyboard,null,null,null,3);  
+                const message = new TextMessage(`ကီးဘုတ်ကိုတွင်ရွေးချယ်ပါ...`, merchantKeyboard,null,null,null,3);  
                 
                 bot.sendMessage(currentUserProfile, message);
           
@@ -316,7 +331,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
             .then(res => res.json())
             .then(json => console.log('JSON', json))
 
-                const message = new TextMessage(`Please choose more actions...`, merchantKeyboard,null,null,null,3);  
+                const message = new TextMessage(`ကီးဘုတ်ကိုတွင်ရွေးချယ်ပါ...`, merchantKeyboard,null,null,null,3);  
          
                  bot.sendMessage(currentUserProfile, message);
             
@@ -865,6 +880,9 @@ bot.onTextMessage(/./, (message, response) => {
             break;
         case "staff-entrylist":
             staffPurchasedList(message, response);
+            break;
+        case "address":
+            location(message, response);
             break;              
         default:
             defaultReply(message, response);
@@ -939,7 +957,14 @@ const staffPurchasedList = (message, response) => {
     response.send(bot_message);
 }
 
+const location = (message, response) => {    
 
+    let bot_message1 = new TextMessage(`စစ်ကိုင်းတိုင်း၊ ကန့်ဘလူခရိုင်၊ ကန့်ဘလူမြို့ အမှတ် (၃)ရပ်ကွက် တပင်ရွှေထီးလမ်း`);
+    let bot_message2 = new TextMessage(`ဆက်သွယ်ရန်- ဖုန်း - ၀၉၇၉၆၄၆၆၄၆၀၊ ၀၉၄၂၆၄၆၆၄၆၀`);  
+    response.send(bot_message1).then(() => {
+        return response.send(bot_message2)
+    });
+}
 
 //https://developers.viber.com/docs/tools/keyboard-examples/
 
