@@ -930,13 +930,13 @@ const staffPurchasedList = (message, response) => {
 }
 
 const location = (message, response) => {    
-
-    let bot_message1 = new TextMessage(`စစ်ကိုင်းတိုင်း၊ ကန့်ဘလူခရိုင်၊ ကန့်ဘလူမြို့ အမှတ် (၃)ရပ်ကွက် တပင်ရွှေထီးလမ်း`);
-    let bot_message2 = new TextMessage(`ဆက်သွယ်ရန်- ဖုန်း- ၀၉၇၉၆၄၆၆၄၆၀၊ ၀၉၄၂၆၄၆၆၄၆၀`);          
-    response.send(bot_message1).then(() => {
-        return response.send(bot_message2).then(() => {            
-        });
-    });
+    console.log(message, response, '---------------------------------------------');
+    // let bot_message1 = new TextMessage(`စစ်ကိုင်းတိုင်း၊ ကန့်ဘလူခရိုင်၊ ကန့်ဘလူမြို့ အမှတ် (၃)ရပ်ကွက် တပင်ရွှေထီးလမ်း`);
+    // let bot_message2 = new TextMessage(`ဆက်သွယ်ရန်- ဖုန်း- ၀၉၇၉၆၄၆၆၄၆၀၊ ၀၉၄၂၆၄၆၆၄၆၀`);          
+    // response.send(bot_message1).then(() => {
+    //     return response.send(bot_message2).then(() => {            
+    //     });
+    // });
 }
 
 const registerMerchant = async (message, response) => {   
