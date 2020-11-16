@@ -554,7 +554,7 @@ app.post('/admin/add-price', async (req,res) => {
             },
             "tracking_data":"tracking data",
             "type":"text",
-            "text": "ပေါက်ဈေးထည့်သွင်းပြီးပါပြီ..."
+            "text": "ပေါက်ဈေးများထည့်သွင်းပြီးပါပြီ..."
             
          }  
 
@@ -566,7 +566,7 @@ app.post('/admin/add-price', async (req,res) => {
          .then(res => res.json())
          .then(json => console.log('JSON', json));
          
-         const message = new TextMessage(`ကီးဘုတ်တွင်ရွေးချယ်ပါ...`, adminKeyboard,null,null,null,3);  
+         const message = new TextMessage(`ကီးဘုတ်တွင်ရွေးချယ်ပါ...`, adminKeyboard,null,null,null,2);  
          
          bot.sendMessage(currentUserProfile, message);         
 
