@@ -853,9 +853,9 @@ bot.onTextMessage(/./, (message, response) => {
         case "staff-entrylist":
             staffPurchasedList(message, response);
             break;
-        case "address":
-            location(message, response);
-            break;              
+        // case "address":
+        //     location(message, response);
+        //     break;              
         default:
             defaultReply(message, response);
             
@@ -937,13 +937,7 @@ const staffPurchasedList = (message, response) => {
 //         return response.send(bot_message2).then(() => {            
 //         });
 //     });
-//     // const message = new TextMessage(`ကီးဘုတ်တွင်ရွေးချယ်ပါ...`, merchantKeyboard,null,null,null,3);
-//     //     bot.sendMessage(currentUserProfile, message);
 // }
-
-//https://developers.viber.com/docs/tools/keyboard-examples/
-
-
 
 const registerMerchant = async (message, response) => {   
 
