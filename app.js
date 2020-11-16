@@ -522,7 +522,7 @@ app.post('/staff/merchant/add-inventory', async (req,res) => {
              .then(res => res.json())
              .then(json => console.log('JSON', json));
              
-             const message = new TextMessage(`Please choose more actions...`, staffKeyboard,null,null,null,2);  
+             const message = new TextMessage(`ကီးဘုတ်ကိုတွင်ရွေးချယ်ပါ...`, staffKeyboard,null,null,null,2);  
              
              bot.sendMessage(currentUserProfile, message);             
         })
@@ -578,7 +578,7 @@ app.post('/admin/add-price', async (req,res) => {
          .then(res => res.json())
          .then(json => console.log('JSON', json));
          
-         const message = new TextMessage(`Please choose more actions...`, adminKeyboard,null,null,null,3);  
+         const message = new TextMessage(`ကီးဘုတ်ကိုတွင်ရွေးချယ်ပါ...`, adminKeyboard,null,null,null,3);  
          
          bot.sendMessage(currentUserProfile, message);         
 
@@ -730,7 +730,7 @@ let AdminCusStafKeyboard = {
             "BgMedia": "http://www.url.by/test.gif",
             "BgLoop": true,
             "ActionType": "reply",
-            "ActionBody": "register",               
+            "ActionBody": "merchant",               
             "Text": "ပြောင်းကုန်သည်",
             "TextVAlign": "middle",
             "TextHAlign": "center",
@@ -745,7 +745,7 @@ let AdminCusStafKeyboard = {
             "BgMedia": "http://www.url.by/test.gif",
             "BgLoop": true,
             "ActionType": "reply",
-            "ActionBody": "stf-view",               
+            "ActionBody": "staff",               
             "Text": "အလုပ်သမား",
             "TextVAlign": "middle",
             "TextHAlign": "center",
@@ -760,7 +760,7 @@ let AdminCusStafKeyboard = {
             "BgMedia": "http://www.url.by/test.gif",
             "BgLoop": true,
             "ActionType": "reply",
-            "ActionBody": "adm-view",               
+            "ActionBody": "admin",               
             "Text": "Admin",
             "TextVAlign": "middle",
             "TextHAlign": "center",
@@ -830,13 +830,13 @@ bot.onTextMessage(/./, (message, response) => {
 
     
     switch(text){
-        case "register":
+        case "merchant":
             registerMerchant(message, response);
             break;
-        case "adm-view":
+        case "admin":
             asKAdminpin(message, response);
             break;
-        case "stf-view":
+        case "staff":
             asKStaffpin(message, response);
             break;        
         case "merch-book-inv":
@@ -966,7 +966,7 @@ const registerMerchant = async (message, response) => {
 
 
 function defaultReply(message, response){
-    let bot_message = new TextMessage(`Please select your activity in keyboard menu`, AdminCusStafKeyboard); 
+    let bot_message = new TextMessage(`ကီးဘုတ်မီနူးတွင်ရွေးချယ်ပါ`, AdminCusStafKeyboard); 
 
     response.send(new TextMessage(`I don't quite understand your command`)).then(()=>{
                    return response.send(bot_message);
