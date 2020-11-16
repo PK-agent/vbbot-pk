@@ -256,7 +256,7 @@ app.post('/merchant/register',function(req,response){
                 .then(res => res.json())
                 .then(json => console.log('JSON', json));
                 
-                const message = new TextMessage(`ကီးဘုတ်တွင်ရွေးချယ်ပါ...`, merchantKeyboard,null,null,null,3);  
+                const message = new TextMessage(`ကီးဘုတ်တွင်ပြန်လည်ရွေးချယ်ပါ...`, merchantKeyboard,null,null,null,3);  
                 
                 bot.sendMessage(currentUserProfile, message);
           
@@ -331,7 +331,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
             .then(res => res.json())
             .then(json => console.log('JSON', json))
 
-                const message = new TextMessage(`ကီးဘုတ်တွင်ရွေးချယ်ပါ...`, merchantKeyboard,null,null,null,3);  
+                const message = new TextMessage(`ကီးဘုတ်တွင်ပြန်လည်ရွေးချယ်ပါ...`, merchantKeyboard,null,null,null,3);  
          
                  bot.sendMessage(currentUserProfile, message);
             
@@ -510,7 +510,7 @@ app.post('/staff/merchant/add-inventory', async (req,res) => {
              .then(res => res.json())
              .then(json => console.log('JSON', json));
              
-             const message = new TextMessage(`ကီးဘုတ်တွင်ရွေးချယ်ပါ...`, staffKeyboard,null,null,null,2);  
+             const message = new TextMessage(`ကီးဘုတ်တွင်ပြန်လည်ရွေးချယ်ပါ...`, staffKeyboard,null,null,null,2);  
              
              bot.sendMessage(currentUserProfile, message);             
         })
@@ -566,7 +566,7 @@ app.post('/admin/add-price', async (req,res) => {
          .then(res => res.json())
          .then(json => console.log('JSON', json));
          
-         const message = new TextMessage(`ကီးဘုတ်တွင်ရွေးချယ်ပါ...`, adminKeyboard,null,null,null,2);  
+         const message = new TextMessage(`ကီးဘုတ်တွင်ပြန်လည်ရွေးချယ်ပါ...`, adminKeyboard,null,null,null,2);  
          
          bot.sendMessage(currentUserProfile, message);         
 
