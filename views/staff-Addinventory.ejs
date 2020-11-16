@@ -125,6 +125,15 @@
       font-style: italic;
       font-weight: lighter;
     }
+    .reset{
+      position: relative;     
+      left: 20px;
+      top: 27px;
+      padding: 5px;
+      font-size: 14px;
+      font-style: italic;
+      font-weight: lighter;
+    }
 
     </style>
  </head>
@@ -153,7 +162,9 @@
         <input type="hidden" name="address" value="<%= data.address %>"/>
         <input type="hidden" name="corn_type" value="<%= data.cornType %>"/>
         
-        <input class="submit" type="submit" name="submit"/>    
+        <input class="submit" type="submit" name="submit" value="Add Merchant"/>
+        <input class="reset" type="reset" name="reset" value="Clear" />
+            
       </form>
     </div>
 

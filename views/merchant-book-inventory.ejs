@@ -181,7 +181,16 @@
     }
     .submit{
       position: relative;     
-      left: 320px;
+      left: 350px;
+      top: 27px;
+      padding: 5px;
+      font-size: 14px;
+      font-style: italic;
+      font-weight: lighter;
+    }
+    .reset{
+      position: relative;     
+      left: 20px;
       top: 27px;
       padding: 5px;
       font-size: 14px;
@@ -228,7 +237,7 @@
       <input type="hidden" name="merchant_id" value="<%= merchant.viberid %>" />
     
     <input class="submit" type="submit" name="submit" value="Book"/>
-    <input type="reset" name="reset" value="Clear" />
+    <input class="reset" type="reset" name="reset" value="Clear" />
   </div>
   </form>
 </div>
