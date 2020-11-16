@@ -256,7 +256,7 @@ app.post('/merchant/register',function(req,response){
                 .then(res => res.json())
                 .then(json => console.log('JSON', json));
                 
-                const message = new TextMessage(`ကီးဘုတ်ကိုတွင်ရွေးချယ်ပါ...`, merchantKeyboard,null,null,null,3);  
+                const message = new TextMessage(`ကီးဘုတ်တွင်ရွေးချယ်ပါ...`, merchantKeyboard,null,null,null,3);  
                 
                 bot.sendMessage(currentUserProfile, message);
           
@@ -331,7 +331,7 @@ app.post('/merchant/book-inventory', async (req,res) => {
             .then(res => res.json())
             .then(json => console.log('JSON', json))
 
-                const message = new TextMessage(`ကီးဘုတ်ကိုတွင်ရွေးချယ်ပါ...`, merchantKeyboard,null,null,null,3);  
+                const message = new TextMessage(`ကီးဘုတ်တွင်ရွေးချယ်ပါ...`, merchantKeyboard,null,null,null,3);  
          
                  bot.sendMessage(currentUserProfile, message);
             
@@ -439,34 +439,7 @@ app.get('/staff/merchant/inventory-list', async (req,res) => {
     res.render('staff-merchantList.ejs', {data});  
 });
 
-// app.post('/staff/merchant/inventory-list/:id', async (req, res) => {  
 
-//     let action = req.body.action;
-//     let docId = req.params.id;
-
-//     if(action == "Add Inventory") {
-//         let merchantBooksRef = db.collection('merchant-books').doc(docId);
-//         let merchantBooksSnapshot = await merchantBooksRef.get();
-    
-//         let data = {};        
-//         if (!merchantBooksSnapshot.exists) {
-//             console.log('No such user!');        
-//         } else {     
-//           data.docId = merchantBooksSnapshot.id;
-//           data.merchantId = merchantBooksSnapshot.data().merchant_id;
-//           data.name = merchantBooksSnapshot.data().name;
-//           data.phone = merchantBooksSnapshot.data().phone;
-//           data.address = merchantBooksSnapshot.data().address;
-//           data.cornType = merchantBooksSnapshot.data().corn_type;
-//         }
-//         console.log(data);
-//         res.render('staff-Addinventory.ejs', {data:data});
-//     }
-//     else {
-
-//     }
- 
-// });
 
 app.get('/staff/merchant/add-inventory/:id', async (req,res) => {  
     
@@ -537,7 +510,7 @@ app.post('/staff/merchant/add-inventory', async (req,res) => {
              .then(res => res.json())
              .then(json => console.log('JSON', json));
              
-             const message = new TextMessage(`ကီးဘုတ်ကိုတွင်ရွေးချယ်ပါ...`, staffKeyboard,null,null,null,2);  
+             const message = new TextMessage(`ကီးဘုတ်တွင်ရွေးချယ်ပါ...`, staffKeyboard,null,null,null,2);  
              
              bot.sendMessage(currentUserProfile, message);             
         })
@@ -593,7 +566,7 @@ app.post('/admin/add-price', async (req,res) => {
          .then(res => res.json())
          .then(json => console.log('JSON', json));
          
-         const message = new TextMessage(`ကီးဘုတ်ကိုတွင်ရွေးချယ်ပါ...`, adminKeyboard,null,null,null,3);  
+         const message = new TextMessage(`ကီးဘုတ်တွင်ရွေးချယ်ပါ...`, adminKeyboard,null,null,null,3);  
          
          bot.sendMessage(currentUserProfile, message);         
 
@@ -960,7 +933,9 @@ const staffPurchasedList = (message, response) => {
 const location = (message, response) => {    
 
     let bot_message1 = new TextMessage(`စစ်ကိုင်းတိုင်း၊ ကန့်ဘလူခရိုင်၊ ကန့်ဘလူမြို့ အမှတ် (၃)ရပ်ကွက် တပင်ရွှေထီးလမ်း`);
-    let bot_message2 = new TextMessage(`ဆက်သွယ်ရန်- ဖုန်း - ၀၉၇၉၆၄၆၆၄၆၀၊ ၀၉၄၂၆၄၆၆၄၆၀`);  
+    let bot_message2 = new TextMessage(`ဆက်သွယ်ရန်- ဖုန်း - ၀၉၇၉၆၄၆၆၄၆၀၊ ၀၉၄၂၆၄၆၆၄၆၀`);
+    const message = new TextMessage(`ကီးဘုတ်တွင်ရွေးချယ်ပါ...`, merchantKeyboard,null,null,null,3);         
+         bot.sendMessage(currentUserProfile, message);  
     response.send(bot_message1).then(() => {
         return response.send(bot_message2)
     });
