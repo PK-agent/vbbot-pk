@@ -566,8 +566,7 @@ app.post('/admin/add-price', async (req,res) => {
          .then(res => res.json())
          .then(json => console.log('JSON', json));
          
-         const message = new TextMessage(`ကီးဘုတ်တွင်ပြန်လည်ရွေးချယ်ပါ...`, adminKeyboard,null,null,null,3);  
-         
+         const message = new TextMessage(`ကီးဘုတ်တွင်ပြန်လည်ရွေးချယ်ပါ...`, adminKeyboard,null,null,null,3);        
          bot.sendMessage(currentUserProfile, message);         
 
      }).catch((error)=>{
@@ -933,7 +932,7 @@ const staffPurchasedList = (message, response) => {
 const location = (message, response) => {    
 
     let bot_message1 = new TextMessage(`စစ်ကိုင်းတိုင်း၊ ကန့်ဘလူခရိုင်၊ ကန့်ဘလူမြို့ အမှတ် (၃)ရပ်ကွက် တပင်ရွှေထီးလမ်း`);
-    let bot_message2 = new TextMessage(`ဆက်သွယ်ရန်- ဖုန်း - ၀၉၇၉၆၄၆၆၄၆၀၊ ၀၉၄၂၆၄၆၆၄၆၀`);          
+    let bot_message2 = new TextMessage(`ဆက်သွယ်ရန်- ဖုန်း- ၀၉၇၉၆၄၆၆၄၆၀၊ ၀၉၄၂၆၄၆၆၄၆၀`);          
     response.send(bot_message1).then(() => {
         return response.send(bot_message2).then(() =>{            
         });
