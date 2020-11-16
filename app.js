@@ -566,7 +566,7 @@ app.post('/admin/add-price', async (req,res) => {
          .then(res => res.json())
          .then(json => console.log('JSON', json));
          
-         const message = new TextMessage(`ကီးဘုတ်တွင်ပြန်လည်ရွေးချယ်ပါ...`, adminKeyboard,null,null,null,2);  
+         const message = new TextMessage(`ကီးဘုတ်တွင်ပြန်လည်ရွေးချယ်ပါ...`, adminKeyboard,null,null,null,3);  
          
          bot.sendMessage(currentUserProfile, message);         
 
