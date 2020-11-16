@@ -908,7 +908,7 @@ const merchantBookInventory = (message, response) => {
     let bot_message1 = new TextMessage(`link ကိုနှိပ်ပြီးစာရင်းသွင်းရန်`);
     let bot_message2 = new UrlMessage(APP_URL + '/merchant/book-inventory');   
     response.send(bot_message1).then(() =>{
-     return response.send(bot_message2)
+     return response.send(bot_message2);
     });
 }
 
@@ -935,9 +935,11 @@ const location = (message, response) => {
     let bot_message1 = new TextMessage(`စစ်ကိုင်းတိုင်း၊ ကန့်ဘလူခရိုင်၊ ကန့်ဘလူမြို့ အမှတ် (၃)ရပ်ကွက် တပင်ရွှေထီးလမ်း`);
     let bot_message2 = new TextMessage(`ဆက်သွယ်ရန်- ဖုန်း - ၀၉၇၉၆၄၆၆၄၆၀၊ ၀၉၄၂၆၄၆၆၄၆၀`);
     const message = new TextMessage(`ကီးဘုတ်တွင်ရွေးချယ်ပါ...`, merchantKeyboard,null,null,null,3);         
-         bot.sendMessage(currentUserProfile, message);  
+           
     response.send(bot_message1).then(() => {
-        return response.send(bot_message2)
+        return response.send(bot_message2).then(() =>{
+           return bot.sendMessage(currentUserProfile, message);
+        });
     });
 }
 
