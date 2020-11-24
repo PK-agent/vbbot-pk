@@ -585,7 +585,7 @@ app.post('/staff/todayprice', async (req, res) => {
     let corn_quality = req.body.corn_quality;
     
     const marketPricesRef = db.collection('market-prices');
-    const marketPricesSnapshot = await marketPricesRef.where('date', '==', date).get();
+    const marketPricesSnapshot = await marketPricesRef.where('date', '==', date).limit(1).get();
     
     let data = [];
     if (marketPricesSnapshot.empty) {
@@ -623,7 +623,7 @@ app.post('/merchant/market-price', async (req, res) => {
     let date = req.body.filled_date;
        
     const marketPricesRef = db.collection('market-prices');
-    const marketPricesSnapshot = await marketPricesRef.where('date', '==', date).get();
+    const marketPricesSnapshot = await marketPricesRef.where('date', '==', date).limit(1).get();
     
     let data = [];
     if (marketPricesSnapshot.empty) {
